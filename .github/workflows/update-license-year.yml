@@ -1,0 +1,50 @@
+name: Update License Year
+
+on:
+  schedule:
+    - cron: '0 0 1 1 *' # Runs at 00:00 UTC on Jan 1 every year
+  workflow_dispatch: # Allow manual trigger as well
+
+permissions:
+  contents: write
+
+jobs:
+  update-license:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Get current year
+        id: year
+        run: echo "year=$(date +'%Y')" >> "$GITHUB_OUTPUT"
+
+      - name: Prepare git config
+        run: git config user.email "nightmaregaurav@users.noreply.github.com" && git config user.name "Gaurav Nyaupane"
+
+      - name: Backup LICENSE file to compare it later
+        run: cp LICENSE LICENSE.bak
+
+      - name: Update year in LICENSE
+        run: |
+          CURRENT_YEAR="${{ steps.year.outputs.year }}"
+          sed -i.bak -E \
+            -e "s/(Copyright \(C\)|Copyright|©|Copr\.|copr\.|copyright)[[:space:]]+([0-9]{4})(–[0-9]{4})?/\1 \2–${CURRENT_YEAR}/I" \
+            LICENSE
+
+      - name: Check if LICENSE changed
+        id: diff
+        run: |
+          if diff -q LICENSE LICENSE.bak > /dev/null; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit updated LICENSE
+        if: steps.diff.outputs.changed == 'true'
+        run: |
+          git add LICENSE
+          git commit -m "chore: update LICENSE year to ${{ steps.year.outputs.year }}"
+          git push
