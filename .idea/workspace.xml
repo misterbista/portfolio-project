@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4efa22f0-4b8e-40fa-9ef1-3bc16d95c00d" name="Changes" comment="Config change">
+    <list default="true" id="4efa22f0-4b8e-40fa-9ef1-3bc16d95c00d" name="Changes" comment="Project config">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/globals.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/setup/page.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/setup/page.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/setup/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/setup/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Plan.md" beforeDir="false" afterPath="$PROJECT_DIR$/Plan.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,6 +122,10 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Fixed hydration error" />
     <MESSAGE value="Config change" />
-    <option name="LAST_COMMIT_MESSAGE" value="Config change" />
+    <MESSAGE value="alias cleanup" />
+    <MESSAGE value="Added config cards" />
+    <MESSAGE value="Added config pages" />
+    <MESSAGE value="Project config" />
+    <option name="LAST_COMMIT_MESSAGE" value="Project config" />
   </component>
 </project>

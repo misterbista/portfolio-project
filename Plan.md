@@ -2,6 +2,7 @@
 
 - Profile Pic (use same as favicon) 
 - Social Media Links `string[]`  // auto detect media and show appropriate icons
+
 # Home (Landing Page)
 
 - Intro Picture
