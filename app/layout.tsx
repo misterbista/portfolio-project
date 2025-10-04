@@ -4,8 +4,8 @@ import {AppendToType, PrimeReactProvider} from "primereact/api";
 import 'primeicons/primeicons.css';
 import 'primereact/resources/themes/lara-light-amber/theme.css';
 import "./globals.css";
-import MenuBar from "@/app/MenuBar";
-import GoToTop from "@/app/GoToTop";
+import MenuBar from "./MenuBar";
+import GoToTop from "./GoToTop";
 
 export default function MainLayout(
   {
