@@ -18,7 +18,7 @@ export default function MainLayout(
   };
 
   return (
-    <html lang="en">
+    <html lang="en" data-google-analytics-opt-out="">
     <body>
     <PrimeReactProvider value={primeReactConfiguration}>
       <MenuBar/>
