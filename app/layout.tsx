@@ -6,6 +6,9 @@ import 'primereact/resources/themes/lara-light-amber/theme.css';
 import "./globals.css";
 import MenuBar from "./MenuBar";
 import GoToTop from "./GoToTop";
+import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+
+const queryClient = new QueryClient()
 
 export default function MainLayout(
   {
@@ -20,11 +23,13 @@ export default function MainLayout(
   return (
     <html lang="en" data-google-analytics-opt-out="">
     <body>
-    <PrimeReactProvider value={primeReactConfiguration}>
-      <MenuBar/>
-      {children}
-      <GoToTop />
-    </PrimeReactProvider>
+      <QueryClientProvider client={queryClient}>
+        <PrimeReactProvider value={primeReactConfiguration}>
+          <MenuBar/>
+          {children}
+          <GoToTop />
+        </PrimeReactProvider>
+      </QueryClientProvider>
     </body>
     </html>
   );
