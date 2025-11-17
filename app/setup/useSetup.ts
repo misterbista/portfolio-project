@@ -28,5 +28,6 @@ export const useSetup = <T extends keyof SetupModels>(setupIdentifier: T) => {
 }
 
 const getSetup = async <T extends keyof SetupModels>(setupIdentifier: T)=> {
-  return await fetch(`config/${setupIdentifier}.json`) as TypeBySetupIdentifier<T>;
+  const response = await fetch(`/config/${setupIdentifier}.json`)
+  return await response.json() as TypeBySetupIdentifier<T>;
 }
