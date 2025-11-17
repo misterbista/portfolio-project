@@ -2,3 +2,30 @@ body {
     margin: 0;
     padding: 0;
 }
+
+a {
+    color: inherit;
+    &:hover {
+        color: inherit;
+    }
+    &:visited {
+        color: inherit;
+    }
+    &:active {
+        color: inherit;
+    }
+    &:focus {
+        color: inherit;
+    }
+    &.external-link::after {
+        content: '';
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        margin-left: 4px;
+        background-image: url('https://www.svgrepo.com/show/510970/external-link.svg');
+        background-size: contain;
+        background-repeat: no-repeat;
+        vertical-align: middle;
+    }
+}
