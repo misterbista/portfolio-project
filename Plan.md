@@ -121,7 +121,8 @@
 ]  // show like file manager in grid view, categories are folders
 ```
 
-# Buttons
+
+# Downloads
 ```json
 [
   {
