@@ -1,3 +1,16 @@
 {
-
+  "socials": [
+    {
+      "media": "GitHub",
+      "link": ""
+    },
+    {
+      "media": "Twitter",
+      "link": ""
+    },
+    {
+      "media": "LinkedIn",
+      "link": ""
+    }
+  ]
 }
