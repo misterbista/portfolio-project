@@ -1,14 +1,5 @@
 import {useQuery} from "@tanstack/react-query";
-import CoreConfigModel from "./models/CoreSetupModel";
-import SidebarConfigModel from "./models/SidebarSetupModel";
-import {ConfigIdentifiers} from "./ConfigIdentifiers";
-
-
-type ConfigModels = {
-  [ConfigIdentifiers.Core]: CoreConfigModel;
-  [ConfigIdentifiers.Sidebar]: SidebarConfigModel
-};
-type TypeByConfigIdentifier<T extends keyof ConfigModels> = ConfigModels[T];
+import {ConfigModels, TypeByConfigIdentifier} from "./ConfigIdentifiers";
 
 
 export const useConfig = <T extends keyof ConfigModels>(configIdentifier: T) => {
