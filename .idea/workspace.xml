@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4efa22f0-4b8e-40fa-9ef1-3bc16d95c00d" name="Changes" comment="QOL">
+    <list default="true" id="4efa22f0-4b8e-40fa-9ef1-3bc16d95c00d" name="Changes" comment="WIP on sidebar setup page">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/setup/models/SidebarSetupModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/setup/models/SidebarSetupModel.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/setup/sidebar/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/setup/sidebar/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/setup/useConfig.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/setup/useConfig.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,8 +147,10 @@
     <MESSAGE value="Fixed json parsing" />
     <MESSAGE value="Added query client provider" />
     <MESSAGE value="WIP Sidebar config page" />
+    <MESSAGE value="Adding more deps" />
     <MESSAGE value="QOL" />
-    <option name="LAST_COMMIT_MESSAGE" value="QOL" />
+    <MESSAGE value="WIP on sidebar setup page" />
+    <option name="LAST_COMMIT_MESSAGE" value="WIP on sidebar setup page" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
