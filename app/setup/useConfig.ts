@@ -1,12 +1,12 @@
 import {useQuery} from "@tanstack/react-query";
 import CoreConfigModel from "./models/CoreSetupModel";
 import SidebarConfigModel from "./models/SidebarSetupModel";
-import {SetupIdentifiers} from "./SetupIdentifiers";
+import {ConfigIdentifiers} from "./ConfigIdentifiers";
 
 
 type ConfigModels = {
-  [SetupIdentifiers.Core]: CoreConfigModel;
-  [SetupIdentifiers.Sidebar]: SidebarConfigModel
+  [ConfigIdentifiers.Core]: CoreConfigModel;
+  [ConfigIdentifiers.Sidebar]: SidebarConfigModel
 };
 type TypeByConfigIdentifier<T extends keyof ConfigModels> = ConfigModels[T];
 

@@ -1,4 +1,4 @@
-export enum SetupIdentifiers {
+export enum ConfigIdentifiers {
   Core="core",
   Sidebar="sidebar"
 }

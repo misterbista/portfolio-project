@@ -1,13 +1,13 @@
 'use client';
 import styles from "./page.module.css";
 import {useConfig} from "../useConfig";
-import {SetupIdentifiers} from "../SetupIdentifiers";
+import {ConfigIdentifiers} from "../ConfigIdentifiers";
 
 export default function Setup() {
   const {
     data,
     isLoading
-  } = useConfig(SetupIdentifiers.Sidebar);
+  } = useConfig(ConfigIdentifiers.Sidebar);
 
   return (
     <div className={styles.page}>
