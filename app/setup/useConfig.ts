@@ -9,7 +9,7 @@ export const useConfig = <T extends keyof ConfigModels>(configIdentifier: T) => 
   } = useQuery<TypeByConfigIdentifier<T>>({
     queryKey: ["setup", configIdentifier],
     queryFn: async () => await getConfig(configIdentifier),
-    refetchOnWindowFocus: true,
+    refetchOnWindowFocus: false
   });
 
   return {
