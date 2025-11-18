@@ -6,9 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="4efa22f0-4b8e-40fa-9ef1-3bc16d95c00d" name="Changes" comment="QOL">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/setup/ConfigIdentifiers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/setup/ConfigIdentifiers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/setup/models/SidebarSetupModel.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/setup/models/SidebarSetupModel.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/setup/sidebar/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/setup/sidebar/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/setup/useConfig.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/setup/useConfig.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,8 +20,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
