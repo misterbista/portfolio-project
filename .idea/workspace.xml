@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4efa22f0-4b8e-40fa-9ef1-3bc16d95c00d" name="Changes" comment="QOL">
-      <change beforePath="$PROJECT_DIR$/app/setup/SetupIdentifiers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/setup/ConfigIdentifiers.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/setup/sidebar/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/setup/sidebar/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/setup/useConfig.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/setup/useConfig.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
