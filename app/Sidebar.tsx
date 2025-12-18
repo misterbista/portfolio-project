@@ -4,12 +4,29 @@ import React, {RefObject, useState} from 'react';
 import {Sidebar as PrimeReactSidebar} from "primereact/sidebar";
 import {Button} from "primereact/button";
 import {Avatar} from "primereact/avatar";
-import SocialLinks, {SocialMedia} from "@nightmaregaurav/react-social-media-links";
+import SocialLinks from "@nightmaregaurav/react-social-media-links";
 import {Divider} from "primereact/divider";
 import {PanelMenu} from "primereact/panelmenu";
+import {useConfig} from "./setup/useConfig";
+import {ConfigIdentifiers} from "./setup/ConfigIdentifiers";
 
 const Sidebar = () => {
   const [visible, setVisible] = useState(false);
+
+  const {
+    data: coreConfig,
+    isLoading: coreConfigLoading
+  } = useConfig(ConfigIdentifiers.Core);
+
+  const {
+    data: sidebarConfig,
+    isLoading: sidebarConfigLoading
+  } = useConfig(ConfigIdentifiers.Sidebar);
+
+  if (sidebarConfigLoading || coreConfigLoading || !sidebarConfig || !coreConfig) {
+    return null;
+  }
+
   const items = [
     {
       label: 'Home',
@@ -52,9 +69,17 @@ const Sidebar = () => {
         <div className={styles.avatarBlock}>
           <Avatar
             className={styles.avatar}
-            image="https://primefaces.org/cdn/primereact/images/avatar/amyelsner.png"
             shape="circle"
-            label="GN"
+            image={sidebarConfig.profilePhoto}
+            imageFallback={"default"}
+            label={coreConfig.fullName.split(' ').map((n) => n[0]).join('')}
+            icon={"pi pi-user"}
+            pt={{
+              image: {
+                alt: coreConfig.fullName,
+                style: {objectFit: 'cover'}
+              }
+            }}
           />
         </div>
         <Button
@@ -67,16 +92,7 @@ const Sidebar = () => {
           onClick={(e) => hide(e)}
         />
         <SocialLinks
-          socialLinks={[
-            {
-              media: SocialMedia.GitHub,
-              link: ""
-            },
-            {
-              media: SocialMedia.LinkedIn,
-              link: ""
-            }
-          ]}
+          socialLinks={sidebarConfig.socials}
           iconSize={25}
         />
         <div className={styles.menuSection}>

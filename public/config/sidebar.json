@@ -1,16 +1,29 @@
 {
+  "profilePhoto": "https://www.gauravnyaupane.com.np/data/2023-3-30-10-3-51-b9fyS9afuD-1680149834800.jpg",
   "socials": [
     {
-      "media": "GitHub",
-      "link": ""
-    },
-    {
-      "media": "Twitter",
-      "link": ""
-    },
-    {
       "media": "LinkedIn",
-      "link": ""
+      "link": "https://www.linkedin.com/in/nightmaregaurav/"
+    },
+    {
+      "media": "GitHub",
+      "link": "https://github.com/nightmaregaurav"
+    },
+    {
+      "media": "Medium",
+      "link": "https://medium.com/@nightmaregaurav"
+    },
+    {
+      "media": "YouTube",
+      "link": "https://www.youtube.com/@gauravnightmare"
+    },
+    {
+      "media": "Spotify",
+      "link": "https://open.spotify.com/user/31rq3tdzashe4xe24aqscmn3hdae"
+    },
+    {
+      "media": "PayPal",
+      "link": "https://www.paypal.com/donate/?hosted_button_id=LG8Q32VA2VHT6"
     }
   ]
 }
