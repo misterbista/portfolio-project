@@ -1,14 +1,14 @@
 'use client';
-import styles from "./MenuBar.module.css";
+import styles from "./Sidebar.module.css";
 import React, {RefObject, useState} from 'react';
-import {Sidebar} from "primereact/sidebar";
+import {Sidebar as PrimeReactSidebar} from "primereact/sidebar";
 import {Button} from "primereact/button";
 import {Avatar} from "primereact/avatar";
 import SocialLinks, {SocialMedia} from "@nightmaregaurav/react-social-media-links";
 import {Divider} from "primereact/divider";
 import {PanelMenu} from "primereact/panelmenu";
 
-const MenuBar = () => {
+const Sidebar = () => {
   const [visible, setVisible] = useState(false);
   const items = [
     {
@@ -45,7 +45,7 @@ const MenuBar = () => {
       outlined
       onClick={() => setVisible(true)}
     />}
-    <Sidebar
+    <PrimeReactSidebar
       visible={visible}
       onHide={() => setVisible(false)}
       content={({ closeIconRef, hide }) => (<>
@@ -92,4 +92,4 @@ const MenuBar = () => {
   </>);
 };
 
-export default MenuBar;
+export default Sidebar;

@@ -4,7 +4,7 @@ import {AppendToType, PrimeReactProvider} from "primereact/api";
 import 'primeicons/primeicons.css';
 import 'primereact/resources/themes/lara-light-amber/theme.css';
 import "./globals.css";
-import MenuBar from "./MenuBar";
+import Sidebar from "./Sidebar";
 import GoToTop from "./GoToTop";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 
@@ -25,7 +25,7 @@ export default function MainLayout(
     <body>
       <QueryClientProvider client={queryClient}>
         <PrimeReactProvider value={primeReactConfiguration}>
-          <MenuBar/>
+          <Sidebar/>
           {children}
           <GoToTop />
         </PrimeReactProvider>
