@@ -18,7 +18,7 @@
 
 # About
 
-- Bio
+- About Me
 - Image
 - Keypoints
 ```json
