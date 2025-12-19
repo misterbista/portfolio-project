@@ -18,6 +18,12 @@ export default function Setup() {
           description="Customize the sidebar."
           pagePath="/setup/sidebar"
         />
+        <ConfigurationGroupCard
+          icon={<i className={"pi pi-bars"}/>}
+          title="Home"
+          description="Customize the Landing page."
+          pagePath="/setup/home"
+        />
       </div>
     </div>
   );

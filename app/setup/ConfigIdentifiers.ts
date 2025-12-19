@@ -1,14 +1,17 @@
-import CoreConfigModel from "./models/CoreSetupModel";
-import SidebarConfigModel from "./models/SidebarSetupModel";
+import CoreSetupModel from "./models/CoreSetupModel";
+import SidebarSetupModel from "./models/SidebarSetupModel";
+import HomeSetupModel from "./models/HomeSetupModel";
 
 export enum ConfigIdentifiers {
   Core="core",
-  Sidebar="sidebar"
+  Sidebar="sidebar",
+  Home="home"
 }
 
 export type ConfigModels = {
-  [ConfigIdentifiers.Core]: CoreConfigModel;
-  [ConfigIdentifiers.Sidebar]: SidebarConfigModel
+  [ConfigIdentifiers.Core]: CoreSetupModel;
+  [ConfigIdentifiers.Sidebar]: SidebarSetupModel;
+  [ConfigIdentifiers.Home]: HomeSetupModel;
 };
 
 export type TypeByConfigIdentifier<T extends keyof ConfigModels> = ConfigModels[T];
