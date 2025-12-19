@@ -8,13 +8,13 @@
 # Sidebar
 
 - Profile Picture
-- Social Media Links `string[]`
+- Social Media Links
 
 # Home (Landing Page)
 
-- Intro Picture
-- Name
-- Intro Word (Title)
+- Hero Picture
+- Full Name (Reuse from Core)
+- Bio
 
 # About
 
