@@ -1,7 +1,14 @@
+# Core
+
+- favicon
+- Full Name
+- SEO Description
+- SEO Keywords
+
 # Sidebar
 
-- Profile Pic (use same as favicon) 
-- Social Media Links `string[]`  // auto detect media and show appropriate icons
+- Profile Picture
+- Social Media Links `string[]`
 
 # Home (Landing Page)
 
