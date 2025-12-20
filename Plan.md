@@ -23,8 +23,6 @@
 - Keypoints
 - Additional info (Optional)
 
-```
-
 # My journey
 - Brief description
 - Milestones  // Git flow branch like structure, use 3 icons for each type of milestone
