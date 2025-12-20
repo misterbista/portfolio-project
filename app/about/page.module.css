@@ -1,0 +1,100 @@
+.page {
+    margin: 2rem;
+}
+
+.pageHeader {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.pageText {
+    color: var(--text-color-secondary);
+    line-height: 1.6;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.pageContent {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+    gap: 8px;
+}
+
+.pagePhoto {
+    border-radius: 8px;
+    overflow: clip;
+}
+
+.keypoints {
+    color: var(--text-color-secondary);
+    grid-column: span 2 / span 2;
+    margin-top: 0;
+    margin-left: 2rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    align-items: center;
+    align-content: center;
+}
+
+.keypoint {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.keypointHead {
+    font-weight: 600;
+    color: var(--text-color);
+    margin-right: 5px;
+}
+
+.keypointValue {
+    color: var(--text-color-secondary);
+}
+
+@media (max-width: 1280px) {
+    .keypoints {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 8px;
+        height: fit-content;
+    }
+}
+
+@media (max-width: 1024px) {
+    .pageContent {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        margin-left: 7rem;
+        margin-right: 7rem;
+    }
+
+    .keypoints {
+        margin-top: 1rem;
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 725px) {
+    .pageContent {
+        margin-left: 5rem;
+        margin-right: 5rem;
+    }
+}
+
+@media (max-width: 500px) {
+    .pageContent {
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+}
+
+@media (max-width: 350px) {
+    .pageContent {
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+}
