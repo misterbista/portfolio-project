@@ -3,6 +3,7 @@ import styles from "./page.module.css";
 import {useConfig} from "../setup/useConfig";
 import {ConfigIdentifiers} from "../setup/ConfigIdentifiers";
 import {Image} from "primereact/image";
+import RenderLink from "../RenderLink";
 
 export default function Setup() {
   const {
@@ -36,7 +37,7 @@ export default function Setup() {
           {aboutConfig.keypoints.map(keypoint => (
             <div className={styles.keypoint} key={keypoint.title.replaceAll(/[^a-zA-Z0-9-_]/g, "")}>
               <span className={styles.keypointHead}>{keypoint.title}:</span>
-              <span className={styles.keypointValue}>{keypoint.value}</span>
+              <span className={styles.keypointValue}>{<RenderLink text={keypoint.value}/>}</span>
             </div>
           ))}
         </div>
