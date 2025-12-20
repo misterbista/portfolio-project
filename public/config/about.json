@@ -3,56 +3,57 @@
   "photo": "https://www.gauravnyaupane.com.np/data/2024-8-3-19-23-0-yTwNJgDiP5-1720968505164.jpg",
   "keypoints": [
     {
-      "title": "Name:",
+      "title": "Name",
       "value": "Gaurav Nyaupane,"
     },
     {
-      "title": "Permanent Address:",
+      "title": "Permanent Address",
       "value": "Damak, Jhapa, Nepal"
     },
     {
-      "title": "Phone:",
+      "title": "Phone",
       "value": "+977-9816928313 (For emergencies only)"
     },
     {
-      "title": "Website:",
+      "title": "Website",
       "value": "https://www.gauravnyaupane.com.np"
     },
     {
-      "title": "Degree:",
+      "title": "Degree",
       "value": "Bachelors"
     },
     {
-      "title": "Freelance Rate:",
+      "title": "Freelance Rate",
       "value": "$30 - $75 Hourly (Flexible based on challenge)"
     },
     {
-      "title": "Salary Expectation:",
+      "title": "Salary Expectation",
       "value": "Nrs 250K - 300K (Flexible based on other benefits and work culture)"
       },
     {
-      "title": "Birth:",
+      "title": "Birth",
       "value": "December 19, 2000"
     },
     {
-      "title": "Temporary (Current) Address:",
+      "title": "Temporary (Current) Address",
       "value": "Gopikrishna, Kathmandu, Nepal"
     },
     {
-      "title": "Email:",
+      "title": "Email",
       "value": "mail.gauravnyaupane@gmail.com (For Important Messages only)"
     },
     {
-      "title": "Language:",
+      "title": "Language",
       "value": "Nepali, English, Hindi"
     },
     {
-      "title": "Freelance:",
+      "title": "Freelance",
       "value": "Unavailable"
     },
     {
-      "title": "Looking for:",
+      "title": "Looking for",
       "value": "Full-time Position (Not actively)"
     }
-  ]
+  ],
+  "additionalInformation": "Apart from my 9-5 job as a software developer, I enjoy contributing to open-source projects, writing technical reports, and mentoring junior developers. In my free time, I like to explore new technologies, reinvent something to understand it better. I also love spending time in nature, hiking, and exploring which helps me to relax and refresh my mind."
 }
