@@ -21,13 +21,8 @@
 - About Me
 - Image
 - Keypoints
-```json
-[
-  {
-    "title": "",
-    "Value": "" // auto detect links and add hyperlinks
-  }
-]
+- Additional info (Optional)
+
 ```
 
 # My journey
