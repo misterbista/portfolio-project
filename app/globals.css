@@ -23,7 +23,8 @@ a {
         width: 16px;
         height: 16px;
         margin-left: 4px;
-        background-image: url('https://www.svgrepo.com/show/510970/external-link.svg');
+        /*noinspection CssUnknownTarget*/
+        background-image: url('/external-link.svg');
         background-size: contain;
         background-repeat: no-repeat;
         vertical-align: middle;
