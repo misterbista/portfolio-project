@@ -1,6 +1,6 @@
 import {Testimonial} from "./Testimonial";
 
-export default class TestimonialSetupModel {
+export default class TestimonialsSetupModel {
   pageDescription: string;
   testimonials: Testimonial[];
 }

@@ -1,6 +1,6 @@
 import {Skill} from "./Skill";
 
-export default class SkillSetupModel {
+export default class SkillsSetupModel {
   pageDescription: string;
   skills: Skill[];
 }

@@ -1,5 +1,5 @@
 import {DownloadLink} from "./DownloadLink";
 
-export default class SetupModel {
+export default class DownloadsSetupModel {
   downloadLinks: DownloadLink[];
 }

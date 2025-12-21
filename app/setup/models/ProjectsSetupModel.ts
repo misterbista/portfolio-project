@@ -1,6 +1,6 @@
 import {Project} from "./Project";
 
-export default class ProjectSetupModel {
+export default class ProjectsSetupModel {
   pageDescription: string;
   projects: Project[];
 }
