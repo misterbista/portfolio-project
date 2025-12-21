@@ -5,6 +5,7 @@ export default class JourneySetupModel {
 }
 
 class Milestone {
+  uniqueId: string;
   type: MilestoneType;
   title: string;
   description: string;
@@ -16,10 +17,7 @@ class Milestone {
   departmentWebsite?: string;
   points: string[];
   partingNote?: string;
-  // projects?: Project[];
   achievements?: Achievement[];
-  // skills?: Skill[];
-
 }
 
 enum MilestoneType {
