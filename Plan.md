@@ -56,6 +56,7 @@
 [
   {
     "title": "",
+    "links": [],  // string[] | auto detect links and add hyperlinks
     "description": "",
     "images": [],
     "technologies": [],
@@ -63,9 +64,7 @@
       "title": "",
       "value": ""  // auto detect links and add hyperlinks
     }],
-    "links": [],  // string[] | auto detect links and add hyperlinks]
-    "milestone": 0,  // choose from existing entries in My Journey | nullable
-    "skills": []  // Not added while creating
+    "milestone": 0  // choose from existing entries in My Journey | nullable
   }
 ]
 ```
