@@ -5,7 +5,6 @@ export class Project {
   links: string[];
   description: string;
   images: string[];
-  technologies: string[];
   keypoints: Keypoint[];
   milestoneId?: string;
 }

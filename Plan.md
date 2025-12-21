@@ -59,7 +59,6 @@
     "links": [],  // string[] | auto detect links and add hyperlinks
     "description": "",
     "images": [],
-    "technologies": [],
     "keypoints": [{
       "title": "",
       "value": ""  // auto detect links and add hyperlinks
