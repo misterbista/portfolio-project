@@ -2,7 +2,7 @@
 import styles from "./page.module.css";
 import ConfigurationGroupCard from "./ConfigurationGroupCard";
 
-export default function Setup() {
+export default function Index() {
   return (
     <div className={styles.page}>
       <div className={styles.cards}>

@@ -5,7 +5,7 @@ import {ConfigIdentifiers} from "../setup/ConfigIdentifiers";
 import {Image} from "primereact/image";
 import RenderLink from "../RenderLink";
 
-export default function Setup() {
+export default function Index() {
   const {
     data: coreConfig,
     isLoading: coreConfigLoading

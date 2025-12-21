@@ -7,7 +7,7 @@ import {InputText} from "primereact/inputtext";
 import React, {useEffect, useState} from "react";
 import ViewOrCopyConfigValues from "../ViewOrCopyConfigValues";
 
-export default function Setup() {
+export default function Index() {
   const {
     data,
     isLoading
