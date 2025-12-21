@@ -31,22 +31,22 @@
   {
     "type": "",  // Academic, Professional, Personal
     "title": "",
-    "from": "", // Date
-    "to": "", // Date
-    "department": "",
-    "departmentLink": "",
-    "company": "",
-    "companyLink": "",
     "description": "",
+    "start": "",  // Date, Optional, blank means end is provided and milestone is not range type
+    "end": "",  // Date, Optional, blank means start is provided and milestone is under progress
+    "company": "",  // optional
+    "companyLink": "",  // optional
+    "department": "",  // optional
+    "departmentLink": "",  // optional
     "points": [], // string array
-    "partingNote": "" // optional
+    "partingNote": ""  // optional
+    "projects": [],  // collapsible list of hyperlinks to project pages | Not added while creating
     "achievements": [{
       "title": "",
       "description": "",
-      "on": "", // Date
+      "on": ""  // Date, optional
     }],  // collapsible list
-    "projects": [],  // collapsible list of hyperlinks to project pages | Not added while creating
-    "skills": [],  // collapsible list of skills | Not added while creating
+    "skills": []  // collapsible list of skills | Not added while creating
   }
 ]
 ```
