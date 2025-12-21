@@ -1,5 +1,5 @@
 import {Photo} from "./Photo";
 
-export default class TestimonialSetupModel {
+export default class GallerySetupModel {
   photos: Photo[];
 }
