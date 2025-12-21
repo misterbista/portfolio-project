@@ -85,15 +85,15 @@
 ```json
 [
   {
-    "from": "",
+    "by": "",
     "date": "",
     "title": "", // optional
-    "department": "",
-    "departmentLink": "",
+    "image": "", // optional
+    "text": "",
     "company": "",
     "companyLink": "",
-    "image": "", // optional
-    "text": ""
+    "department": "",
+    "departmentLink": ""
   }
 ] 
 ```
