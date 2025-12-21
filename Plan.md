@@ -67,28 +67,18 @@
   }
 ]
 ```
-# Skills  
+# Skills
+
 ```json
 [
   {
     "title": "",
-    "description": "", // optional
-    "associatedMilestones": [], // choose from existing entries in My Journey
-    "associatedProjects": [], // choose from existing entries in Projects | Adding project will automatically add this skill to the milestone associated with the project if it's not already there
+    "image": "",
+    "description": "",
+    "associatedMilestones": [],  // choose from existing entries in My Journey
+    "associatedProjects": []  // choose from existing entries in Projects | Adding project will automatically add this skill to the milestone associated with the project if it's not already there
   }
 ]  // show in a circle x/y where x is (the number of total projects + the number of total milestones) and y is (the number of total projects with this skill + the number of total milestones with this skill)    
-```
-
-# Services
-```json
-[
-  {
-    "title": "",
-    "description": "",  // really short description
-    "icon": "",
-    "links": [], // string[] | auto detect links and add hyperlinks
-  }
-]  // show as card grid
 ```
 
 # Testimonials
