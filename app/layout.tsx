@@ -9,6 +9,7 @@ import GoToTop from "./GoToTop";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {useConfig} from "./setup/useConfig";
 import {ConfigIdentifiers} from "./setup/ConfigIdentifiers";
+import Head from "next/head";
 
 const queryClient = new QueryClient()
 
@@ -26,7 +27,7 @@ export default function MainLayout(
     <QueryClientProvider client={queryClient}>
       <PrimeReactProvider value={primeReactConfiguration}>
         <html lang="en" data-google-analytics-opt-out="">
-          <Head/>
+          <HeadLayout/>
           <body>
             <Sidebar/>
             {children}
@@ -38,7 +39,7 @@ export default function MainLayout(
   );
 }
 
-const Head = () => {
+const HeadLayout = () => {
   const {
     data: coreConfig,
     isLoading: coreConfigLoading
@@ -57,7 +58,7 @@ const Head = () => {
   const previewImage = coreConfig.favicon;
 
   return (
-    <head>
+    <Head>
       {/* Title of the website */}
       <title>{title}</title>
 
@@ -109,6 +110,6 @@ const Head = () => {
           }
         })}
       </script>
-    </head>
+    </Head>
   );
 };
