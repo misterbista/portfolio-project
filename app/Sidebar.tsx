@@ -59,6 +59,11 @@ const Sidebar = () => {
       url: 'testimonials'
     },
     {
+      label: 'Blogs',
+      icon: 'pi pi-pencil',
+      url: 'blogs'
+    },
+    {
       label: 'Gallery',
       icon: 'pi pi-image',
       url: 'gallery'
