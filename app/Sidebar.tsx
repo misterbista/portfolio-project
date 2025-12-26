@@ -34,6 +34,36 @@ const Sidebar = () => {
       url: ''
     },
     {
+      label: 'About Me',
+      icon: 'pi pi-user',
+      url: 'about'
+    },
+    {
+      label: 'My Journey',
+      icon: 'pi pi-map',
+      url: 'journey'
+    },
+    {
+      label: 'Projects',
+      icon: 'pi pi-briefcase',
+      url: 'projects'
+    },
+    {
+      label: 'Skills',
+      icon: 'pi pi-cog',
+      url: 'skills'
+    },
+    {
+      label: 'Testimonials',
+      icon: 'pi pi-comments',
+      url: 'testimonials'
+    },
+    {
+      label: 'Gallery',
+      icon: 'pi pi-image',
+      url: 'gallery'
+    },
+    {
       label: 'Downloads',
       icon: 'pi pi-download',
       items: [
@@ -45,6 +75,24 @@ const Sidebar = () => {
         },
         {
           label: 'Full Resume',
+          icon: 'pi pi-file-plus',
+          target: '_blank',
+          url: 'https://docs.google.com/document/d/1gO7-1Uu5yIZLX-LXakb_II96pjjCFr1AB2132fjwUww/edit?tab=t.0'
+        }
+      ]
+    },
+    {
+      label: 'Links',
+      icon: 'pi pi-link',
+      items: [
+        {
+          label: 'Something 1',
+          icon: 'pi pi-file',
+          target: '_blank',
+          url: 'https://docs.google.com/document/d/1OvxmbaNJZu-Si9Pm0RfjTQ7iFkajFDYcLKLBphiiH7c/edit?tab=t.0'
+        },
+        {
+          label: 'Something 2',
           icon: 'pi pi-file-plus',
           target: '_blank',
           url: 'https://docs.google.com/document/d/1gO7-1Uu5yIZLX-LXakb_II96pjjCFr1AB2132fjwUww/edit?tab=t.0'
