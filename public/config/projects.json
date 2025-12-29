@@ -1,0 +1,784 @@
+{
+  "pageDescription": "I have taken great pride in my work and have dedicated a significant portion of my time to developing open-source projects. You can find all of the open-source projects I initiated or create on my GitHub profile. Some notable projects that I have created including a glance on some of the private ones are as follows.",
+  "projects": [
+    {
+      "title": "Family Tree",
+      "description": "'Family Tree', intends to allow users to create, collect, organize, visualize and print their family tree using their phone or computer. This system will help researchers or individuals who are interested in identifying their family tree and their ancestors, know the exact relationship amongst family members and eliminate the tedious task of searching for their name in the family tree book that was previously used to be handwritten. This System will help its users to find, identify, and know details about their relatives. This system also has the potential of becoming a go-to system for family chat and connection.",
+      "previewImage": "https://www.gauravnyaupane.com.np/data/2022-11-3-9-10-26-jxL37B7pst-2022-11-03_09-08.png",
+      "images": [],
+      "links": [],
+      "keypoints": [
+        {
+          "title": "Frontend",
+          "value": "React"
+        },
+        {
+          "title": "Backend",
+          "value": "Django"
+        },
+        {
+          "title": "categories",
+          "value": "Close Source, Django, React, Web"
+        }
+      ],
+      "seoKeywords": [
+        "Gaurav",
+        "Gaurav Nyaupane",
+        "Gaurav's Project",
+        "Gaurav's Projects",
+        "Gaurav Nyaupane's Project",
+        "Gaurav Nyaupane's Projects",
+        "Family Tree",
+        "Ancestory management tool"
+      ]
+    },
+    {
+      "title": "BaghChal",
+      "description": "Classic Nepali multiplayer game.",
+      "previewImage": "https://www.gauravnyaupane.com.np/data/2022-11-3-8-55-13-FX5BEDB601-Screenshot 2021-05-31 20 47 49.png",
+      "images": [],
+      "links": [
+        {
+          "media": "GitHub",
+          "link": "https://github.com/nightmaregaurav/BaghChal"
+        }
+      ],
+      "keypoints": [
+        {
+          "title": "Programming Language",
+          "value": "Python"
+        },
+        {
+          "title": "Type",
+          "value": "Classic, Multiplayer"
+        },
+        {
+          "title": "categories",
+          "value": "Game, PyQt, Open Source"
+        }
+      ],
+      "seoKeywords": [
+        "Gaurav",
+        "Gaurav Nyaupane",
+        "Gaurav's Project",
+        "Gaurav's Projects",
+        "Gaurav Nyaupane's Project",
+        "Gaurav Nyaupane's Projects",
+        "Baghchal",
+        "Bagh chal"
+      ]
+    },
+    {
+      "title": "Phone Directory",
+      "description": "Public phone directory where anyone can view, add, and edit phone numbers.",
+      "previewImage": "https://cdn-icons-png.flaticon.com/512/3875/3875172.png",
+      "images": [],
+      "links": [
+        {
+          "media": "GitHub",
+          "link": "https://github.com/nightmaregaurav/phonedirectory"
+        }
+      ],
+      "keypoints": [
+        {
+          "title": "Status",
+          "value": "Discontinued"
+        },
+        {
+          "title": "categories",
+          "value": "Web, ASP.NET Core, Open Source"
+        }
+      ],
+      "seoKeywords": [
+        "Gaurav",
+        "Gaurav Nyaupane",
+        "Gaurav's Project",
+        "Gaurav's Projects",
+        "Gaurav Nyaupane's Project",
+        "Gaurav Nyaupane's Projects",
+        "Phone Directory",
+        "Public Phone Directory"
+      ]
+    },
+    {
+      "title": "PPTS (PUBG Points Table)",
+      "description": "This Game Points Table generation and tournament hosting system is Specially intended for PUBG But works on similar games.",
+      "previewImage": "https://cdn-icons-png.flaticon.com/512/3875/3875172.png",
+      "images": [],
+      "links": [
+        {
+          "media": "Github",
+          "link": "https://github.com/nightmaregaurav/PPts"
+        }
+      ],
+      "keypoints": [
+        {
+          "title": "Suitable for",
+          "value": "Shooting games with similar ranking as PUBG"
+        },
+        {
+          "title": "categories",
+          "value": "Web, Django, Open Source"
+        }
+      ],
+      "seoKeywords": [
+        "Gaurav",
+        "Gaurav Nyaupane",
+        "Gaurav's Project",
+        "Gaurav's Projects",
+        "Gaurav Nyaupane's Project",
+        "Gaurav Nyaupane's Projects",
+        "PUBG",
+        "PPTS",
+        "PUBG Points table",
+        "PUBG match hosting platform",
+        "Free fire match hosting platform",
+        "PUBG tournament",
+        "Free fire tournament"
+      ]
+    },
+    {
+      "title": "EReal Estate",
+      "description": "A system that eliminates the excessive cost of hiring brokers and the frustrating process of finding both: available properties to purchase and customer who wants to buy property; on time. Anyone who is interested can offer their bid to the property and one can easily find out if it is the right price for the property or not. This system gives a platform for the same user to perform both actions: buying and selling. It helps users to find a suitable property to purchase using the search feature which provides a handful of tools to filter search contents. Using the power and potential of python programming language working with technologies like Maria DB, Redis, ASGI, Bootstrap, jQuery, etc.",
+      "previewImage": "https://www.gauravnyaupane.com.np/data/2022-11-3-9-40-36-7bFANEQdxx-ere icon.png",
+      "images": [
+        "https://www.gauravnyaupane.com.np/data/2022-11-3-9-42-20-K5mw9cJ6tY-SS_ landing page.png",
+        "https://www.gauravnyaupane.com.np/data/2022-11-3-9-42-31-1Mgu2OeSoP-SS_ home2.png",
+        "https://www.gauravnyaupane.com.np/data/2022-11-3-9-42-43-YFguQ59N8A-SS_ view post1.png",
+        "https://www.gauravnyaupane.com.np/data/2022-11-3-9-42-50-P7b0eVz1pw-SS_ view post2.png",
+        "https://www.gauravnyaupane.com.np/data/2022-11-3-9-42-57-fZmbAioqnD-SS_ view profile.png"
+      ],
+      "links": [],
+      "keypoints": [
+        {
+          "title": "Type",
+          "value": "C2C Ecommerce"
+        },
+        {
+          "title": "Sub-type",
+          "value": "Auction shop"
+        },
+        {
+          "title": "Category",
+          "value": "Real Estate Portal"
+        },
+        {
+          "title": "categories",
+          "value": "Web, Django, Close Source, E commerce"
+        }
+      ],
+      "seoKeywords": [
+        "Gaurav",
+        "Gaurav Nyaupane",
+        "Gaurav's Project",
+        "Gaurav's Projects",
+        "Gaurav Nyaupane's Project",
+        "Gaurav Nyaupane's Projects",
+        "EReal Estate",
+        "Real Estate Online Auction System"
+      ]
+    },
+    {
+      "title": "Personal website CMS",
+      "description": "CMS may sound like a big word. But A content management system (CMS) is computer software used to manage the creation and modification of digital content (content management). Personal-Website-CMS does just that. It provides CMS to publish a personal website with the bare minimum features. If CMS sounds inconvenient, you may call it Micro-CMS.",
+      "previewImage": "https://www.gauravnyaupane.com.np/data/2022-11-3-11-55-45-gRdMxYsGHD-2022-11-03_11-37.png",
+      "images": [
+        "https://www.gauravnyaupane.com.np/data/2022-11-3-11-55-47-i6duEvMCso-2022-11-03_11-37_1.png",
+        "https://www.gauravnyaupane.com.np/data/2022-11-3-11-55-48-RwQ40LGzBK-2022-11-03_11-37_2.png"
+      ],
+      "links": [
+        {
+          "media": "GitHub",
+          "link": "https://github.com/nightmaregaurav/personal-website-cms"
+        },
+        {
+          "media": "Demo",
+          "link": "https://www.gauravnyaupane.com.np"
+        }
+      ],
+      "keypoints": [
+        {
+          "title": "Type",
+          "value": "CMS"
+        },
+        {
+          "title": "Useful for",
+          "value": "Personal website, galery, project showcase etc."
+        },
+        {
+          "title": "Setup",
+          "value": "Dynamic with GUI"
+        },
+        {
+          "title": "Cost",
+          "value": "Free"
+        },
+        {
+          "title": "categories",
+          "value": "Web, React, Open Source"
+        }
+      ],
+      "seoKeywords": [
+        "Gaurav",
+        "Gaurav Nyaupane",
+        "Gaurav's Project",
+        "Gaurav's Projects",
+        "Gaurav Nyaupane's Project",
+        "Gaurav Nyaupane's Projects",
+        "Personal website",
+        "Personal website CMS"
+      ]
+    },
+    {
+      "title": "Third eye",
+      "description": "Medical Report plays a very important role in the cure of any disease. But if the medical history of a patient is way big and handwritten, it is hard for anyone to extract the required information from them. 'Third Eye' allows doctors to get managed information about the medical history of the patient. Doctors will get a platform to write medical reports in an electric medium, allowing them to manage their appointments with patients so the risky and unsecured traditional paper file method will be replaced. Additionally, Third Eye will allow users to print their medical reports in hard and or soft copy it will be easy to extract and share only the required part. The records will be grouped categorically. Doctors will be allowed to comment or write reviews on old reports so that old reports may also be used to explain the new issues. Patients will also be able to log in and access their medical history and status.",
+      "previewImage": "https://www.gauravnyaupane.com.np/data/2022-11-3-12-10-3-mRFgtfnkhy-Third Eye Final_FULL.png",
+      "images": [
+        "https://www.gauravnyaupane.com.np/data/2022-11-3-12-10-4-VBGoo0bzVX-0002.png",
+        "https://www.gauravnyaupane.com.np/data/2022-11-3-12-10-5-i0GAkmVlbI-0017.png",
+        "https://www.gauravnyaupane.com.np/data/2022-11-3-12-10-6-VTauQua2QN-0018.png",
+        "https://www.gauravnyaupane.com.np/data/2022-11-3-12-12-56-6nj4np4aTR-0025.png",
+        "https://www.gauravnyaupane.com.np/data/2022-11-3-12-10-8-xXBzWbEGcb-0034.png"
+      ],
+      "links": [],
+      "keypoints": [
+        {
+          "title": "Type",
+          "value": "Desktop Application"
+        },
+        {
+          "title": "Uses Internet",
+          "value": "Yes"
+        },
+        {
+          "title": "Supported Platform",
+          "value": "Windows, Mac, Linux"
+        },
+        {
+          "title": "categories",
+          "value": "Desktop Application, Swing, Close Source"
+        }
+      ],
+      "seoKeywords": [
+        "Gaurav",
+        "Gaurav Nyaupane",
+        "Gaurav's Project",
+        "Gaurav's Projects",
+        "Gaurav Nyaupane's Project",
+        "Gaurav Nyaupane's Projects",
+        "Third Eye",
+        "Medical information management system"
+      ]
+    },
+    {
+      "title": "Document Rating System",
+      "description": "Simple c# WPF application to peer review and rate any document. (No API used, DB connection is exposed IE: bad DB connection design)",
+      "previewImage": "https://raw.githubusercontent.com/nightmaregaurav/rating-wpf/master/Documentation/Home.png",
+      "images": [
+        "https://raw.githubusercontent.com/nightmaregaurav/rating-wpf/master/Documentation/Login.png",
+        "https://raw.githubusercontent.com/nightmaregaurav/rating-wpf/master/Documentation/Post.png",
+        "https://raw.githubusercontent.com/nightmaregaurav/rating-wpf/master/Documentation/Register.png",
+        "https://raw.githubusercontent.com/nightmaregaurav/rating-wpf/master/Documentation/Admin.png"
+      ],
+      "links": [
+        {
+          "media": "GitHub",
+          "link": "https://github.com/nightmaregaurav/rating-wpf"
+        }
+      ],
+      "keypoints": [
+        {
+          "title": "Type",
+          "value": "Desktop Application"
+        },
+        {
+          "title": "Status",
+          "value": "Unmaintained"
+        },
+        {
+          "title": "categories",
+          "value": "WPF, Open Source, Desktop Application"
+        }
+      ],
+      "seoKeywords": [
+        "Gaurav",
+        "Gaurav Nyaupane",
+        "Gaurav's Project",
+        "Gaurav's Projects",
+        "Gaurav Nyaupane's Project",
+        "Gaurav Nyaupane's Projects",
+        "Document Rating System"
+      ]
+    },
+    {
+      "title": "Swagger Endpoints Generator",
+      "description": "Automatically generate typescript models and endpoints from swagger.json so API call is as simple as writing endpoints.API__GET__my_object.call({data:value});",
+      "previewImage": "https://camo.githubusercontent.com/34b30ad5321bd615343ac3bcf7960a2d00504c1ebdc9cf26db222b57778a643e/68747470733a2f2f6e6f6465692e636f2f6e706d2f406e696768746d6172656761757261762f737761676765722d656e64706f696e74732d67656e2e706e673f6d696e693d74727565",
+      "images": [],
+      "links": [
+        {
+          "media": "GitHub",
+          "link": "https://github.com/nightmaregaurav/swagger-endpoints-gen"
+        },
+        {
+          "media": "NPM",
+          "link": "https://www.npmjs.com/package/@nightmaregaurav/swagger-endpoints-gen"
+        }
+      ],
+      "keypoints": [
+        {
+          "title": "Type",
+          "value": "Scaffolding Tool"
+        },
+        {
+          "title": "Language Support",
+          "value": "JS and TS"
+        },
+        {
+          "title": "categories",
+          "value": "Web, API, Scaffolding, Swagger gen, JS, TS, Open Source, Automation Tool"
+        }
+      ],
+      "seoKeywords": [
+        "Gaurav",
+        "Gaurav Nyaupane",
+        "Gaurav's Project",
+        "Gaurav's Projects",
+        "Gaurav Nyaupane's Project",
+        "Gaurav Nyaupane's Projects",
+        "Swagger Endpoints Generator"
+      ]
+    },
+    {
+      "title": "Result Extractor",
+      "description": "This tool is used to extract the results of individual campus from a given file that lists the results of multiple campus as a global merit list. This tool was primarily made for the purpose of extracting the results of individual campus from the global merit list of the BCA TU Entrance Examination taken by TUFOHSS.",
+      "previewImage": "https://www.gauravnyaupane.com.np/data/2023-3-19-15-55-41-omuwPTgUSa-2023-03-19_15-55.png",
+      "images": [],
+      "links": [
+        {
+          "media": "GitHub",
+          "link": "https://github.com/nightmaregaurav/result-extractor"
+        }
+      ],
+      "keypoints": [
+        {
+          "title": "Extra Features",
+          "value": "Uploading to Google Drive, Nice CLI UI"
+        },
+        {
+          "title": "categories",
+          "value": "Automation Tool, Open Source"
+        }
+      ],
+      "seoKeywords": [
+        "Gaurav",
+        "Gaurav Nyaupane",
+        "Gaurav's Project",
+        "Gaurav's Projects",
+        "Gaurav Nyaupane's Project",
+        "Gaurav Nyaupane's Projects",
+        "Result Extractor",
+        "BCA Result Extractor",
+        "BCA Entrance Result Extractor"
+      ]
+    },
+    {
+      "title": "ID printing",
+      "description": "MinorMinor ID Printing tool made for DAO ILAM [Not in use] ID Printing tool made for DAO ILAM [Not in use]",
+      "previewImage": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSP7j4XbFKx9vdbelzywZih4cRUj5uyLCJIaJ5GeBY&s",
+      "images": [],
+      "links": [
+        {
+          "media": "GitHub",
+          "link": "https://github.com/nightmaregaurav/dao-ilam-minor-id"
+        }
+      ],
+      "keypoints": [
+        {
+          "title": "Made For",
+          "value": "DAO Ilam"
+        },
+        {
+          "title": "categories",
+          "value": "Web, PHP, Open Source"
+        }
+      ],
+      "seoKeywords": [
+        "Gaurav",
+        "Gaurav Nyaupane",
+        "Gaurav's Project",
+        "Gaurav's Projects",
+        "Gaurav Nyaupane's Project",
+        "Gaurav Nyaupane's Projects",
+        "ID card printing tool"
+      ]
+    },
+    {
+      "title": "ACL-DotNet-Template",
+      "description": "Solution Template for Custom Permission scoped user/role based Access Control implementation with dotnet.",
+      "previewImage": "https://www.gauravnyaupane.com.np/data/2023-7-29-16-47-49-Vsi5y9KZDe-access-control.png",
+      "images": [],
+      "links": [
+        {
+          "media": "GitHub",
+          "link": "https://github.com/nightmaregaurav/ACL-DotNet-Template"
+        }
+      ],
+      "keypoints": [
+        {
+          "title": "Type",
+          "value": "DotNet Solution Template"
+        },
+        {
+          "title": "categories",
+          "value": "Template, Asp.Net Core"
+        }
+      ],
+      "seoKeywords": [
+        "Gaurav",
+        "Gaurav Nyaupane",
+        "Gaurav's Project",
+        "Gaurav's Projects",
+        "Gaurav Nyaupane's Project",
+        "Gaurav Nyaupane's Projects",
+        "Dotnet ACL"
+      ]
+    },
+    {
+      "title": "Line & circle drawing algorithm problem solver.",
+      "description": "Solves Line drawing algorithm using DDA & BLA in exam's answer format, and shows plots.",
+      "previewImage": "https://www.gauravnyaupane.com.np/data/2023-7-29-17-15-6-eOMuWPecjl-Screenshot from 2023-07-29 17-10-53.png",
+      "images": [
+        "https://www.gauravnyaupane.com.np/data/2023-7-29-17-15-7-gDhUh4JT0c-Screenshot from 2023-07-29 17-11-18.png",
+        "https://www.gauravnyaupane.com.np/data/2023-7-29-17-15-8-961PJyrGkZ-Screenshot from 2023-07-29 17-11-38.png",
+        "https://www.gauravnyaupane.com.np/data/2023-7-29-17-19-6-mRXoIIFEEK-Screenshot from 2023-07-29 17-11-47.png",
+        "https://www.gauravnyaupane.com.np/data/2023-7-29-17-15-10-LoInkpaOjB-Screenshot from 2023-07-29 17-11-56.png",
+        "https://www.gauravnyaupane.com.np/data/2023-7-29-17-19-17-UYTtqRerjg-Screenshot from 2023-07-29 17-12-01.png"
+      ],
+      "links": [
+        {
+          "media": "GitHub",
+          "link": "https://github.com/nightmaregaurav/line-drawing-algorithm-solver"
+        }
+      ],
+      "keypoints": [
+        {
+          "title": "Language",
+          "value": "Python"
+        },
+        {
+          "title": "Requires",
+          "value": "Matplotlib"
+        },
+        {
+          "title": "categories",
+          "value": "Automation Tool"
+        }
+      ],
+      "seoKeywords": [
+        "Gaurav",
+        "Gaurav Nyaupane",
+        "Gaurav's Project",
+        "Gaurav's Projects",
+        "Gaurav Nyaupane's Project",
+        "Gaurav Nyaupane's Projects",
+        "Line Drawing algorithm",
+        "Circle Drawing algorithm",
+        "BCA Assignment solution"
+      ]
+    },
+    {
+      "title": "JDBC, JSP, RMI, Servlet & Java Socket Chat Sample",
+      "description": "JDBC Connection & CRUD sample, JSP simple application setup step and sample, RMI simple application setup step and sample, Servlet simple application setup step and sample, TCP & UDP * MultiThreaded & SingeThreaded Socket sample Chat application.",
+      "previewImage": "https://www.gauravnyaupane.com.np/data/2023-7-29-17-23-24-LtCessdQVW-2023-07-29_17-22.png",
+      "images": [],
+      "links": [
+        {
+          "media": "GitHub",
+          "link": "https://github.com/nightmaregaurav/BasicJavaNetworkProgramming"
+        }
+      ],
+      "keypoints": [
+        {
+          "title": "Type",
+          "value": "Snippets"
+        },
+        {
+          "title": "Language",
+          "value": "Java"
+        },
+        {
+          "title": "Useful For",
+          "value": "Networking"
+        },
+        {
+          "title": "categories",
+          "value": "Template, Snippets"
+        }
+      ],
+      "seoKeywords": [
+        "Gaurav",
+        "Gaurav Nyaupane",
+        "Gaurav's Project",
+        "Gaurav's Projects",
+        "Gaurav Nyaupane's Project",
+        "Gaurav Nyaupane's Projects",
+        "JDBC Example",
+        "JSP Example",
+        "Java RMI Example",
+        "Servlet Example",
+        "Java Socket Chat Example"
+      ]
+    },
+    {
+      "title": "HammingCode implementation",
+      "description": "Hamming code encryption and error correction algorithm implementation with exam like answer output.",
+      "previewImage": "https://www.gauravnyaupane.com.np/data/2023-7-29-17-34-34-BzkjjrLOSs-2023-07-29_17-32.png",
+      "images": [],
+      "links": [
+        {
+          "media": "GitHub",
+          "link": "https://github.com/nightmaregaurav/hammingcode-implementation"
+        }
+      ],
+      "keypoints": [
+        {
+          "title": "Language",
+          "value": "C"
+        },
+        {
+          "title": "Encryption",
+          "value": "Yes"
+        },
+        {
+          "title": "Error Correction",
+          "value": "Yes"
+        },
+        {
+          "title": "categories",
+          "value": "Snippets"
+        }
+      ],
+      "seoKeywords": [
+        "Gaurav",
+        "Gaurav Nyaupane",
+        "Gaurav's Project",
+        "Gaurav's Projects",
+        "Gaurav Nyaupane's Project",
+        "Gaurav Nyaupane's Projects",
+        "Hamming error detection and correction algorithm implementation"
+      ]
+    },
+    {
+      "title": "AutoAssignment",
+      "description": "A Light weight and simplest alternative to AutoMapper",
+      "previewImage": "https://www.gauravnyaupane.com.np/data/2023-8-5-14-16-38-tDVwpw0JMF-2023-08-05_14-16.png",
+      "images": [],
+      "links": [
+        {
+          "media": "GitHub",
+          "link": "https://github.com/nightmaregaurav/AutoAssignment"
+        },
+        {
+          "media": "NuGet",
+          "link": "https://www.nuget.org/packages/nightmaregaurav.autoassignment"
+        }
+      ],
+      "keypoints": [
+        {
+          "title": "Uses Reflection",
+          "value": "No"
+        },
+        {
+          "title": "Size",
+          "value": "< 100 LOC"
+        },
+        {
+          "title": "categories",
+          "value": "Automation Tool, C# Library"
+        }
+      ],
+      "seoKeywords": [
+        "Gaurav",
+        "Gaurav Nyaupane",
+        "Gaurav's Project",
+        "Gaurav's Projects",
+        "Gaurav Nyaupane's Project",
+        "Gaurav Nyaupane's Projects",
+        "C# auto mapper alternative",
+        "AutoAssignment"
+      ]
+    },
+    {
+      "title": "MethodSignature",
+      "description": "Simplified Method Signature Retrieval.",
+      "previewImage": "https://www.gauravnyaupane.com.np/data/2023-8-5-14-17-29-Y6YGSOnCw1-2023-08-05_14-15_1.png",
+      "images": [],
+      "links": [
+        {
+          "media": "GitHub",
+          "link": "https://github.com/nightmaregaurav/MethodSignature"
+        },
+        {
+          "media": "NuGet",
+          "link": "https://www.nuget.org/packages/nightmaregaurav.methodsignature/"
+        }
+      ],
+      "keypoints": [
+        {
+          "title": "Uses Reflection",
+          "value": "Yes"
+        },
+        {
+          "title": "categories",
+          "value": "Automation Tool, C# Library"
+        }
+      ],
+      "seoKeywords": [
+        "Gaurav",
+        "Gaurav Nyaupane",
+        "Gaurav's Project",
+        "Gaurav's Projects",
+        "Gaurav Nyaupane's Project",
+        "Gaurav Nyaupane's Projects",
+        "MethodSignature",
+        "C# Method Name String"
+      ]
+    },
+    {
+      "title": "Scheduler",
+      "description": "Scheduler is a simple job scheduling framework in C# that allows you to easily define and execute scheduled tasks in the background.",
+      "previewImage": "https://www.gauravnyaupane.com.np/data/2023-10-22-12-39-6-lI9A4YmztN-2023-October-22%2012-38-54.jpg",
+      "images": [],
+      "links": [
+        {
+          "media": "GitHub",
+          "link": "https://github.com/nightmaregaurav/Scheduler"
+        },
+        {
+          "media": "NuGet",
+          "link": "https://www.nuget.org/packages/nightmaregaurav.scheduler/"
+        }
+      ],
+      "keypoints": [
+        {
+          "title": "External Dependency",
+          "value": "None"
+        },
+        {
+          "title": "categories",
+          "value": "CronJob Tool, C# Library"
+        }
+      ],
+      "seoKeywords": [
+        "Gaurav",
+        "Gaurav Nyaupane",
+        "Gaurav's Project",
+        "Gaurav's Projects",
+        "Gaurav Nyaupane's Project",
+        "Gaurav Nyaupane's Projects",
+        "C# Scheduler"
+      ]
+    },
+    {
+      "title": "Redis Cache Helper",
+      "description": "A C# utility library that provides caching functionality using the StackExchange.Redis library. It simplifies the process of storing and retrieving data from a Redis cache, allowing for efficient and reliable caching of objects.",
+      "previewImage": "https://www.gauravnyaupane.com.np/data/2023-10-22-12-48-56-Kb6M75JZso-2023-October-22 12-48-45.jpg",
+      "images": [],
+      "links": [
+        {
+          "media": "GitHub",
+          "link": "https://github.com/nightmaregaurav/RedisCacheHelper"
+        },
+        {
+          "media": "NuGet",
+          "link": "https://www.nuget.org/packages/nightmaregaurav.rediscachehelper/"
+        }
+      ],
+      "keypoints": [
+        {
+          "title": "Depends on",
+          "value": "Stackoverflow.Redis"
+        },
+        {
+          "title": "categories",
+          "value": "C# Library"
+        }
+      ],
+      "seoKeywords": [
+        "Gaurav",
+        "Gaurav Nyaupane",
+        "Gaurav's Project",
+        "Gaurav's Projects",
+        "Gaurav Nyaupane's Project",
+        "Gaurav Nyaupane's Projects",
+        "Redis Cache Helper",
+        "C# Redis wrapper"
+      ]
+    },
+    {
+      "title": "FairShare",
+      "description": "Gaurav's fair share problem & Reduction by Transitive Debt Algorithm",
+      "previewImage": "https://www.gauravnyaupane.com.np/data/2023-10-22-12-31-54-jo7CDHGTp0-2023-October-22%2012-31-30.jpg",
+      "images": [],
+      "links": [
+        {
+          "media": "GitHub",
+          "link": "https://github.com/nightmaregaurav/FairShare"
+        }
+      ],
+      "keypoints": [
+        {
+          "title": "Type",
+          "value": "Algorithm POC"
+        },
+        {
+          "title": "categories",
+          "value": "Algorithm, Automation Tool"
+        }
+      ],
+      "seoKeywords": [
+        "Gaurav",
+        "Gaurav Nyaupane",
+        "Gaurav's Project",
+        "Gaurav's Projects",
+        "Gaurav Nyaupane's Project",
+        "Gaurav Nyaupane's Projects",
+        "Fair Share",
+        "Manage shared expenses"
+      ]
+    },
+    {
+      "title": "PwnSSH",
+      "description": "Hack into ssh of a device and access using ngrok",
+      "previewImage": "https://nightmaregaurav.github.io/data/2023-10-22-12-38-30-VulE4e6MEb-2023-October-22%2012-38-19.jpg",
+      "images": [],
+      "links": [
+        {
+          "media": "GitHub",
+          "link": "https://github.com/nightmaregaurav/PwnSSH"
+        }
+      ],
+      "keypoints": [
+        {
+          "title": "Tech",
+          "value": "Java, shell, crontab"
+        },
+        {
+          "title": "categories",
+          "value": "Hacking Script"
+        }
+      ],
+      "seoKeywords": [
+        "Gaurav",
+        "Gaurav Nyaupane",
+        "Gaurav's Project",
+        "Gaurav's Projects",
+        "Gaurav Nyaupane's Project",
+        "Gaurav Nyaupane's Projects",
+        "PwnSSH",
+        "SSH Hacking with stealthy script"
+      ]
+    }
+  ]
+}
