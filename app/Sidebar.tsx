@@ -9,6 +9,7 @@ import {Divider} from "primereact/divider";
 import {PanelMenu} from "primereact/panelmenu";
 import {useConfig} from "./setup/useConfig";
 import {ConfigIdentifiers} from "./setup/ConfigIdentifiers";
+import {MenuItem} from "primereact/menuitem";
 
 const Sidebar = () => {
   const [visible, setVisible] = useState(false);
@@ -27,7 +28,7 @@ const Sidebar = () => {
     return null;
   }
 
-  const items = [
+  const items: MenuItem[] = [
     {
       label: 'Home',
       icon: 'pi pi-home',
