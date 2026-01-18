@@ -14,7 +14,7 @@ import {usePathname} from "next/dist/client/components/navigation";
 
 const getMenuItems = (path: string, activeClass: string) => [
   {
-    label: activeClass,
+    label: "Home",
     icon: 'pi pi-home',
     url: '/',
     className: path === "/" ? activeClass : ""
