@@ -1,6 +1,6 @@
 'use client';
 import styles from "./Sidebar.module.css";
-import React, {RefObject, useState} from 'react';
+import React, {RefObject, useMemo, useState} from 'react';
 import {Sidebar as PrimeReactSidebar} from "primereact/sidebar";
 import {Button} from "primereact/button";
 import {Avatar} from "primereact/avatar";
@@ -10,8 +10,98 @@ import {PanelMenu} from "primereact/panelmenu";
 import {useConfig} from "./setup/useConfig";
 import {ConfigIdentifiers} from "./setup/ConfigIdentifiers";
 import {MenuItem} from "primereact/menuitem";
+import {usePathname} from "next/dist/client/components/navigation";
+
+const getMenuItems = (path: string, activeClass: string) => [
+  {
+    label: activeClass,
+    icon: 'pi pi-home',
+    url: '/',
+    className: path === "/" ? activeClass : ""
+  },
+  {
+    label: "About",
+    icon: 'pi pi-user',
+    url: '/about',
+    className: path === "/about" ? activeClass : ""
+  },
+  {
+    label: 'My Journey',
+    icon: 'pi pi-map',
+    url: '/journey',
+    className: path === "/journey" ? activeClass : ""
+  },
+  {
+    label: 'Projects',
+    icon: 'pi pi-briefcase',
+    url: '/projects',
+    className: path === "/projects" ? activeClass : ""
+  },
+  {
+    label: 'Skills',
+    icon: 'pi pi-cog',
+    url: '/skills',
+    className: path === "/skills" ? activeClass : ""
+  },
+  {
+    label: 'Testimonials',
+    icon: 'pi pi-comments',
+    url: '/testimonials',
+    className: path === "/testimonials" ? activeClass : ""
+  },
+  {
+    label: 'Blogs',
+    icon: 'pi pi-pencil',
+    url: '/blogs',
+    className: path === "/blogs" ? activeClass : ""
+  },
+  {
+    label: 'Gallery',
+    icon: 'pi pi-image',
+    url: '/gallery',
+    className: path === "/gallery" ? activeClass : ""
+  },
+  {
+    label: 'Downloads',
+    icon: 'pi pi-download',
+    items: [
+      {
+        label: 'Short Resume',
+        icon: 'pi pi-file',
+        target: '_blank',
+        url: 'https://docs.google.com/document/d/1OvxmbaNJZu-Si9Pm0RfjTQ7iFkajFDYcLKLBphiiH7c/edit?tab=t.0',
+      },
+      {
+        label: 'Full Resume',
+        icon: 'pi pi-file-plus',
+        target: '_blank',
+        url: 'https://docs.google.com/document/d/1gO7-1Uu5yIZLX-LXakb_II96pjjCFr1AB2132fjwUww/edit?tab=t.0',
+      }
+    ]
+  },
+  {
+    label: 'Links',
+    icon: 'pi pi-link',
+    items: [
+      {
+        label: 'Something 1',
+        icon: 'pi pi-file',
+        target: '_blank',
+        url: 'https://docs.google.com/document/d/1OvxmbaNJZu-Si9Pm0RfjTQ7iFkajFDYcLKLBphiiH7c/edit?tab=t.0',
+      },
+      {
+        label: 'Something 2',
+        icon: 'pi pi-file-plus',
+        target: '_blank',
+        url: 'https://docs.google.com/document/d/1gO7-1Uu5yIZLX-LXakb_II96pjjCFr1AB2132fjwUww/edit?tab=t.0',
+      }
+    ]
+  }
+] as MenuItem[]
 
 const Sidebar = () => {
+  const pathname = usePathname();
+
   const [visible, setVisible] = useState(false);
 
   const {
@@ -24,88 +114,11 @@ const Sidebar = () => {
     isLoading: sidebarConfigLoading
   } = useConfig(ConfigIdentifiers.Sidebar);
 
+  const menuItems = useMemo(() => getMenuItems(pathname || "", styles.activeMenu), [pathname]);
+
   if (sidebarConfigLoading || coreConfigLoading || !sidebarConfig || !coreConfig) {
     return null;
   }
-
-  const items: MenuItem[] = [
-    {
-      label: 'Home',
-      icon: 'pi pi-home',
-      url: ''
-    },
-    {
-      label: 'About Me',
-      icon: 'pi pi-user',
-      url: 'about'
-    },
-    {
-      label: 'My Journey',
-      icon: 'pi pi-map',
-      url: 'journey'
-    },
-    {
-      label: 'Projects',
-      icon: 'pi pi-briefcase',
-      url: 'projects'
-    },
-    {
-      label: 'Skills',
-      icon: 'pi pi-cog',
-      url: 'skills'
-    },
-    {
-      label: 'Testimonials',
-      icon: 'pi pi-comments',
-      url: 'testimonials'
-    },
-    {
-      label: 'Blogs',
-      icon: 'pi pi-pencil',
-      url: 'blogs'
-    },
-    {
-      label: 'Gallery',
-      icon: 'pi pi-image',
-      url: 'gallery'
-    },
-    {
-      label: 'Downloads',
-      icon: 'pi pi-download',
-      items: [
-        {
-          label: 'Short Resume',
-          icon: 'pi pi-file',
-          target: '_blank',
-          url: 'https://docs.google.com/document/d/1OvxmbaNJZu-Si9Pm0RfjTQ7iFkajFDYcLKLBphiiH7c/edit?tab=t.0'
-        },
-        {
-          label: 'Full Resume',
-          icon: 'pi pi-file-plus',
-          target: '_blank',
-          url: 'https://docs.google.com/document/d/1gO7-1Uu5yIZLX-LXakb_II96pjjCFr1AB2132fjwUww/edit?tab=t.0'
-        }
-      ]
-    },
-    {
-      label: 'Links',
-      icon: 'pi pi-link',
-      items: [
-        {
-          label: 'Something 1',
-          icon: 'pi pi-file',
-          target: '_blank',
-          url: 'https://docs.google.com/document/d/1OvxmbaNJZu-Si9Pm0RfjTQ7iFkajFDYcLKLBphiiH7c/edit?tab=t.0'
-        },
-        {
-          label: 'Something 2',
-          icon: 'pi pi-file-plus',
-          target: '_blank',
-          url: 'https://docs.google.com/document/d/1gO7-1Uu5yIZLX-LXakb_II96pjjCFr1AB2132fjwUww/edit?tab=t.0'
-        }
-      ]
-    }
-  ];
 
   return (<>
     {!visible && <Button
@@ -150,7 +163,7 @@ const Sidebar = () => {
           iconSize={25}
         />
         <div className={styles.menuSection}>
-          <PanelMenu model={items}/>
+          <PanelMenu model={menuItems}/>
         </div>
         <Divider/>
         <div className={styles.footer}>
