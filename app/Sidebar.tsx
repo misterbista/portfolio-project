@@ -123,11 +123,15 @@ const Sidebar = () => {
   return (<>
     {!visible && <Button
       className={styles.openButton}
+      size={"small"}
       type="button"
-      icon="pi pi-bars"
       rounded
       outlined
+      icon="pi pi-bars"
       onClick={() => setVisible(true)}
+      aria-label={"Show sidebar"}
+      tooltip={"Show sidebar"}
+      tooltipOptions={{ position: 'left', style: {fontSize: "12px"}, showDelay: 1000 }}
     />}
     <PrimeReactSidebar
       visible={visible}
@@ -151,12 +155,16 @@ const Sidebar = () => {
         </div>
         <Button
           className={styles.closeButton}
+          size={"small"}
           type="button"
-          icon="pi pi-times"
           rounded
-          outlined
+          text
+          icon="pi pi-times"
           ref={closeIconRef as RefObject<Button>}
           onClick={(e) => hide(e)}
+          aria-label={"Hide sidebar"}
+          tooltip={"Hide sidebar"}
+          tooltipOptions={{ position: 'left', style: {fontSize: "12px"}, showDelay: 1000 }}
         />
         <SocialLinks
           socialLinks={sidebarConfig.socials}
