@@ -24,8 +24,10 @@ export default function Index() {
       }
     });
   }
+
   useEffect(() => {
-    setConfig(JSON.parse(JSON.stringify(data || {})));
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setConfig(structuredClone(data ?? {}));
   }, [data]);
 
   return (

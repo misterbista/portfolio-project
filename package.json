@@ -3,36 +3,32 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint"
   },
   "dependencies": {
     "@nightmaregaurav/react-social-media-links": "^1.0.5",
-    "@tanstack/react-query": "^5.90.10",
-    "next": "^16.1.0-canary.19",
+    "@tanstack/react-query": "^5.101.0",
+    "next": "16.2.9",
     "primeicons": "^7.0.0",
-    "primereact": "^10.9.7",
+    "primereact": "^10.9.8",
     "prismjs": "^1.30.0",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react": "19.2.4",
+    "react-dom": "19.2.4"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
-    "@tanstack/eslint-plugin-query": "^5.91.2",
-    "@types/node": "^24",
-    "@types/prismjs": "^1.26.5",
+    "@tailwindcss/postcss": "^4",
+    "@tanstack/eslint-plugin-query": "^5.101.0",
+    "@types/node": "^20",
+    "@types/prismjs": "^1.26.6",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "babel-plugin-react-compiler": "1.0.0",
     "eslint": "^9",
-    "eslint-config-next": "^15.5.4",
+    "eslint-config-next": "16.2.9",
+    "tailwindcss": "^4",
     "typescript": "^5"
-  },
-  "engineStrict": true,
-  "engines": {
-    "npm": ">=11.6.1 <12.0.0",
-    "node": ">=24.9.0 <25.0.0",
-    "yarn": ">=1.22.22 <2.0.0"
   }
 }
