@@ -81,6 +81,19 @@
 ]  // show in a circle x/y where x is (the number of total projects + the number of total milestones) and y is (the number of total projects with this skill + the number of total milestones with this skill)    
 ```
 
+# Services
+
+```json
+[
+  {
+    "title": "",
+    "description": "",
+    "icon": "", // optional
+    "link": "" // auto detect links and add hyperlinks
+  }
+] 
+```
+
 # Testimonials
 ```json
 [
