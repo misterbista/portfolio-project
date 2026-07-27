@@ -10,25 +10,25 @@
   },
   "dependencies": {
     "@nightmaregaurav/react-social-media-links": "^1.0.5",
-    "@tanstack/react-query": "^5.101.0",
-    "next": "16.2.9",
-    "primeicons": "^7.0.0",
-    "primereact": "^10.9.8",
+    "@tanstack/react-query": "^5.101.4",
+    "next": "16.2.12",
+    "primeicons": "^8.0.0",
+    "primereact": "^11.0.0",
     "prismjs": "^1.30.0",
-    "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@tanstack/eslint-plugin-query": "^5.101.0",
-    "@types/node": "^20",
+    "@tailwindcss/postcss": "^4.3.3",
+    "@tanstack/eslint-plugin-query": "^5.101.4",
+    "@types/node": "^26.1.1",
     "@types/prismjs": "^1.26.6",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
     "babel-plugin-react-compiler": "1.0.0",
-    "eslint": "^9",
-    "eslint-config-next": "16.2.9",
-    "tailwindcss": "^4",
-    "typescript": "^7"
+    "eslint": "^10.8.0",
+    "eslint-config-next": "16.2.12",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^7.0.2"
   }
 }
