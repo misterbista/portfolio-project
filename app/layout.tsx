@@ -1,15 +1,16 @@
 'use client';
 import React from "react";
-import {AppendToType, PrimeReactProvider} from "primereact/api";
-import 'primeicons/primeicons.css';
-import 'primereact/resources/themes/lara-light-amber/theme.css';
 import "./globals.css";
-import Sidebar from "./Sidebar";
-import GoToTop from "./GoToTop";
+import GoToTop from "@/components/custom/GoToTop";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
-import {useConfig} from "./setup/useConfig";
-import {ConfigIdentifiers} from "./setup/ConfigIdentifiers";
+import {useConfig} from "@/app/setup/useConfig";
+import {ConfigIdentifiers} from "@/app/setup/ConfigIdentifiers";
 import Head from "next/head";
+import { Geist } from "next/font/google";
+import { cn } from "@/lib/utils";
+import Sidebar from "./Sidebar";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const queryClient = new QueryClient()
 
@@ -18,23 +19,16 @@ export default function MainLayout(
     children
   }: Readonly<{ children: React.ReactNode; }>
 ) {
-  const primeReactConfiguration = {
-    appendTo: 'self' as AppendToType,
-    ripple: true,
-  };
-
   return (
     <QueryClientProvider client={queryClient}>
-      <PrimeReactProvider value={primeReactConfiguration}>
-        <html lang="en" data-google-analytics-opt-out="">
-          <HeadLayout/>
-          <body>
-            <Sidebar/>
-            {children}
-            <GoToTop/>
-          </body>
-        </html>
-      </PrimeReactProvider>
+      <html lang="en" data-google-analytics-opt-out="" className={cn("font-sans", geist.variable)}>
+        <HeadLayout/>
+        <body>
+          <Sidebar/>
+          {children}
+          <GoToTop/>
+        </body>
+      </html>
     </QueryClientProvider>
   );
 }
