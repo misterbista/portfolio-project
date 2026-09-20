@@ -8,6 +8,7 @@ export const schema = z.object({
       url: z.string(),
     }),
   ),
+  enabledPages: z.array(z.string()),
 });
 
 export type Model = z.infer<typeof schema>;

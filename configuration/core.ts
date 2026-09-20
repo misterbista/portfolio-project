@@ -6,7 +6,6 @@ export const schema = z.object({
   fullName: z.string(),
   seoDescription: z.string().optional(),
   seoKeywords: z.array(z.string()),
-  enabledPages: z.array(z.string()),
 });
 
 export type Model = z.infer<typeof schema>;

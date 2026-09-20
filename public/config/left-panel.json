@@ -25,5 +25,8 @@
       "name": "PayPal",
       "url": "https://www.paypal.com/donate/?hosted_button_id=LG8Q32VA2VHT6"
     }
+  ],
+  "enabledPages": [
+    "about"
   ]
 }

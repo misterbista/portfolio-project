@@ -34,7 +34,7 @@ function Page() {
 
   return (
     <div className={styles.page}>
-      <h1>Left Panel Configuration <ViewOrCopyConfigValues config={formValues} /></h1>
+      <div>Left Panel Configuration <ViewOrCopyConfigValues config={formValues} /></div>
       <form onSubmit={handleSubmit(save)}>
           <input {...register("profilePhoto")}/>
           <label htmlFor={"profilePhoto"}>Profile Photo URL</label>

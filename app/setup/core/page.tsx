@@ -9,7 +9,7 @@ import {Model, schema} from "@/configuration/core";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Input} from "@/components/ui/input";
 import {Label} from "@/components/ui/label";
-import {Button} from "@base-ui/react";
+import {Button} from "@/components/ui/button";
 
 function Page() {
   const {
@@ -37,15 +37,36 @@ function Page() {
   }
 
   return (
+    // make it a card in the middle of the page
     <div className={styles.page}>
-      <h1>Core Configuration <ViewOrCopyConfigValues config={formValues} /></h1>
+      <div className={styles.header}>Core Configuration <ViewOrCopyConfigValues config={formValues} /></div>
       <form onSubmit={handleSubmit(save)}>
         {/* start finding better ui design for form and begin form component placement. */}
 
-        <Input {...register("fullName")}/>
-        <Label htmlFor={"fullName"}>Full Name</Label>
+        <Label htmlFor={"favicon"}>Favicon</Label>
+        <Input {...register("favicon")}/>
 
-        <Button type={"submit"}>Save</Button>
+        <Label htmlFor={"websiteName"}>Website Name</Label>
+        <Input {...register("websiteName")}/>
+
+        <Label htmlFor={"fullName"}>Full Name</Label>
+        <Input {...register("fullName")}/>
+
+        <Label htmlFor={"seoDescription"}>SEO Description</Label>
+        <Input {...register("seoDescription")}/>
+
+        <Label htmlFor={"seoKeywords"}>SEO Keywords</Label>
+        {/* show badge below input for each enter save as string array */}
+        <Input {...register("seoKeywords.0")}/>
+
+        <Button
+          type={"submit"}
+          size={"sm"}
+          variant={"outline"}
+          className={"cursor-pointer mt-2"}
+        >
+          Save
+        </Button>
       </form>
     </div>
   );
