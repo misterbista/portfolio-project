@@ -3,7 +3,6 @@
 import React from 'react';
 import "./globals.css";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
-import Head from "next/head";
 import {ReactQueryDevtools} from "@tanstack/react-query-devtools";
 import {Identifier, useConfig} from "@/configuration/useConfig";
 import { TooltipProvider } from "@/components/ui/tooltip"
@@ -41,6 +40,7 @@ function RootLayout({ children }: LayoutProps<"/">) {
 
 export default RootLayout;
 
+// replace this with metadata export
 function LayoutHead(){
   const {
     config: coreConfig,
@@ -53,9 +53,8 @@ function LayoutHead(){
 
   const currentUrl = window.location.href;
 
-
   return (
-    <Head>
+    <head>
       {/* Title of the website */}
       <title>{coreConfig.websiteName}</title>
 
@@ -107,6 +106,6 @@ function LayoutHead(){
           }
         })}
       </script>
-    </Head>
+    </head>
   );
 }
