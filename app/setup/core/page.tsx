@@ -1,10 +1,10 @@
 "use client"
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import styles from "./page.module.css";
 import {Identifier, useConfig} from "@/configuration/useConfig";
 import ViewOrCopyConfigValues from "@/components/ui/ViewOrCopyConfigValues";
-import {useForm} from "react-hook-form";
+import {Controller, useForm} from "react-hook-form";
 import {Model, schema} from "@/configuration/core";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Input} from "@/components/ui/input";
@@ -13,6 +13,9 @@ import {Button} from "@/components/ui/button";
 import {Card, CardContent} from "@/components/ui/card";
 import {cn} from "@/lib/utils";
 import {useRouter} from "next/navigation";
+import {ArrayInput} from "@/components/ui/ArrayInput";
+import {Textarea} from "@/components/ui/textarea";
+import ConfigFormTools from "@/app/setup/ConfigFormTools";
 
 function Page() {
   const router = useRouter()
@@ -24,14 +27,21 @@ function Page() {
   } = useConfig(Identifier.Core);
 
   const {
-    register,
+    reset,
+    control,
     handleSubmit,
     watch
   } = useForm<Model>({
     resolver: zodResolver(schema),
-    values: coreConfig
+    defaultValues: coreConfig
   });
   const formValues = watch();
+
+  useEffect(() => {
+    if (coreConfig) {
+      reset(coreConfig);
+    }
+  }, [coreConfig, reset]);
 
   async function save(values: Model) {
     await saveConfig(values);
@@ -45,23 +55,65 @@ function Page() {
     <div className={styles.page}>
       <Card>
         <CardContent>
-          <div className={styles.header}>Core Configuration <ViewOrCopyConfigValues config={formValues} /></div>
-          <form onSubmit={handleSubmit(save)} className={cn(styles.form, "grid gap-2")}>
-            <Label htmlFor={"favicon"}>Favicon</Label>
-            <Input {...register("favicon")}/>
+          <div className={styles.header}>
+            <span className={styles.left}>Core Configuration <ViewOrCopyConfigValues config={formValues} /></span>
+            {/* Move view and copy config as dropdown menus in tools, add an option to manage files in github */}
+            {/* This file manager shall list all the files inside public/uploads directory */}
+            {/* Allow user to download the file, copy the URL, upload the file, delete the file */}
+            {/* Deleting won't use any smart detection, any existing usage will start failing, so just show a warning before deleting */}
+            {/* Adding file will expose it to public, so we should show a warning before uploading */}
+            <span className={styles.right}><ConfigFormTools/></span>
+          </div>
+          <form onSubmit={handleSubmit(save)} className={cn(styles.form, "grid gap-2 max-w-3xl")}>
+            <Controller
+              control={control}
+              name={"favicon"}
+              render={({field, fieldState: {error}}) => <>
+                <Label htmlFor={"favicon"}>Favicon</Label>
+                <Input {...field} className={cn("w-full", {"border-destructive": error})}/>
+                {error && <small className={"text-destructive"}>{error.message}</small>}
+              </>}
+            />
 
-            <Label htmlFor={"websiteName"}>Website Name</Label>
-            <Input {...register("websiteName")}/>
+            <Controller
+              control={control}
+              name={"websiteName"}
+              render={({field, fieldState: {error}}) => <>
+                <Label htmlFor={"websiteName"}>Website Name</Label>
+                <Input {...field} className={cn("w-full", {"border-destructive": error})}/>
+                {error && <small className={"text-destructive"}>{error.message}</small>}
+              </>}
+            />
 
-            <Label htmlFor={"fullName"}>Full Name</Label>
-            <Input {...register("fullName")}/>
+            <Controller
+              control={control}
+              name={"fullName"}
+              render={({field, fieldState: {error}}) => <>
+                <Label htmlFor={"fullName"}>Full Name</Label>
+                <Input {...field} className={cn("w-full", {"border-destructive": error})}/>
+                {error && <small className={"text-destructive"}>{error.message}</small>}
+              </>}
+            />
 
-            <Label htmlFor={"seoDescription"}>SEO Description</Label>
-            <Input {...register("seoDescription")}/>
+            <Controller
+              control={control}
+              name={"seoDescription"}
+              render={({field, fieldState: {error}}) => <>
+                <Label htmlFor={"seoDescription"}>SEO Description</Label>
+                <Textarea {...field} className={cn("w-full", {"border-destructive": error})}/>
+                {error && <small className={"text-destructive"}>{error.message}</small>}
+              </>}
+            />
 
-            <Label htmlFor={"seoKeywords"}>SEO Keywords</Label>
-            {/* show badge below input for each enter save as string array */}
-            <Input {...register("seoKeywords.0")}/>
+            <Controller
+              control={control}
+              name={"seoKeywords"}
+              render={({field, fieldState: {error}}) => <>
+                <Label htmlFor={"seoKeywords"}>SEO Keywords</Label>
+                <ArrayInput {...field} className={cn("w-full", {"border-destructive": error})}/>
+                {error && <small className={"text-destructive"}>{error.message}</small>}
+              </>}
+            />
 
             <div className={"flex gap-2 justify-end"}>
               <Button
