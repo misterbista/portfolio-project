@@ -70,9 +70,13 @@ export function useConfig<T extends Identifier>(configIdentifier: T){
   } = useMutation({
     mutationKey: [configIdentifier],
     mutationFn: async (newConfig: ConfigurationModel<T>) => await saveConfig(configIdentifier, newConfig),
-    onError: async (error) => {
+    onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: [configIdentifier] });
-      toast.error(`Failed to save config: ${configIdentifier}. Error: ${error}`);
+      toast.success(`Config saved successfully: ${configIdentifier}`);
+    },
+    onError: async (error) => {
+      const errorMessage = error instanceof Error ? error.message : typeof error === "string" ? error : `Failed to save ${configIdentifier} config.`;
+      toast.error(errorMessage);
     }
   });
 
@@ -95,14 +99,16 @@ async function getConfig<T extends Identifier> (configIdentifier: T): Promise<Co
 
 async function saveConfig<T extends Identifier>(configIdentifier: T, newConfig: ConfigurationModel<T>): Promise<void> {
   const configPath = configurationPaths[configIdentifier];
-  const response = await fetch(configPath, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(newConfig)
-  });
-  if (!response.ok) {
-    throw new Error(`Failed to save config: ${configIdentifier}`);
+  const filePath = `./public${configPath}`;
+  const ghConfig = localStorage.getItem("ghConfig");
+
+  if (!ghConfig) {
+    return Promise.resolve().then(() => {
+      throw new Error("You have not logged in yet. Please log in to use this feature.");
+    });
   }
+
+  return Promise.resolve().then(() => {
+    throw new Error("Feature is not implemented: Saving config to GitHub is not supported yet.");
+  });
 }

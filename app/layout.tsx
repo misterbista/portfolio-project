@@ -10,6 +10,7 @@ import { TooltipProvider } from "@/components/ui/tooltip"
 import { SidebarProvider } from "@/components/ui/sidebar"
 import LeftPanel from "@/app/LeftPanel";
 import GoToTopButton from "@/components/ui/GoToTopButton";
+import {Toaster} from "sonner";
 
 
 const queryClient = new QueryClient()
@@ -30,6 +31,7 @@ function RootLayout({ children }: LayoutProps<"/">) {
               <GoToTopButton/>
             </SidebarProvider>
           </TooltipProvider>
+          <Toaster/>
         </body>
       </html>
       <ReactQueryDevtools initialIsOpen={false} />
