@@ -109,17 +109,17 @@ function LeftPanel() {
   const {open} = useSidebar();
 
   const {
-    data: coreConfig,
-    isLoading: coreConfigLoading
+    config: coreConfig,
+    isLoadingConfig: isLoadingCoreConfig
   } = useConfig(Identifier.Core);
 
   const {
-    data: leftPanelConfig,
-    isLoading: leftPanelConfigLoading
+    config: leftPanelConfig,
+    isLoadingConfig: isLoadingLeftPanelConfig
   } = useConfig(Identifier.LeftPanel);
 
-  if (leftPanelConfigLoading || coreConfigLoading || !leftPanelConfig || !coreConfig) {
-    return null;
+  if (isLoadingLeftPanelConfig || isLoadingCoreConfig || !leftPanelConfig || !coreConfig) {
+    return "Loading...";
   }
 
   return (<>

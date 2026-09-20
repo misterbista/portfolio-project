@@ -1,4 +1,4 @@
-import {useQuery} from "@tanstack/react-query";
+import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import {Model as CoreConfigurationModel} from "@/configuration/core";
 import {Model as LeftPanelConfigurationModel} from "@/configuration/leftPanel";
 import {Model as HomeConfigurationModel} from "@/configuration/home";
@@ -9,6 +9,7 @@ import {Model as SkillsConfigurationModel} from "@/configuration/skills";
 import {Model as TestimonialsConfigurationModel} from "@/configuration/testimonials";
 import {Model as GalleryConfigurationModel} from "@/configuration/gallery";
 import {Model as DownloadsConfigurationModel} from "@/configuration/downloads";
+import {toast} from "sonner";
 
 export enum Identifier {
   Core = "core",
@@ -52,6 +53,8 @@ const configurationPaths: Record<Identifier, string> = {
 };
 
 export function useConfig<T extends Identifier>(configIdentifier: T){
+  const queryClient = useQueryClient();
+
   const {
     data,
     isLoading,
@@ -61,9 +64,23 @@ export function useConfig<T extends Identifier>(configIdentifier: T){
     refetchOnWindowFocus: false
   });
 
+  const {
+    mutateAsync,
+    isPending
+  } = useMutation({
+    mutationKey: [configIdentifier],
+    mutationFn: async (newConfig: ConfigurationModel<T>) => await saveConfig(configIdentifier, newConfig),
+    onError: async (error) => {
+      await queryClient.invalidateQueries({ queryKey: [configIdentifier] });
+      toast.error(`Failed to save config: ${configIdentifier}. Error: ${error}`);
+    }
+  });
+
   return {
-    data: data,
-    isLoading
+    config: data,
+    isLoadingConfig: isLoading,
+    saveConfig: mutateAsync,
+    isSavingConfig: isPending
   };
 }
 
@@ -74,4 +91,18 @@ async function getConfig<T extends Identifier> (configIdentifier: T): Promise<Co
     throw new Error(`Failed to fetch config: ${configIdentifier}`);
   }
   return await response.json() as ConfigurationModel<T>;
+}
+
+async function saveConfig<T extends Identifier>(configIdentifier: T, newConfig: ConfigurationModel<T>): Promise<void> {
+  const configPath = configurationPaths[configIdentifier];
+  const response = await fetch(configPath, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(newConfig)
+  });
+  if (!response.ok) {
+    throw new Error(`Failed to save config: ${configIdentifier}`);
+  }
 }

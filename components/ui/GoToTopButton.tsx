@@ -15,7 +15,9 @@ function GoToTopButton() {
     isAtTop
   } = useScrollPosition(bodyRef);
 
-  if(isAtTop) return null;
+  if(isAtTop) {
+    return <></>;
+  }
 
   return (
     <Button

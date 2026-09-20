@@ -10,8 +10,8 @@ import {zodResolver} from "@hookform/resolvers/zod";
 
 function Page() {
   const {
-    data: coreConfig,
-    isLoading: coreConfigLoading
+    config: coreConfig,
+    isLoadingConfig: isLoadingCoreConfig
   } = useConfig(Identifier.Core);
 
   const {
@@ -25,10 +25,10 @@ function Page() {
   const formValues = watch();
 
   function save(values: Model) {
-    console.log(values);
+
   }
 
-  if(coreConfigLoading || !coreConfig){
+  if(isLoadingCoreConfig || !coreConfig){
     return "Loading...";
   }
 
@@ -37,6 +37,7 @@ function Page() {
       <h1>Core Configuration <ViewOrCopyConfigValues config={formValues} /></h1>
       <form onSubmit={handleSubmit(save)}>
         {/* start finding better ui design for form and begin form component placement. */}
+
         <input{...register("fullName")}/>
         <label htmlFor={"fullName"}>Full Name</label>
       </form>

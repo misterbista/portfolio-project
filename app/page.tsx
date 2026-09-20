@@ -7,17 +7,17 @@ import {cn} from "@/lib/utils";
 
 function Page() {
   const {
-    data: coreConfig,
-    isLoading: coreConfigLoading
+    config: coreConfig,
+    isLoadingConfig: isLoadingCoreConfig
   } = useConfig(Identifier.Core);
 
   const {
-    data: homeConfig,
-    isLoading: homeConfigLoading
+    config: homeConfig,
+    isLoadingConfig: isLoadingHomeConfig
   } = useConfig(Identifier.Home);
 
-  if (coreConfigLoading || homeConfigLoading || !coreConfig || !homeConfig) {
-    return null;
+  if (isLoadingCoreConfig || isLoadingHomeConfig || !coreConfig || !homeConfig) {
+    return "Loading...";
   }
 
   return (

@@ -10,17 +10,17 @@ import {cn} from "@/lib/utils";
 
 function Page() {
   const {
-    data: coreConfig,
-    isLoading: coreConfigLoading
+    config: coreConfig,
+    isLoadingConfig: isLoadingCoreConfig
   } = useConfig(Identifier.Core);
 
   const {
-    data: aboutConfig,
-    isLoading: aboutConfigLoading
+    config: aboutConfig,
+    isLoadingConfig: isLoadingAboutConfig
   } = useConfig(Identifier.About);
 
-  if (aboutConfigLoading || coreConfigLoading || !aboutConfig || !coreConfig) {
-    return null;
+  if (isLoadingAboutConfig || isLoadingCoreConfig || !aboutConfig || !coreConfig) {
+    return "Loading...";
   }
 
   return (

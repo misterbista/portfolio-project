@@ -41,12 +41,12 @@ export default RootLayout;
 
 function LayoutHead(){
   const {
-    data: coreConfig,
-    isLoading: coreConfigLoading
+    config: coreConfig,
+    isLoadingConfig: isLoadingCoreConfig
   } = useConfig(Identifier.Core);
 
-  if (coreConfigLoading || !coreConfig) {
-    return null;
+  if (isLoadingCoreConfig || !coreConfig) {
+    return "Loading...";
   }
 
   const currentUrl = window.location.href;

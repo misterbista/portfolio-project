@@ -10,8 +10,8 @@ import {zodResolver} from "@hookform/resolvers/zod";
 
 function Page() {
   const {
-    data: leftPanelConfig,
-    isLoading: leftPanelConfigLoading
+    config: leftPanelConfig,
+    isLoadingConfig: isLoadingLeftPanelConfig
   } = useConfig(Identifier.LeftPanel);
 
   const {
@@ -28,7 +28,7 @@ function Page() {
     console.log(values);
   }
 
-  if(leftPanelConfigLoading || !leftPanelConfig){
+  if(isLoadingLeftPanelConfig || !leftPanelConfig){
     return "Loading...";
   }
 

@@ -13,17 +13,17 @@ function Page() {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [sortMode, setSortMode] = useState<'name_asc' | 'name_desc' | 'created_asc' | 'created_desc'>('name_asc');
   const {
-    data: coreConfig,
-    isLoading: coreConfigLoading
+    config: coreConfig,
+    isLoadingConfig: isLoadingCoreConfig
   } = useConfig(Identifier.Core);
 
   const {
-    data: projectsConfig,
-    isLoading: projectsConfigLoading
+    config: projectsConfig,
+    isLoadingConfig: isLoadingProjectsConfig
   } = useConfig(Identifier.Projects);
 
-  if (projectsConfigLoading || coreConfigLoading || !projectsConfig || !coreConfig) {
-    return null;
+  if (isLoadingProjectsConfig || isLoadingCoreConfig || !projectsConfig || !coreConfig) {
+    return "Loading...";
   }
 
   return (
