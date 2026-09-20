@@ -10,8 +10,13 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {Input} from "@/components/ui/input";
 import {Label} from "@/components/ui/label";
 import {Button} from "@/components/ui/button";
+import {Card, CardContent} from "@/components/ui/card";
+import {cn} from "@/lib/utils";
+import {useRouter} from "next/navigation";
 
 function Page() {
+  const router = useRouter()
+
   const {
     config: coreConfig,
     isLoadingConfig: isLoadingCoreConfig,
@@ -37,37 +42,49 @@ function Page() {
   }
 
   return (
-    // make it a card in the middle of the page
     <div className={styles.page}>
-      <div className={styles.header}>Core Configuration <ViewOrCopyConfigValues config={formValues} /></div>
-      <form onSubmit={handleSubmit(save)}>
-        {/* start finding better ui design for form and begin form component placement. */}
+      <Card>
+        <CardContent>
+          <div className={styles.header}>Core Configuration <ViewOrCopyConfigValues config={formValues} /></div>
+          <form onSubmit={handleSubmit(save)} className={cn(styles.form, "grid gap-2")}>
+            <Label htmlFor={"favicon"}>Favicon</Label>
+            <Input {...register("favicon")}/>
 
-        <Label htmlFor={"favicon"}>Favicon</Label>
-        <Input {...register("favicon")}/>
+            <Label htmlFor={"websiteName"}>Website Name</Label>
+            <Input {...register("websiteName")}/>
 
-        <Label htmlFor={"websiteName"}>Website Name</Label>
-        <Input {...register("websiteName")}/>
+            <Label htmlFor={"fullName"}>Full Name</Label>
+            <Input {...register("fullName")}/>
 
-        <Label htmlFor={"fullName"}>Full Name</Label>
-        <Input {...register("fullName")}/>
+            <Label htmlFor={"seoDescription"}>SEO Description</Label>
+            <Input {...register("seoDescription")}/>
 
-        <Label htmlFor={"seoDescription"}>SEO Description</Label>
-        <Input {...register("seoDescription")}/>
+            <Label htmlFor={"seoKeywords"}>SEO Keywords</Label>
+            {/* show badge below input for each enter save as string array */}
+            <Input {...register("seoKeywords.0")}/>
 
-        <Label htmlFor={"seoKeywords"}>SEO Keywords</Label>
-        {/* show badge below input for each enter save as string array */}
-        <Input {...register("seoKeywords.0")}/>
-
-        <Button
-          type={"submit"}
-          size={"sm"}
-          variant={"outline"}
-          className={"cursor-pointer mt-2"}
-        >
-          Save
-        </Button>
-      </form>
+            <div className={"flex gap-2 justify-end"}>
+              <Button
+                type={"button"}
+                size={"sm"}
+                variant={"outline"}
+                className={"cursor-pointer mt-2"}
+                onClick={() => router.push("/setup")}
+              >
+                Cancel
+              </Button>
+              <Button
+                type={"submit"}
+                size={"sm"}
+                variant={"outline"}
+                className={"cursor-pointer mt-2 bg-primary text-secondary"}
+              >
+                Save
+              </Button>
+            </div>
+          </form>
+        </CardContent>
+      </Card>
     </div>
   );
 }
