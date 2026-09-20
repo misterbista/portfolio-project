@@ -48,7 +48,7 @@ function LayoutHead(){
   } = useConfig(Identifier.Core);
 
   if (isLoadingCoreConfig || !coreConfig) {
-    return <>Loading...</>;
+    return <></>;
   }
 
   const currentUrl = window.location.href;
