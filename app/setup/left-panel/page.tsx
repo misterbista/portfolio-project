@@ -29,7 +29,7 @@ function Page() {
   }
 
   if(isLoadingLeftPanelConfig || !leftPanelConfig){
-    return "Loading...";
+    return <>Loading...</>;
   }
 
   return (

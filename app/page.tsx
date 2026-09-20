@@ -17,7 +17,7 @@ function Page() {
   } = useConfig(Identifier.Home);
 
   if (isLoadingCoreConfig || isLoadingHomeConfig || !coreConfig || !homeConfig) {
-    return "Loading...";
+    return <>Loading...</>;
   }
 
   return (

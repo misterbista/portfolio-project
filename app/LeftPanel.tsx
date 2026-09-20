@@ -119,7 +119,7 @@ function LeftPanel() {
   } = useConfig(Identifier.LeftPanel);
 
   if (isLoadingLeftPanelConfig || isLoadingCoreConfig || !leftPanelConfig || !coreConfig) {
-    return "Loading...";
+    return <>Loading...</>;
   }
 
   return (<>

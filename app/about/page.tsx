@@ -20,7 +20,7 @@ function Page() {
   } = useConfig(Identifier.About);
 
   if (isLoadingAboutConfig || isLoadingCoreConfig || !aboutConfig || !coreConfig) {
-    return "Loading...";
+    return <>Loading...</>;
   }
 
   return (

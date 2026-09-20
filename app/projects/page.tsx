@@ -23,7 +23,7 @@ function Page() {
   } = useConfig(Identifier.Projects);
 
   if (isLoadingProjectsConfig || isLoadingCoreConfig || !projectsConfig || !coreConfig) {
-    return "Loading...";
+    return <>Loading...</>;
   }
 
   return (
