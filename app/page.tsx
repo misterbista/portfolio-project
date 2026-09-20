@@ -1,18 +1,20 @@
-'use client';
-import styles from "./page.module.css";
-import {useConfig} from "./setup/useConfig";
-import {ConfigIdentifiers} from "./setup/ConfigIdentifiers";
+"use client"
 
-export default function Home() {
+import React from 'react';
+import styles from "./page.module.css";
+import {Identifier, useConfig} from "@/configuration/useConfig";
+import {cn} from "@/lib/utils";
+
+function Page() {
   const {
     data: coreConfig,
     isLoading: coreConfigLoading
-  } = useConfig(ConfigIdentifiers.Core);
+  } = useConfig(Identifier.Core);
 
   const {
     data: homeConfig,
     isLoading: homeConfigLoading
-  } = useConfig(ConfigIdentifiers.Home);
+  } = useConfig(Identifier.Home);
 
   if (coreConfigLoading || homeConfigLoading || !coreConfig || !homeConfig) {
     return null;
@@ -24,11 +26,13 @@ export default function Home() {
         className={styles.heroImage}
         style={{background: `url("${homeConfig.heroPicture}")`}}
       />
-      <div className={styles.heroText}>
-        <span className={styles.heroTextPrimary}>{coreConfig.fullName}</span>
+      <div className={styles.heroText} >
+        <span className={cn(styles.heroTextPrimary, "text-white")}>{coreConfig.fullName}</span>
         <br/><br/>
-        <span className={styles.heroTextSecondary}>{homeConfig.bio}</span>
+        <span className={cn(styles.heroTextSecondary, "text-white")}>{homeConfig.bio}</span>
       </div>
     </div>
   );
 }
+
+export default Page;

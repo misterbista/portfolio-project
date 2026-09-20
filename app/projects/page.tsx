@@ -1,0 +1,61 @@
+"use client"
+
+import React, {useState} from 'react';
+import styles from "./page.module.css";
+import {cn} from "@/lib/utils";
+import {Identifier, useConfig} from "@/configuration/useConfig";
+import {Button} from "@/components/ui/button";
+import {Input} from "@/components/ui/input";
+import {GridIcon, ListIcon} from "lucide-react";
+import SmartText from "@/components/ui/SmartText";
+
+function Page() {
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [sortMode, setSortMode] = useState<'name_asc' | 'name_desc' | 'created_asc' | 'created_desc'>('name_asc');
+  const {
+    data: coreConfig,
+    isLoading: coreConfigLoading
+  } = useConfig(Identifier.Core);
+
+  const {
+    data: projectsConfig,
+    isLoading: projectsConfigLoading
+  } = useConfig(Identifier.Projects);
+
+  if (projectsConfigLoading || coreConfigLoading || !projectsConfig || !coreConfig) {
+    return null;
+  }
+
+  return (
+    <div className={cn(styles.page, "bg-secondary")}>
+      <span className={styles.pageHeader}>Projects</span>
+      <SmartText className={styles.pageText}>{projectsConfig.pageDescription}</SmartText>
+      <div className={styles.pageContent}>
+        <div className={styles.searchAndActionsStrip}>
+          <Input className={styles.searchBox} placeholder={"Search..."} />
+          <div className={styles.quickActionButtons}>
+            {viewMode === 'list' ? <Button
+                size={"icon-sm"}
+                type="button"
+                onClick={() => setViewMode('grid')}
+                aria-label={"Switch to grid mode"}
+            ><GridIcon/></Button> : <Button
+                size={"icon-sm"}
+                type="button"
+                onClick={() => setViewMode('list')}
+                aria-label={"Switch to list mode"}
+            ><ListIcon/></Button>}
+          {/*  make a dropdown menu for sort modes  */}
+          </div>
+        </div>
+        <div className={styles.projectsContainer}>
+          {projectsConfig.projects.map((project, index) => <div key={index}>
+            {project.title}
+          </div>)}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Page;

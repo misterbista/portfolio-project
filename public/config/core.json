@@ -1,5 +1,6 @@
 {
   "favicon": "https://www.gauravnyaupane.com.np/data/2022-11-2-18-48-2-HPWi62Rhbi-favicon.ico",
+  "websiteName": "Gaurav's Portfolio",
   "fullName": "Gaurav Nyaupane",
   "seoDescription": "Short info here",
   "seoKeywords": [
@@ -13,5 +14,6 @@
     "developer",
     "programmer",
     "tech enthusiast"
-  ]
+  ],
+  "enabledPages": []
 }
