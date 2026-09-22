@@ -10,7 +10,9 @@ const nextConfig: NextConfig = {
         pathname: '**',
       }
     ]
-  }
+  },
+  output: 'export',
+  distDir: 'build',
 };
 
 export default nextConfig;
