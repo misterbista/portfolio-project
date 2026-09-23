@@ -1,0 +1,82 @@
+name: Release
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - id: checkout
+        name: Checkout source repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.TOKEN }}
+
+      - id: extract-node-version
+        name: Extract node version from package.json
+        uses: sergeysova/jq-action@v2
+        with:
+          cmd: 'jq .engines.node package.json -r'
+
+      - id: extract-pnpm-version
+        name: Extract pnpm version from package.json
+        uses: sergeysova/jq-action@v2
+        with:
+          cmd: 'jq .packageManager package.json -r | cut -d "@" -f 2'
+
+      - id: extract-release-version
+        name: Extract release version from package.json
+        uses: sergeysova/jq-action@v2
+        with:
+          cmd: 'jq .version package.json -r'
+
+      - id: install-pnpm
+        name: Install pnpm ${{ steps.extract-pnpm-version.outputs.value }}
+        uses: pnpm/action-setup@v6
+        with:
+          version: ${{ steps.extract-pnpm-version.outputs.value }}
+
+      - id: install-node
+        name: Install Node.js ${{ steps.extract-node-version.outputs.value }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ steps.extract-node-version.outputs.value }}
+          cache: 'pnpm'
+
+      - id: install-dependencies
+        name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - id: build
+        name: Build
+        run: pnpm build
+
+      - id: clone-target-repo
+        name: Clone target repository
+        run: |
+          git clone https://${{ secrets.TARGET_REPO_TOKEN }}@github.com/${{ secrets.TARGET_REPO_USER }}/${{ secrets.TARGET_REPO_NAME }}.git --branch ${{ secrets.TARGET_REPO_BRANCH }} --single-branch /tmp/release
+
+      - id: copy-release-files
+        name: Copy release files
+        run: |
+          cp -r build/* /tmp/release/
+
+      - id: publish
+        name: Publish V${{ steps.extract-release-version.outputs.value }}
+        run: |
+          cd /tmp/release
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+          git add --all
+          if git diff --cached --quiet; then
+            echo "No changes to publish."
+            exit 0
+          fi
+          git commit -m "Release v${{ steps.extract-release-version.outputs.value }} | ${{ github.event.head_commit.message }}"
+          git config --unset-all http.https://github.com/.extraheader
+          git push origin ${{ secrets.TARGET_REPO_BRANCH }}
