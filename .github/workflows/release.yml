@@ -77,12 +77,7 @@ jobs:
             echo "No changes to publish."
             exit 0
           fi
-          echo "Committing..."
           git commit -m "Release v${{ steps.extract-release-version.outputs.value }} | ${{ github.event.head_commit.message }}"
-          echo "Setting up remote with token..."
           git remote add github-token "https://${{ secrets.TOKEN }}@github.com/${{ secrets.TARGET_REPO_USER }}/${{ secrets.TARGET_REPO_NAME }}.git"
-          echo "Clearing any existing extraheader configuration..."
-          git config --unset-all http.https://github.com/.extraheader
-          echo "Pushing to target repository..."
+          git config --unset-all http.https://github.com/.extraheader || true
           git push github-token ${{ secrets.TARGET_REPO_BRANCH }}
-          echo "DONE!"
