@@ -78,6 +78,6 @@ jobs:
             exit 0
           fi
           git commit -m "Release v${{ steps.extract-release-version.outputs.value }} | ${{ github.event.head_commit.message }}"
-          git remote add github-token "https://${{ secrets.TOKEN }}@github.com/${{ secrets.TARGET_REPO_USER }}/${{ secrets.TARGET_REPO_NAME }}.git"
+          git remote add github-token "https://${{ secrets.TARGET_REPO_TOKEN }}@github.com/${{ secrets.TARGET_REPO_USER }}/${{ secrets.TARGET_REPO_NAME }}.git"
           git config --unset-all http.https://github.com/.extraheader || true
           git push github-token ${{ secrets.TARGET_REPO_BRANCH }}
