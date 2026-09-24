@@ -16,8 +16,12 @@ function Page() {
     isLoadingConfig: isLoadingHomeConfig
   } = useConfig(Identifier.Home);
 
-  if (isLoadingCoreConfig || isLoadingHomeConfig || !coreConfig || !homeConfig) {
+  if (isLoadingCoreConfig || isLoadingHomeConfig) {
     return <>Loading...</>;
+  }
+
+  if(!coreConfig || !homeConfig){
+    return <>Error loading configuration</>;
   }
 
   return (

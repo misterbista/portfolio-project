@@ -19,8 +19,12 @@ function Page() {
     isLoadingConfig: isLoadingAboutConfig
   } = useConfig(Identifier.About);
 
-  if (isLoadingAboutConfig || isLoadingCoreConfig || !aboutConfig || !coreConfig) {
+  if (isLoadingCoreConfig || isLoadingAboutConfig) {
     return <>Loading...</>;
+  }
+
+  if(!coreConfig || !aboutConfig){
+    return <>Error loading configuration</>;
   }
 
   return (

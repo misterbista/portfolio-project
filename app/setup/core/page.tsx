@@ -47,7 +47,7 @@ function Page() {
     await saveConfig(values);
   }
 
-  if(isLoadingCoreConfig || !coreConfig){
+  if(isLoadingCoreConfig){
     return <>Loading...</>;
   }
 

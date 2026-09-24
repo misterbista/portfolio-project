@@ -28,8 +28,12 @@ function Page() {
     console.log(values);
   }
 
-  if(isLoadingLeftPanelConfig || !leftPanelConfig){
+  if(isLoadingLeftPanelConfig){
     return <>Loading...</>;
+  }
+
+  if(!leftPanelConfig){
+    return <>Error loading configuration</>;
   }
 
   return (

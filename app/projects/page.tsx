@@ -22,8 +22,12 @@ function Page() {
     isLoadingConfig: isLoadingProjectsConfig
   } = useConfig(Identifier.Projects);
 
-  if (isLoadingProjectsConfig || isLoadingCoreConfig || !projectsConfig || !coreConfig) {
+  if (isLoadingCoreConfig || isLoadingProjectsConfig) {
     return <>Loading...</>;
+  }
+
+  if(!coreConfig || !projectsConfig){
+    return <>Error loading configuration</>;
   }
 
   return (
