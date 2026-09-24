@@ -64,7 +64,7 @@ jobs:
       - id: copy-release-files
         name: Copy release files
         run: |
-          cp -r build/* /tmp/release/
+          cp -r build/. /tmp/release/
 
       - id: publish
         name: Publish V${{ steps.extract-release-version.outputs.value }}
