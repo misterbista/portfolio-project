@@ -1,13 +1,76 @@
 "use client"
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import styles from "./page.module.css";
+import ConfigurationFormWrapper from "@/components/ui/ConfigurationFormWrapper";
+import {Identifier, useConfig} from "@/configuration/useConfig";
+import {useForm} from "react-hook-form";
+import {Model, schema} from "@/configuration/core";  // Change this
+import {zodResolver} from "@hookform/resolvers/zod";
+import {cn} from "@/lib/utils";
+import {Button} from "@/components/ui/button";
+import {useRouter} from "next/navigation";
 
 function Page() {
+  const router = useRouter()
+
+  const {
+    config,
+    isLoadingConfig,
+    saveConfig
+  } = useConfig(Identifier.Core);  // Change this
+
+  const {
+    reset,
+    control,
+    handleSubmit,
+    watch
+  } = useForm<Model>({
+    resolver: zodResolver(schema),
+    defaultValues: config
+  });
+  const formValues = watch();
+
+  useEffect(() => {
+    if (config) {
+      reset(config);
+    }
+  }, [config, reset]);
+
+  async function save(values: Model) {
+    await saveConfig(values);
+  }
+
+  if(isLoadingConfig){
+    return <>Loading...</>;
+  }
+
   return (
-    <div className={styles.page}>
-      Congratulations on reaching the blank page. This page serves as a pause to reflect on how you’re squandering your time.
-    </div>
+    <ConfigurationFormWrapper className={styles.page} title={"Blank Configuration"} config={formValues}>
+      <form onSubmit={handleSubmit(save)} className={cn(styles.form, "grid gap-2 max-w-3xl")}>
+        Nothing here.
+
+        <div className={"flex gap-2 justify-end"}>
+          <Button
+            type={"button"}
+            size={"sm"}
+            variant={"outline"}
+            className={"cursor-pointer mt-2"}
+            onClick={() => router.push("/setup")}
+          >
+            Cancel
+          </Button>
+          <Button
+            type={"submit"}
+            size={"sm"}
+            variant={"outline"}
+            className={"cursor-pointer mt-2 bg-primary text-secondary"}
+          >
+            Save
+          </Button>
+        </div>
+      </form>
+    </ConfigurationFormWrapper>
   );
 }
 

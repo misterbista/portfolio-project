@@ -9,21 +9,21 @@ type ArrayInputProps = Omit<
   React.ComponentProps<"input">,
   "value" | "onChange"
 > & {
-  value: string[];
-  onChange?: (value: string[]) => void;
+  value: string[] | undefined;
+  onChange?: (value: string[] | undefined) => void;
 };
 
 function ArrayInput({ className, value, onChange, ...props }: ArrayInputProps) {
   const [intermediateValue, setIntermediateValue] = useState("");
   
   function remove(index: number) {
-    const newValue = [...value];
+    const newValue = [...(value || [])];
     newValue.splice(index, 1);
     onChange?.(newValue);
   }
 
   function add(item: string) {
-    onChange?.([...value, item]);
+    onChange?.([...(value || []), item]);
   }
 
   return (<span className={cn("flex flex-wrap gap-1")}>

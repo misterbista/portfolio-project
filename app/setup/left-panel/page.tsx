@@ -1,49 +1,76 @@
 "use client"
 
-import React from "react";
+import React, {useEffect} from 'react';
 import styles from "./page.module.css";
+import ConfigurationFormWrapper from "@/components/ui/ConfigurationFormWrapper";
 import {Identifier, useConfig} from "@/configuration/useConfig";
-import ViewOrCopyConfigValues from "@/components/ui/ViewOrCopyConfigValues";
 import {useForm} from "react-hook-form";
 import {Model, schema} from "@/configuration/leftPanel";
 import {zodResolver} from "@hookform/resolvers/zod";
+import {cn} from "@/lib/utils";
+import {Button} from "@/components/ui/button";
+import {useRouter} from "next/navigation";
 
 function Page() {
+  const router = useRouter()
+
   const {
-    config: leftPanelConfig,
-    isLoadingConfig: isLoadingLeftPanelConfig
+    config,
+    isLoadingConfig,
+    saveConfig
   } = useConfig(Identifier.LeftPanel);
 
   const {
-    register,
+    reset,
+    control,
     handleSubmit,
     watch
   } = useForm<Model>({
     resolver: zodResolver(schema),
-    values: leftPanelConfig
+    defaultValues: config
   });
   const formValues = watch();
 
-  function save(values: Model) {
-    console.log(values);
+  useEffect(() => {
+    if (config) {
+      reset(config);
+    }
+  }, [config, reset]);
+
+  async function save(values: Model) {
+    await saveConfig(values);
   }
 
-  if(isLoadingLeftPanelConfig){
+  if(isLoadingConfig){
     return <>Loading...</>;
   }
 
-  if(!leftPanelConfig){
-    return <>Error loading configuration</>;
-  }
-
   return (
-    <div className={styles.page}>
-      <div>Left Panel Configuration <ViewOrCopyConfigValues config={formValues} /></div>
-      <form onSubmit={handleSubmit(save)}>
-          <input {...register("profilePhoto")}/>
-          <label htmlFor={"profilePhoto"}>Profile Photo URL</label>
+    <ConfigurationFormWrapper className={styles.page} title={"Left Panel Configuration"} config={formValues}>
+      <form onSubmit={handleSubmit(save)} className={cn(styles.form, "grid gap-2 max-w-3xl")}>
+        <label htmlFor={"profilePhoto"}>Profile Photo URL</label>
+
+        <div className={"flex gap-2 justify-end"}>
+          <Button
+            type={"button"}
+            size={"sm"}
+            variant={"outline"}
+            className={"cursor-pointer mt-2"}
+            onClick={() => router.push("/setup")}
+          >
+            Cancel
+          </Button>
+          <Button
+            type={"submit"}
+            size={"sm"}
+            variant={"outline"}
+            className={"cursor-pointer mt-2 bg-primary text-secondary"}
+          >
+            Save
+          </Button>
+        </div>
       </form>
-    </div>
+    </ConfigurationFormWrapper>
   );
 }
 

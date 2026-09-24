@@ -67,7 +67,7 @@ function LayoutHead(){
       <meta name="title" content={coreConfig.websiteName} />
       <meta name="description" content={coreConfig.seoDescription} />
       <meta name="author" content={coreConfig.fullName} />
-      <meta name="keywords" content={coreConfig.seoKeywords.join(", ")} />
+      <meta name="keywords" content={(coreConfig.seoKeywords || []).join(", ")} />
       <meta name="robots" content="index, follow" />
       <meta name="theme-color" content="#ffffff" />
 
