@@ -16,7 +16,7 @@ function ConfigurationFormWrapper<T>(
         <CardContent>
           <div className={"flex justify-between items-center mb-2"}>
             <span className={"text-xl font-bold"}>{title}</span>
-            <span className={""}><ConfigFormTools config={config}/></span>
+            <ConfigFormTools config={config}/>
           </div>
           {children}
         </CardContent>
