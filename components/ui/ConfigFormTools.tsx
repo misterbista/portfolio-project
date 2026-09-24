@@ -31,11 +31,6 @@ function ConfigFormTools<T>(
   const configString = useMemo(() => stringify(config), [config]);
 
   return (<>
-    {/* Add an option to manage files in github */}
-    {/* This file manager shall list all the files inside public/uploads directory */}
-    {/* Allow user to download the file, copy the URL, upload the file, delete the file */}
-    {/* Deleting won't use any smart detection, any existing usage will start failing, so just show a warning before deleting */}
-    {/* Adding file will expose it to public, so we should show a warning before uploading */}
     <DropdownMenu>
       <DropdownMenuTrigger render={<Button variant="link"><Settings size={16} className="cursor-pointer" /></Button>} />
       <DropdownMenuContent className="w-auto border rounded-md bg-white shadow-lg">

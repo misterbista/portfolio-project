@@ -9,6 +9,10 @@ function AssetManagerDialog(
     setShow: (show: boolean) => void
   }
 ) {
+  {/* This file manager shall list all the files inside public/uploads directory */}
+  {/* Allow user to download the file, copy the URL, upload the file, delete the file */}
+  {/* Deleting won't use any smart detection, any existing usage will start failing, so just show a warning before deleting */}
+  {/* Adding file will expose it to public, so we should show a warning before uploading */}
   return (
     <Dialog open={show} onOpenChange={setShow}>
       <DialogContent
