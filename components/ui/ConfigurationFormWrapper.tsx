@@ -1,3 +1,5 @@
+"use client"
+
 import React from 'react';
 import ConfigFormTools from "@/components/ui/ConfigFormTools";
 import {Card, CardContent} from "@/components/ui/card";
