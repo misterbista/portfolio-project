@@ -1,7 +1,7 @@
 "use client"
 
 import React from 'react';
-import {Dialog, DialogContent, DialogHeader, DialogTitle} from "@/components/ui/dialog";
+import {Dialog, DialogContent} from "@/components/ui/dialog";
 import GithubFileManager from "@/components/ui/GithubFileManager";
 import {useGithubPatAuth} from "@/hooks/useGithubPatAuth";
 
@@ -20,11 +20,8 @@ function AssetManagerDialog(
           height: 'auto', maxHeight: '100%'
         }}
       >
-        <DialogHeader>
-          <DialogTitle><b>Asset Manager</b></DialogTitle>
-        </DialogHeader>
         {githubPat ? <GithubFileManager
-          className={"border rounded-md w-2xl h-full"}
+          className={"w-2xl h-full"}
           pat={githubPat}
           path={"uploads"}
         /> : <span className={"text-gray-500"}>You have not logged in yet. Please log in to use this feature.</span>}
