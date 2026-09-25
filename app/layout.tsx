@@ -4,11 +4,8 @@ import React from 'react';
 import "./globals.css";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {ReactQueryDevtools} from "@tanstack/react-query-devtools";
-import {Identifier, useConfig} from "@/configuration/useConfig";
+import {Identifier, useConfig} from "@/hooks/useConfig";
 import { TooltipProvider } from "@/components/ui/tooltip"
-import { SidebarProvider } from "@/components/ui/sidebar"
-import LeftPanel from "@/app/LeftPanel";
-import GoToTopButton from "@/components/ui/GoToTopButton";
 import {Toaster} from "sonner";
 
 
@@ -24,11 +21,7 @@ function RootLayout({ children }: LayoutProps<"/">) {
         <LayoutHead/>
         <body>
           <TooltipProvider>
-            <SidebarProvider defaultOpen={false}>
-              <LeftPanel/>
-              {children}
-              <GoToTopButton/>
-            </SidebarProvider>
+            {children}
           </TooltipProvider>
           <Toaster/>
         </body>

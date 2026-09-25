@@ -2,7 +2,7 @@
 
 import React from 'react';
 import styles from "./page.module.css";
-import {Identifier, useConfig} from "@/configuration/useConfig";
+import {Identifier, useConfig} from "@/hooks/useConfig";
 import {cn} from "@/lib/utils";
 import FullScreenMessage from "@/components/ui/FullScreenMessage";
 import {Spinner} from "@/components/ui/spinner";

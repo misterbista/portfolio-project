@@ -10,6 +10,7 @@ import {Model as TestimonialsConfigurationModel} from "@/configuration/testimoni
 import {Model as GalleryConfigurationModel} from "@/configuration/gallery";
 import {Model as DownloadsConfigurationModel} from "@/configuration/downloads";
 import {toast} from "sonner";
+import {useGithubPatAuth} from "@/hooks/useGithubPatAuth";
 
 export enum Identifier {
   Core = "core",
@@ -64,12 +65,14 @@ export function useConfig<T extends Identifier>(configIdentifier: T){
     refetchOnWindowFocus: false
   });
 
+  const {githubPat} = useGithubPatAuth();
+
   const {
     mutateAsync,
     isPending
   } = useMutation({
     mutationKey: [configIdentifier],
-    mutationFn: async (newConfig: ConfigurationModel<T>) => await saveConfig(configIdentifier, newConfig),
+    mutationFn: async (newConfig: ConfigurationModel<T>) => await saveConfig(configIdentifier, newConfig, githubPat),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: [configIdentifier] });
       toast.success(`Config saved successfully: ${configIdentifier}`);
@@ -97,12 +100,11 @@ async function getConfig<T extends Identifier> (configIdentifier: T): Promise<Co
   return await response.json() as ConfigurationModel<T>;
 }
 
-async function saveConfig<T extends Identifier>(configIdentifier: T, newConfig: ConfigurationModel<T>): Promise<void> {
+async function saveConfig<T extends Identifier>(configIdentifier: T, newConfig: ConfigurationModel<T>, githubPat: string | null): Promise<void> {
   const configPath = configurationPaths[configIdentifier];
   const filePath = `./public${configPath}`;
-  const ghConfig = localStorage.getItem("ghConfig");
 
-  if (!ghConfig) {
+  if (!githubPat) {
     return Promise.resolve().then(() => {
       throw new Error("You have not logged in yet. Please log in to use this feature.");
     });

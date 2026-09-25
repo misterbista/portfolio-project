@@ -2,7 +2,7 @@
 
 import React, {useEffect} from 'react';
 import styles from "./page.module.css";
-import {Identifier, useConfig} from "@/configuration/useConfig";
+import {Identifier, useConfig} from "@/hooks/useConfig";
 import {Controller, useForm} from "react-hook-form";
 import {Model, schema} from "@/configuration/core";
 import {zodResolver} from "@hookform/resolvers/zod";

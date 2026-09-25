@@ -10,7 +10,7 @@ import {
   SidebarTrigger,
   useSidebar
 } from "@/components/ui/sidebar";
-import {Identifier, useConfig} from "@/configuration/useConfig";
+import {Identifier, useConfig} from "@/hooks/useConfig";
 import {AlignJustify, Heart, XIcon} from "lucide-react";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import {usePathname} from "next/navigation";

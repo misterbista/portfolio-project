@@ -24,7 +24,7 @@ function ConfigPreviewDialog(
         }}
       >
         <DialogHeader>
-          <DialogTitle>JSON Preview</DialogTitle>
+          <DialogTitle><b>JSON Preview</b></DialogTitle>
         </DialogHeader>
         <pre
           className="language-json"

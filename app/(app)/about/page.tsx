@@ -2,7 +2,7 @@
 
 import React from 'react';
 import styles from "./page.module.css";
-import {Identifier, useConfig} from "@/configuration/useConfig";
+import {Identifier, useConfig} from "@/hooks/useConfig";
 import Image from "next/image";
 import SmartText from "@/components/ui/SmartText";
 import {AspectRatio} from "@/components/ui/aspect-ratio";

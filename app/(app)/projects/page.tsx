@@ -3,7 +3,7 @@
 import React, {useState} from 'react';
 import styles from "./page.module.css";
 import {cn} from "@/lib/utils";
-import {Identifier, useConfig} from "@/configuration/useConfig";
+import {Identifier, useConfig} from "@/hooks/useConfig";
 import {Button} from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
 import {GridIcon, ListIcon} from "lucide-react";
