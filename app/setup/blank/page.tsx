@@ -10,6 +10,8 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {cn} from "@/lib/utils";
 import {Button} from "@/components/ui/button";
 import {useRouter} from "next/navigation";
+import FullScreenMessage from "@/components/ui/FullScreenMessage";
+import {Spinner} from "@/components/ui/spinner";
 
 function Page() {
   const router = useRouter()
@@ -42,7 +44,7 @@ function Page() {
   }
 
   if(isLoadingConfig){
-    return <>Loading...</>;
+    return <FullScreenMessage><Spinner className="size-10" /></FullScreenMessage>;
   }
 
   return (

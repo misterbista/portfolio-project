@@ -14,6 +14,8 @@ import {useRouter} from "next/navigation";
 import {ArrayInput} from "@/components/ui/ArrayInput";
 import {Textarea} from "@/components/ui/textarea";
 import ConfigurationFormWrapper from "@/components/ui/ConfigurationFormWrapper";
+import FullScreenMessage from "@/components/ui/FullScreenMessage";
+import {Spinner} from "@/components/ui/spinner";
 
 function Page() {
   const router = useRouter()
@@ -46,7 +48,7 @@ function Page() {
   }
 
   if(isLoadingConfig){
-    return <>Loading...</>;
+    return <FullScreenMessage><Spinner className="size-10" /></FullScreenMessage>;
   }
 
   return (

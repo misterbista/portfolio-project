@@ -8,6 +8,8 @@ import {Button} from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
 import {GridIcon, ListIcon} from "lucide-react";
 import SmartText from "@/components/ui/SmartText";
+import FullScreenMessage from "@/components/ui/FullScreenMessage";
+import {Spinner} from "@/components/ui/spinner";
 
 function Page() {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
@@ -23,11 +25,11 @@ function Page() {
   } = useConfig(Identifier.Projects);
 
   if (isLoadingCoreConfig || isLoadingProjectsConfig) {
-    return <>Loading...</>;
+    return <FullScreenMessage><Spinner className="size-10" /></FullScreenMessage>;
   }
 
   if(!coreConfig || !projectsConfig){
-    return <>Error loading configuration</>;
+    return <FullScreenMessage>Error loading configuration...</FullScreenMessage>;
   }
 
   return (

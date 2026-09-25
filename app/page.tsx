@@ -4,6 +4,8 @@ import React from 'react';
 import styles from "./page.module.css";
 import {Identifier, useConfig} from "@/configuration/useConfig";
 import {cn} from "@/lib/utils";
+import FullScreenMessage from "@/components/ui/FullScreenMessage";
+import {Spinner} from "@/components/ui/spinner";
 
 function Page() {
   const {
@@ -17,11 +19,11 @@ function Page() {
   } = useConfig(Identifier.Home);
 
   if (isLoadingCoreConfig || isLoadingHomeConfig) {
-    return <>Loading...</>;
+    return <FullScreenMessage><Spinner className="size-10" /></FullScreenMessage>;
   }
 
   if(!coreConfig || !homeConfig){
-    return <>Error loading configuration</>;
+    return <FullScreenMessage>Error loading configuration...</FullScreenMessage>;
   }
 
   return (

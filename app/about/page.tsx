@@ -7,6 +7,8 @@ import Image from "next/image";
 import SmartText from "@/components/ui/SmartText";
 import {AspectRatio} from "@/components/ui/aspect-ratio";
 import {cn} from "@/lib/utils";
+import FullScreenMessage from "@/components/ui/FullScreenMessage";
+import {Spinner} from "@/components/ui/spinner";
 
 function Page() {
   const {
@@ -20,11 +22,11 @@ function Page() {
   } = useConfig(Identifier.About);
 
   if (isLoadingCoreConfig || isLoadingAboutConfig) {
-    return <>Loading...</>;
+    return <FullScreenMessage><Spinner className="size-10" /></FullScreenMessage>;
   }
 
   if(!coreConfig || !aboutConfig){
-    return <>Error loading configuration</>;
+    return <FullScreenMessage>Error loading configuration...</FullScreenMessage>;
   }
 
   return (
