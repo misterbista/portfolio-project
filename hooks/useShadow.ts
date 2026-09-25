@@ -1,3 +1,5 @@
+"use client"
+
 import {useEffect, useState} from "react";
 
 export function useShadow<T extends object>(original?: T){

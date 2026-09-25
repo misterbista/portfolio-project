@@ -11,7 +11,7 @@ function Layout({ children }: LayoutProps<"/">) {
   const {githubSession} = useGithubPatAuth();
   return (<>
     {githubSession && <span className={"absolute top-2 left-2 text-2xl"}>
-      Your changes will save to: {githubSession.repository?.full_name} {JSON.stringify(githubSession)}
+      Your changes will save to: {githubSession.repository?.full_name}
     </span>}
     <Button
       variant={"outline"}

@@ -1,3 +1,5 @@
+"use client"
+
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import {Model as CoreConfigurationModel} from "@/configuration/core";
 import {Model as LeftPanelConfigurationModel} from "@/configuration/leftPanel";
