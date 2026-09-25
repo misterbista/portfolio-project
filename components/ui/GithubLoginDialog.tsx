@@ -1,3 +1,5 @@
+"use client"
+
 import React from 'react';
 import {useGithubPatAuth} from "@/hooks/useGithubPatAuth";
 import {Dialog, DialogContent, DialogHeader, DialogTitle} from "@/components/ui/dialog";
