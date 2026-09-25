@@ -8,14 +8,17 @@ import GithubLoginDialog from "@/components/ui/GithubLoginDialog";
 
 function Layout({ children }: LayoutProps<"/">) {
   const [showLoginDialog, setShowLoginDialog] = useState(false);
-  const {githubPat} = useGithubPatAuth();
+  const {githubSession} = useGithubPatAuth();
   return (<>
+    {githubSession && <span className={"absolute top-2 left-2 text-2xl"}>
+      Your changes will save to: {githubSession.repository?.full_name} {JSON.stringify(githubSession)}
+    </span>}
     <Button
       variant={"outline"}
       className={"absolute top-2 right-2 text-2xl cursor-pointer"}
       onClick={() => setShowLoginDialog(true)}
     >
-      {githubPat ? <UnlockIcon/> : <LockIcon/>}
+      {githubSession ? <UnlockIcon/> : <LockIcon/>}
     </Button>
     {children}
     <GithubLoginDialog

@@ -17,20 +17,23 @@ function GithubLoginDialog(
 ) {
   const {
     setGithubPat,
-    validatePat,
-    isValidating
+    updatingPat
   } = useGithubPatAuth();
   const [pat, setPat] = React.useState("");
 
   const savePat = async () => {
-    const validationResult = await validatePat(pat);
-    if(!validationResult.valid){
-      toast.error(validationResult.error);
-      return;
+    try {
+      await setGithubPat(pat);
+      hide();
+    } catch (ex){
+      if (ex instanceof Error) {
+        toast.error(ex.message);
+      } else if (typeof ex === "string") {
+        toast.error(ex);
+      } else {
+        toast.error("Failed to save GitHub PAT");
+      }
     }
-    setGithubPat(pat);
-    toast.success("GitHub PAT saved successfully!");
-    hide();
   };
 
   return (
@@ -57,7 +60,7 @@ function GithubLoginDialog(
             disabled={!pat}
             onClick={() => savePat()}
           >
-            {isValidating ? <Spinner/> : "Save"}
+            {updatingPat ? <Spinner/> : "Save"}
           </Button>
         </div>
       </DialogContent>
