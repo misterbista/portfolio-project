@@ -12,9 +12,9 @@ import {Model as TestimonialsConfigurationModel} from "@/configuration/testimoni
 import {Model as GalleryConfigurationModel} from "@/configuration/gallery";
 import {Model as DownloadsConfigurationModel} from "@/configuration/downloads";
 import {toast} from "sonner";
-import {useGithubPatAuth} from "@/hooks/useGithubPatAuth";
+import {useGitHubPatAuth} from "@/hooks/useGitHubPatAuth";
 import {encodeBase64} from "@/lib/encodings";
-import {uploadGitHubFiles} from "@/lib/github";
+import {uploadGitHubFiles} from "@/lib/gitHub";
 
 export enum Identifier {
   Core = "core",
@@ -70,9 +70,9 @@ export function useConfig<T extends Identifier>(configIdentifier: T){
   });
 
   const {
-    githubPat,
-    githubSession
-  } = useGithubPatAuth();
+    gitHubPat,
+    gitHubSession
+  } = useGitHubPatAuth();
 
   const {
     mutateAsync,
@@ -82,9 +82,9 @@ export function useConfig<T extends Identifier>(configIdentifier: T){
     mutationFn: async (newConfig: ConfigurationModel<T>) => await saveConfig(
       configIdentifier,
       newConfig,
-      githubPat,
-      githubSession?.user?.login || "",
-      githubSession?.repository?.name || ""
+      gitHubPat,
+      gitHubSession?.user?.login || "",
+      gitHubSession?.repository?.name || ""
     ),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: [configIdentifier] });
@@ -116,14 +116,14 @@ async function getConfig<T extends Identifier> (configIdentifier: T): Promise<Co
 async function saveConfig<T extends Identifier>(
   configIdentifier: T,
   newConfig: ConfigurationModel<T>,
-  githubPat: string | null,
+  gitHubPat: string | null,
   owner: string,
   repo: string
 ): Promise<void> {
   const configPath = configurationPaths[configIdentifier];
   const filePath = configPath.replace(/^\/+/, "");
   await uploadGitHubFiles(
-    githubPat ?? "",
+    gitHubPat ?? "",
     owner,
     repo,
     filePath.substring(0, filePath.lastIndexOf("/")),

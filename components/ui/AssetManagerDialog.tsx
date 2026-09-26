@@ -2,8 +2,8 @@
 
 import React from 'react';
 import {Dialog, DialogContent} from "@/components/ui/dialog";
-import GithubFileManager from "@/components/ui/GithubFileManager";
-import {useGithubPatAuth} from "@/hooks/useGithubPatAuth";
+import GitHubFileManager from "@/components/ui/GitHubFileManager";
+import {useGitHubPatAuth} from "@/hooks/useGitHubPatAuth";
 
 function AssetManagerDialog(
   {show, setShow}: {
@@ -11,7 +11,7 @@ function AssetManagerDialog(
     setShow: (show: boolean) => void
   }
 ) {
-  const {githubSession} = useGithubPatAuth();
+  const {gitHubSession} = useGitHubPatAuth();
   return (
     <Dialog open={show} onOpenChange={setShow}>
       <DialogContent
@@ -20,7 +20,7 @@ function AssetManagerDialog(
           height: 'auto', maxHeight: '100%'
         }}
       >
-        {githubSession ? <GithubFileManager
+        {gitHubSession ? <GitHubFileManager
           className={"w-2xl h-full"}
           path={"uploads"}
         /> : <span className={"text-gray-500"}>You have not logged in yet. Please log in to use this feature.</span>}

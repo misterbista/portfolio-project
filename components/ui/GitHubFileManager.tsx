@@ -8,7 +8,7 @@ import {Spinner} from "@/components/ui/spinner";
 import {Separator} from "@/components/ui/separator";
 import {useGitHubFolder} from "@/hooks/useGitHubFolder";
 
-function GithubFileManager(
+function GitHubFileManager(
   {className, path}: {
     className?: string,
     path: string
@@ -22,7 +22,7 @@ function GithubFileManager(
   // but instead of folders it should act as file type filter
   // each file should have the similar option button as folder in that page
   // this option shall allow copying URL, viewing in new tab, downloading, deleting, and validating
-  // Validatin will check the file's existance against github these will come handy for files just uploaded. and not yet published by github pages
+  // Validatin will check the file's existance against GitHub these will come handy for files just uploaded. and not yet published by GitHub pages
   // these files will be temporarily stored in local storage right after being uploaded and will be lost on refresh
   // idea is if they are uploaded and published they will come through gh API shortly anyway
   // unverified is a category that lists such local files and won't allow delete. other actions are allowed cause base64 is stored locally
@@ -73,4 +73,4 @@ function GithubFileManager(
   );
 }
 
-export default GithubFileManager;
+export default GitHubFileManager;

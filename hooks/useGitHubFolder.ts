@@ -9,8 +9,8 @@ import {
   GitHubCreateFileRequest,
   listGitHubFiles,
   uploadGitHubFiles
-} from "@/lib/github";
-import {useGithubPatAuth} from "@/hooks/useGithubPatAuth";
+} from "@/lib/gitHub";
+import {useGitHubPatAuth} from "@/hooks/useGitHubPatAuth";
 import {toast} from "sonner";
 
 const EMPTY_FILES: GitHubContent[] = [];
@@ -21,21 +21,21 @@ export function useGitHubFolder(
   const normalizedFolderPath = folderPath?.replace(/^\/+|\/+$/g, "") ?? "";
 
   const {
-    githubPat,
-    githubSession,
-  } = useGithubPatAuth();
+    gitHubPat,
+    gitHubSession,
+  } = useGitHubPatAuth();
 
   const {
     data: files,
     isLoading: loadingFiles,
   } = useQuery({
-    queryKey: ["github-folder", normalizedFolderPath],
+    queryKey: ["gitHub-folder", normalizedFolderPath],
     queryFn: async () => {
       try {
         await listGitHubFiles(
-          githubPat ?? "",
-          githubSession!.user!.login ?? "",
-          githubSession!.repository!.name ?? "",
+          gitHubPat ?? "",
+          gitHubSession!.user!.login ?? "",
+          gitHubSession!.repository!.name ?? "",
           normalizedFolderPath
         )
       } catch (error) {
@@ -44,7 +44,7 @@ export function useGitHubFolder(
         return EMPTY_FILES;
       }
     },
-    enabled: !!githubPat && !!githubSession && githubSession!.user && !!githubSession!.repository && !!normalizedFolderPath,
+    enabled: !!gitHubPat && !!gitHubSession && gitHubSession!.user && !!gitHubSession!.repository,
   });
 
   const {
@@ -52,15 +52,15 @@ export function useGitHubFolder(
     isPending: deletingFiles
   } = useMutation({
     mutationFn: async (fileNames: string[]) => await deleteGitHubFiles(
-      githubPat ?? "",
-      githubSession!.user!.login ?? "",
-      githubSession!.repository!.name ?? "",
+      gitHubPat ?? "",
+      gitHubSession!.user!.login ?? "",
+      gitHubSession!.repository!.name ?? "",
       normalizedFolderPath,
       fileNames
     ),
     onSuccess: async () => {
       await queryClient.invalidateQueries({
-        queryKey: ["github-folder", normalizedFolderPath],
+        queryKey: ["gitHub-folder", normalizedFolderPath],
       });
     },
     onError: async (error) => {
@@ -74,15 +74,15 @@ export function useGitHubFolder(
     isPending: uploadingFiles
   } = useMutation({
     mutationFn: async (files: GitHubCreateFileRequest[]) => await uploadGitHubFiles(
-      githubPat ?? "",
-      githubSession!.user!.login,
-      githubSession!.repository!.name,
+      gitHubPat ?? "",
+      gitHubSession!.user!.login,
+      gitHubSession!.repository!.name,
       normalizedFolderPath,
       files
     ),
     onSuccess: async () => {
       await queryClient.invalidateQueries({
-        queryKey: ["github-folder", normalizedFolderPath],
+        queryKey: ["gitHub-folder", normalizedFolderPath],
       });
     },
     onError: async (error) => {

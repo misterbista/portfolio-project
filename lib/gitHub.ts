@@ -1,6 +1,31 @@
 import {encodeBase64} from "@/lib/encodings";
 import {isNullOrWhitespace} from "@/lib/string";
 
+export type GitHubUser = {
+  login: string;
+  id: number;
+  avatar_url: string;
+  name: string | null;
+};
+
+export type GitHubRepo = {
+  id: number;
+  name: string;
+  full_name: string;
+  default_branch: string;
+  owner: {
+    login: string;
+    id: number;
+  };
+};
+
+export type GitHubPatValidation = {
+  valid: boolean;
+  repository?: GitHubRepo;
+  user?: GitHubUser;
+  error?: string;
+};
+
 export interface GitHubContent {
   name: string;
   path: string;
@@ -185,4 +210,96 @@ export async function uploadGitHubFiles(
       throw new Error(`Failed to upload "${file.name}": ${uploadResponse.status} ${uploadResponse.statusText}`);
     }
   }
+}
+
+export async function validateGitHubToken(
+  token: string,
+  expectedRepositoryName?: string
+) {
+  if(!expectedRepositoryName) {
+    return {
+      valid: false,
+      error: 'No repository name was provided. Aborting due to security reasons.'
+    };
+  }
+
+  const userResponse = await fetch(
+    "https://api.github.com/user",
+    {
+      headers: createGitHubHeaders(token)
+    },
+  );
+
+  if (userResponse.status === 401) {
+    return {
+      valid: false,
+      error: "Invalid or expired GitHub token.",
+    }
+  }
+
+  if (!userResponse.ok) {
+    return {
+      valid: false,
+      error: `Failed to identify GitHub user: HTTP ${userResponse.status}`,
+    }
+  }
+
+  const user = (await userResponse.json()) as GitHubUser;
+
+  const repositoryParts = expectedRepositoryName
+    .trim()
+    .split("/")
+    .filter(Boolean);
+
+  let owner;
+  let repository;
+
+  if (repositoryParts.length === 1) {
+    owner = user.login;
+    repository = repositoryParts[0];
+  } else if (repositoryParts.length === 2) {
+    owner = repositoryParts[0];
+    repository = repositoryParts[1];
+  } else {
+    return {
+      valid: false,
+      error: "Repository must be in the form 'repository' or 'owner/repository'.",
+    }
+  }
+
+  const repositoryResponse = await fetch(
+    `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repository)}`,
+    {
+      headers: createGitHubHeaders(token)
+    },
+  );
+
+  if (repositoryResponse.status === 404) {
+    return {
+      valid: false,
+      error: `Repository '${owner}/${repository}' was not found or is not accessible with this token.`,
+    }
+  }
+
+  if (repositoryResponse.status === 403) {
+    return {
+      valid: false,
+      error: `GitHub denied access to repository '${owner}/${repository}'.`,
+    }
+  }
+
+  if (!repositoryResponse.ok) {
+    return {
+      valid: false,
+      error: `Failed to access repository: HTTP ${repositoryResponse.status}`,
+    }
+  }
+
+  const repositoryData = (await repositoryResponse.json()) as GitHubRepo;
+
+  return {
+    valid: true,
+    repository: repositoryData,
+    user: user
+  };
 }

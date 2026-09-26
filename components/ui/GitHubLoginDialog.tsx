@@ -1,7 +1,7 @@
 "use client"
 
 import React, {useState} from 'react';
-import {useGithubPatAuth} from "@/hooks/useGithubPatAuth";
+import {useGitHubPatAuth} from "@/hooks/useGitHubPatAuth";
 import {Dialog, DialogContent, DialogHeader, DialogTitle} from "@/components/ui/dialog";
 import {Input} from "@/components/ui/input";
 import {toast} from "sonner";
@@ -11,18 +11,18 @@ import {InputGroup, InputGroupAddon, InputGroupInput} from "@/components/ui/inpu
 import {EyeIcon, EyeOffIcon} from "lucide-react";
 
 
-function GithubLoginDialog(
+function GitHubLoginDialog(
   {show, hide}: {
     show: boolean,
     hide: () => void
   }
 ) {
   const {
-    githubSession,
-    setGithubPat,
-    clearGithubPat,
+    gitHubSession,
+    setGitHubPat,
+    clearGitHubPat,
     updatingPat
-  } = useGithubPatAuth();
+  } = useGitHubPatAuth();
 
   const [showPat, setShowPat] = useState(false);
   const [pat, setPat] = useState("");
@@ -34,7 +34,7 @@ function GithubLoginDialog(
     }
 
     try {
-      await setGithubPat(pat, repoName);
+      await setGitHubPat(pat, repoName);
       hide();
     } catch (ex){
       if (ex instanceof Error) {
@@ -63,18 +63,18 @@ function GithubLoginDialog(
           savePat();
         }}>
           <div className="flex flex-col gap-4">
-            {githubSession && <>
-              <p>You are already logged in with a PAT to access {githubSession.repository?.full_name}.</p>
+            {gitHubSession && <>
+              <p>You are already logged in with a PAT to access {gitHubSession.repository?.full_name}.</p>
 
               <Button
                 className="px-4 py-2 cursor-pointer"
                 type="button"
-                onClick={() => clearGithubPat()}
+                onClick={() => clearGitHubPat()}
               >
                 Logout
               </Button>
             </>}
-            {!githubSession && <>
+            {!gitHubSession && <>
               <p>To use this application, you need to provide a GitHub Personal Access Token (PAT) with the necessary permissions.</p>
               <p>Please <a className={"underline!"} href={"https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens"} target="_blank">generate a token on GitHub</a> and enter it below.</p>
               <InputGroup>
@@ -112,4 +112,4 @@ function GithubLoginDialog(
   );
 }
 
-export default GithubLoginDialog;
+export default GitHubLoginDialog;

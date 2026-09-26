@@ -7,7 +7,7 @@ import {ReactQueryDevtools} from "@tanstack/react-query-devtools";
 import {Identifier, useConfig} from "@/hooks/useConfig";
 import { TooltipProvider } from "@/components/ui/tooltip"
 import {Toaster} from "sonner";
-import {GithubPatProvider} from "@/hooks/useGithubPatAuth";
+import {GitHubPatProvider} from "@/hooks/useGitHubPatAuth";
 
 
 const queryClient = new QueryClient()
@@ -15,7 +15,7 @@ const queryClient = new QueryClient()
 function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <QueryClientProvider client={queryClient}>
-      <GithubPatProvider>
+      <GitHubPatProvider>
         <html
           lang="en"
           data-google-analytics-opt-out=""
@@ -29,7 +29,7 @@ function RootLayout({ children }: LayoutProps<"/">) {
           </body>
         </html>
         <ReactQueryDevtools initialIsOpen={false} />
-      </GithubPatProvider>
+      </GitHubPatProvider>
     </QueryClientProvider>
   );
 }
