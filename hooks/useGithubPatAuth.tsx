@@ -154,7 +154,7 @@ async function validateGitHubToken(
     owner = user.login;
     repository = repositoryParts[0];
   } else if (repositoryParts.length === 2) {
-    owner = user.login;
+    owner = repositoryParts[0];
     repository = repositoryParts[1];
   } else {
     return {
