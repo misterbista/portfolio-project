@@ -11,7 +11,7 @@ function AssetManagerDialog(
     setShow: (show: boolean) => void
   }
 ) {
-  const {githubPat} = useGithubPatAuth();
+  const {githubSession} = useGithubPatAuth();
   return (
     <Dialog open={show} onOpenChange={setShow}>
       <DialogContent
@@ -20,9 +20,8 @@ function AssetManagerDialog(
           height: 'auto', maxHeight: '100%'
         }}
       >
-        {githubPat ? <GithubFileManager
+        {githubSession ? <GithubFileManager
           className={"w-2xl h-full"}
-          pat={githubPat}
           path={"uploads"}
         /> : <span className={"text-gray-500"}>You have not logged in yet. Please log in to use this feature.</span>}
       </DialogContent>

@@ -1,0 +1,188 @@
+import {encodeBase64} from "@/lib/encodings";
+import {isNullOrWhitespace} from "@/lib/string";
+
+export interface GitHubContent {
+  name: string;
+  path: string;
+  sha: string;
+  size: number;
+  type: "file" | "dir";
+  download_url: string | null;
+}
+
+export interface GitHubCreateFileRequest {
+  name: string;
+  content: string | File;
+}
+
+function createGitHubHeaders(token: string): HeadersInit {
+  return {
+    Accept: "application/vnd.github+json",
+    Authorization: `Bearer ${token}`,
+    "X-GitHub-Api-Version": "2026-03-10",
+  };
+}
+
+function createGitHubContentsUrl(
+  owner: string,
+  repo: string,
+  path: string,
+): string {
+  const normalizedPath = path.replace(/^\/+|\/+$/g, "");
+  return `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/${normalizedPath}`;
+}
+
+export async function listGitHubFiles(
+  pat: string,
+  owner: string,
+  repository: string,
+  folderPath: string,
+): Promise<GitHubContent[]> {
+  if (!pat || !owner || !repository || isNullOrWhitespace(pat) || isNullOrWhitespace(owner) || isNullOrWhitespace(repository)) {
+    throw new Error("You have not logged in yet. Please log in to use this feature.");
+  }
+
+  const url = createGitHubContentsUrl(owner, repository, folderPath);
+  const response = await fetch(
+    url,
+    {
+      method: "GET",
+      headers: createGitHubHeaders(pat),
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error(`Failed to list files in the folder "${folderPath}": ${response.status} ${response.statusText}`);
+  }
+
+  const items = (await response.json()) as GitHubContent[];
+  if (!Array.isArray(items)) {
+    return [];
+  }
+
+  return items.filter((item) => item.type === "file" && item.name !== ".gitkeep");
+}
+
+export async function deleteGitHubFiles(
+  pat: string,
+  owner: string,
+  repository: string,
+  folderPath: string,
+  fileNames: string[],
+): Promise<void> {
+  if (!pat || !owner || !repository || isNullOrWhitespace(pat) || isNullOrWhitespace(owner) || isNullOrWhitespace(repository)) {
+    throw new Error("You have not logged in yet. Please log in to use this feature.");
+  }
+
+  if (fileNames.length === 0) {
+    return;
+  }
+
+  const uniqueFileNames = [...new Set(fileNames)];
+
+  for (const fileName of uniqueFileNames) {
+    const filePath = `${folderPath.replace(/\/+$/, "")}/${fileName.replace(/^\/+/, "")}`;
+    const url = createGitHubContentsUrl(owner, repository, filePath);
+    const fileResponse = await fetch(
+      url,
+      {
+        method: "GET",
+        headers: createGitHubHeaders(pat),
+      },
+    );
+
+    if (fileResponse.status === 404) {
+      continue;
+    }
+
+    if (!fileResponse.ok) {
+      throw new Error(`Failed to fetch info for "${fileName}": ${fileResponse.status} ${fileResponse.statusText}`);
+    }
+
+    const file = (await fileResponse.json()) as GitHubContent;
+
+    const deleteResponse = await fetch(
+      url,
+      {
+        method: "DELETE",
+        headers: {
+          ...createGitHubHeaders(pat),
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          message: `Delete ${filePath}`,
+          sha: file.sha,
+        }),
+      },
+    );
+
+    if (!deleteResponse.ok) {
+      throw new Error(`Failed to delete "${fileName}": ${deleteResponse.status} ${deleteResponse.statusText}`);
+    }
+  }
+}
+
+export async function uploadGitHubFiles(
+  pat: string,
+  owner: string,
+  repository: string,
+  folderPath: string,
+  files: GitHubCreateFileRequest[],
+): Promise<void> {
+  if (!pat || !owner || !repository || isNullOrWhitespace(pat) || isNullOrWhitespace(owner) || isNullOrWhitespace(repository)) {
+    throw new Error("You have not logged in yet. Please log in to use this feature.");
+  }
+
+  if (files.length === 0) {
+    return;
+  }
+
+  for (const file of files) {
+    const filePath = `${folderPath.replace(/\/+$/, "")}/${file.name.replace(/^\/+/, "")}`;
+    const url = createGitHubContentsUrl(owner, repository, filePath);
+    const existingFileResponse = await fetch(
+      url,
+      {
+        method: "GET",
+        headers: createGitHubHeaders(pat),
+      },
+    );
+
+    let sha: string | undefined;
+    if (existingFileResponse.ok) {
+      const existingFile = (await existingFileResponse.json()) as GitHubContent;
+      sha = existingFile.sha;
+    } else if (existingFileResponse.status !== 404) {
+      throw new Error(`Failed to fetch info for "${file.name}": ${existingFileResponse.status} ${existingFileResponse.statusText}`);
+    }
+
+    const content = await encodeBase64(file.content);
+    const body: {
+      message: string;
+      content: string;
+      sha?: string;
+    } = {
+      message: `${sha ? "Update" : "Create"} ${filePath}`,
+      content,
+    };
+    if (sha) {
+      body.sha = sha;
+    }
+
+    const uploadResponse = await fetch(
+      url,
+      {
+        method: "PUT",
+        headers: {
+          ...createGitHubHeaders(pat),
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      },
+    );
+
+    if (!uploadResponse.ok) {
+      throw new Error(`Failed to upload "${file.name}": ${uploadResponse.status} ${uploadResponse.statusText}`);
+    }
+  }
+}

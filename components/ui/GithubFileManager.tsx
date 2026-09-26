@@ -6,14 +6,18 @@ import {Button} from "@/components/ui/button";
 import {FileUp} from "lucide-react";
 import {Spinner} from "@/components/ui/spinner";
 import {Separator} from "@/components/ui/separator";
+import {useGitHubFolder} from "@/hooks/useGitHubFolder";
 
 function GithubFileManager(
-  {className, pat, path}: {
+  {className, path}: {
     className?: string,
-    pat: string,
     path: string
   }
 ) {
+  const {
+    files,
+    loadingFiles
+  } = useGitHubFolder(path)
   // design similar UI as https://www.creative-tim.com/ui/block/file-manager
   // but instead of folders it should act as file type filter
   // each file should have the similar option button as folder in that page
@@ -45,7 +49,26 @@ function GithubFileManager(
         </div>
       </div>
       <Separator className={"my-3"}/>
-
+      {
+        loadingFiles ? <div className={"flex flex-row justify-center align-center items-center"}>
+          <Spinner />
+        </div> : <div className={"flex flex-col gap-2"}>
+          {
+            files?.map((file) => (
+              <div key={file.name} className={"flex flex-row justify-between align-center items-center p-2 border rounded"}>
+                <span>{file.name}</span>
+                <div className={"flex flex-row gap-2"}>
+                  <Button size={"sm"}>Copy URL</Button>
+                  <Button size={"sm"}>View</Button>
+                  <Button size={"sm"}>Download</Button>
+                  <Button size={"sm"}>Delete</Button>
+                  <Button size={"sm"}>Validate</Button>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      }
     </div>
   );
 }

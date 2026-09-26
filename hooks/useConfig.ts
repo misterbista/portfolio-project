@@ -13,6 +13,8 @@ import {Model as GalleryConfigurationModel} from "@/configuration/gallery";
 import {Model as DownloadsConfigurationModel} from "@/configuration/downloads";
 import {toast} from "sonner";
 import {useGithubPatAuth} from "@/hooks/useGithubPatAuth";
+import {encodeBase64} from "@/lib/encodings";
+import {uploadGitHubFiles} from "@/lib/github";
 
 export enum Identifier {
   Core = "core",
@@ -25,10 +27,6 @@ export enum Identifier {
   Testimonials = "testimonials",
   Gallery = "gallery",
   Downloads = "downloads",
-}
-
-interface GitHubContentResponse {
-  sha: string;
 }
 
 type ConfigurationModelMap = {
@@ -64,7 +62,7 @@ export function useConfig<T extends Identifier>(configIdentifier: T){
 
   const {
     data,
-    isLoading,
+    isLoading
   } = useQuery({
     queryKey: [configIdentifier],
     queryFn: async () => await getConfig(configIdentifier),
@@ -124,69 +122,16 @@ async function saveConfig<T extends Identifier>(
 ): Promise<void> {
   const configPath = configurationPaths[configIdentifier];
   const filePath = configPath.replace(/^\/+/, "");
-
-  if (!githubPat) {
-    throw new Error("You have not logged in yet. Please log in to use this feature.");
-  }
-
-  const headers = {
-    Authorization: `Bearer ${githubPat}`,
-    Accept: "application/vnd.github+json",
-    "X-GitHub-Api-Version": "2022-11-28",
-  };
-
-  const apiUrl = `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/${filePath}`;
-  let existingSha: string | undefined;
-  const existingFileResponse = await fetch(apiUrl, {
-    method: "GET",
-    headers,
-  });
-
-
-  if (existingFileResponse.ok) {
-    const existingFile = (await existingFileResponse.json()) as GitHubContentResponse;
-    existingSha = existingFile.sha;
-  } else if (existingFileResponse.status !== 404) {
-    const errorBody = await existingFileResponse.text();
-    throw new Error(`Failed to check existing configuration file (${existingFileResponse.status}): ${errorBody}`,);
-  }
-
-  const updateBody: {
-    message: string;
-    content: string;
-    sha?: string;
-  } = {
-    message: `Update ${filePath}`,
-    content: encodeBase64(JSON.stringify(newConfig, null, 2)),
-  };
-  if (existingSha) {
-    updateBody.sha = existingSha;
-  }
-
-
-  const saveResponse = await fetch(apiUrl, {
-    method: "PUT",
-    headers: {
-      ...headers,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(updateBody),
-  });
-
-  if (!saveResponse.ok) {
-    const errorBody = await saveResponse.text();
-    throw new Error(
-      `Failed to save ${configIdentifier} config (${saveResponse.status}): ${errorBody}`,
-    );
-  }
-}
-
-
-function encodeBase64(value: string): string {
-  const bytes = new TextEncoder().encode(value);
-  let binary = "";
-  for (const byte of bytes) {
-    binary += String.fromCharCode(byte);
-  }
-  return btoa(binary);
+  await uploadGitHubFiles(
+    githubPat ?? "",
+    owner,
+    repo,
+    filePath.substring(0, filePath.lastIndexOf("/")),
+    [
+      {
+        name: filePath.substring(filePath.lastIndexOf("/") + 1),
+        content: await encodeBase64(JSON.stringify(newConfig, null, 2)),
+      },
+    ]
+  )
 }
