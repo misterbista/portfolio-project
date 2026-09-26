@@ -27,6 +27,10 @@ export enum Identifier {
   Downloads = "downloads",
 }
 
+interface GitHubContentResponse {
+  sha: string;
+}
+
 type ConfigurationModelMap = {
   [Identifier.Core]: CoreConfigurationModel;
   [Identifier.LeftPanel]: LeftPanelConfigurationModel;
@@ -67,14 +71,23 @@ export function useConfig<T extends Identifier>(configIdentifier: T){
     refetchOnWindowFocus: false
   });
 
-  const {githubPat} = useGithubPatAuth();
+  const {
+    githubPat,
+    githubSession
+  } = useGithubPatAuth();
 
   const {
     mutateAsync,
     isPending
   } = useMutation({
     mutationKey: [configIdentifier],
-    mutationFn: async (newConfig: ConfigurationModel<T>) => await saveConfig(configIdentifier, newConfig, githubPat),
+    mutationFn: async (newConfig: ConfigurationModel<T>) => await saveConfig(
+      configIdentifier,
+      newConfig,
+      githubPat,
+      githubSession?.user?.login || "",
+      githubSession?.repository?.name || ""
+    ),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: [configIdentifier] });
       toast.success(`Config saved successfully: ${configIdentifier}`);
@@ -102,17 +115,78 @@ async function getConfig<T extends Identifier> (configIdentifier: T): Promise<Co
   return await response.json() as ConfigurationModel<T>;
 }
 
-async function saveConfig<T extends Identifier>(configIdentifier: T, newConfig: ConfigurationModel<T>, githubPat: string | null): Promise<void> {
+async function saveConfig<T extends Identifier>(
+  configIdentifier: T,
+  newConfig: ConfigurationModel<T>,
+  githubPat: string | null,
+  owner: string,
+  repo: string
+): Promise<void> {
   const configPath = configurationPaths[configIdentifier];
-  const filePath = `./public${configPath}`;
+  const filePath = configPath.replace(/^\/+/, "");
 
   if (!githubPat) {
-    return Promise.resolve().then(() => {
-      throw new Error("You have not logged in yet. Please log in to use this feature.");
-    });
+    throw new Error("You have not logged in yet. Please log in to use this feature.");
   }
 
-  return Promise.resolve().then(() => {
-    throw new Error("Feature is not implemented: Saving config to GitHub is not supported yet.");
+  const headers = {
+    Authorization: `Bearer ${githubPat}`,
+    Accept: "application/vnd.github+json",
+    "X-GitHub-Api-Version": "2022-11-28",
+  };
+
+  const apiUrl = `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/${filePath}`;
+  let existingSha: string | undefined;
+  const existingFileResponse = await fetch(apiUrl, {
+    method: "GET",
+    headers,
   });
+
+
+  if (existingFileResponse.ok) {
+    const existingFile = (await existingFileResponse.json()) as GitHubContentResponse;
+    existingSha = existingFile.sha;
+  } else if (existingFileResponse.status !== 404) {
+    const errorBody = await existingFileResponse.text();
+    throw new Error(`Failed to check existing configuration file (${existingFileResponse.status}): ${errorBody}`,);
+  }
+
+  const updateBody: {
+    message: string;
+    content: string;
+    sha?: string;
+  } = {
+    message: `Update ${filePath}`,
+    content: encodeBase64(JSON.stringify(newConfig, null, 2)),
+  };
+  if (existingSha) {
+    updateBody.sha = existingSha;
+  }
+
+
+  const saveResponse = await fetch(apiUrl, {
+    method: "PUT",
+    headers: {
+      ...headers,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(updateBody),
+  });
+
+  if (!saveResponse.ok) {
+    const errorBody = await saveResponse.text();
+    throw new Error(
+      `Failed to save ${configIdentifier} config (${saveResponse.status}): ${errorBody}`,
+    );
+  }
+}
+
+
+function encodeBase64(value: string): string {
+  const bytes = new TextEncoder().encode(value);
+  let binary = "";
+  for (const byte of bytes) {
+    binary += String.fromCharCode(byte);
+  }
+  return btoa(binary);
 }
