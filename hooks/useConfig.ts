@@ -83,8 +83,7 @@ export function useConfig<T extends Identifier>(configIdentifier: T){
       configIdentifier,
       newConfig,
       gitHubPat,
-      gitHubSession?.user?.login || "",
-      gitHubSession?.repository?.name || ""
+      gitHubSession?.repository?.full_name || ""
     ),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: [configIdentifier] });
@@ -117,14 +116,12 @@ async function saveConfig<T extends Identifier>(
   configIdentifier: T,
   newConfig: ConfigurationModel<T>,
   gitHubPat: string | null,
-  owner: string,
   repo: string
 ): Promise<void> {
   const configPath = configurationPaths[configIdentifier];
   const filePath = configPath.replace(/^\/+/, "");
   await uploadGitHubFiles(
     gitHubPat ?? "",
-    owner,
     repo,
     filePath.substring(0, filePath.lastIndexOf("/")),
     [
