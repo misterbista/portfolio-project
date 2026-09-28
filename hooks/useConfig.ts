@@ -13,7 +13,6 @@ import {Model as GalleryConfigurationModel} from "@/configuration/gallery";
 import {Model as DownloadsConfigurationModel} from "@/configuration/downloads";
 import {toast} from "sonner";
 import {useGitHubPatAuth} from "@/hooks/useGitHubPatAuth";
-import {encodeBase64} from "@/lib/encodings";
 import {uploadGitHubFiles} from "@/lib/gitHub";
 
 export enum Identifier {
@@ -127,7 +126,7 @@ async function saveConfig<T extends Identifier>(
     [
       {
         name: filePath.substring(filePath.lastIndexOf("/") + 1),
-        content: await encodeBase64(JSON.stringify(newConfig, null, 2)),
+        content: JSON.stringify(newConfig, null, 2),
       },
     ]
   )
