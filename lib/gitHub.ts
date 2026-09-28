@@ -49,25 +49,23 @@ function createGitHubHeaders(token: string): HeadersInit {
 }
 
 function createGitHubContentsUrl(
-  owner: string,
   repo: string,
   path: string,
 ): string {
   const normalizedPath = path.replace(/^\/+|\/+$/g, "");
-  return `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/${normalizedPath}`;
+  return `https://api.github.com/repos/${encodeURIComponent(repo)}/contents/${normalizedPath}`;
 }
 
 export async function listGitHubFiles(
   pat: string,
-  owner: string,
   repository: string,
   folderPath: string,
 ): Promise<GitHubContent[]> {
-  if (!pat || !owner || !repository || isNullOrWhitespace(pat) || isNullOrWhitespace(owner) || isNullOrWhitespace(repository)) {
+  if (!pat || !repository || isNullOrWhitespace(pat) || isNullOrWhitespace(repository)) {
     throw new Error("You have not logged in yet. Please log in to use this feature.");
   }
 
-  const url = createGitHubContentsUrl(owner, repository, folderPath);
+  const url = createGitHubContentsUrl(repository, folderPath);
   const response = await fetch(
     url,
     {
@@ -90,12 +88,11 @@ export async function listGitHubFiles(
 
 export async function deleteGitHubFiles(
   pat: string,
-  owner: string,
   repository: string,
   folderPath: string,
   fileNames: string[],
 ): Promise<void> {
-  if (!pat || !owner || !repository || isNullOrWhitespace(pat) || isNullOrWhitespace(owner) || isNullOrWhitespace(repository)) {
+  if (!pat || !repository || isNullOrWhitespace(pat) || isNullOrWhitespace(repository)) {
     throw new Error("You have not logged in yet. Please log in to use this feature.");
   }
 
@@ -107,7 +104,7 @@ export async function deleteGitHubFiles(
 
   for (const fileName of uniqueFileNames) {
     const filePath = `${folderPath.replace(/\/+$/, "")}/${fileName.replace(/^\/+/, "")}`;
-    const url = createGitHubContentsUrl(owner, repository, filePath);
+    const url = createGitHubContentsUrl(repository, filePath);
     const fileResponse = await fetch(
       url,
       {
@@ -149,12 +146,11 @@ export async function deleteGitHubFiles(
 
 export async function uploadGitHubFiles(
   pat: string,
-  owner: string,
   repository: string,
   folderPath: string,
   files: GitHubCreateFileRequest[],
 ): Promise<void> {
-  if (!pat || !owner || !repository || isNullOrWhitespace(pat) || isNullOrWhitespace(owner) || isNullOrWhitespace(repository)) {
+  if (!pat || !repository || isNullOrWhitespace(pat) || isNullOrWhitespace(repository)) {
     throw new Error("You have not logged in yet. Please log in to use this feature.");
   }
 
@@ -164,7 +160,7 @@ export async function uploadGitHubFiles(
 
   for (const file of files) {
     const filePath = `${folderPath.replace(/\/+$/, "")}/${file.name.replace(/^\/+/, "")}`;
-    const url = createGitHubContentsUrl(owner, repository, filePath);
+    const url = createGitHubContentsUrl(repository, filePath);
     const existingFileResponse = await fetch(
       url,
       {

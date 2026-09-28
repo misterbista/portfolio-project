@@ -34,8 +34,7 @@ export function useGitHubFolder(
       try {
         await listGitHubFiles(
           gitHubPat ?? "",
-          gitHubSession!.user!.login ?? "",
-          gitHubSession!.repository!.name ?? "",
+          gitHubSession!.repository!.full_name ?? "",
           normalizedFolderPath
         )
       } catch (error) {
@@ -53,8 +52,7 @@ export function useGitHubFolder(
   } = useMutation({
     mutationFn: async (fileNames: string[]) => await deleteGitHubFiles(
       gitHubPat ?? "",
-      gitHubSession!.user!.login ?? "",
-      gitHubSession!.repository!.name ?? "",
+      gitHubSession!.repository!.full_name ?? "",
       normalizedFolderPath,
       fileNames
     ),
@@ -75,8 +73,7 @@ export function useGitHubFolder(
   } = useMutation({
     mutationFn: async (files: GitHubCreateFileRequest[]) => await uploadGitHubFiles(
       gitHubPat ?? "",
-      gitHubSession!.user!.login,
-      gitHubSession!.repository!.name,
+      gitHubSession!.repository!.full_name,
       normalizedFolderPath,
       files
     ),
