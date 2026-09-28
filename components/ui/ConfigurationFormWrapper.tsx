@@ -3,17 +3,20 @@
 import React from 'react';
 import ConfigFormTools from "@/components/ui/ConfigFormTools";
 import {Card, CardContent} from "@/components/ui/card";
+import {FieldValues, FormProvider, UseFormReturn} from "react-hook-form";
 
-function ConfigurationFormWrapper<T>(
-  {title, config, children, className}: {
+function ConfigurationFormWrapper<T extends FieldValues>(
+  {title, config, children, className, form}: {
     title: string;
     config: T;
     children: React.ReactNode;
     className?: string;
+    form: UseFormReturn<T, any, T>
   }
 ) {
   return (
     <div className={className}>
+      <FormProvider {...form}>
       <Card>
         <CardContent>
           <div className={"flex justify-between items-center mb-2"}>
@@ -23,6 +26,7 @@ function ConfigurationFormWrapper<T>(
           {children}
         </CardContent>
       </Card>
+      </FormProvider>
     </div>
   );
 }

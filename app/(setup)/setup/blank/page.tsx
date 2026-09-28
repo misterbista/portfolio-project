@@ -5,7 +5,7 @@ import styles from "./page.module.css";
 import ConfigurationFormWrapper from "@/components/ui/ConfigurationFormWrapper";
 import {Identifier, useConfig} from "@/hooks/useConfig";
 import {useForm} from "react-hook-form";
-import {Model, schema} from "@/configuration/core";  // Change this
+import {Model, schema, defaultValues} from "@/configuration/core";  // Change this
 import {zodResolver} from "@hookform/resolvers/zod";
 import {cn} from "@/lib/utils";
 import {Button} from "@/components/ui/button";
@@ -22,15 +22,16 @@ function Page() {
     saveConfig
   } = useConfig(Identifier.Core);  // Change this
 
+  const form = useForm<Model>({
+    resolver: zodResolver(schema),
+    defaultValues
+  });
   const {
     reset,
     control,
     handleSubmit,
     watch
-  } = useForm<Model>({
-    resolver: zodResolver(schema),
-    defaultValues: config
-  });
+  } = form;
   const formValues = watch();
 
   useEffect(() => {
@@ -48,7 +49,7 @@ function Page() {
   }
 
   return (
-    <ConfigurationFormWrapper className={styles.page} title={"Blank Configuration"} config={formValues}>
+    <ConfigurationFormWrapper className={styles.page} title={"Blank Configuration"} config={formValues} form={form}>
       <form onSubmit={handleSubmit(save)} className={cn(styles.form, "grid gap-2 max-w-3xl")}>
         Nothing here.
 

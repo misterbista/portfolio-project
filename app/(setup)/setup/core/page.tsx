@@ -4,7 +4,7 @@ import React, {useEffect} from 'react';
 import styles from "./page.module.css";
 import {Identifier, useConfig} from "@/hooks/useConfig";
 import {Controller, useForm} from "react-hook-form";
-import {Model, schema} from "@/configuration/core";
+import {Model, schema, defaultValues} from "@/configuration/core";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Input} from "@/components/ui/input";
 import {Label} from "@/components/ui/label";
@@ -26,15 +26,16 @@ function Page() {
     saveConfig
   } = useConfig(Identifier.Core);
 
+  const form = useForm<Model>({
+    resolver: zodResolver(schema),
+    defaultValues
+  });
   const {
     reset,
     control,
     handleSubmit,
     watch
-  } = useForm<Model>({
-    resolver: zodResolver(schema),
-    defaultValues: config
-  });
+  } = form;
   const formValues = watch();
 
   useEffect(() => {
@@ -52,14 +53,15 @@ function Page() {
   }
 
   return (
-    <ConfigurationFormWrapper className={styles.page} title={"Core Configuration"} config={formValues}>
+    <ConfigurationFormWrapper className={styles.page} title={"Core Configuration"} config={formValues} form={form}>
       <form onSubmit={handleSubmit(save)} className={cn(styles.form, "grid gap-2 max-w-3xl")}>
         <Controller
           control={control}
           name={"favicon"}
           render={({field, fieldState: {error}}) => <>
             <Label htmlFor={"favicon"}>Favicon</Label>
-            <Input {...field} className={cn("w-full", {"border-destructive": error})}/>
+            <Input {...field} value={field.value ?? ""}
+                   className={cn("w-full", {"border-destructive": error})}/>
             {error && <small className={"text-destructive"}>{error.message}</small>}
           </>}
         />
