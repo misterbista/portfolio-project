@@ -27,12 +27,20 @@ export type GitHubPatValidation = {
 };
 
 export interface GitHubContent {
+  _links: {
+    git: string;
+    html: string;
+    self: string;
+  };
+  download_url: string;
+  git_url: string;
+  html_url: string;
   name: string;
   path: string;
   sha: string;
   size: number;
   type: "file" | "dir";
-  download_url: string | null;
+  url: string;
 }
 
 export interface GitHubCreateFileRequest {
