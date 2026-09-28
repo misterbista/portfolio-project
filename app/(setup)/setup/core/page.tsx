@@ -61,8 +61,7 @@ function Page() {
           name={"favicon"}
           render={({field, fieldState: {error}}) => <>
             <Label htmlFor={"favicon"}>Favicon</Label>
-            <Input {...field} value={field.value ?? ""}
-                   className={cn("w-full", {"border-destructive": error})}/>
+            <Input {...field} className={cn("w-full", {"border-destructive": error})}/>
             {error && <small className={"text-destructive"}>{error.message}</small>}
           </>}
         />
