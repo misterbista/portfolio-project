@@ -19,7 +19,8 @@ function Page() {
   const {
     config,
     isLoadingConfig,
-    saveConfig
+    saveConfig,
+    isSavingConfig
   } = useConfig(Identifier.Core);  // Change this
 
   const form = useForm<Model>({
@@ -68,8 +69,9 @@ function Page() {
             size={"sm"}
             variant={"outline"}
             className={"cursor-pointer mt-2 bg-primary text-secondary"}
+            disabled={isSavingConfig}
           >
-            Save
+            {isSavingConfig ? <Spinner /> : "Save"}
           </Button>
         </div>
       </form>
