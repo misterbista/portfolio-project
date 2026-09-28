@@ -53,7 +53,12 @@ function createGitHubContentsUrl(
   path: string,
 ): string {
   const normalizedPath = path.replace(/^\/+|\/+$/g, "");
-  return `https://api.github.com/repos/${encodeURIComponent(repo)}/contents/${normalizedPath}`;
+  const ownerRepo = repo.trim().split("/").filter(Boolean);
+  if (ownerRepo.length !== 2) {
+    throw new Error("Repository must be in the form 'owner/repository'.");
+  }
+  const [owner, repository] = ownerRepo;
+  return `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repository)}/contents/${normalizedPath}`;
 }
 
 export async function listGitHubFiles(
