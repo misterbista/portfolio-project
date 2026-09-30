@@ -91,7 +91,6 @@ export function useGitHubFolder(
   return {
     files: files ?? EMPTY_FILES,
     loadingFiles,
-
     deleteFiles,
     deletingFiles,
     uploadFiles,

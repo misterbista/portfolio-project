@@ -21,7 +21,7 @@ function AssetManagerDialog(
         }}
       >
         {gitHubSession ? <GitHubFileManager
-          className={"w-2xl h-full"}
+          className={"max-w-2xl h-full"}
           path={"uploads"}
         /> : <span className={"text-gray-500"}>You have not logged in yet. Please log in to use this feature.</span>}
       </DialogContent>
