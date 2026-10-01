@@ -3,6 +3,7 @@ import {Button} from "@/components/ui/button";
 import {FileUp} from "lucide-react";
 import {Spinner} from "@/components/ui/spinner";
 import {GitHubCreateFileRequest} from "@/lib/gitHub";
+import {confirm} from "@/components/ui/Confirm";
 
 function FileUploadButton(
   {
@@ -29,7 +30,38 @@ function FileUploadButton(
         content: file,
       });
     }
-    await uploadFiles(ghFiles);
+
+    let returned = await confirm({
+      title: "Confirm Upload",
+      message: `Are you sure you want to upload ${ghFiles.length} files? This will make these files publicly available.`,
+      actions: [
+        {
+          label: "Cancel",
+          onClick: async () => false,
+          buttonProps: {
+            variant: "outline",
+            className: "cursor-pointer",
+          },
+        },
+        {
+          label: "Upload",
+          onClick: async () => true,
+          buttonProps: {
+            className: "cursor-pointer",
+          },
+        },
+      ],
+    });
+
+    try {
+      if(returned) {
+        await uploadFiles(ghFiles);
+      }
+    } finally {
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
+    }
   };
 
   return (<div className={"flex flex-col gap-1"}>

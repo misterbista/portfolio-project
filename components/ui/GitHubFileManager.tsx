@@ -17,6 +17,7 @@ import {Checkbox} from "@/components/ui/checkbox";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
 import {getFileTypeFromMimeType, humanizeFileSize} from "@/lib/files";
 import FileUploadButton from "@/components/ui/FileUploadButton";
+import {confirm} from "@/components/ui/Confirm";
 
 function GitHubFileManager(
   {className, path}: {
@@ -56,7 +57,30 @@ function GitHubFileManager(
   }
 
   async function onDelete(fileNames: string[]) {
-    await deleteFiles(fileNames);
+    let returned = await confirm({
+      title: "Confirm Delete",
+      message: `Are you sure you want to delete ${fileNames.length} files? This action cannot be undone.`,
+      actions: [
+        {
+          label: "Cancel",
+          onClick: async () => false,
+          buttonProps: {
+            variant: "outline",
+            className: "cursor-pointer",
+          },
+        },
+        {
+          label: "Delete",
+          onClick: async () => true,
+          buttonProps: {
+            className: "cursor-pointer",
+          },
+        },
+      ],
+    });
+    if (returned) {
+      await deleteFiles(fileNames);
+    }
   }
 
   const filteredFiles = files
