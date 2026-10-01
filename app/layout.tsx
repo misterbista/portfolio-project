@@ -8,6 +8,7 @@ import {Identifier, useConfig} from "@/hooks/useConfig";
 import { TooltipProvider } from "@/components/ui/tooltip"
 import {Toaster} from "sonner";
 import {GitHubPatProvider} from "@/hooks/useGitHubPatAuth";
+import {ConfirmDialog} from "@/components/ui/Confirm";
 
 
 const queryClient = new QueryClient()
@@ -26,6 +27,7 @@ function RootLayout({ children }: LayoutProps<"/">) {
               {children}
             </TooltipProvider>
             <Toaster/>
+            <ConfirmDialog/>
           </body>
         </html>
         <ReactQueryDevtools initialIsOpen={false} />

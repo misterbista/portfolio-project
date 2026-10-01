@@ -18,6 +18,10 @@ type ExternalHook<T> = {
    * Accepts either a new value or an updater function receiving the previous value.
    */
   update: (next: SetStateAction<T>) => void,
+  /**
+   * Returns the current value of the external state.
+   */
+  get: () => T,
 }
 
 // export const {
@@ -28,7 +32,7 @@ type ExternalHook<T> = {
  * Creates a small external state store with a React hook for subscribing and an externally callable updater.
  *
  * @param initialValue - The initial value stored in the external state.
- * @returns An object containing the `useState` hook and the `update` function.
+ * @returns An object containing the `useState` hook, `get` function and the `update` function.
  *
  * @example
  * Usage:
@@ -40,6 +44,7 @@ type ExternalHook<T> = {
  * export const {
  *   useState: useCount,
  *   update: updateCount,
+ *   get: getCount
  * } = createExternalHook(0);
  * ```
  *
@@ -56,9 +61,10 @@ type ExternalHook<T> = {
  *
  * `@services/count.ts`
  * ```ts
- * import { updateCount } from "@/hooks/useCount";
+ * import { getCount, updateCount } from "@/hooks/useCount";
  *
  * export function incrementCount() {
+ *   console.log(getCount()); // Get the current count value
  *   updateCount((count) => count + 1);
  * }
  * ```
@@ -102,5 +108,6 @@ export function createExternalHook<T>(
   return {
     useState,
     update,
+    get: getSnapshot
   } as ExternalHook<T>
 }
