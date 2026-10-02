@@ -15,7 +15,7 @@ jobs:
         name: Checkout source repository
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - id: extract-node-version
         name: Extract node version from package.json
