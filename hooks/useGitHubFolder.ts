@@ -57,9 +57,8 @@ export function useGitHubFolder(
       fileNames
     ),
     onSuccess: async () => {
-      await queryClient.invalidateQueries({
-        queryKey: ["gitHub-folder", normalizedFolderPath],
-      });
+      await queryClient.invalidateQueries({queryKey: ["gitHub-folder", normalizedFolderPath]});
+      toast.success("File(s) deleted successfully!");
     },
     onError: async (error) => {
       const errorMessage = error instanceof Error ? error.message : typeof error === "string" ? error : `Something went wrong!`;
@@ -78,9 +77,8 @@ export function useGitHubFolder(
       files
     ),
     onSuccess: async () => {
-      await queryClient.invalidateQueries({
-        queryKey: ["gitHub-folder", normalizedFolderPath],
-      });
+      await queryClient.invalidateQueries({queryKey: ["gitHub-folder", normalizedFolderPath]});
+      toast.success("File(s) uploaded successfully!");
     },
     onError: async (error) => {
       const errorMessage = error instanceof Error ? error.message : typeof error === "string" ? error : `Something went wrong!`;
