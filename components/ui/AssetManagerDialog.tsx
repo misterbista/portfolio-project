@@ -13,7 +13,25 @@ function AssetManagerDialog(
 ) {
   const {gitHubSession} = useGitHubPatAuth();
   return (
-    <Dialog open={show} onOpenChange={setShow}>
+    <Dialog
+      open={show}
+      onOpenChange={(nextOpen, eventDetails) => {
+        if (!nextOpen) {
+          const reason = eventDetails.reason
+
+          if (
+            reason === "escape-key" ||
+            reason === "focus-out" ||
+            reason === "outside-press" ||
+            reason === "trigger-press"
+          ) {
+            return
+          }
+        }
+
+        setShow(nextOpen)
+      }}
+    >
       <DialogContent
         style={{
           width: 'auto', maxWidth: '100%',
