@@ -32,7 +32,7 @@ export function useGitHubFolder(
     queryKey: ["gitHub-folder", normalizedFolderPath],
     queryFn: async () => {
       try {
-        await listGitHubFiles(
+        return await listGitHubFiles(
           gitHubPat ?? "",
           gitHubSession!.repository!.full_name ?? "",
           normalizedFolderPath

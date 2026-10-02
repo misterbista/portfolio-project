@@ -15,7 +15,7 @@ import {GitHubContent} from "@/lib/gitHub";
 import Image from "next/image";
 import {Checkbox} from "@/components/ui/checkbox";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
-import {getFileTypeFromMimeType, humanizeFileSize} from "@/lib/files";
+import {getFileTypeFromExtension, humanizeFileSize} from "@/lib/files";
 import FileUploadButton from "@/components/ui/FileUploadButton";
 import {confirm} from "@/components/ui/Confirm";
 
@@ -85,7 +85,7 @@ function GitHubFileManager(
 
   const filteredFiles = files
     ?.filter(file => {
-      let typeString = getFileTypeFromMimeType(file.type);
+      const typeString = getFileTypeFromExtension(file.name);
       if(selectedFileType && typeString !== selectedFileType) {
         return false;
       }
@@ -94,7 +94,7 @@ function GitHubFileManager(
     );
 
   const fileTypes = files?.reduce((acc, file) => {
-    const type = getFileTypeFromMimeType(file.type);
+    const type = getFileTypeFromExtension(file.name);
     if (!acc[type]) {
       acc[type] = 0;
     }
@@ -154,9 +154,9 @@ function GitHubFileManager(
         <span className={"text-gray-500"}>No files found matching the search criteria.</span>
       </div>}
       <div className={"flex flex-row gap-2 overflow-x-auto py-1 mb-3"}>
-        {Object.entries(fileTypes ?? {}).map(([type, count]) => (
+        {Object.entries(fileTypes ?? {}).map(([type, count], i) => (
           <Badge
-            key={type}
+            key={i}
             variant={"secondary"}
             onClick={() => setSelectedFileType(selectedFileType === type ? undefined : type)}
             className={cn(
@@ -206,7 +206,8 @@ function GitHubFileManager(
           }
         )}
       >
-        {filteredFiles?.map(file => (viewMode === "grid" ? (<GridCard
+        {filteredFiles?.map((file, i) => (viewMode === "grid" ? (<GridCard
+          key={i}
           file={file}
           isAnySelected={selectedFiles.length > 0}
           isSelected={selectedFiles.includes(file.name)}
@@ -220,6 +221,7 @@ function GitHubFileManager(
           onDownload={onDownload}
           onDelete={onDelete}
         />) : (<ListCard
+          key={i}
           file={file}
           isAnySelected={selectedFiles.length > 0}
           isSelected={selectedFiles.includes(file.name)}
@@ -279,7 +281,7 @@ function GridCard(
           </div>
           <span className={"flex flex-row gap-2 justify-between mt-1 text-muted-foreground text-xs"}>
             <span>{humanizeFileSize(file.size)}</span>
-            <span>{getFileTypeFromMimeType(file.type)}</span>
+            <span>{getFileTypeFromExtension(file.name)}</span>
           </span>
         </div>
       </TooltipTrigger>
@@ -328,7 +330,7 @@ function ListCard(
             <div className={"flex flex-row mx-1 gap-1 justify-start text-muted-foreground text-xs"}>
               <span>{humanizeFileSize(file.size)}</span>
               <span>•</span>
-              <span>{getFileTypeFromMimeType(file.type)}</span>
+              <span>{getFileTypeFromExtension(file.name)}</span>
             </div>
           </div>
           <FileActions
@@ -399,7 +401,7 @@ function FileIconWithCheckbox(
   const [hovered, setHovered] = useState(false);
   const showCheckbox = hovered || isAnySelected;
 
-  const isImage = file.type.startsWith("image/");
+  const isImage = getFileTypeFromExtension(file.name) === "Image";
 
   return <span
     className="relative inline-flex shrink-0 items-center justify-center cursor-pointer"

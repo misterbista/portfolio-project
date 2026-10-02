@@ -9,7 +9,8 @@ const nextConfig: NextConfig = {
         hostname: '**',
         pathname: '**',
       }
-    ]
+    ],
+    unoptimized: true
   },
   output: 'export',
   distDir: 'build',
