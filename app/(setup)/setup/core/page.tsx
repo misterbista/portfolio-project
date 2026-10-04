@@ -55,55 +55,55 @@ function Page() {
 
   return (
     <ConfigurationFormWrapper className={styles.page} title={"Core Configuration"} config={formValues} form={form}>
-      <form onSubmit={handleSubmit(save)} className={cn(styles.form, "grid gap-2 max-w-3xl")}>
+      <form onSubmit={handleSubmit(save)} className={cn(styles.form, "grid gap-6 max-w-3xl")}>
         <Controller
           control={control}
           name={"favicon"}
-          render={({field, fieldState: {error}}) => <>
+          render={({field, fieldState: {error}}) => <div className="grid gap-2">
             <Label htmlFor={"favicon"}>Favicon</Label>
             <Input {...field} className={cn("w-full", {"border-destructive": error})}/>
             {error && <small className={"text-destructive"}>{error.message}</small>}
-          </>}
+          </div>}
         />
 
         <Controller
           control={control}
           name={"websiteName"}
-          render={({field, fieldState: {error}}) => <>
+          render={({field, fieldState: {error}}) => <div className="grid gap-2">
             <Label htmlFor={"websiteName"}>Website Name</Label>
             <Input {...field} className={cn("w-full", {"border-destructive": error})}/>
             {error && <small className={"text-destructive"}>{error.message}</small>}
-          </>}
+          </div>}
         />
 
         <Controller
           control={control}
           name={"fullName"}
-          render={({field, fieldState: {error}}) => <>
+          render={({field, fieldState: {error}}) => <div className="grid gap-2">
             <Label htmlFor={"fullName"}>Full Name</Label>
             <Input {...field} className={cn("w-full", {"border-destructive": error})}/>
             {error && <small className={"text-destructive"}>{error.message}</small>}
-          </>}
+          </div>}
         />
 
         <Controller
           control={control}
           name={"seoDescription"}
-          render={({field, fieldState: {error}}) => <>
+          render={({field, fieldState: {error}}) => <div className="grid gap-2">
             <Label htmlFor={"seoDescription"}>SEO Description</Label>
             <Textarea {...field} className={cn("w-full", {"border-destructive": error})}/>
             {error && <small className={"text-destructive"}>{error.message}</small>}
-          </>}
+          </div>}
         />
 
         <Controller
           control={control}
           name={"seoKeywords"}
-          render={({field, fieldState: {error}}) => <>
+          render={({field, fieldState: {error}}) => <div className="grid gap-2">
             <Label htmlFor={"seoKeywords"}>SEO Keywords</Label>
             <ArrayInput {...field} className={cn("w-full", {"border-destructive": error})}/>
             {error && <small className={"text-destructive"}>{error.message}</small>}
-          </>}
+          </div>}
         />
 
         <div className={"flex gap-2 justify-end"}>

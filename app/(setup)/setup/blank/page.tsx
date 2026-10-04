@@ -51,7 +51,7 @@ function Page() {
 
   return (
     <ConfigurationFormWrapper className={styles.page} title={"Blank Configuration"} config={formValues} form={form}>
-      <form onSubmit={handleSubmit(save)} className={cn(styles.form, "grid gap-2 max-w-3xl")}>
+      <form onSubmit={handleSubmit(save)} className={cn(styles.form, "grid gap-6 max-w-3xl")}>
         Nothing here.
 
         <div className={"flex gap-2 justify-end"}>
