@@ -4,7 +4,7 @@ import React, {useEffect} from 'react';
 import styles from "./page.module.css";
 import ConfigurationFormWrapper from "@/components/ui/ConfigurationFormWrapper";
 import {Identifier, useConfig} from "@/hooks/useConfig";
-import {useForm} from "react-hook-form";
+import {Controller, useForm} from "react-hook-form";
 import {Model, schema, defaultValues} from "@/configuration/leftPanel";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {cn} from "@/lib/utils";
@@ -12,6 +12,8 @@ import {Button} from "@/components/ui/button";
 import {useRouter} from "next/navigation";
 import FullScreenMessage from "@/components/ui/FullScreenMessage";
 import {Spinner} from "@/components/ui/spinner";
+import {Label} from "@/components/ui/label";
+import {Input} from "@/components/ui/input";
 
 function Page() {
   const router = useRouter()
@@ -52,7 +54,16 @@ function Page() {
   return (
     <ConfigurationFormWrapper className={styles.page} title={"Left Panel Configuration"} config={formValues} form={form}>
       <form onSubmit={handleSubmit(save)} className={cn(styles.form, "grid gap-2 max-w-3xl")}>
-        <label htmlFor={"profilePhoto"}>Profile Photo URL</label>
+        <Controller
+          control={control}
+          name={"profilePhoto"}
+          render={({field, fieldState: {error}}) => <>
+            <Label htmlFor={"profilePhoto"}>Profile Photo</Label>
+            <Input {...field} className={cn("w-full", {"border-destructive": error})}/>
+            {error && <small className={"text-destructive"}>{error.message}</small>}
+          </>}
+        />
+
 
         <div className={"flex gap-2 justify-end"}>
           <Button
