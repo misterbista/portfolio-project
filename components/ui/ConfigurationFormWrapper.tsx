@@ -18,7 +18,7 @@ function ConfigurationFormWrapper<T extends FieldValues>(
     <div className={className}>
       <FormProvider {...form}>
       <Card>
-        <CardContent>
+        <CardContent className={"overflow-y-auto"} style={{maxHeight: "calc(100dvh - 20rem)"}}>
           <div className={"flex justify-between items-center mb-2"}>
             <span className={"text-xl font-bold"}>{title}</span>
             <ConfigFormTools config={config}/>

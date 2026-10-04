@@ -8,7 +8,7 @@ export const schema = z.object({
       url: z.url("Social URL must be a valid URL"),
     }),
   ),
-  enabledPages: z.array(z.string()),
+  enabledMenus: z.array(z.string()),
 });
 
 export type Model = z.infer<typeof schema>;
@@ -16,5 +16,5 @@ export type Model = z.infer<typeof schema>;
 export const defaultValues: Model = {
   profilePhoto: "",
   socials: [],
-  enabledPages: [],
+  enabledMenus: [],
 };
