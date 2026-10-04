@@ -18,7 +18,7 @@ import FullScreenMessage from "@/components/ui/FullScreenMessage";
 import {Spinner} from "@/components/ui/spinner";
 
 function Page() {
-  const router = useRouter()
+  const router = useRouter();
 
   const {
     config,
@@ -59,51 +59,61 @@ function Page() {
         <Controller
           control={control}
           name={"favicon"}
-          render={({field, fieldState: {error}}) => <div className="grid gap-2">
-            <Label htmlFor={"favicon"}>Favicon</Label>
-            <Input {...field} className={cn("w-full", {"border-destructive": error})}/>
-            {error && <small className={"text-destructive"}>{error.message}</small>}
-          </div>}
+          render={({field, fieldState: {error}}) =>
+            <div className="grid gap-2">
+              <Label htmlFor={"favicon"}>Favicon</Label>
+              <Input {...field} id={"favicon"} placeholder={"https://example.com/favicon.ico"} className={cn("w-full", error && "border-destructive")}/>
+              {error && <small className={"text-destructive"}>{error.message}</small>}
+            </div>
+          }
         />
 
         <Controller
           control={control}
           name={"websiteName"}
-          render={({field, fieldState: {error}}) => <div className="grid gap-2">
-            <Label htmlFor={"websiteName"}>Website Name</Label>
-            <Input {...field} className={cn("w-full", {"border-destructive": error})}/>
-            {error && <small className={"text-destructive"}>{error.message}</small>}
-          </div>}
+          render={({field, fieldState: {error}}) =>
+            <div className="grid gap-2">
+              <Label htmlFor={"websiteName"}>Website Name</Label>
+              <Input {...field} id={"websiteName"} placeholder={"My Website"} className={cn("w-full", error && "border-destructive")}/>
+              {error && <small className={"text-destructive"}>{error.message}</small>}
+            </div>
+          }
         />
 
         <Controller
           control={control}
           name={"fullName"}
-          render={({field, fieldState: {error}}) => <div className="grid gap-2">
-            <Label htmlFor={"fullName"}>Full Name</Label>
-            <Input {...field} className={cn("w-full", {"border-destructive": error})}/>
-            {error && <small className={"text-destructive"}>{error.message}</small>}
-          </div>}
+          render={({field, fieldState: {error}}) =>
+            <div className="grid gap-2">
+              <Label htmlFor={"fullName"}>Full Name</Label>
+              <Input {...field} id={"fullName"} placeholder={"John Doe"} className={cn("w-full", error && "border-destructive")}/>
+              {error && <small className={"text-destructive"}>{error.message}</small>}
+            </div>
+          }
         />
 
         <Controller
           control={control}
           name={"seoDescription"}
-          render={({field, fieldState: {error}}) => <div className="grid gap-2">
-            <Label htmlFor={"seoDescription"}>SEO Description</Label>
-            <Textarea {...field} className={cn("w-full", {"border-destructive": error})}/>
-            {error && <small className={"text-destructive"}>{error.message}</small>}
-          </div>}
+          render={({field, fieldState: {error}}) =>
+            <div className="grid gap-2">
+              <Label htmlFor={"seoDescription"}>SEO Description</Label>
+              <Textarea {...field} id={"seoDescription"} placeholder={"A brief description of your website"} className={cn("w-full", error && "border-destructive")}/>
+              {error && <small className={"text-destructive"}>{error.message}</small>}
+            </div>
+          }
         />
 
         <Controller
           control={control}
           name={"seoKeywords"}
-          render={({field, fieldState: {error}}) => <div className="grid gap-2">
-            <Label htmlFor={"seoKeywords"}>SEO Keywords</Label>
-            <ArrayInput {...field} className={cn("w-full", {"border-destructive": error})}/>
-            {error && <small className={"text-destructive"}>{error.message}</small>}
-          </div>}
+          render={({field, fieldState: {error}}) =>
+            <div className="grid gap-2">
+              <Label htmlFor={"seoKeywords"}>SEO Keywords</Label>
+              <ArrayInput {...field} id={"seoKeywords"} placeholder={"Enter keywords..."} className={cn("w-full", error && "border-destructive")}/>
+              {error && <small className={"text-destructive"}>{error.message}</small>}
+            </div>
+          }
         />
 
         <div className={"flex gap-2 justify-end"}>

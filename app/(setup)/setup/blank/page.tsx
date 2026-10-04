@@ -14,7 +14,7 @@ import FullScreenMessage from "@/components/ui/FullScreenMessage";
 import {Spinner} from "@/components/ui/spinner";
 
 function Page() {
-  const router = useRouter()
+  const router = useRouter();
 
   const {
     config,
