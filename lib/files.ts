@@ -123,6 +123,7 @@ const EXTENSION_TO_TYPE_MAP: Record<string, FileType> = {
   bmp: "Image",
   webp: "Image",
   svg: "Image",
+  ico: "Image",
 
   // Videos
   mp4: "Video",
