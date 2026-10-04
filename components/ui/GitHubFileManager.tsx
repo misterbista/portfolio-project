@@ -30,7 +30,7 @@ function GitHubFileManager(
     debouncedState: debouncedSearchKeyword,
     setState: setSearchKeyword
   } = useDebouncedState("", 500);
-  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+  const [viewMode, setViewMode] = useState<"grid" | "list">("list");
   const [selectedFileType, setSelectedFileType] = useState<string>();
   const [selectedFiles, setSelectedFiles] = useState<string[]>([]);
 
