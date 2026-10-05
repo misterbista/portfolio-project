@@ -74,11 +74,11 @@ function Page() {
       <form onSubmit={handleSubmit(save)} className={cn(styles.form, "grid gap-6 max-w-3xl")}>
         <Controller
           control={control}
-          name={"profilePhoto"}
+          name={"profilePicture"}
           render={({ field, fieldState: { error } }) => (
             <div className={"grid gap-2"}>
-              <Label htmlFor={"profilePhoto"}>Profile Photo</Label>
-              <Input {...field} id={"profilePhoto"} placeholder={"https://example.com/profile.jpg"} className={cn("w-full", error && "border-destructive")}/>
+              <Label htmlFor={"profilePicture"}>Profile Photo</Label>
+              <Input {...field} id={"profilePicture"} placeholder={"https://example.com/profile.jpg"} className={cn("w-full", error && "border-destructive")}/>
               {error && <small className={"text-destructive"}>{error.message}</small>}
             </div>
           )}

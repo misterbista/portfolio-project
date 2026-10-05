@@ -1,12 +1,12 @@
 import * as z from "zod";
 
 export const schema = z.object({
-  profilePhoto: z
-    .url("Profile Photo must be a valid URL")
+  profilePicture: z
+    .url("Profile Picture must be a valid URL")
     .meta({
-      title: "Profile Photo",
+      title: "Profile Picture",
       description:
-        "An image that will be used as the profile photo in the left panel. " +
+        "An image that will be used as the profile picture in the left panel. " +
         "It is recommended to use a square image of size 512x512px.",
     }),
   socials: z
@@ -49,7 +49,7 @@ export const schema = z.object({
 export type Model = z.infer<typeof schema>;
 
 export const defaultValues: Model = {
-  profilePhoto: "",
+  profilePicture: "",
   socials: [],
   enabledMenus: [],
 };

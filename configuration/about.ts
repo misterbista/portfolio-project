@@ -2,7 +2,7 @@ import * as z from "zod";
 
 export const schema = z.object({
   aboutMe: z.string(),
-  photo: z.string(),
+  heroPicture: z.string(),
   keypoints: z.array(
     z.object({
       title: z.string(),
