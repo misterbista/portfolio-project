@@ -12,7 +12,7 @@ export const schema = z.object({
     .string("Bio is required")
     .meta({
       title: "Bio",
-      description: "A brief description about yourself."
+      description: "A really short description about yourself. Job title, role, or a few words about you."
     })
 });
 
