@@ -1,0 +1,30 @@
+import * as z from "zod";
+
+export const schema = z.array(
+  z.object({
+    title: z.string().meta({
+      title: "Title",
+      description: "The name of the service.",
+    }),
+    description: z.string().meta({
+      title: "Description",
+      description: "A description of the service provided.",
+    }),
+    icon: z.string().optional().meta({
+      title: "Icon",
+      description: "An optional icon to display with the service.",
+    }),
+    link: z.string().meta({
+      title: "Link",
+      description: "A related URL. Links are automatically detected and made clickable.",
+    }),
+  }).meta({
+    title: "Service",
+    description: "A service offered and its related information.",
+  }),
+).meta({
+  title: "Services",
+  description: "The list of services offered on the Services page.",
+});
+
+export type Model = z.infer<typeof schema>;
