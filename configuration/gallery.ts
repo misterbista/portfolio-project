@@ -3,11 +3,34 @@ import * as z from "zod";
 export const schema = z.object({
   photos: z.array(
     z.object({
-      url: z.string(),
-      caption: z.string(),
-      categories: z.array(z.string()),
+      url: z.string().meta({
+        title: "Photo URL",
+        description: "The URL of the photo to display in the gallery.",
+      }),
+      caption: z.string().meta({
+        title: "Caption",
+        description: "A caption to display with the photo.",
+      }),
+      categories: z.array(
+        z.string().meta({
+          title: "Category",
+          description: "A gallery category that groups this photo.",
+        }),
+      ).meta({
+        title: "Categories",
+        description: "The categories used to group this photo in the gallery.",
+      }),
+    }).meta({
+      title: "Photo",
+      description: "A photo and its display information in the gallery.",
     }),
-  ),
+  ).meta({
+    title: "Photos",
+    description: "The photos to display in the gallery.",
+  }),
+}).meta({
+  title: "Gallery Configuration",
+  description: "Configuration for the portfolio photo gallery.",
 });
 
 export type Model = z.infer<typeof schema>;

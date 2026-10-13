@@ -92,6 +92,9 @@ export const schema = z.object({
     title: "Milestones",
     description: "A list of significant events in your journey"
   }),
+}).meta({
+  title: "Journey Configuration",
+  description: "A summary of your journey and the milestones that make it up.",
 });
 
 export type Model = z.infer<typeof schema>;

@@ -10,7 +10,7 @@ import {Model as ProjectsConfigurationModel} from "@/configuration/projects";
 import {Model as SkillsConfigurationModel} from "@/configuration/skills";
 import {Model as TestimonialsConfigurationModel} from "@/configuration/testimonials";
 import {Model as GalleryConfigurationModel} from "@/configuration/gallery";
-import {Model as DownloadsConfigurationModel} from "@/configuration/downloads";
+import {Model as DownloadsConfigurationModel} from "@/configuration/quickLinks";
 import {toast} from "sonner";
 import {useGitHubPatAuth} from "@/hooks/useGitHubPatAuth";
 import {uploadGitHubFiles} from "@/lib/gitHub";
@@ -25,7 +25,7 @@ export enum Identifier {
   Skills = "skills",
   Testimonials = "testimonials",
   Gallery = "gallery",
-  Downloads = "downloads",
+  QuickLinks = "quickLinks",
 }
 
 type ConfigurationModelMap = {
@@ -38,7 +38,7 @@ type ConfigurationModelMap = {
   [Identifier.Skills]: SkillsConfigurationModel;
   [Identifier.Testimonials]: TestimonialsConfigurationModel;
   [Identifier.Gallery]: GalleryConfigurationModel;
-  [Identifier.Downloads]: DownloadsConfigurationModel;
+  [Identifier.QuickLinks]: DownloadsConfigurationModel;
 };
 
 type ConfigurationModel<K extends Identifier> = ConfigurationModelMap[K];
@@ -53,7 +53,7 @@ const configurationPaths: Record<Identifier, string> = {
   [Identifier.Skills]: "/config/skills.json",
   [Identifier.Testimonials]: "/config/testimonials.json",
   [Identifier.Gallery]: "/config/gallery.json",
-  [Identifier.Downloads]: "/config/downloads.json",
+  [Identifier.QuickLinks]: "/config/quick-links.json",
 };
 
 export function useConfig<T extends Identifier>(configIdentifier: T){

@@ -41,7 +41,10 @@ export const schema = z.object({
     }
   ),
   seoKeywords: z
-    .array(z.string("Please enter a valid keyword"))
+    .array(z.string("Please enter a valid keyword").meta({
+      title: "SEO Keyword",
+      description: "A search term associated with the website.",
+    }))
     .default([])
     .optional()
     .meta({
@@ -50,6 +53,9 @@ export const schema = z.object({
         "A list of keywords that will be used in the SEO metadata. " +
         "These are different from the about page, which is a longer description of who you are.",
     }),
+}).meta({
+  title: "Core Configuration",
+  description: "Site-wide identity and search metadata used throughout the portfolio.",
 });
 
 export type Model = z.infer<typeof schema>;

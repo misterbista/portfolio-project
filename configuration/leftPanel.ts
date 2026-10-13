@@ -11,29 +11,28 @@ export const schema = z.object({
     }),
   socials: z
     .array(
-    z.object({
-      name: z
-        .string("Social Media Name is required")
-        .meta({
-          title: "Social Media Name",
-          description: "The name of the social media account.",
-        }
-      ),
-      url: z
-        .url("Social URL must be a valid URL")
-        .meta({
-          title: "Social Media URL",
-          description: "The URL of the social media account.",
-        }
-      ),
-    }).meta({
-      title: "Social Media",
-      description: "A social media account.",
-    }).meta({
+      z.object({
+        name: z
+          .string("Social Media Name is required")
+          .meta({
+            title: "Social Media Name",
+            description: "The name of the social media account.",
+          }),
+        url: z
+          .url("Social URL must be a valid URL")
+          .meta({
+            title: "Social Media URL",
+            description: "The URL of the social media account.",
+          }),
+      }).meta({
+        title: "Social Media Account",
+        description: "A social media account.",
+      }),
+    )
+    .meta({
       title: "Social Media Accounts",
       description: "A list of social media accounts to show in the left panel.",
     }),
-  ),
   enabledMenus: z
     .array(z.string().meta({
       title: "Menu Name",
@@ -44,6 +43,9 @@ export const schema = z.object({
       description:
         "A list of enabled menus in to show in the left panel.",
     }),
+}).meta({
+  title: "Left Panel Configuration",
+  description: "Configuration for the profile, social links, and menu shown in the left panel.",
 });
 
 export type Model = z.infer<typeof schema>;

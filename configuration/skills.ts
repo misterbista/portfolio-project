@@ -1,16 +1,49 @@
 import * as z from "zod";
 
 export const schema = z.object({
-  pageDescription: z.string(),
+  summary: z.string().meta({
+    title: "Page Description",
+    description: "Introductory text displayed at the top of the skills page.",
+  }),
   skills: z.array(
     z.object({
-      title: z.string(),
-      image: z.string(),
-      description: z.string(),
-      associatedMilestoneIds: z.array(z.string()),
-      associatedProjectIds: z.array(z.string()),
+      title: z.string().meta({
+        title: "Title",
+        description: "The name of the skill.",
+      }),
+      image: z.string().meta({
+        title: "Image",
+        description: "The image used to represent the skill.",
+      }),
+      description: z.string().meta({
+        title: "Description",
+        description: "A brief description of the skill.",
+      }),
+      associatedMilestoneIds: z.array(z.string().meta({
+        title: "Milestone ID",
+        description: "The ID of a journey milestone associated with this skill.",
+      })).meta({
+        title: "Associated Milestones",
+        description: "Journey milestones that demonstrate or relate to this skill.",
+      }),
+      associatedProjectIds: z.array(z.string().meta({
+        title: "Project ID",
+        description: "The ID of a project associated with this skill.",
+      })).meta({
+        title: "Associated Projects",
+        description: "Projects that demonstrate or use this skill.",
+      }),
+    }).meta({
+      title: "Skill",
+      description: "A skill entry and its related projects and milestones.",
     }),
-  ),
+  ).meta({
+    title: "Skills",
+    description: "The skills displayed on the skills page.",
+  }),
+}).meta({
+  title: "Skills Configuration",
+  description: "Configuration for the skills page and its skill entries.",
 });
 
 export type Model = z.infer<typeof schema>;

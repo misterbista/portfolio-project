@@ -14,6 +14,9 @@ export const schema = z.object({
       title: "Bio",
       description: "A really short description about yourself. Job title, role, or a few words about you."
     })
+}).meta({
+  title: "Home Configuration",
+  description: "Configuration for the landing page, including its cover image and short bio.",
 });
 
 export type Model = z.infer<typeof schema>;

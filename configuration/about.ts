@@ -42,6 +42,9 @@ export const schema = z.object({
       title: "Additional information",
       description: "Any additional paragraph to display on the about page.",
     }),
+}).meta({
+  title: "About Configuration",
+  description: "Configuration for the About page, including its introduction, image, and key points.",
 });
 
 export type Model = z.infer<typeof schema>;
