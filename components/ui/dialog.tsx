@@ -35,6 +35,10 @@ function DialogOverlay({
         className
       )}
       {...props}
+      onClick={(event) => {
+        event.stopPropagation()
+        props.onClick?.(event)
+      }}
     />
   )
 }
@@ -57,6 +61,10 @@ function DialogContent({
           className
         )}
         {...props}
+        onClick={(event) => {
+          event.stopPropagation()
+          props.onClick?.(event)
+        }}
       >
         {children}
         {showCloseButton && (

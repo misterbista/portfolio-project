@@ -32,6 +32,10 @@ function SheetOverlay({ className, ...props }: SheetPrimitive.Backdrop.Props) {
         className
       )}
       {...props}
+      onClick={(event) => {
+        event.stopPropagation()
+        props.onClick?.(event)
+      }}
     />
   )
 }
@@ -57,6 +61,10 @@ function SheetContent({
           className
         )}
         {...props}
+        onClick={(event) => {
+          event.stopPropagation()
+          props.onClick?.(event)
+        }}
       >
         {children}
         {showCloseButton && (
