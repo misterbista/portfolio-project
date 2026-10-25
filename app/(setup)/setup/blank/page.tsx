@@ -9,13 +9,10 @@ import {Model, schema, defaultValues} from "@/configuration/core";  // Change th
 import {zodResolver} from "@hookform/resolvers/zod";
 import {cn} from "@/lib/utils";
 import {Button} from "@/components/ui/button";
-import {useRouter} from "next/navigation";
 import FullScreenMessage from "@/components/ui/FullScreenMessage";
 import {Spinner} from "@/components/ui/spinner";
 
 function Page() {
-  const router = useRouter();
-
   const {
     config,
     isLoadingConfig,
@@ -54,16 +51,7 @@ function Page() {
       <form onSubmit={handleSubmit(save)} className={cn(styles.form, "grid gap-6 max-w-3xl")}>
         Nothing here.
 
-        <div className={"flex gap-2 justify-end"}>
-          <Button
-            type={"button"}
-            size={"sm"}
-            variant={"outline"}
-            className={"cursor-pointer mt-2"}
-            onClick={() => router.push("/setup")}
-          >
-            Cancel
-          </Button>
+        <div className={"flex justify-end"}>
           <Button
             type={"submit"}
             size={"sm"}
