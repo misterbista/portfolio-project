@@ -10,16 +10,22 @@ function Layout({ children }: LayoutProps<"/">) {
   const [showLoginDialog, setShowLoginDialog] = useState(false);
   const {gitHubSession} = useGitHubPatAuth();
   return (<>
-    {gitHubSession && <span className={"absolute top-2 left-2 text-2xl"}>
-      Your changes will save to: {gitHubSession.repository?.full_name}
-    </span>}
-    <Button
-      variant={"outline"}
-      className={"absolute top-2 right-2 text-2xl cursor-pointer"}
-      onClick={() => setShowLoginDialog(true)}
-    >
-      {gitHubSession ? <UnlockIcon/> : <LockIcon/>}
-    </Button>
+    <div className={"absolute left-4 right-4 top-4 z-10 flex items-center justify-between gap-4 sm:left-6 sm:right-6"}>
+      {gitHubSession ? (
+        <span className={"max-w-[calc(100%-3rem)] truncate text-sm text-muted-foreground"}>
+          Saving to <strong className={"font-medium text-foreground"}>{gitHubSession.repository?.full_name}</strong>
+        </span>
+      ) : <span className={"text-sm text-muted-foreground"}>Connect GitHub to save changes.</span>}
+      <Button
+        variant={"outline"}
+        size={"icon"}
+        aria-label={gitHubSession ? "Change GitHub repository" : "Connect GitHub"}
+        className={"shrink-0 cursor-pointer"}
+        onClick={() => setShowLoginDialog(true)}
+      >
+        {gitHubSession ? <UnlockIcon/> : <LockIcon/>}
+      </Button>
+    </div>
     {children}
     <GitHubLoginDialog
       show={showLoginDialog}
