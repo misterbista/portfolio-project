@@ -50,8 +50,8 @@ export const schema = z.object({
     .meta({
       title: "SEO Keywords",
       description:
-        "A list of keywords that will be used in the SEO metadata. " +
-        "These are different from the about page, which is a longer description of who you are.",
+        "Short search terms that describe the whole website. Enter plain words separated by commas; " +
+        "avoid repeating the website name or writing complete sentences.",
     }),
 }).meta({
   title: "Core Configuration",
