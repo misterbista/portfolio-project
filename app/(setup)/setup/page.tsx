@@ -3,11 +3,19 @@
 import React from 'react';
 import styles from "./page.module.css";
 import ConfigurationGroupCard from "@/components/ui/ConfigurationGroupCard";
-import {AlignJustify, Home, Wrench} from "lucide-react";
+import {AlignJustify, BookOpen, BriefcaseBusiness, FolderKanban, GalleryHorizontal, GraduationCap, Home, MessageSquareQuote, PanelsTopLeft, Settings2, Sparkles, Wrench} from "lucide-react";
 
 function Page() {
   return (
     <div className={styles.page}>
+      <div className={"w-full max-w-6xl"}>
+        <div className={"max-w-2xl"}>
+          <h1 className={"text-3xl font-semibold tracking-tight sm:text-4xl"}>Website setup</h1>
+          <p className={"mt-3 text-base text-muted-foreground"}>
+            Configure each part of your portfolio using focused forms. Your changes are saved to the connected repository.
+          </p>
+        </div>
+      </div>
       <div className={styles.cards}>
         <ConfigurationGroupCard
           icon={<Wrench/>}
@@ -26,6 +34,60 @@ function Page() {
           title="Home"
           description="Customize the Landing page."
           pagePath="/setup/home"
+        />
+        <ConfigurationGroupCard
+          icon={<PanelsTopLeft/>}
+          title="About"
+          description="Customize the About page."
+          pagePath="/setup/about"
+        />
+        <ConfigurationGroupCard
+          icon={<GraduationCap/>}
+          title="Journey"
+          description="Manage journey milestones."
+          pagePath="/setup/journey"
+        />
+        <ConfigurationGroupCard
+          icon={<FolderKanban/>}
+          title="Projects"
+          description="Manage projects and milestones."
+          pagePath="/setup/projects"
+        />
+        <ConfigurationGroupCard
+          icon={<Sparkles/>}
+          title="Skills"
+          description="Manage skills and related data."
+          pagePath="/setup/skills"
+        />
+        <ConfigurationGroupCard
+          icon={<GalleryHorizontal/>}
+          title="Gallery"
+          description="Manage gallery photos."
+          pagePath="/setup/gallery"
+        />
+        <ConfigurationGroupCard
+          icon={<BriefcaseBusiness/>}
+          title="Services"
+          description="Manage offered services."
+          pagePath="/setup/services"
+        />
+        <ConfigurationGroupCard
+          icon={<MessageSquareQuote/>}
+          title="Testimonials"
+          description="Manage testimonials."
+          pagePath="/setup/testimonials"
+        />
+        <ConfigurationGroupCard
+          icon={<BookOpen/>}
+          title="Blog"
+          description="Write rich text blog posts."
+          pagePath="/setup/blogs"
+        />
+        <ConfigurationGroupCard
+          icon={<Settings2/>}
+          title="Quick
+          Links" description="Manage downloads and links."
+          pagePath="/setup/quick-links"
         />
       </div>
     </div>
