@@ -1,6 +1,6 @@
 "use client"
 
-import React, {useEffect} from 'react';
+import React, {useEffect} from "react";
 import styles from "./page.module.css";
 import {Identifier, useConfig} from "@/hooks/useConfig";
 import {Controller, useForm} from "react-hook-form";
@@ -10,7 +10,6 @@ import {Input} from "@/components/ui/input";
 import {Label} from "@/components/ui/label";
 import {Button} from "@/components/ui/button";
 import {cn} from "@/lib/utils";
-import {useRouter} from "next/navigation";
 import {ArrayInput} from "@/components/ui/ArrayInput";
 import {Textarea} from "@/components/ui/textarea";
 import ConfigurationFormWrapper from "@/components/ui/ConfigurationFormWrapper";
@@ -18,8 +17,6 @@ import FullScreenMessage from "@/components/ui/FullScreenMessage";
 import {Spinner} from "@/components/ui/spinner";
 
 function Page() {
-  const router = useRouter();
-
   const {
     config,
     isLoadingConfig,
@@ -110,22 +107,13 @@ function Page() {
           render={({field, fieldState: {error}}) =>
             <div className={"grid gap-2"}>
               <Label htmlFor={"seoKeywords"}>SEO Keywords</Label>
-              <ArrayInput {...field} id={"seoKeywords"} placeholder={"Enter keywords..."} className={cn("w-full", error && "border-destructive")}/>
+              <ArrayInput {...field} id={"seoKeywords"} placeholder={"Type a keyword and press Enter"} className={cn("w-full", error && "border-destructive")}/>
               {error && <small className={"text-destructive"}>{error.message}</small>}
             </div>
           }
         />
 
-        <div className={"flex gap-2 justify-end"}>
-          <Button
-            type={"button"}
-            size={"sm"}
-            variant={"outline"}
-            className={"cursor-pointer mt-2"}
-            onClick={() => router.push("/setup")}
-          >
-            Cancel
-          </Button>
+        <div className={"flex justify-end"}>
           <Button
             type={"submit"}
             size={"sm"}
