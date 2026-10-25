@@ -18,14 +18,13 @@ const ZOOM_STEP = 0.01;
 
 type ImageLightboxProps = {
   src: string;
-  alt: string;
+  name: string;
   trigger?: React.ReactNode;
-  originalSrc?: string;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
 };
 
-function ImageLightbox({src, alt, trigger, originalSrc = src, open: controlledOpen, onOpenChange}: ImageLightboxProps) {
+function ImageLightbox({src, name, trigger, open: controlledOpen, onOpenChange}: ImageLightboxProps) {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
   const [fitScale, setFitScale] = useState(1);
@@ -64,8 +63,8 @@ function ImageLightbox({src, alt, trigger, originalSrc = src, open: controlledOp
 
   function downloadImage() {
     const link = document.createElement("a");
-    link.href = originalSrc;
-    link.download = alt || "image";
+    link.href = src;
+    link.download = name || "image";
     link.target = "_blank";
     link.rel = "noopener noreferrer";
     document.body.appendChild(link);
@@ -86,19 +85,19 @@ function ImageLightbox({src, alt, trigger, originalSrc = src, open: controlledOp
           setUncontrolledOpen(true);
           onOpenChange?.(true);
         }}
-        aria-label={`View ${alt}`}
+        aria-label={`View ${name}`}
       >
         {trigger}
       </button>}
       <SheetContent className={"top-0 left-0 h-dvh! max-h-dvh! w-dvw! max-w-dvw! translate-x-0 translate-y-0 gap-3 rounded-none p-4 sm:p-6"} showCloseButton>
         <SheetHeader>
-          <SheetTitle>{alt || "Image preview"}</SheetTitle>
-          <SheetDescription>Use the controls to zoom, download, or open the original image.</SheetDescription>
+          <SheetTitle>{name || "Image preview"}</SheetTitle>
+          <SheetDescription>Use the controls to zoom or download the image.</SheetDescription>
         </SheetHeader>
         <div ref={containerRef} className={"flex min-h-0 flex-1 items-start justify-center overflow-auto rounded-lg bg-muted/40 p-4"}>
           <img
             src={src}
-            alt={alt}
+            alt={name}
             className={"max-h-full max-w-full origin-center object-contain transition-transform duration-150"}
             onLoad={(event) => {
               const img = event.currentTarget;
@@ -145,10 +144,6 @@ function ImageLightbox({src, alt, trigger, originalSrc = src, open: controlledOp
             <Button type={"button"} variant={"outline"} onClick={downloadImage}>
               <Download />
               Download
-            </Button>
-            <Button type={"button"} variant={"outline"} onClick={() => window.open(originalSrc, "_blank", "noopener,noreferrer")}>
-              <ExternalLink />
-              Open original
             </Button>
           </div>
         </SheetFooter>

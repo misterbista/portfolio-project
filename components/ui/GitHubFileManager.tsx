@@ -1,6 +1,6 @@
 "use client"
 
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {cn} from "@/lib/utils";
 import {Button} from "@/components/ui/button";
 import {Copy, Download, Ellipsis, Eye, FileIcon, Grid, List, Trash} from "lucide-react";
@@ -18,6 +18,7 @@ import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
 import {getFileTypeFromExtension, humanizeFileSize} from "@/lib/files";
 import FileUploadButton from "@/components/ui/FileUploadButton";
 import {confirm} from "@/components/ui/Confirm";
+import ImageLightbox from "@/components/ui/ImageLightbox";
 
 function GitHubFileManager(
   {className, path}: {
@@ -33,6 +34,7 @@ function GitHubFileManager(
   const [viewMode, setViewMode] = useState<"grid" | "list">("list");
   const [selectedFileType, setSelectedFileType] = useState<string>();
   const [selectedFiles, setSelectedFiles] = useState<string[]>([]);
+  const [imagePreview, setImagePreview] = useState<{url: string, name: string} | null>(null);
 
   const {
     files,
@@ -218,6 +220,7 @@ function GitHubFileManager(
               setSelectedFiles(selectedFiles.filter(f => f !== file.name));
             }
           }}
+          onView={async (url) => setImagePreview({url, name: file.name})}
           onDownload={onDownload}
           onDelete={onDelete}
         />) : (<ListCard
@@ -232,10 +235,21 @@ function GitHubFileManager(
               setSelectedFiles(selectedFiles.filter(f => f !== file.name));
             }
           }}
+          onView={async (url) => setImagePreview({url, name: file.name})}
           onDownload={onDownload}
           onDelete={onDelete}
         />)))}
       </div>
+      {imagePreview && <ImageLightbox
+        open={true}
+        onOpenChange={(open) => {
+          if (!open) {
+            setImagePreview(null);
+          }
+        }}
+        src={imagePreview.url}
+        name={imagePreview.name}
+      />}
     </div>
   );
 }
@@ -243,11 +257,12 @@ function GitHubFileManager(
 export default GitHubFileManager;
 
 function GridCard(
-  {file, isAnySelected, isSelected, onSelectionChange, onDownload, onDelete}: {
+  {file, isAnySelected, isSelected, onSelectionChange, onView, onDownload, onDelete}: {
     file: GitHubContent,
     isAnySelected: boolean,
     isSelected: boolean,
     onSelectionChange: (selected: boolean) => void,
+    onView: (url: string) => Promise<void>,
     onDownload: (fileNames: string[]) => Promise<void>,
     onDelete: (fileNames: string[]) => Promise<void>
   }
@@ -277,7 +292,7 @@ function GridCard(
                 .{file.name.slice(file.name.lastIndexOf(".") + 1)}
               </span>
             </div>
-            <FileActions file={file} onDownload={onDownload} onDelete={onDelete} />
+            <FileActions file={file} onView={onView} onDownload={onDownload} onDelete={onDelete} />
           </div>
           <span className={"flex flex-row gap-2 justify-between mt-1 text-muted-foreground text-xs"}>
             <span>{humanizeFileSize(file.size)}</span>
@@ -293,11 +308,12 @@ function GridCard(
 }
 
 function ListCard(
-  {file, isAnySelected, isSelected, onSelectionChange, onDownload, onDelete}: {
+  {file, isAnySelected, isSelected, onSelectionChange, onView, onDownload, onDelete}: {
     file: GitHubContent,
     isAnySelected: boolean,
     isSelected: boolean,
     onSelectionChange: (selected: boolean) => void,
+    onView: (url: string) => Promise<void>,
     onDownload: (fileNames: string[]) => Promise<void>,
     onDelete: (fileNames: string[]) => Promise<void>
   }
@@ -335,6 +351,7 @@ function ListCard(
           </div>
           <FileActions
             file={file}
+            onView={onView}
             onDownload={onDownload}
             onDelete={onDelete}
           />
@@ -348,8 +365,9 @@ function ListCard(
 }
 
 function FileActions(
-  {file, onDownload, onDelete}: {
+  {file, onView, onDownload, onDelete}: {
     file: GitHubContent,
+    onView: (url: string) => Promise<void>,
     onDownload: (fileNames: string[]) => Promise<void>,
     onDelete: (fileNames: string[]) => Promise<void>
   }
@@ -367,10 +385,10 @@ function FileActions(
           CopyLink
         </DropdownMenuItem>
         <DropdownMenuItem className="hover:bg-gray-100 py-1 px-4 cursor-pointer flex flex-no gap-2" onClick={async () => {
-          window.open(file.download_url, "_blank");
+          await onView(file.download_url);
         }}>
           <Eye size={14} />
-          View (open in new tab)
+          View
         </DropdownMenuItem>
         <DropdownMenuItem className="hover:bg-gray-100 py-1 px-4 cursor-pointer flex flex-no gap-2" onClick={async () => {
           await onDownload([file.name]);
@@ -402,6 +420,14 @@ function FileIconWithCheckbox(
   const showCheckbox = hovered || isAnySelected;
 
   const isImage = getFileTypeFromExtension(file.name) === "Image";
+  const thumbnailUrl = isImage && file.path.startsWith("uploads/") && !file.path.startsWith("uploads_thumbs/")
+    ? file.download_url.replace("/uploads/", "/uploads_thumbs/")
+    : file.download_url;
+  const [imageUrl, setImageUrl] = useState(thumbnailUrl);
+
+  useEffect(() => {
+    setImageUrl(thumbnailUrl);
+  }, [thumbnailUrl]);
 
   return <span
     className="relative inline-flex shrink-0 items-center justify-center cursor-pointer"
@@ -415,12 +441,17 @@ function FileIconWithCheckbox(
   >
     {isImage ? (
       <Image
-        src={file.download_url}
+        src={imageUrl}
         alt={file.name}
         width={size}
         height={size}
         className="block h-full w-full rounded object-cover"
         loading="lazy"
+        onError={() => {
+          if (imageUrl !== file.download_url) {
+            setImageUrl(file.download_url);
+          }
+        }}
       />
     ) : (
       <FileIcon
