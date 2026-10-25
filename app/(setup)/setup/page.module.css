@@ -2,16 +2,18 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
-    height: 100dvh;
-    justify-content: center;
+    min-height: 100dvh;
+    justify-content: flex-start;
+    padding: 6rem 1rem 2rem;
+    background:
+        radial-gradient(circle at top left, color-mix(in oklab, var(--primary) 8%, transparent), transparent 35rem),
+        var(--background);
 }
 
 .cards {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 3rem;
+    display: grid;
+    width: min(72rem, 100%);
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
 }
