@@ -2,6 +2,7 @@
 
 import React from 'react';
 import "./globals.css";
+import "@/components/block-editor/style.css";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {ReactQueryDevtools} from "@tanstack/react-query-devtools";
 import {Identifier, useConfig} from "@/hooks/useConfig";
