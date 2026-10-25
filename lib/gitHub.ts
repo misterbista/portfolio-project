@@ -43,6 +43,36 @@ export interface GitHubContent {
   url: string;
 }
 
+export async function getGitHubFileContent(
+  pat: string,
+  repository: string,
+  filePath: string,
+): Promise<string> {
+  if (!pat || !repository || isNullOrWhitespace(pat) || isNullOrWhitespace(repository)) {
+    throw new Error("You have not logged in yet. Please log in to use this feature.");
+  }
+
+  const url = createGitHubContentsUrl(repository, filePath);
+  const response = await fetch(
+    url,
+    {
+      method: "GET",
+      headers: createGitHubHeaders(pat),
+    }
+  );
+
+  if (response.status === 404) return "";
+  if (!response.ok) {
+    throw new Error(`Failed to read "${filePath}": ${response.status} ${response.statusText}`);
+  }
+
+  const file = await response.json() as GitHubContent & {content?: string; encoding?: string};
+  if (!file.content || file.encoding !== "base64") return "";
+
+  const binary = atob(file.content.replace(/\s/g, ""));
+  return new TextDecoder().decode(Uint8Array.from(binary, (character) => character.charCodeAt(0)));
+}
+
 export interface GitHubCreateFileRequest {
   name: string;
   content: string | File;
