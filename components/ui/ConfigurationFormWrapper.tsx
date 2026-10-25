@@ -3,7 +3,10 @@
 import React from 'react';
 import ConfigFormTools from "@/components/ui/ConfigFormTools";
 import {Card, CardContent} from "@/components/ui/card";
+import {Button} from "@/components/ui/button";
 import {FieldValues, FormProvider, UseFormReturn} from "react-hook-form";
+import {ChevronLeft} from "lucide-react";
+import {useRouter} from "next/navigation";
 
 function ConfigurationFormWrapper<T extends FieldValues>(
   {title, config, children, className, form}: {
@@ -14,18 +17,30 @@ function ConfigurationFormWrapper<T extends FieldValues>(
     form: UseFormReturn<T, any, T>
   }
 ) {
+  const router = useRouter();
+
   return (
     <div className={className}>
       <FormProvider {...form}>
-      <Card>
-        <CardContent className={"overflow-y-auto"} style={{maxHeight: "calc(100dvh - 20rem)"}}>
-          <div className={"flex justify-between items-center mb-2"}>
-            <span className={"text-xl font-bold"}>{title}</span>
-            <ConfigFormTools config={config}/>
-          </div>
-          {children}
-        </CardContent>
-      </Card>
+        <Card className={"mx-auto w-full max-w-6xl border-border/70 shadow-lg shadow-black/5"}>
+          <CardContent className={"max-h-[calc(100dvh-8rem)] overflow-y-auto p-4 sm:p-6"}>
+            <div className={"mb-6 flex items-start justify-between gap-4 border-b pb-4"}>
+              <div className={"flex min-w-0 items-start gap-3"}>
+                <Button type={"button"} variant={"ghost"} size={"icon-sm"} className={"mt-0.5 shrink-0"} onClick={() => router.push("/setup")} aria-label={"Cancel and return to setup"}>
+                  <ChevronLeft />
+                </Button>
+                <div>
+                  <h1 className={"text-xl font-semibold tracking-tight"}>{title}</h1>
+                  <p className={"mt-1 text-sm text-muted-foreground"}>Update the values below, then save your changes.</p>
+                </div>
+              </div>
+              <ConfigFormTools config={config}/>
+            </div>
+            <div className={"[&>div]:mx-auto [&>div]:w-full [&>form]:mx-auto [&>form]:w-full"}>
+              {children}
+            </div>
+          </CardContent>
+        </Card>
       </FormProvider>
     </div>
   );
