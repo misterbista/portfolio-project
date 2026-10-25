@@ -1,76 +1,76 @@
 "use client"
 
-import React, {useState} from 'react';
-import { Input as InputPrimitive } from "@base-ui/react/input"
-import { cn } from "@/lib/utils"
+import React, {useState} from "react";
+import {Input as InputPrimitive} from "@base-ui/react/input";
 import {XIcon} from "lucide-react";
+import {cn} from "@/lib/utils";
 
-type ArrayInputProps = Omit<
-  React.ComponentProps<"input">,
-  "value" | "onChange"
-> & {
+type ArrayInputProps = Omit<React.ComponentProps<"input">, "value" | "onChange"> & {
   value: string[] | undefined;
   onChange?: (value: string[] | undefined) => void;
 };
 
-function ArrayInput({ className, value, onChange, ...props }: ArrayInputProps) {
-  const [intermediateValue, setIntermediateValue] = useState("");
-  
-  function remove(index: number) {
-    const newValue = [...(value || [])];
-    newValue.splice(index, 1);
-    onChange?.(newValue);
-  }
-
-  function add(item: string) {
-    onChange?.([...(value || []), item]);
-  }
-
-  return (<span className={cn("flex flex-wrap gap-1")}>
-    <InputPrimitive
-      {...props}
-      type={"text"}
-      data-slot="input"
-      className={cn(
-        "h-8 w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 py-1 text-base transition-colors outline-none file:inline-flex file:font-medium placeholder:text-muted-foreground focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
-        className
-      )}
-      value={intermediateValue}
-      onChange={(event) => setIntermediateValue(event.target.value)}
-      onKeyDown={(event) => {
-        if (event.key === "Enter" && intermediateValue.trim() !== "") {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-      }}
-      onKeyUp={(event) => {
-        if (event.key === "Enter" && intermediateValue.trim() !== "") {
-          event.preventDefault();
-          event.stopPropagation();
-          add(intermediateValue);
-          setIntermediateValue("");
-        }
-      }}
-    />
-    <span className={cn("inline-flex items-center gap-1 flex-wrap mt-1")}>
-      {value && value.map((value, index) => <span
-        key={index}
-        className={cn("inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground hover:bg-primary/80 text-xs font-medium h-5 px-2 py-1 cursor-pointer break-inside-avoid whitespace-nowrap")}
-        onClick={ async (event) => {
-          event.stopPropagation();
-          event.preventDefault();
-          await navigator.clipboard.writeText(value);
-        }}
-      >
-        {value}
-        <XIcon size={12} className={"ml-2 cursor-pointer"} onClick={(event) => {
-          event.stopPropagation();
-          event.preventDefault();
-          remove(index);
-        }}/>
-      </span>)}
-    </span>
-  </span>)
+function isLink(value: string) {
+  return /^https?:\/\//i.test(value);
 }
 
-export { ArrayInput }
+function ArrayInput({className, value, onChange, ...props}: ArrayInputProps) {
+  const [inputValue, setInputValue] = useState("");
+
+  function addValue() {
+    const nextValue = inputValue.trim();
+    if (!nextValue) return;
+    onChange?.([...(value || []), nextValue]);
+    setInputValue("");
+  }
+
+  function removeValue(index: number) {
+    onChange?.((value || []).filter((_, valueIndex) => valueIndex !== index));
+  }
+
+  return (
+    <div className={"grid gap-2"}>
+      <InputPrimitive
+        {...props}
+        type={"text"}
+        value={inputValue}
+        className={cn(
+          "h-8 w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 py-1 text-base transition-colors outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+          className
+        )}
+        onChange={(event) => setInputValue(event.target.value)}
+        onKeyDown={(event) => {
+          if (event.key === "Enter") {
+            event.preventDefault();
+            addValue();
+          }
+        }}
+      />
+      {value && value.length > 0 && (
+        <div className={"flex flex-wrap gap-2"}>
+          {value.map((item, index) => (
+            <span key={`${item}-${index}`} className={"inline-flex max-w-full items-center gap-1 rounded-md bg-primary px-2 py-1 text-xs font-medium text-primary-foreground"}>
+              {isLink(item) ? (
+                <a href={item} target={"_blank"} rel={"noreferrer"} className={"max-w-[18rem] truncate hover:underline"}>
+                  {item}
+                </a>
+              ) : (
+                <span className={"max-w-[18rem] truncate"}>{item}</span>
+              )}
+              <button
+                type={"button"}
+                aria-label={`Remove ${item}`}
+                className={"ml-1 inline-flex size-4 shrink-0 items-center justify-center rounded-sm hover:bg-primary-foreground/20"}
+                onClick={() => removeValue(index)}
+              >
+                <XIcon size={12} />
+              </button>
+            </span>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+export {ArrayInput};
