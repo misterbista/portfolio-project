@@ -1,4 +1,5 @@
 import React from 'react';
+import {Checkbox} from "@/components/ui/checkbox";
 
 function CheckboxList(
   {options, value, onValueChange}:{
@@ -11,7 +12,18 @@ function CheckboxList(
   }
 ) {
   return (
-    <div className={"grid gap-2"}>
+    <div className={"grid gap-2 sm:grid-cols-2"}>
+      {options.map((option) => (
+        <label key={option.value} className={"flex cursor-pointer items-center gap-3 rounded-lg border p-3 transition-colors hover:bg-muted/50"}>
+          <Checkbox
+            checked={value.includes(option.value)}
+            onCheckedChange={(checked) => onValueChange(
+              checked ? [...value, option.value] : value.filter((item) => item !== option.value)
+            )}
+          />
+          <span className={"text-sm font-medium"}>{option.label}</span>
+        </label>
+      ))}
     </div>
   );
 }

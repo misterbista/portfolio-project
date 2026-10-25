@@ -10,23 +10,26 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { useRouter } from "next/navigation";
 import ConfigurationFormWrapper from "@/components/ui/ConfigurationFormWrapper";
 import FullScreenMessage from "@/components/ui/FullScreenMessage";
 import { Spinner } from "@/components/ui/spinner";
 import { Trash2, Plus } from "lucide-react";
 import CheckboxList from "@/components/ui/CheckboxList";
 
-const availablePages = [
+const availableMenus = [
   { value: "home", label: "Home" },
   { value: "about", label: "About" },
+  { value: "journey", label: "Journey" },
   { value: "projects", label: "Projects" },
-  { value: "contact", label: "Contact" },
+  { value: "skills", label: "Skills" },
+  { value: "services", label: "services" },
+  { value: "testimonials", label: "Testimonials" },
+  { value: "gallery", label: "Gallery" },
+  { value: "blogs", label: "Blogs" },
+  { value: "quickLinks", label: "Quick Links" },
 ];
 
 function Page() {
-  const router = useRouter();
-
   const {
     config,
     isLoadingConfig,
@@ -164,16 +167,12 @@ function Page() {
           render={({ field, fieldState: { error } }) => (
             <div className={"grid gap-3"}>
               <div>
-                <Label>Enabled Pages</Label>
+                <Label>Enabled Menus</Label>
                 <p className={"text-sm text-muted-foreground"}>
-                  Select the pages that should be visible on your website.
+                  Select the menus that should be visible on your website.
                 </p>
               </div>
-              <CheckboxList
-                options={availablePages}
-                value={field.value}
-                onValueChange={field.onChange}
-              />
+              <CheckboxList options={availableMenus} value={field.value} onValueChange={field.onChange}/>
               {error && (
                 <small className={"text-destructive"}>
                   {error.message}
@@ -183,16 +182,7 @@ function Page() {
           )}
         />
 
-        <div className={"flex gap-2 justify-end"}>
-          <Button
-            type={"button"}
-            size={"sm"}
-            variant={"outline"}
-            className={"cursor-pointer mt-2"}
-            onClick={() => router.push("/setup")}
-          >
-            Cancel
-          </Button>
+        <div className={"flex justify-end"}>
           <Button
             type={"submit"}
             size={"sm"}
