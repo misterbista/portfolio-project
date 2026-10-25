@@ -11,6 +11,8 @@ import {Model as SkillsConfigurationModel} from "@/configuration/skills";
 import {Model as TestimonialsConfigurationModel} from "@/configuration/testimonials";
 import {Model as GalleryConfigurationModel} from "@/configuration/gallery";
 import {Model as DownloadsConfigurationModel} from "@/configuration/quickLinks";
+import {Model as BlogConfigurationModel} from "@/configuration/blog";
+import {Model as ServicesConfigurationModel} from "@/configuration/services";
 import {toast} from "sonner";
 import {useGitHubPatAuth} from "@/hooks/useGitHubPatAuth";
 import {uploadGitHubFiles} from "@/lib/gitHub";
@@ -26,6 +28,9 @@ export enum Identifier {
   Testimonials = "testimonials",
   Gallery = "gallery",
   QuickLinks = "quickLinks",
+  Blogs = "blogs",
+  Blog = "blog",
+  Services = "services",
 }
 
 type ConfigurationModelMap = {
@@ -39,32 +44,45 @@ type ConfigurationModelMap = {
   [Identifier.Testimonials]: TestimonialsConfigurationModel;
   [Identifier.Gallery]: GalleryConfigurationModel;
   [Identifier.QuickLinks]: DownloadsConfigurationModel;
+  [Identifier.Blogs]: BlogConfigurationModel;
+  [Identifier.Blog]: string;
+  [Identifier.Services]: ServicesConfigurationModel;
 };
 
+type ConfigQuery = Record<string, string|number|null>;
 type ConfigurationModel<K extends Identifier> = ConfigurationModelMap[K];
-
-const configurationPaths: Record<Identifier, string> = {
-  [Identifier.Core]: "/config/core.json",
-  [Identifier.LeftPanel]: "/config/left-panel.json",
-  [Identifier.Home]: "/config/home.json",
-  [Identifier.About]: "/config/about.json",
-  [Identifier.Journey]: "/config/journey.json",
-  [Identifier.Projects]: "/config/projects.json",
-  [Identifier.Skills]: "/config/skills.json",
-  [Identifier.Testimonials]: "/config/testimonials.json",
-  [Identifier.Gallery]: "/config/gallery.json",
-  [Identifier.QuickLinks]: "/config/quick-links.json",
+type ConfigHookResult<T extends Identifier> = {
+  config: ConfigurationModel<T> | undefined;
+  isLoadingConfig: boolean;
+  saveConfig: (config: ConfigurationModel<T>) => Promise<void>;
+  isSavingConfig: boolean;
 };
 
-export function useConfig<T extends Identifier>(configIdentifier: T){
+const configurationPaths: Record<Identifier, (query?: ConfigQuery) => string> = {
+  [Identifier.Core]: _ => `/config/core.json`,
+  [Identifier.LeftPanel]: _ => `/config/left-panel.json`,
+  [Identifier.Home]: _ => `/config/home.json`,
+  [Identifier.About]: _ => `/config/about.json`,
+  [Identifier.Journey]: _ => `/config/journey.json`,
+  [Identifier.Projects]: _ => `/config/projects.json`,
+  [Identifier.Skills]: _ => `/config/skills.json`,
+  [Identifier.Testimonials]: _ => `/config/testimonials.json`,
+  [Identifier.Gallery]: _ => `/config/gallery.json`,
+  [Identifier.QuickLinks]: _ => `/config/quick-links.json`,
+  [Identifier.Blogs]: _ => `/config/blogs.json`,
+  [Identifier.Blog]: (query) => `/config/blogs/${query ? query['id'] : "NA"}`,
+  [Identifier.Services]: _ => `/config/services.json`,
+};
+
+export function useConfig<T extends Identifier>(configIdentifier: T, query?: ConfigQuery): ConfigHookResult<T>{
   const queryClient = useQueryClient();
 
   const {
     data,
     isLoading
   } = useQuery({
-    queryKey: [configIdentifier],
-    queryFn: async () => await getConfig(configIdentifier),
+    queryKey: [configIdentifier, query],
+    queryFn: async () => await getConfig(configIdentifier, query),
     refetchOnWindowFocus: false
   });
 
@@ -77,15 +95,16 @@ export function useConfig<T extends Identifier>(configIdentifier: T){
     mutateAsync,
     isPending
   } = useMutation({
-    mutationKey: [configIdentifier],
+    mutationKey: [configIdentifier, query],
     mutationFn: async (newConfig: ConfigurationModel<T>) => await saveConfig(
       configIdentifier,
+      query,
       newConfig,
       gitHubPat,
       gitHubSession?.repository?.full_name || ""
     ),
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: [configIdentifier] });
+      await queryClient.invalidateQueries({ queryKey: [configIdentifier, query] });
       toast.success(`Config saved successfully: ${configIdentifier}`);
     },
     onError: async (error) => {
@@ -102,22 +121,31 @@ export function useConfig<T extends Identifier>(configIdentifier: T){
   };
 }
 
-async function getConfig<T extends Identifier> (configIdentifier: T): Promise<ConfigurationModel<T>> {
-  const configPath = configurationPaths[configIdentifier];
+async function getConfig<T extends Identifier>(configIdentifier: T, query?: ConfigQuery): Promise<ConfigurationModel<T>> {
+  const configPathFunction = configurationPaths[configIdentifier];
+  const configPath = configPathFunction(query);
   const response = await fetch(configPath);
   if (!response.ok) {
     throw new Error(`Failed to fetch config: ${configIdentifier}`);
   }
-  return await response.json() as ConfigurationModel<T>;
+
+  const text = await response.text();
+  try {
+    return JSON.parse(text) as ConfigurationModel<T>;
+  } catch {
+    return text as ConfigurationModel<T>;
+  }
 }
 
 async function saveConfig<T extends Identifier>(
   configIdentifier: T,
+  query: ConfigQuery | undefined,
   newConfig: ConfigurationModel<T>,
   gitHubPat: string | null,
   repo: string
 ): Promise<void> {
-  const configPath = configurationPaths[configIdentifier];
+  const configPathFunction = configurationPaths[configIdentifier];
+  const configPath = configPathFunction(query);
   const filePath = configPath.replace(/^\/+/, "");
   await uploadGitHubFiles(
     gitHubPat ?? "",
