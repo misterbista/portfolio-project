@@ -21,3 +21,7 @@ export const schema = z.object({
 
 export type Model = z.infer<typeof schema>;
 
+export const defaultValues: Model = {
+  coverPicture: "",
+  bio: "",
+};

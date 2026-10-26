@@ -1,7 +1,7 @@
 import * as z from "zod";
 
 export const schema = z.object({
-  link: z.array(
+  links: z.array(
     z.object({
       title: z.string().meta({
         title: "Title",
@@ -33,3 +33,7 @@ export const schema = z.object({
 });
 
 export type Model = z.infer<typeof schema>;
+
+export const defaultValues: Model = {
+  links: [],
+};

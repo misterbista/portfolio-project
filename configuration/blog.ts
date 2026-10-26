@@ -42,3 +42,5 @@ export const schema = z.array(
 });
 
 export type Model = z.infer<typeof schema>;
+
+export const defaultValues: Model = [];
