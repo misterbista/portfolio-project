@@ -31,6 +31,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import {cn} from "@/lib/utils";
 
 function createSlashCommandItems(
   onImageRequest: (range: Range) => void
@@ -64,12 +65,16 @@ function createSlashCommandItems(
 }
 
 export interface RichTextEditorProps {
+  id?: string;
+  className?: string;
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
 }
 
 export function RichTextEditor({
+  id,
+  className,
   value,
   onChange,
   placeholder = "Type / for commands...",
@@ -137,7 +142,7 @@ export function RichTextEditor({
   };
 
   return (
-    <>
+    <div id={id} className={cn("border rounded-md", className)} style={{paddingRight: "1rem"}}>
       <BlockEditor editor={editor} />
       <Dialog
         open={imageDialogOpen}
@@ -181,6 +186,6 @@ export function RichTextEditor({
           </form>
         </DialogContent>
       </Dialog>
-    </>
+    </div>
   );
 }
