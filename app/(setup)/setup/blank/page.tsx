@@ -3,9 +3,9 @@
 import React, {useEffect} from 'react';
 import styles from "./page.module.css";
 import ConfigurationFormWrapper from "@/components/ui/ConfigurationFormWrapper";
-import {Identifier, useConfig} from "@/hooks/useConfig";
+import {ConfigMode, Identifier, useConfig} from "@/hooks/useConfig";
 import {useForm} from "react-hook-form";
-import {Model, schema, defaultValues} from "@/configuration/core";  // Change this
+import {defaultValues, Model, schema} from "@/configuration/core"; // Change this
 import {zodResolver} from "@hookform/resolvers/zod";
 import {cn} from "@/lib/utils";
 import {Button} from "@/components/ui/button";
@@ -18,7 +18,7 @@ function Page() {
     isLoadingConfig,
     saveConfig,
     isSavingConfig
-  } = useConfig(Identifier.Core);  // Change this
+  } = useConfig(Identifier.Core, undefined, ConfigMode.Private);  // Change this
 
   const form = useForm<Model>({
     resolver: zodResolver(schema),

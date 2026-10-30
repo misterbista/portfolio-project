@@ -15,7 +15,7 @@ import {Model as BlogConfigurationModel} from "@/configuration/blog";
 import {Model as ServicesConfigurationModel} from "@/configuration/services";
 import {toast} from "sonner";
 import {useGitHubPatAuth} from "@/hooks/useGitHubPatAuth";
-import {uploadGitHubFiles} from "@/lib/gitHub";
+import {getGitHubFileContent, uploadGitHubFiles} from "@/lib/gitHub";
 
 export enum Identifier {
   Core = "core",
@@ -74,16 +74,38 @@ const configurationPaths: Record<Identifier, (query?: ConfigQuery) => string> = 
   [Identifier.Services]: _ => `/config/services.json`,
 };
 
-export function useConfig<T extends Identifier>(configIdentifier: T, query?: ConfigQuery): ConfigHookResult<T>{
+export enum ConfigMode {
+  Public = "public",
+  Private = "private"
+}
+
+export function useConfig<T extends Identifier>(configIdentifier: T, query?: ConfigQuery, mode?: ConfigMode): ConfigHookResult<T>{
   const queryClient = useQueryClient();
+  mode ??= ConfigMode.Public;
 
   const {
-    data,
-    isLoading
+    data: publicConfigData,
+    isLoading: isLoadingPublicConfig
   } = useQuery({
     queryKey: [configIdentifier, query],
     queryFn: async () => await getConfig(configIdentifier, query),
-    refetchOnWindowFocus: false
+    refetchOnWindowFocus: false,
+    enabled: mode === ConfigMode.Public
+  });
+
+  const {
+    data: privateConfigData,
+    isLoading: isLoadingPrivateConfig
+  } = useQuery({
+    queryKey: [configIdentifier, query],
+    queryFn: async () => await getConfigUsingPat(
+      configIdentifier,
+      query,
+      gitHubPat,
+      gitHubSession?.repository?.full_name || ""
+    ),
+    refetchOnWindowFocus: false,
+    enabled: mode === ConfigMode.Private
   });
 
   const {
@@ -114,8 +136,8 @@ export function useConfig<T extends Identifier>(configIdentifier: T, query?: Con
   });
 
   return {
-    config: data,
-    isLoadingConfig: isLoading,
+    config: mode === ConfigMode.Public ? publicConfigData : privateConfigData,
+    isLoadingConfig: mode === ConfigMode.Public ? isLoadingPublicConfig : isLoadingPrivateConfig,
     saveConfig: mutateAsync,
     isSavingConfig: isPending
   };
@@ -158,4 +180,21 @@ async function saveConfig<T extends Identifier>(
       },
     ]
   )
+}
+
+async function getConfigUsingPat<T extends Identifier>(
+  configIdentifier: T,
+  query: ConfigQuery | undefined,
+  gitHubPat: string | null,
+  repo: string
+): Promise<ConfigurationModel<T>> {
+  const configPathFunction = configurationPaths[configIdentifier];
+  const configPath = configPathFunction(query);
+  const filePath = configPath.replace(/^\/+/, "");
+  const response = await getGitHubFileContent(
+    gitHubPat ?? "",
+    repo,
+    filePath
+  );
+  return JSON.parse(response) as ConfigurationModel<T>;
 }

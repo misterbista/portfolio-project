@@ -2,7 +2,7 @@
 
 import React, { useEffect } from "react";
 import styles from "./page.module.css";
-import { Identifier, useConfig } from "@/hooks/useConfig";
+import {ConfigMode, Identifier, useConfig} from "@/hooks/useConfig";
 import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { Model, schema, defaultValues } from "@/configuration/leftPanel";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -35,7 +35,7 @@ function Page() {
     isLoadingConfig,
     saveConfig,
     isSavingConfig
-  } = useConfig(Identifier.LeftPanel);
+  } = useConfig(Identifier.LeftPanel, undefined, ConfigMode.Private);
 
   const form = useForm<Model>({
     resolver: zodResolver(schema),
