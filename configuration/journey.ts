@@ -29,11 +29,11 @@ export const schema = z.object({
         title: "Description",
         description: "A brief description of the milestone"
       }),
-      start: z.coerce.date().optional().meta({
+      start: z.iso.date().optional().meta({
         title: "Start Date",
         description: "When this milestone began. Leave it empty if the timing is unknown."
       }),
-      end: z.coerce.date().optional().meta({
+      end: z.iso.date().optional().meta({
         title: "End Date",
         description: "When this milestone ended. Leave it empty for ongoing milestones."
       }),
@@ -75,7 +75,7 @@ export const schema = z.object({
               title: "Achievement Description",
               description: "A brief description of the achievement"
             }),
-            on: z.coerce.date().optional().meta({
+            on: z.iso.date().optional().meta({
               title: "Achievement Date",
               description: "The date of the achievement"
             })
