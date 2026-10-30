@@ -1,11 +1,10 @@
 "use client"
 
-import React, {useEffect} from "react";
+import React from "react";
 import styles from "./page.module.css";
-import {ConfigMode, Identifier, useConfig} from "@/hooks/useConfig";
-import {Controller, useForm} from "react-hook-form";
+import {Identifier} from "@/hooks/useConfig";
+import {Controller} from "react-hook-form";
 import {defaultValues, Model, schema} from "@/configuration/home";
-import {zodResolver} from "@hookform/resolvers/zod";
 import {Input} from "@/components/ui/input";
 import {Label} from "@/components/ui/label";
 import {Button} from "@/components/ui/button";
@@ -13,33 +12,22 @@ import {Spinner} from "@/components/ui/spinner";
 import FullScreenMessage from "@/components/ui/FullScreenMessage";
 import ConfigurationFormWrapper from "@/components/ui/ConfigurationFormWrapper";
 import {cn} from "@/lib/utils";
+import {useConfigurationForm} from "@/hooks/useConfigurationForm";
 
 function Page() {
   const {
-    config,
     isLoadingConfig,
     saveConfig,
-    isSavingConfig
-  } = useConfig(Identifier.Home, undefined, ConfigMode.Private);
-
-  const form = useForm<Model>({
-    resolver: zodResolver(schema),
-    defaultValues
-  });
-
-  const {
+    isSavingConfig,
+    form,
     control,
-    reset,
     handleSubmit,
-    watch
-  } = form;
-  const formValues = watch();
-
-  useEffect(() => {
-    if (config) {
-      reset(config);
-    }
-  }, [config, reset]);
+    formValues
+  } = useConfigurationForm(
+    Identifier.Home,
+    schema,
+    defaultValues
+  );
 
   async function save(values: Model) {
     await saveConfig(values);

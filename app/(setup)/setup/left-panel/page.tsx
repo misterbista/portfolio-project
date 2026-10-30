@@ -1,11 +1,10 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "./page.module.css";
-import {ConfigMode, Identifier, useConfig} from "@/hooks/useConfig";
-import { Controller, useFieldArray, useForm } from "react-hook-form";
+import {Identifier} from "@/hooks/useConfig";
+import { Controller, useFieldArray } from "react-hook-form";
 import { Model, schema, defaultValues } from "@/configuration/leftPanel";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -15,6 +14,7 @@ import FullScreenMessage from "@/components/ui/FullScreenMessage";
 import { Spinner } from "@/components/ui/spinner";
 import { Trash2, Plus } from "lucide-react";
 import CheckboxList from "@/components/ui/CheckboxList";
+import {useConfigurationForm} from "@/hooks/useConfigurationForm";
 
 const availableMenus = [
   { value: "home", label: "Home" },
@@ -31,29 +31,18 @@ const availableMenus = [
 
 function Page() {
   const {
-    config,
     isLoadingConfig,
     saveConfig,
-    isSavingConfig
-  } = useConfig(Identifier.LeftPanel, undefined, ConfigMode.Private);
-
-  const form = useForm<Model>({
-    resolver: zodResolver(schema),
-    defaultValues
-  });
-  const {
-    reset,
+    isSavingConfig,
+    form,
     control,
     handleSubmit,
-    watch
-  } = form;
-  const formValues = watch();
-
-  useEffect(() => {
-    if (config) {
-      reset(config);
-    }
-  }, [config, reset]);
+    formValues
+  } = useConfigurationForm(
+    Identifier.LeftPanel,
+    schema,
+    defaultValues
+  );
 
   async function save(values: Model) {
     await saveConfig(values);
