@@ -43,7 +43,7 @@ function Page() {
   }
 
   if(isLoadingConfig){
-    return <FullScreenMessage><Spinner className={"size-10"} /></FullScreenMessage>;
+    return <FullScreenMessage><Spinner className={"size-10"}/></FullScreenMessage>;
   }
 
   return (

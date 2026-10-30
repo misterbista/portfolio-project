@@ -49,7 +49,7 @@ function Page() {
   const {fields, append, remove} = useFieldArray({control, name: "keypoints"});
 
   if(isLoadingConfig){
-    return <FullScreenMessage><Spinner className={"size-10"} /></FullScreenMessage>;
+    return <FullScreenMessage><Spinner className={"size-10"}/></FullScreenMessage>;
   }
 
   return (
