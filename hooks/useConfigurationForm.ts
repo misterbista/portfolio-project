@@ -21,6 +21,8 @@ export function useConfigurationForm<
   type Input = z.input<TSchema>;
   type Output = z.output<TSchema>;
 
+  mode ??= ConfigMode.Private;
+
   const {
     config,
     isLoadingConfig,
