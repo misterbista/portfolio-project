@@ -27,6 +27,15 @@
     }
   ],
   "enabledMenus": [
-    "about"
+    "about",
+    "home",
+    "journey",
+    "skills",
+    "testimonials",
+    "projects",
+    "services",
+    "gallery",
+    "quickLinks",
+    "blogs"
   ]
 }
