@@ -87,7 +87,7 @@ export function useConfig<T extends Identifier>(configIdentifier: T, query?: Con
     data: publicConfigData,
     isLoading: isLoadingPublicConfig
   } = useQuery({
-    queryKey: [configIdentifier, query],
+    queryKey: [configIdentifier, query, mode],
     queryFn: async () => await getConfig(configIdentifier, query),
     refetchOnWindowFocus: false,
     enabled: mode === ConfigMode.Public
@@ -97,7 +97,7 @@ export function useConfig<T extends Identifier>(configIdentifier: T, query?: Con
     data: privateConfigData,
     isLoading: isLoadingPrivateConfig
   } = useQuery({
-    queryKey: [configIdentifier, query],
+    queryKey: [configIdentifier, query, mode],
     queryFn: async () => await getConfigUsingPat(
       configIdentifier,
       query,

@@ -5,11 +5,14 @@ import {useRouter} from "next/navigation";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
 import {ArrowRight} from "lucide-react";
 import {Button} from "@/components/ui/button";
+import {useGitHubPatAuth} from "@/hooks/useGitHubPatAuth";
+import {confirm} from "@/components/ui/Confirm";
 
 function ConfigurationGroupCard(
   {icon, title, description, pagePath}: { icon: ReactNode; title: string; description: string, pagePath: string}
 ) {
   const router = useRouter();
+  const {gitHubSession} = useGitHubPatAuth();
 
   return (
     <Card className={"flex min-h-52 w-full max-w-sm flex-col border-border/70 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg"}>
@@ -21,7 +24,24 @@ function ConfigurationGroupCard(
         <CardDescription>{description}</CardDescription>
       </CardHeader>
       <CardContent className={"mt-auto"}>
-        <Button className={"w-full justify-between"} variant={"outline"} onClick={() => router.push(pagePath)}>
+        <Button className={"w-full justify-between"} variant={"outline"} onClick={() => {
+          if(gitHubSession){
+            router.push(pagePath);
+          } else {
+            confirm({
+              title: "Authentication Required",
+              message: "You need to authenticate with GitHub to perform this section.",
+              actions: [
+                {
+                  label: "Close",
+                  onClick: async () => {
+                    return;
+                  }
+                }
+              ]
+            });
+          }
+        }}>
           Configure
           <ArrowRight/>
         </Button>
