@@ -572,6 +572,10 @@ function SocialLinks(
     iconSize?: number;
   }
 ) {
+  if(!links || links.length === 0) {
+    return <></>;
+  }
+
   return (
     <div className={"flex flex-row gap-2 justify-center align-middle"}>
       {

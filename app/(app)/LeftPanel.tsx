@@ -1,6 +1,6 @@
 "use client"
 
-import React from 'react';
+import React, {useMemo} from 'react';
 import styles from './LeftPanel.module.css';
 import {
   Sidebar,
@@ -21,86 +21,67 @@ class LeftPanelItem {
   label: string;
   icon: React.ReactNode;
   url: string;
+  show: boolean;
   target?: string
   items?: LeftPanelItem[];
 }
 
-const MenuItems = [
+const getMenuItems = (
+  allowedMenus: string[]
+) => [
   {
     label: "Home",
     icon: 'pi pi-home',
     url: '/',
+    show: allowedMenus.includes('home')
   },
   {
     label: "About",
     icon: 'pi pi-user',
     url: '/about',
+    show: allowedMenus.includes('about')
   },
   {
     label: 'My Journey',
     icon: 'pi pi-map',
     url: '/journey',
+    show: allowedMenus.includes('journey')
   },
   {
     label: 'Projects',
     icon: 'pi pi-briefcase',
     url: '/projects',
+    show: allowedMenus.includes('projects')
   },
   {
     label: 'Skills',
     icon: 'pi pi-cog',
     url: '/skills',
+    show: allowedMenus.includes('skills')
+  },
+  {
+    label: 'Services',
+    icon: 'pi pi-cog',
+    url: '/services',
+    show: allowedMenus.includes('services')
   },
   {
     label: 'Testimonials',
     icon: 'pi pi-comments',
     url: '/testimonials',
-  },
-  {
-    label: 'Blogs',
-    icon: 'pi pi-pencil',
-    url: '/blogs',
+    show: allowedMenus.includes('testimonials')
   },
   {
     label: 'Gallery',
     icon: 'pi pi-image',
     url: '/gallery',
+    show: allowedMenus.includes('gallery')
   },
   {
-    label: 'Downloads',
-    icon: 'pi pi-download',
-    items: [
-      {
-        label: 'Short Resume',
-        icon: 'pi pi-file',
-        target: '_blank',
-        url: 'https://docs.google.com/document/d/1OvxmbaNJZu-Si9Pm0RfjTQ7iFkajFDYcLKLBphiiH7c/edit?tab=t.0',
-      },
-      {
-        label: 'Full Resume',
-        icon: 'pi pi-file-plus',
-        target: '_blank',
-        url: 'https://docs.google.com/document/d/1gO7-1Uu5yIZLX-LXakb_II96pjjCFr1AB2132fjwUww/edit?tab=t.0',
-      }
-    ]
-  },
-  {
-    label: 'Links',
-    icon: 'pi pi-link',
-    items: [
-      {
-        label: 'Something 1',
-        icon: 'pi pi-file',
-        target: '_blank',
-        url: 'https://docs.google.com/document/d/1OvxmbaNJZu-Si9Pm0RfjTQ7iFkajFDYcLKLBphiiH7c/edit?tab=t.0',
-      },
-      {
-        label: 'Something 2',
-        icon: 'pi pi-file-plus',
-        target: '_blank',
-        url: 'https://docs.google.com/document/d/1gO7-1Uu5yIZLX-LXakb_II96pjjCFr1AB2132fjwUww/edit?tab=t.0',
-      }
-    ]
+    label: 'Blogs',
+    icon: 'pi pi-pencil',
+    url: '/blogs',
+    show: allowedMenus.includes('blogs')
   }
 ] as LeftPanelItem[]
 
@@ -118,9 +99,26 @@ function LeftPanel() {
     isLoadingConfig: isLoadingLeftPanelConfig
   } = useConfig(Identifier.LeftPanel);
 
-  if (isLoadingLeftPanelConfig || isLoadingCoreConfig || !leftPanelConfig || !coreConfig) {
+  const {
+    config: quickLinksConfig,
+    isLoadingConfig: isLoadingQuickLinksConfig
+  } = useConfig(Identifier.QuickLinks);
+
+  if (
+    isLoadingLeftPanelConfig ||
+    isLoadingCoreConfig ||
+    isLoadingQuickLinksConfig ||
+    !leftPanelConfig ||
+    !coreConfig ||
+    !quickLinksConfig
+  ) {
     return <></>;
   }
+
+  const menuItems = useMemo(
+    () => getMenuItems(leftPanelConfig.enabledMenus),
+    [leftPanelConfig, quickLinksConfig]
+  );
 
   return (<>
     {!open && <SidebarTrigger variant={"outline"} className={styles.openButton}>
@@ -129,7 +127,7 @@ function LeftPanel() {
 
     <Sidebar>
       <SidebarHeader>
-        <div className={styles.avatarBlock}>
+        {leftPanelConfig.profilePicture && <div className={styles.avatarBlock}>
           <Avatar className={styles.avatar}>
             <AvatarImage src={leftPanelConfig.profilePicture} alt={coreConfig.fullName} style={{objectFit: 'cover'}}/>
             <AvatarFallback>
@@ -142,7 +140,7 @@ function LeftPanel() {
               }
             </AvatarFallback>
           </Avatar>
-        </div>
+        </div>}
 
         <SidebarTrigger  className={styles.closeButton} variant={"outline"}>
           <XIcon/>
@@ -155,12 +153,16 @@ function LeftPanel() {
       </SidebarHeader>
       <SidebarContent>
         {/* actual nav menus*/}
-        <SidebarGroup>
-        </SidebarGroup>
+        {menuItems.filter((item) => item.show).length > 0 &&
+          <SidebarGroup>
+          </SidebarGroup>
+        }
 
-        {/* download and links */}
-        <SidebarGroup>
-        </SidebarGroup>
+        {/* quick links */}
+        {leftPanelConfig.enabledMenus.includes('quickLinks') && quickLinksConfig.links.length > 0 &&
+          <SidebarGroup>
+          </SidebarGroup>
+        }
       </SidebarContent>
       <SidebarFooter className={cn(styles.footer, "text-secondary-foreground")}>
         &copy; {(new Date()).getFullYear()} Created using <a href={"https://github.com/nightmaregaurav/portfolio"} target={"_blank"}>Portfolio</a>.
