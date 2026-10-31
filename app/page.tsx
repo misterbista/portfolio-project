@@ -30,7 +30,7 @@ function Page() {
     <div className={styles.page}>
       <div
         className={styles.heroImage}
-        style={{background: `url("${homeConfig.heroPicture}")`}}
+        style={{background: `url("${homeConfig.coverPicture}")`}}
       />
       <div className={styles.heroText} >
         <span className={cn(styles.heroTextPrimary, "text-white")}>{coreConfig.fullName}</span>

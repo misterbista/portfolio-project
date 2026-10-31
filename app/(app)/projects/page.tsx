@@ -35,7 +35,7 @@ function Page() {
   return (
     <div className={cn(styles.page, "bg-secondary")}>
       <span className={styles.pageHeader}>Projects</span>
-      <SmartText className={styles.pageText}>{projectsConfig.pageDescription}</SmartText>
+      <SmartText className={styles.pageText}>{projectsConfig.summary}</SmartText>
       <div className={styles.pageContent}>
         <div className={styles.searchAndActionsStrip}>
           <Input className={styles.searchBox} placeholder={"Search..."} />

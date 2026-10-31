@@ -131,7 +131,7 @@ function LeftPanel() {
       <SidebarHeader>
         <div className={styles.avatarBlock}>
           <Avatar className={styles.avatar}>
-            <AvatarImage src={leftPanelConfig.profilePhoto} alt={coreConfig.fullName} style={{objectFit: 'cover'}}/>
+            <AvatarImage src={leftPanelConfig.profilePicture} alt={coreConfig.fullName} style={{objectFit: 'cover'}}/>
             <AvatarFallback>
               {coreConfig
                 .fullName

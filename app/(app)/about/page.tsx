@@ -37,7 +37,7 @@ function Page() {
         <AspectRatio ratio={16 / 9} className="w-full max-w-sm rounded-lg bg-muted">
           <Image
             className={styles.pagePhoto}
-            src={aboutConfig.photo}
+            src={aboutConfig.heroPicture}
             alt={coreConfig.fullName}
             width={200}
             height={200}
