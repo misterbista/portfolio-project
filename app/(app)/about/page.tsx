@@ -9,6 +9,7 @@ import {AspectRatio} from "@/components/ui/aspect-ratio";
 import {cn} from "@/lib/utils";
 import FullScreenMessage from "@/components/ui/FullScreenMessage";
 import {Spinner} from "@/components/ui/spinner";
+import HtmlRenderer from "@/components/ui/HtmlRenderer";
 
 function Page() {
   const {
@@ -32,7 +33,7 @@ function Page() {
   return (
     <div className={cn(styles.page, "bg-secondary")}>
       <span className={styles.pageHeader}>About</span>
-      <SmartText className={styles.pageText}>{aboutConfig.aboutMe}</SmartText>
+      <HtmlRenderer className={styles.pageText}>{aboutConfig.aboutMe}</HtmlRenderer>
       <div className={styles.pageContent}>
         <AspectRatio ratio={16 / 9} className="w-full max-w-sm rounded-lg bg-muted">
           <Image
@@ -53,7 +54,7 @@ function Page() {
           ))}
         </div>
       </div>
-      { aboutConfig.additionalInformation && <SmartText className={styles.pageText}>{aboutConfig.additionalInformation}</SmartText> }
+      { aboutConfig.additionalInformation && <HtmlRenderer className={styles.pageText}>{aboutConfig.additionalInformation}</HtmlRenderer> }
     </div>
   );
 }
