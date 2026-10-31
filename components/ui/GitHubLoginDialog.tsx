@@ -9,6 +9,7 @@ import {Button} from "@/components/ui/button";
 import {Spinner} from "@/components/ui/spinner";
 import {InputGroup, InputGroupAddon, InputGroupInput} from "@/components/ui/input-group";
 import {EyeIcon, EyeOffIcon} from "lucide-react";
+import SmartLink from "@/components/ui/SmartLink";
 
 
 function GitHubLoginDialog(
@@ -76,7 +77,7 @@ function GitHubLoginDialog(
             </>}
             {!gitHubSession && <>
               <p>To use this application, you need to provide a GitHub Personal Access Token (PAT) with the necessary permissions.</p>
-              <p>Please <a className={"underline!"} href={"https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens"} target="_blank">generate a token on GitHub</a> and enter it below.</p>
+              <p>Please <SmartLink className={"underline!"} href={"https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens"} target="_blank">generate a token on GitHub</SmartLink> and enter it below.</p>
               <InputGroup>
                 <InputGroupInput
                   type={showPat ? "text" : "password"}

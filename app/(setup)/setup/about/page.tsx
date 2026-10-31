@@ -12,7 +12,7 @@ import {Spinner} from "@/components/ui/spinner";
 import FullScreenMessage from "@/components/ui/FullScreenMessage";
 import ConfigurationFormWrapper from "@/components/ui/ConfigurationFormWrapper";
 import {Plus, Trash2} from "lucide-react";
-import {RichTextEditor} from "@/components/RichTextEditor";
+import {RichTextEditor} from "@/components/ui/RichTextEditor";
 import {cn} from "@/lib/utils";
 import {useConfigurationForm} from "@/hooks/useConfigurationForm";
 

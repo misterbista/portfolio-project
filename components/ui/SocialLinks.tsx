@@ -55,6 +55,7 @@ import {
   SiOdnoklassniki,
   SiRss, SiPaypal,
 } from '@icons-pack/react-simple-icons';
+import SmartLink from "@/components/ui/SmartLink";
 
 class SocialMediaIconConfig {
   names: string[];
@@ -585,9 +586,9 @@ function SocialLinks(
             return <></>;
           }
           return (
-            <a key={index} href={link.url} target="_blank" rel="noopener noreferrer">
+            <SmartLink key={index} href={link.url} target="_blank" rel="noopener noreferrer">
               {config.iconRenderer(iconSize || 24)}
-            </a>
+            </SmartLink>
           );
         })
       }

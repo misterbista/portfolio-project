@@ -4,6 +4,7 @@ import React, {useState} from "react";
 import {Input as InputPrimitive} from "@base-ui/react/input";
 import {XIcon} from "lucide-react";
 import {cn} from "@/lib/utils";
+import SmartLink from "@/components/ui/SmartLink";
 
 type ArrayInputProps = Omit<React.ComponentProps<"input">, "value" | "onChange"> & {
   value: string[] | undefined;
@@ -51,9 +52,9 @@ function ArrayInput({className, value, onChange, ...props}: ArrayInputProps) {
           {value.map((item, index) => (
             <span key={`${item}-${index}`} className={"inline-flex max-w-full items-center gap-1 rounded-md bg-primary px-2 py-1 text-xs font-medium text-primary-foreground"}>
               {isLink(item) ? (
-                <a href={item} target={"_blank"} rel={"noreferrer"} className={"max-w-[18rem] truncate hover:underline"}>
+                <SmartLink href={item} target={"_blank"} rel={"noreferrer"} className={"max-w-[18rem] truncate hover:underline"}>
                   {item}
-                </a>
+                </SmartLink>
               ) : (
                 <span className={"max-w-[18rem] truncate"}>{item}</span>
               )}

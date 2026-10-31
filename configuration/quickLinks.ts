@@ -15,7 +15,7 @@ export const schema = z.object({
         title: "Link",
         description: "The URL or path of the downloadable file.",
       }),
-      download: z.string().meta({
+      download: z.boolean().meta({
         title: "Download",
         description: "Whither or not this link is a download link. If not, it will be treated as a link to open in a new tab"
       }),
