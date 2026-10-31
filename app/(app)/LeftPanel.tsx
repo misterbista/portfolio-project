@@ -5,8 +5,8 @@ import styles from './LeftPanel.module.css';
 import {
   Sidebar,
   SidebarContent, SidebarFooter,
-  SidebarGroup,
-  SidebarHeader,
+  SidebarGroup, SidebarGroupContent, SidebarGroupLabel,
+  SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem,
   SidebarTrigger,
   useSidebar
 } from "@/components/ui/sidebar";
@@ -16,10 +16,12 @@ import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import {usePathname} from "next/navigation";
 import SocialLinks from "@/components/ui/SocialLinks";
 import {cn} from "@/lib/utils";
+import SidebarCustomMenuItem from "@/app/(app)/SidebarCustomMenuItem";
+import SmartLink from "@/components/ui/SmartLink";
 
 class LeftPanelItem {
   label: string;
-  icon: React.ReactNode;
+  icon: string;
   url: string;
   show: boolean;
   target?: string
@@ -31,55 +33,55 @@ const getMenuItems = (
 ) => [
   {
     label: "Home",
-    icon: 'pi pi-home',
+    icon: 'House',
     url: '/',
     show: allowedMenus.includes('home')
   },
   {
     label: "About",
-    icon: 'pi pi-user',
+    icon: 'User',
     url: '/about',
     show: allowedMenus.includes('about')
   },
   {
     label: 'My Journey',
-    icon: 'pi pi-map',
+    icon: 'Milestone',
     url: '/journey',
     show: allowedMenus.includes('journey')
   },
   {
     label: 'Projects',
-    icon: 'pi pi-briefcase',
+    icon: 'FolderOpenDot',
     url: '/projects',
     show: allowedMenus.includes('projects')
   },
   {
     label: 'Skills',
-    icon: 'pi pi-cog',
+    icon: 'Brain',
     url: '/skills',
     show: allowedMenus.includes('skills')
   },
   {
     label: 'Services',
-    icon: 'pi pi-cog',
+    icon: 'BriefcaseBusiness',
     url: '/services',
     show: allowedMenus.includes('services')
   },
   {
     label: 'Testimonials',
-    icon: 'pi pi-comments',
+    icon: 'MessageCircleMore',
     url: '/testimonials',
     show: allowedMenus.includes('testimonials')
   },
   {
     label: 'Gallery',
-    icon: 'pi pi-image',
+    icon: 'Images',
     url: '/gallery',
     show: allowedMenus.includes('gallery')
   },
   {
     label: 'Blogs',
-    icon: 'pi pi-pencil',
+    icon: 'NotebookPen',
     url: '/blogs',
     show: allowedMenus.includes('blogs')
   }
@@ -127,7 +129,7 @@ function LeftPanel() {
 
     <Sidebar>
       <SidebarHeader>
-        {leftPanelConfig.profilePicture && <div className={styles.avatarBlock}>
+        {(leftPanelConfig.profilePicture || coreConfig.fullName) && <div className={styles.avatarBlock}>
           <Avatar className={styles.avatar}>
             <AvatarImage src={leftPanelConfig.profilePicture} alt={coreConfig.fullName} style={{objectFit: 'cover'}}/>
             <AvatarFallback>
@@ -151,22 +153,57 @@ function LeftPanel() {
           iconSize={25}
         />
       </SidebarHeader>
+
       <SidebarContent>
         {/* actual nav menus*/}
         {menuItems.filter((item) => item.show).length > 0 &&
           <SidebarGroup>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {menuItems.filter((item) => item.show).map((item, index) => (
+                  <SidebarMenuItem key={index}>
+                    <SidebarMenuButton
+                      render={<SidebarCustomMenuItem
+                        label={item.label}
+                        link={item.url}
+                        icon={item.icon}
+                        show={item.show}
+                        currentPath={pathname}
+                      />}
+                    />
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
           </SidebarGroup>
         }
 
         {/* quick links */}
-        {leftPanelConfig.enabledMenus.includes('quickLinks') && quickLinksConfig.links.length > 0 &&
+        {leftPanelConfig.enabledMenus.includes('quickLinks') && quickLinksConfig?.links?.length > 0 &&
           <SidebarGroup>
+            <SidebarGroupLabel>Quick Links</SidebarGroupLabel>
+            <SidebarGroupContent>
+              <SidebarMenu>
+                {quickLinksConfig.links.map((link, index) => (
+                  <SidebarMenuItem key={index}>
+                    <SidebarMenuButton
+                      render={<SidebarCustomMenuItem
+                        label={link.title}
+                        link={link.link}
+                        icon={link.icon}
+                      />}
+                    />
+                  </SidebarMenuItem>
+                ))}
+              </SidebarMenu>
+            </SidebarGroupContent>
           </SidebarGroup>
         }
       </SidebarContent>
+
       <SidebarFooter className={cn(styles.footer, "text-secondary-foreground")}>
-        &copy; {(new Date()).getFullYear()} Created using <a href={"https://github.com/nightmaregaurav/portfolio"} target={"_blank"}>Portfolio</a>.
-        Provided with <Heart className={"inline"} size={14}/> by <a href={"https://www.gauravnyaupane.com.np/"} target={"_blank"}>Gaurav Nyaupane</a>.
+        &copy; {(new Date()).getFullYear()} Created using <SmartLink href={"https://github.com/nightmaregaurav/portfolio"} target={"_blank"}>Portfolio</SmartLink>.
+        Provided with <Heart className={"inline"} size={14}/> by <SmartLink href={"https://www.gauravnyaupane.com.np/"} target={"_blank"}>Gaurav Nyaupane</SmartLink>.
       </SidebarFooter>
     </Sidebar>
   </>);
