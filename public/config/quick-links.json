@@ -1,28 +1,14 @@
 {
   "links":[
     {
-      "title": "View Resume",
+      "title": "Get Resume",
       "icon": "file-text",
       "link": "https://raw.githubusercontent.com/nightmaregaurav/public-documents/main/Resume_Gaurav_Nyaupane.pdf",
-      "download": false
     },
     {
-      "title": "View CV",
+      "title": "Get CV",
       "icon": "file-text",
       "link": "https://raw.githubusercontent.com/nightmaregaurav/public-documents/main/CV_Gaurav_Nyaupane.pdf",
-      "download": false
-    },
-    {
-      "title": "Download Resume",
-      "icon": "file-text",
-      "link": "https://raw.githubusercontent.com/nightmaregaurav/public-documents/main/Resume_Gaurav_Nyaupane.pdf",
-      "download": true
-    },
-    {
-      "title": "Download CV",
-      "icon": "file-text",
-      "link": "https://raw.githubusercontent.com/nightmaregaurav/public-documents/main/CV_Gaurav_Nyaupane.pdf",
-      "download": true
     }
   ]
 }

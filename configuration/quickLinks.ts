@@ -14,11 +14,7 @@ export const schema = z.object({
       link: z.string().meta({
         title: "Link",
         description: "The URL or path of the downloadable file.",
-      }),
-      download: z.boolean().meta({
-        title: "Download",
-        description: "Whither or not this link is a download link. If not, it will be treated as a link to open in a new tab"
-      }),
+      })
     }).meta({
       title: "Download Link",
       description: "A file or resource that visitors can download.",
