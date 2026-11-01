@@ -204,7 +204,7 @@ function ProjectFields({control, index, journey}: {control: Control<Model>; inde
           <div className={"grid gap-2"}>
             <Label htmlFor={"milestoneId"}>Journey milestone</Label>
             <Select id={"milestoneId"} items={milestoneOptions} value={field.value || "none"} onValueChange={(value) => field.onChange(value === "none" ? "" : value)}>
-              <SelectTrigger className={cn("w-full", error && "border-destructive")}>
+              <SelectTrigger type="button" className={cn("w-full", error && "border-destructive")}>
                 <SelectValue placeholder={"No milestone"} />
               </SelectTrigger>
               <SelectContent>

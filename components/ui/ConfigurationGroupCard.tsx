@@ -24,7 +24,7 @@ function ConfigurationGroupCard(
         <CardDescription>{description}</CardDescription>
       </CardHeader>
       <CardContent className={"mt-auto"}>
-        <Button className={"w-full justify-between cursor-pointer hover:-translate-y-px"} variant={"outline"} onClick={() => {
+        <Button type={"button"} className={"w-full justify-between cursor-pointer hover:-translate-y-px"} variant={"outline"} onClick={() => {
           if(gitHubSession){
             router.push(pagePath);
           } else {

@@ -51,7 +51,7 @@ function ServiceFields({control, index}: {control: Control<Model>; index: number
               <Label htmlFor={`services.${index}.icon`}>
                 Icon name
                 <Tooltip>
-                  <TooltipTrigger>
+                  <TooltipTrigger type="button">
                     <HelpCircle className={"ml-1 inline h-4 w-4 text-muted-foreground"} />
                   </TooltipTrigger>
                   <TooltipContent>

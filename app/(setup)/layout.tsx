@@ -17,6 +17,7 @@ function Layout({ children }: LayoutProps<"/">) {
         </span>
       ) : <span className={"text-sm text-muted-foreground"}>Connect GitHub to save changes.</span>}
       <Button
+        type="button"
         variant={"outline"}
         size={"icon"}
         aria-label={gitHubSession ? "Change GitHub repository" : "Connect GitHub"}

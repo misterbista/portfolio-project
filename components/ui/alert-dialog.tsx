@@ -147,6 +147,7 @@ function AlertDialogAction({
 }: React.ComponentProps<typeof Button>) {
   return (
     <Button
+      type="button"
       data-slot="alert-dialog-action"
       className={cn(className, "cursor-pointer hover:-translate-y-px")}
       {...props}
@@ -165,7 +166,7 @@ function AlertDialogCancel({
     <AlertDialogPrimitive.Close
       data-slot="alert-dialog-cancel"
       className={cn(className)}
-      render={<Button variant={variant} size={size} className="cursor-pointer hover:-translate-y-px" />}
+      render={<Button type="button" variant={variant} size={size} className="cursor-pointer hover:-translate-y-px" />}
       {...props}
     />
   )

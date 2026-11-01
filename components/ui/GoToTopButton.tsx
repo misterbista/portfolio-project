@@ -21,6 +21,7 @@ function GoToTopButton() {
 
   return (
     <Button
+      type="button"
       variant="outline"
       size="icon-sm"
       style={{position: 'fixed', bottom: '8px', right: '8px', cursor: 'pointer'}}

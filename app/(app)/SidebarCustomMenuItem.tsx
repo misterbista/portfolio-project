@@ -28,6 +28,7 @@ function SidebarCustomMenuItem(
 
   return (
     <Button
+      type="button"
       variant="ghost"
       className={cn(
         "w-full justify-start h-12",

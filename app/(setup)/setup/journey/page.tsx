@@ -110,7 +110,7 @@ function MilestoneFields({control, index}: {control: Control<Model>; index: numb
             <div className={"grid gap-2"}>
               <Label htmlFor={`milestones.${index}.type`}>Type</Label>
               <Select id={`milestones.${index}.type`} items={types} value={field.value} onValueChange={field.onChange}>
-                <SelectTrigger className={cn("w-full", error && "border-destructive")}>
+                <SelectTrigger type="button" className={cn("w-full", error && "border-destructive")}>
                   <SelectValue placeholder="Select Type" />
                 </SelectTrigger>
                 <SelectContent>

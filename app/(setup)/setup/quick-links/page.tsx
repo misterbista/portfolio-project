@@ -47,7 +47,7 @@ function LinkFields({control, index}: {control: Control<Model>; index: number}) 
             <Label htmlFor={`links.${index}.icon`}>
               Icon name
               <Tooltip>
-                <TooltipTrigger>
+                <TooltipTrigger type="button">
                   <HelpCircle className={"ml-1 inline h-4 w-4 text-muted-foreground"} />
                 </TooltipTrigger>
                 <TooltipContent>

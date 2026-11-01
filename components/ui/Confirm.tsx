@@ -123,6 +123,7 @@ export function ConfirmDialog() {
                   <Button
                     key={index}
                     {...action.buttonProps}
+                    type="button"
                     disabled={loading || action.buttonProps?.disabled}
                     onClick={() => handleAction(index)}
                     className={[action.buttonProps?.className, "cursor-pointer", "hover:-translate-y-px"].filter(Boolean).join(" ")}

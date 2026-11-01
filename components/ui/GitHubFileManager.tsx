@@ -129,6 +129,7 @@ function GitHubFileManager(
         />
         <span className={"flex flex-row gap-1"}>
           <Button
+            type={"button"}
             size={"icon-sm"}
             onClick={() => setViewMode("grid")}
             variant={viewMode === "grid" ? "default" : "outline"}
@@ -137,6 +138,7 @@ function GitHubFileManager(
             <Grid/>
           </Button>
           <Button
+            type={"button"}
             size={"icon-sm"}
             onClick={() => setViewMode("list")}
             variant={viewMode === "list" ? "default" : "outline"}
@@ -178,7 +180,7 @@ function GitHubFileManager(
           {selectedFiles.length} file(s) selected
         </span>
         <DropdownMenu>
-          <DropdownMenuTrigger render={<Button size={"icon-sm"} variant="outline" className="cursor-pointer hover:-translate-y-px">
+          <DropdownMenuTrigger render={<Button type={"button"} size={"icon-sm"} variant="outline" className="cursor-pointer hover:-translate-y-px">
             <Ellipsis size={16} className="cursor-pointer" />
           </Button>} />
           <DropdownMenuContent className="w-auto border rounded-md bg-white shadow-lg">
@@ -269,7 +271,7 @@ function GridCard(
 ) {
   return (
     <Tooltip>
-      <TooltipTrigger delay={2000}>
+      <TooltipTrigger type="button" delay={2000}>
         <div className={cn(
           "rounded p-2 flex flex-col align-center",
           {
@@ -320,7 +322,7 @@ function ListCard(
 ) {
   return (
     <Tooltip>
-      <TooltipTrigger delay={2000}>
+      <TooltipTrigger type="button" delay={2000}>
         <div className={cn(
           "rounded p-2 flex flex-row align-center items-center",
           {
@@ -374,7 +376,7 @@ function FileActions(
 ) {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button size={"icon-sm"} variant="outline" className="cursor-pointer hover:-translate-y-px">
+      <DropdownMenuTrigger render={<Button type={"button"} size={"icon-sm"} variant="outline" className="cursor-pointer hover:-translate-y-px">
         <Ellipsis size={16} className="cursor-pointer" />
       </Button>} />
       <DropdownMenuContent className="w-auto border rounded-md bg-white shadow-lg">
