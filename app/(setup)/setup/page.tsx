@@ -3,7 +3,17 @@
 import React from 'react';
 import styles from "./page.module.css";
 import ConfigurationGroupCard from "@/components/ui/ConfigurationGroupCard";
-import {AlignJustify, BookOpen, BriefcaseBusiness, FolderKanban, GalleryHorizontal, GraduationCap, Home, MessageSquareQuote, PanelsTopLeft, Settings2, Sparkles, Wrench} from "lucide-react";
+import {
+  AlignJustify,
+  Brain,
+  BriefcaseBusiness,
+  FolderOpenDot,
+  House, Images, Link,
+  MessageCircleMore,
+  Milestone, NotebookPen,
+  User,
+  Wrench
+} from "lucide-react";
 
 function Page() {
   return (
@@ -30,40 +40,34 @@ function Page() {
           pagePath="/setup/left-panel"
         />
         <ConfigurationGroupCard
-          icon={<Home/>}
+          icon={<House/>}
           title="Home"
           description="Customize the Landing page."
           pagePath="/setup/home"
         />
         <ConfigurationGroupCard
-          icon={<PanelsTopLeft/>}
+          icon={<User/>}
           title="About"
           description="Customize the About page."
           pagePath="/setup/about"
         />
         <ConfigurationGroupCard
-          icon={<GraduationCap/>}
+          icon={<Milestone/>}
           title="Journey"
           description="Manage journey milestones."
           pagePath="/setup/journey"
         />
         <ConfigurationGroupCard
-          icon={<FolderKanban/>}
+          icon={<FolderOpenDot/>}
           title="Projects"
           description="Manage projects and milestones."
           pagePath="/setup/projects"
         />
         <ConfigurationGroupCard
-          icon={<Sparkles/>}
+          icon={<Brain/>}
           title="Skills"
           description="Manage skills and related data."
           pagePath="/setup/skills"
-        />
-        <ConfigurationGroupCard
-          icon={<GalleryHorizontal/>}
-          title="Gallery"
-          description="Manage gallery photos."
-          pagePath="/setup/gallery"
         />
         <ConfigurationGroupCard
           icon={<BriefcaseBusiness/>}
@@ -72,21 +76,27 @@ function Page() {
           pagePath="/setup/services"
         />
         <ConfigurationGroupCard
-          icon={<MessageSquareQuote/>}
+          icon={<MessageCircleMore/>}
           title="Testimonials"
           description="Manage testimonials."
           pagePath="/setup/testimonials"
         />
         <ConfigurationGroupCard
-          icon={<BookOpen/>}
+          icon={<Images/>}
+          title="Gallery"
+          description="Manage gallery photos."
+          pagePath="/setup/gallery"
+        />
+        <ConfigurationGroupCard
+          icon={<NotebookPen/>}
           title="Blog"
           description="Write rich text blog posts."
           pagePath="/setup/blogs"
         />
         <ConfigurationGroupCard
-          icon={<Settings2/>}
-          title="Quick
-          Links" description="Manage downloads and links."
+          icon={<Link/>}
+          title="Quick Links"
+          description="Manage downloads and links."
           pagePath="/setup/quick-links"
         />
       </div>
