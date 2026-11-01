@@ -156,12 +156,12 @@ function Page() {
           render={({ field, fieldState: { error } }) => (
             <div className={"grid gap-3"}>
               <div>
-                <Label>Enabled Menus</Label>
+                <Label htmlFor={"enabledMenus"}>Enabled Menus</Label>
                 <p className={"text-sm text-muted-foreground"}>
                   Select the menus that should be visible on your website.
                 </p>
               </div>
-              <CheckboxList options={availableMenus} value={field.value} onValueChange={field.onChange}/>
+              <CheckboxList id={"enabledMenus"} options={availableMenus} value={field.value} onValueChange={field.onChange}/>
               {error && (
                 <small className={"text-destructive"}>
                   {error.message}

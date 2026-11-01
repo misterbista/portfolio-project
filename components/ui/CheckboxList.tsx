@@ -4,7 +4,8 @@ import React from 'react';
 import {Checkbox} from "@/components/ui/checkbox";
 
 function CheckboxList(
-  {options, value, onValueChange}:{
+  {id, options, value, onValueChange}:{
+    id: string;
     options: {
       value: string,
       label: string
@@ -14,7 +15,7 @@ function CheckboxList(
   }
 ) {
   return (
-    <div className={"grid gap-2 sm:grid-cols-2"}>
+    <div className={"grid gap-2 sm:grid-cols-2"} id={id}>
       {options.map((option) => (
         <label key={option.value} className={"flex cursor-pointer items-center gap-3 rounded-lg border p-3 transition-colors hover:bg-muted/50"}>
           <Checkbox
