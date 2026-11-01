@@ -1,7 +1,7 @@
 "use client"
 
 import React, {useEffect, useState} from "react";
-import {Download, ExternalLink, RotateCcw, ZoomIn, ZoomOut} from "lucide-react";
+import {Download, RotateCcw, ZoomIn, ZoomOut} from "lucide-react";
 import {Button} from "@/components/ui/button";
 import {
   Sheet,
@@ -79,7 +79,7 @@ function ImageLightbox({src, name, trigger, open: controlledOpen, onOpenChange}:
     }}>
       {trigger && <button
         type={"button"}
-        className={"block cursor-zoom-in text-left"}
+        className={"block cursor-pointer text-left transition-transform hover:scale-[1.01] active:scale-[0.99]"}
         onClick={(event) => {
           event.stopPropagation();
           setUncontrolledOpen(true);
@@ -116,13 +116,13 @@ function ImageLightbox({src, name, trigger, open: controlledOpen, onOpenChange}:
         </div>
         <SheetFooter className={"flex-row flex-wrap justify-between sm:justify-between"}>
           <div className={"flex items-center gap-1"}>
-            <Button type={"button"} size={"icon-sm"} variant={"outline"} onClick={() => setZoom((value) => Math.max(MIN_ZOOM, value - ZOOM_STEP))} aria-label={"Zoom out"}>
+            <Button type={"button"} size={"icon-sm"} variant={"outline"} onClick={() => setZoom((value) => Math.max(MIN_ZOOM, value - ZOOM_STEP))} aria-label={"Zoom out"} className="cursor-pointer hover:-translate-y-px">
               <ZoomOut />
             </Button>
-            <Button type={"button"} size={"icon-sm"} variant={"outline"} onClick={() => setZoom(1)} aria-label={"Reset zoom"}>
+            <Button type={"button"} size={"icon-sm"} variant={"outline"} onClick={() => setZoom(1)} aria-label={"Reset zoom"} className="cursor-pointer hover:-translate-y-px">
               <RotateCcw />
             </Button>
-            <Button type={"button"} size={"icon-sm"} variant={"outline"} onClick={() => setZoom((value) => Math.min(MAX_ZOOM, value + ZOOM_STEP))} aria-label={"Zoom in"}>
+            <Button type={"button"} size={"icon-sm"} variant={"outline"} onClick={() => setZoom((value) => Math.min(MAX_ZOOM, value + ZOOM_STEP))} aria-label={"Zoom in"} className="cursor-pointer hover:-translate-y-px">
               <ZoomIn />
             </Button>
             <label className={"ml-2 flex min-w-40 items-center gap-2 text-xs text-muted-foreground"}>
@@ -141,7 +141,7 @@ function ImageLightbox({src, name, trigger, open: controlledOpen, onOpenChange}:
             </label>
           </div>
           <div className={"flex items-center gap-2"}>
-            <Button type={"button"} variant={"outline"} onClick={downloadImage}>
+            <Button type={"button"} variant={"outline"} onClick={downloadImage} className="cursor-pointer hover:-translate-y-px">
               <Download />
               Download
             </Button>

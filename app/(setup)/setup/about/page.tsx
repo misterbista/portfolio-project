@@ -79,6 +79,7 @@ function Page() {
               size={"sm"}
               variant={"outline"}
               onClick={() => append({title: "", value: ""})}
+              className="cursor-pointer hover:-translate-y-px"
             >
               <Plus /> Add Key Point
             </Button>
@@ -97,7 +98,7 @@ function Page() {
                   render={({field}) => <Input {...field} placeholder={"Value"} />}
                 />
               </div>
-              <Button type={"button"} size={"icon"} variant={"ghost"} className={"text-destructive"} onClick={() => remove(index)}><Trash2 /></Button>
+              <Button type={"button"} size={"icon"} variant={"ghost"} className={"text-destructive cursor-pointer hover:-translate-y-px"} onClick={() => remove(index)}><Trash2 /></Button>
             </div>
           )}
         </div>
@@ -119,7 +120,7 @@ function Page() {
             type={"submit"}
             size={"sm"}
             variant={"outline"}
-            className={"cursor-pointer mt-2 bg-primary text-secondary"}
+            className={"cursor-pointer mt-2 bg-primary text-secondary hover:-translate-y-px"}
             disabled={isSavingConfig}
           >
             {isSavingConfig ? <Spinner /> : "Save"}

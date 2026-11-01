@@ -110,6 +110,7 @@ function LinkCardHeader(
           variant={"ghost"}
           onClick={onEdit}
           aria-label={"Edit milestone"}
+          className="cursor-pointer hover:-translate-y-px"
         >
           <Pencil/>
         </Button>}
@@ -118,7 +119,7 @@ function LinkCardHeader(
           type={"button"}
           size={"icon-sm"}
           variant={"ghost"}
-          className={"text-destructive"}
+          className={"text-destructive cursor-pointer hover:-translate-y-px"}
           onClick={onDelete}
           aria-label={"Delete milestone"}
         >
@@ -172,6 +173,7 @@ function Page() {
               append(emptyLink);
               setEditingIndex(linksWatch.length);
             }}
+            className="cursor-pointer hover:-translate-y-px"
           >
             <Plus /> Add link
           </Button>
@@ -196,7 +198,7 @@ function Page() {
               <div className={"grid gap-4 border-t pt-4"}>
                 <LinkFields control={control} index={index} />
                 <div className={"flex justify-end"}>
-                  <Button type={"button"} size={"sm"} variant={"outline"} onClick={() => setEditingIndex(null)}>Done</Button>
+                  <Button type={"button"} size={"sm"} variant={"outline"} onClick={() => setEditingIndex(null)} className="cursor-pointer hover:-translate-y-px">Done</Button>
                 </div>
               </div>
             )}
@@ -220,7 +222,7 @@ function Page() {
         }
 
         <div className={"flex justify-end"}>
-          <Button type={"submit"} size={"sm"} variant={"outline"} className={"cursor-pointer mt-2 bg-primary text-secondary"} disabled={isSavingConfig}>
+          <Button type={"submit"} size={"sm"} variant={"outline"} className={"cursor-pointer mt-2 bg-primary text-secondary hover:-translate-y-px"} disabled={isSavingConfig}>
             {isSavingConfig ? <Spinner /> : "Save"}
           </Button>
         </div>

@@ -39,7 +39,7 @@ function ProjectLinksFields({control, projectIndex}: {control: Control<Model>; p
     <div className={"grid gap-3"}>
       <div className={"flex items-center justify-between"}>
         <Label>Project links</Label>
-        <Button type={"button"} size={"sm"} variant={"outline"} onClick={() => append({name: "", url: ""})}>
+        <Button type={"button"} size={"sm"} variant={"outline"} onClick={() => append({name: "", url: ""})} className="cursor-pointer hover:-translate-y-px">
           <Plus /> Add link
         </Button>
       </div>
@@ -68,7 +68,7 @@ function ProjectLinksFields({control, projectIndex}: {control: Control<Model>; p
             }
           />
 
-          <Button type={"button"} size={"icon-sm"} variant={"ghost"} className={"text-destructive"} onClick={() => remove(linkIndex)} aria-label={"Delete project link"}>
+          <Button type={"button"} size={"icon-sm"} variant={"ghost"} className={"text-destructive cursor-pointer hover:-translate-y-px"} onClick={() => remove(linkIndex)} aria-label={"Delete project link"}>
             <Trash2 />
           </Button>
         </div>
@@ -84,7 +84,7 @@ function KeypointFields({control, index: projectIndex}: {control: Control<Model>
     <div className={"grid gap-3"}>
       <div className={"flex items-center justify-between"}>
         <Label>Key points</Label>
-        <Button type={"button"} size={"sm"} variant={"outline"} onClick={() => append({title: "", value: ""})}>
+        <Button type={"button"} size={"sm"} variant={"outline"} onClick={() => append({title: "", value: ""})} className="cursor-pointer hover:-translate-y-px">
           <Plus /> Add key point
         </Button>
       </div>
@@ -113,7 +113,7 @@ function KeypointFields({control, index: projectIndex}: {control: Control<Model>
             }
           />
 
-          <Button type={"button"} size={"icon-sm"} variant={"ghost"} className={"text-destructive"} onClick={() => remove(index)} aria-label={"Delete key point"}>
+          <Button type={"button"} size={"icon-sm"} variant={"ghost"} className={"text-destructive cursor-pointer hover:-translate-y-px"} onClick={() => remove(index)} aria-label={"Delete key point"}>
             <Trash2 />
           </Button>
         </div>
@@ -261,6 +261,7 @@ function ProjectCardHeader(
           variant={"ghost"}
           onClick={onEdit}
           aria-label={"Edit project"}
+          className="cursor-pointer hover:-translate-y-px"
         >
           <Pencil/>
         </Button>}
@@ -269,7 +270,7 @@ function ProjectCardHeader(
           type={"button"}
           size={"icon-sm"}
           variant={"ghost"}
-          className={"text-destructive"}
+          className={"text-destructive cursor-pointer hover:-translate-y-px"}
           onClick={onDelete}
           aria-label={"Delete project"}
         >
@@ -337,6 +338,7 @@ function Page() {
               append(project);
               setEditingProjectId(project.id);
             }}
+            className="cursor-pointer hover:-translate-y-px"
           >
             <Plus /> Add project
           </Button>
@@ -360,7 +362,7 @@ function Page() {
               <div className={"grid gap-4 border-t pt-4"}>
                 <ProjectFields control={control} index={index} journey={journey} />
                 <div className={"flex justify-end"}>
-                  <Button type={"button"} size={"sm"} variant={"outline"} onClick={() => setEditingProjectId(null)}>Done</Button>
+                  <Button type={"button"} size={"sm"} variant={"outline"} onClick={() => setEditingProjectId(null)} className="cursor-pointer hover:-translate-y-px">Done</Button>
                 </div>
               </div>
             )}
@@ -390,7 +392,7 @@ function Page() {
             type={"submit"}
             size={"sm"}
             variant={"outline"}
-            className={"cursor-pointer mt-2 bg-primary text-secondary"}
+            className={"cursor-pointer mt-2 bg-primary text-secondary hover:-translate-y-px"}
             disabled={isSavingConfig}
           >
             {isSavingConfig ? <Spinner /> : "Save"}

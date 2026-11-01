@@ -32,6 +32,7 @@ function SidebarCustomMenuItem(
       className={cn(
         "w-full justify-start h-12",
         currentPath === link && "bg-gray-200",
+        "cursor-pointer hover:-translate-y-px"
       )}
     >
       <SmartLink href={link} className="w-full h-full flex items-center">

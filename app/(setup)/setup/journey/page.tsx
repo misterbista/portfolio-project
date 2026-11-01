@@ -46,7 +46,7 @@ function AchievementFields({control, index}: {control: Control<Model>; index: nu
     <div className={"grid gap-3"}>
       <div className={"flex items-center justify-between"}>
         <Label>Achievements</Label>
-        <Button type={"button"} size={"sm"} variant={"outline"} onClick={() => append({title: "", description: "", on: ""})}>
+        <Button type={"button"} size={"sm"} variant={"outline"} onClick={() => append({title: "", description: "", on: ""})} className="cursor-pointer hover:-translate-y-px">
           <Plus /> Add achievement
         </Button>
       </div>
@@ -75,7 +75,7 @@ function AchievementFields({control, index}: {control: Control<Model>; index: nu
             }
           />
 
-          <Button type={"button"} size={"icon-sm"} variant={"ghost"} className={"text-destructive"} onClick={() => remove(achievementIndex)} aria-label={"Delete achievement"}>
+          <Button type={"button"} size={"icon-sm"} variant={"ghost"} className={"text-destructive cursor-pointer hover:-translate-y-px"} onClick={() => remove(achievementIndex)} aria-label={"Delete achievement"}>
             <Trash2 />
           </Button>
         </div>
@@ -292,6 +292,7 @@ function MilestoneCardHeader(
           variant={"ghost"}
           onClick={onEdit}
           aria-label={"Edit milestone"}
+          className="cursor-pointer hover:-translate-y-px"
         >
           <Pencil/>
         </Button>}
@@ -300,7 +301,7 @@ function MilestoneCardHeader(
           type={"button"}
           size={"icon-sm"}
           variant={"ghost"}
-          className={"text-destructive"}
+          className={"text-destructive cursor-pointer hover:-translate-y-px"}
           onClick={onDelete}
           aria-label={"Delete milestone"}
         >
@@ -397,6 +398,7 @@ function Page() {
               append(milestone);
               setEditingMilestoneId(milestone.id);
             }}
+            className="cursor-pointer hover:-translate-y-px"
           >
             <Plus /> Add milestone
           </Button>
@@ -420,7 +422,7 @@ function Page() {
               <div className={"grid gap-4 border-t pt-4"}>
                 <MilestoneFields control={control} index={index} />
                 <div className={"flex justify-end"}>
-                  <Button type={"button"} size={"sm"} variant={"outline"} onClick={() => setEditingMilestoneId(null)}>Done</Button>
+                  <Button type={"button"} size={"sm"} variant={"outline"} onClick={() => setEditingMilestoneId(null)} className="cursor-pointer hover:-translate-y-px">Done</Button>
                 </div>
               </div>
             )}
@@ -450,7 +452,7 @@ function Page() {
             type={"submit"}
             size={"sm"}
             variant={"outline"}
-            className={"cursor-pointer mt-2 bg-primary text-secondary"}
+            className={"cursor-pointer mt-2 bg-primary text-secondary hover:-translate-y-px"}
             disabled={isSavingConfig}
           >
             {isSavingConfig ? <Spinner /> : "Save"}

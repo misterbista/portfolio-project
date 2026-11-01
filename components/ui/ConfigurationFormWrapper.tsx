@@ -26,7 +26,7 @@ function ConfigurationFormWrapper<T extends FieldValues>(
           <CardContent className={"max-h-[calc(100dvh-8rem)] overflow-y-auto p-4 sm:p-6"}>
             <div className={"mb-6 flex items-start justify-between gap-4 border-b pb-4"}>
               <div className={"flex min-w-0 items-start gap-3"}>
-                <Button type={"button"} variant={"ghost"} size={"icon-sm"} className={"mt-0.5 shrink-0"} onClick={() => router.push("/setup")} aria-label={"Cancel and return to setup"}>
+                <Button type={"button"} variant={"ghost"} size={"icon-sm"} className={"mt-0.5 shrink-0 cursor-pointer hover:-translate-y-px"} onClick={() => router.push("/setup")} aria-label={"Cancel and return to setup"}>
                   <ChevronLeft />
                 </Button>
                 <div>

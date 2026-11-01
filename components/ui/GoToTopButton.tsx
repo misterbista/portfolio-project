@@ -27,6 +27,7 @@ function GoToTopButton() {
       onClick={() => {
         bodyRef.current?.scrollTo({top: 0, behavior: 'smooth'});
       }}
+      className="cursor-pointer hover:-translate-y-px"
     >
       <ArrowUp/>
     </Button>

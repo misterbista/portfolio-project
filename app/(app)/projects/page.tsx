@@ -45,11 +45,13 @@ function Page() {
                 type="button"
                 onClick={() => setViewMode('grid')}
                 aria-label={"Switch to grid mode"}
+                className="cursor-pointer hover:-translate-y-px"
             ><GridIcon/></Button> : <Button
                 size={"icon-sm"}
                 type="button"
                 onClick={() => setViewMode('list')}
                 aria-label={"Switch to list mode"}
+                className="cursor-pointer hover:-translate-y-px"
             ><ListIcon/></Button>}
           {/*  make a dropdown menu for sort modes  */}
           </div>

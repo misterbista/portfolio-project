@@ -68,7 +68,7 @@ function GitHubLoginDialog(
               <p>You are already logged in with a PAT to access {gitHubSession.repository?.full_name}.</p>
 
               <Button
-                className="px-4 py-2 cursor-pointer"
+                className="px-4 py-2 cursor-pointer hover:-translate-y-px"
                 type="button"
                 onClick={() => clearGitHubPat()}
               >
@@ -87,8 +87,8 @@ function GitHubLoginDialog(
                 />
                 <InputGroupAddon align="inline-end">
                   {showPat
-                    ? <EyeOffIcon size={14} className={"cursor-pointer mr-1"} onClick={() => setShowPat(false)}/>
-                    : <EyeIcon size={14} className={"cursor-pointer mr-1"} onClick={() => setShowPat(true)}/>
+                    ? <EyeOffIcon size={14} className={"mr-1 cursor-pointer transition-transform hover:scale-110 active:scale-95"} onClick={() => setShowPat(false)}/>
+                    : <EyeIcon size={14} className={"mr-1 cursor-pointer transition-transform hover:scale-110 active:scale-95"} onClick={() => setShowPat(true)}/>
                   }
                 </InputGroupAddon>
               </InputGroup>
@@ -100,7 +100,7 @@ function GitHubLoginDialog(
               />
               <Button
                 type="submit"
-                className="px-4 py-2 cursor-pointer"
+                className="px-4 py-2 cursor-pointer hover:-translate-y-px"
                 disabled={!pat || !repoName}
               >
                 {updatingPat ? <Spinner/> : "Login"}

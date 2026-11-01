@@ -125,6 +125,7 @@ export function ConfirmDialog() {
                     {...action.buttonProps}
                     disabled={loading || action.buttonProps?.disabled}
                     onClick={() => handleAction(index)}
+                    className={[action.buttonProps?.className, "cursor-pointer", "hover:-translate-y-px"].filter(Boolean).join(" ")}
                   >
                     {isLoading && <Spinner className="mr-2 size-4" />}
                     {action.label}

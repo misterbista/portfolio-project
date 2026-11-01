@@ -73,7 +73,7 @@ function DialogContent({
             render={
               <Button
                 variant="ghost"
-                className="absolute top-2 right-2"
+                className="absolute top-2 right-2 cursor-pointer hover:-translate-y-px"
                 size="icon-sm"
               />
             }
@@ -117,7 +117,7 @@ function DialogFooter({
     >
       {children}
       {showCloseButton && (
-        <DialogPrimitive.Close render={<Button variant="outline" />}>
+        <DialogPrimitive.Close render={<Button variant="outline" className="cursor-pointer hover:-translate-y-px" />}>
           Close
         </DialogPrimitive.Close>
       )}

@@ -32,7 +32,7 @@ function ConfigFormTools<T>(
 
   return (<>
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant="link"><Settings size={16} className="cursor-pointer" /></Button>} />
+      <DropdownMenuTrigger render={<Button variant="link" className="cursor-pointer hover:-translate-y-px"><Settings size={16} className="cursor-pointer" /></Button>} />
       <DropdownMenuContent className="w-auto border rounded-md bg-white shadow-lg">
         <DropdownMenuItem className="hover:bg-gray-100 py-1 px-4 pt-2 cursor-pointer flex flex-no gap-2" onClick={async () => {
           await copyToClipboard(configString);

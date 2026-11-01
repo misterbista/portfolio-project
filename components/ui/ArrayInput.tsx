@@ -61,7 +61,7 @@ function ArrayInput({className, value, onChange, ...props}: ArrayInputProps) {
               <button
                 type={"button"}
                 aria-label={`Remove ${item}`}
-                className={"ml-1 inline-flex size-4 shrink-0 items-center justify-center rounded-sm hover:bg-primary-foreground/20"}
+                className={"ml-1 inline-flex size-4 shrink-0 cursor-pointer items-center justify-center rounded-sm transition-transform hover:scale-110 active:scale-95 hover:bg-primary-foreground/20"}
                 onClick={() => removeValue(index)}
               >
                 <XIcon size={12} />

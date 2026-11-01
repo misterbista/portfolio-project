@@ -69,7 +69,7 @@ function Page() {
             type={"submit"}
             size={"sm"}
             variant={"outline"}
-            className={"cursor-pointer mt-2 bg-primary text-secondary"}
+            className={"cursor-pointer mt-2 bg-primary text-secondary hover:-translate-y-px"}
             disabled={isSavingConfig}
           >
             {isSavingConfig ? <Spinner /> : "Save"}

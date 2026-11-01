@@ -94,6 +94,7 @@ function Page() {
                   url: "",
                 })
               }
+              className="cursor-pointer hover:-translate-y-px"
             >
               <Plus className={"size-4"} />
               Add Social
@@ -134,7 +135,7 @@ function Page() {
                   type={"button"}
                   size={"icon"}
                   variant={"ghost"}
-                  className={"text-destructive hover:text-destructive"}
+                  className={"text-destructive hover:text-destructive cursor-pointer hover:-translate-y-px"}
                   onClick={() => removeSocial(index)}
                 >
                   <Trash2 className={"size-4"} />
@@ -176,7 +177,7 @@ function Page() {
             type={"submit"}
             size={"sm"}
             variant={"outline"}
-            className={"cursor-pointer mt-2 bg-primary text-secondary"}
+            className={"cursor-pointer mt-2 bg-primary text-secondary hover:-translate-y-px"}
             disabled={isSavingConfig}
           >
             {isSavingConfig ? <Spinner /> : "Save"}

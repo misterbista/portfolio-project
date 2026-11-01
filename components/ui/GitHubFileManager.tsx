@@ -132,7 +132,7 @@ function GitHubFileManager(
             size={"icon-sm"}
             onClick={() => setViewMode("grid")}
             variant={viewMode === "grid" ? "default" : "outline"}
-            className={"cursor-pointer"}
+            className={"cursor-pointer hover:-translate-y-px"}
           >
             <Grid/>
           </Button>
@@ -140,7 +140,7 @@ function GitHubFileManager(
             size={"icon-sm"}
             onClick={() => setViewMode("list")}
             variant={viewMode === "list" ? "default" : "outline"}
-            className={"cursor-pointer"}
+            className={"cursor-pointer hover:-translate-y-px"}
           >
             <List/>
           </Button>
@@ -178,7 +178,7 @@ function GitHubFileManager(
           {selectedFiles.length} file(s) selected
         </span>
         <DropdownMenu>
-          <DropdownMenuTrigger render={<Button size={"icon-sm"} variant="outline">
+          <DropdownMenuTrigger render={<Button size={"icon-sm"} variant="outline" className="cursor-pointer hover:-translate-y-px">
             <Ellipsis size={16} className="cursor-pointer" />
           </Button>} />
           <DropdownMenuContent className="w-auto border rounded-md bg-white shadow-lg">
@@ -374,7 +374,7 @@ function FileActions(
 ) {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button size={"icon-sm"} variant="outline">
+      <DropdownMenuTrigger render={<Button size={"icon-sm"} variant="outline" className="cursor-pointer hover:-translate-y-px">
         <Ellipsis size={16} className="cursor-pointer" />
       </Button>} />
       <DropdownMenuContent className="w-auto border rounded-md bg-white shadow-lg">
@@ -430,7 +430,7 @@ function FileIconWithCheckbox(
   }, [thumbnailUrl]);
 
   return <span
-    className="relative inline-flex shrink-0 items-center justify-center cursor-pointer"
+    className="relative inline-flex shrink-0 cursor-pointer items-center justify-center transition-transform duration-150 hover:scale-[1.03] active:scale-[0.98]"
     style={{
       width: `${size}px`,
       height: `${size}px`,

@@ -77,7 +77,7 @@ function FileUploadButton(
     <Button
       type="button"
       size={"lg"}
-      className={"cursor-pointer"}
+      className={"cursor-pointer hover:-translate-y-px"}
       disabled={uploadingFiles}
       onClick={() => fileInputRef.current?.click()}
     >

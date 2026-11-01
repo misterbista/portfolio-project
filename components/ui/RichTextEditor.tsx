@@ -176,10 +176,10 @@ export function RichTextEditor({
               aria-label="Image URL"
             />
             <DialogFooter className="mt-4">
-              <Button type="button" variant="outline" onClick={closeImageDialog}>
+              <Button type="button" variant="outline" onClick={closeImageDialog} className="cursor-pointer hover:-translate-y-px">
                 Cancel
               </Button>
-              <Button type="submit" disabled={!imageUrl.trim()}>
+              <Button type="submit" disabled={!imageUrl.trim()} className="cursor-pointer hover:-translate-y-px">
                 Insert image
               </Button>
             </DialogFooter>

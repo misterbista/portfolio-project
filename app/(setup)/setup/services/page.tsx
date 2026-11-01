@@ -128,6 +128,7 @@ function ServiceCardHeader(
           variant={"ghost"}
           onClick={onEdit}
           aria-label={"Edit service"}
+          className="cursor-pointer hover:-translate-y-px"
         >
           <Pencil/>
         </Button>}
@@ -136,7 +137,7 @@ function ServiceCardHeader(
           type={"button"}
           size={"icon-sm"}
           variant={"ghost"}
-          className={"text-destructive"}
+          className={"text-destructive cursor-pointer hover:-translate-y-px"}
           onClick={onDelete}
           aria-label={"Delete service"}
         >
@@ -191,6 +192,7 @@ function Page() {
               append(service);
               setEditingServiceId(service.id);
             }}
+            className="cursor-pointer hover:-translate-y-px"
           >
             <Plus /> Add service
           </Button>
@@ -214,7 +216,7 @@ function Page() {
               <div className={"grid gap-4 border-t pt-4"}>
                 <ServiceFields control={control} index={index} />
                 <div className={"flex justify-end"}>
-                  <Button type={"button"} size={"sm"} variant={"outline"} onClick={() => setEditingServiceId(null)}>Done</Button>
+                  <Button type={"button"} size={"sm"} variant={"outline"} onClick={() => setEditingServiceId(null)} className="cursor-pointer hover:-translate-y-px">Done</Button>
                 </div>
               </div>
             )}
@@ -244,7 +246,7 @@ function Page() {
             type={"submit"}
             size={"sm"}
             variant={"outline"}
-            className={"cursor-pointer mt-2 bg-primary text-secondary"}
+            className={"cursor-pointer mt-2 bg-primary text-secondary hover:-translate-y-px"}
             disabled={isSavingConfig}
           >
             {isSavingConfig ? <Spinner /> : "Save"}

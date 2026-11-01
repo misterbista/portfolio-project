@@ -20,7 +20,7 @@ function Layout({ children }: LayoutProps<"/">) {
         variant={"outline"}
         size={"icon"}
         aria-label={gitHubSession ? "Change GitHub repository" : "Connect GitHub"}
-        className={"shrink-0 cursor-pointer"}
+        className={"shrink-0 cursor-pointer hover:-translate-y-px"}
         onClick={() => setShowLoginDialog(true)}
       >
         {gitHubSession ? <UnlockIcon/> : <LockIcon/>}
