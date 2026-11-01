@@ -7,9 +7,9 @@ import {Identifier, useConfig} from "@/hooks/useConfig";
 import {Button} from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
 import {GridIcon, ListIcon} from "lucide-react";
-import SmartText from "@/components/ui/SmartText";
 import FullScreenMessage from "@/components/ui/FullScreenMessage";
 import {Spinner} from "@/components/ui/spinner";
+import HtmlRenderer from "@/components/ui/HtmlRenderer";
 
 function Page() {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
@@ -39,7 +39,7 @@ function Page() {
   return (
     <div className={cn(styles.page, "bg-secondary")}>
       <span className={styles.pageHeader}>Projects</span>
-      <SmartText className={styles.pageText}>{projectsConfig.summary}</SmartText>
+      <HtmlRenderer className={styles.pageText}>{projectsConfig.summary}</HtmlRenderer>
       <div className={styles.pageContent}>
         <div className={styles.searchAndActionsStrip}>
           <Input className={styles.searchBox} placeholder={"Search..."} />
