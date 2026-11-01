@@ -6,11 +6,48 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+
+concurrency:
+  group: generate-thumbnails-${{ github.repository }}
+  cancel-in-progress: false
 
 jobs:
-  generate-thumbnails:
+  verify-fork:
     runs-on: ubuntu-latest
+    outputs:
+      is_fork: ${{ steps.repository_info.outputs.is_fork }}
+
+    steps:
+      - name: Check repository fork status
+        id: repository_info
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+
+          repository_data="$(curl --fail-with-body --silent --show-error \
+            --retry 3 \
+            --retry-delay 2 \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${REPOSITORY}")"
+
+          is_fork="$(jq -r '.fork | tostring' <<< "${repository_data}")"
+          echo "is_fork=${is_fork}" >> "${GITHUB_OUTPUT}"
+
+          if [ "${is_fork}" != "true" ]; then
+            echo "Repository ${REPOSITORY} is not a fork; skipping thumbnail generation."
+          fi
+
+  generate-thumbnails:
+    needs: verify-fork
+    if: needs.verify-fork.outputs.is_fork == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout repository
