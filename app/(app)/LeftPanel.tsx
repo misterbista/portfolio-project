@@ -109,10 +109,8 @@ function LeftPanel() {
   if (
     isLoadingLeftPanelConfig ||
     isLoadingCoreConfig ||
-    isLoadingQuickLinksConfig ||
     !leftPanelConfig ||
-    !coreConfig ||
-    !quickLinksConfig
+    !coreConfig
   ) {
     return <></>;
   }
@@ -179,7 +177,11 @@ function LeftPanel() {
         }
 
         {/* quick links */}
-        {leftPanelConfig.enabledMenus.includes('quickLinks') && quickLinksConfig?.links?.length > 0 &&
+        {leftPanelConfig.enabledMenus.includes('quickLinks') &&
+          quickLinksConfig?.links?.length &&
+          quickLinksConfig?.links?.length > 0 &&
+          !isLoadingQuickLinksConfig &&
+          !!quickLinksConfig &&
           <SidebarGroup>
             <SidebarGroupLabel>Quick Links</SidebarGroupLabel>
             <SidebarGroupContent>

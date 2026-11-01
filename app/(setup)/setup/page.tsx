@@ -46,6 +46,12 @@ function Page() {
           pagePath="/setup/left-panel"
         />
         <ConfigurationGroupCard
+          icon={<Link/>}
+          title="Quick Links"
+          description="Manage links to show on the left panel."
+          pagePath="/setup/quick-links"
+        />
+        <ConfigurationGroupCard
           icon={<User/>}
           title="About"
           description="Customize the About page."
@@ -92,12 +98,6 @@ function Page() {
           title="Blog"
           description="Write blog posts."
           pagePath="/setup/blogs"
-        />
-        <ConfigurationGroupCard
-          icon={<Link/>}
-          title="Quick Links"
-          description="Manage links to show on the left panel."
-          pagePath="/setup/quick-links"
         />
       </div>
     </div>
