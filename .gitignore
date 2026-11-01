@@ -42,3 +42,6 @@ next-env.d.ts
 
 # IDE config
 .idea/
+
+public/config/*
+public/config/blogs/*
