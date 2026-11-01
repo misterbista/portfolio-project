@@ -377,7 +377,11 @@ function Page() {
         />
 
         <div className={"flex flex-col justify-between gap-3 sm:flex-row sm:items-center"}>
-          <div><Label>Milestones</Label><p className={"mt-1 text-sm text-muted-foreground"}>Entries are ordered by start date, then end date.</p></div>
+          <div>
+            <Label>Milestones</Label>
+            <p className={"mt-1 text-sm text-muted-foreground"}>Entries are ordered by start date, then end date.</p>
+          </div>
+
           <Button
             type={"button"}
             size={"sm"}
