@@ -3,6 +3,7 @@ import * as z from "zod";
 export const schema = z.object({
   profilePicture: z
     .url("Profile Picture must be a valid URL")
+    .min(1, "Profile picture URL is required.")
     .meta({
       title: "Profile Picture",
       description:
@@ -14,12 +15,14 @@ export const schema = z.object({
       z.object({
         name: z
           .string("Social Media Name is required")
+          .min(1, "Social media name is required.")
           .meta({
             title: "Social Media Name",
             description: "The name of the social media account.",
           }),
         url: z
           .url("Social URL must be a valid URL")
+          .min(1, "Social media URL is required.")
           .meta({
             title: "Social Media URL",
             description: "The URL of the social media account.",
@@ -34,7 +37,7 @@ export const schema = z.object({
       description: "A list of social media accounts to show in the left panel.",
     }),
   enabledMenus: z
-    .array(z.string().meta({
+    .array(z.string().min(1, "Menu name is required.").meta({
       title: "Menu Name",
       description: "The name of the menu.",
     }))
