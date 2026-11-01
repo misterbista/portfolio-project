@@ -2,7 +2,7 @@
 
 import React, {useEffect, useState} from "react";
 import styles from "./page.module.css";
-import {ConfigMode, Identifier} from "@/hooks/useConfig";
+import {Identifier} from "@/hooks/useConfig";
 import {defaultValues, Model, schema} from "@/configuration/journey";
 import {Input} from "@/components/ui/input";
 import {Textarea} from "@/components/ui/textarea";
@@ -317,9 +317,7 @@ function Page() {
   } = useConfigurationForm(
     Identifier.Journey,
     schema,
-    defaultValues,
-    undefined,
-    ConfigMode.Public
+    defaultValues
   );
   const [editingMilestoneId, setEditingMilestoneId] = useState<string | null>(null);
   const {fields: milestones, append, remove, move} = useFieldArray({control, name: "milestones", keyName: "fieldArrayId"});
