@@ -169,6 +169,9 @@ async function saveConfig<T extends Identifier>(
   const configPathFunction = configurationPaths[configIdentifier];
   const configPath = configPathFunction(query);
   const filePath = configPath.replace(/^\/+/, "");
+  const content = typeof newConfig === "string"
+    ? newConfig as string
+    : JSON.stringify(newConfig, null, 2);
   await uploadGitHubFiles(
     gitHubPat ?? "",
     repo,
@@ -176,7 +179,7 @@ async function saveConfig<T extends Identifier>(
     [
       {
         name: filePath.substring(filePath.lastIndexOf("/") + 1),
-        content: JSON.stringify(newConfig, null, 2),
+        content,
       },
     ]
   )
@@ -196,5 +199,10 @@ async function getConfigUsingPat<T extends Identifier>(
     repo,
     filePath
   );
-  return JSON.parse(response) as ConfigurationModel<T>;
+
+  try {
+    return JSON.parse(response) as ConfigurationModel<T>;
+  } catch {
+    return response as ConfigurationModel<T>;
+  }
 }
