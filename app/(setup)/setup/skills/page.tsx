@@ -159,8 +159,8 @@ function SkillCardHeader(
 }
 
 function Page() {
-  const {config: journey} = useConfig(Identifier.Journey, undefined, ConfigMode.Public);
-  const {config: projectsConfig} = useConfig(Identifier.Projects, undefined, ConfigMode.Public);
+  const {config: journey} = useConfig(Identifier.Journey, undefined, ConfigMode.Private);
+  const {config: projectsConfig} = useConfig(Identifier.Projects, undefined, ConfigMode.Private);
   const {
     isLoadingConfig,
     saveConfig,
@@ -172,9 +172,7 @@ function Page() {
   } = useConfigurationForm(
     Identifier.Skills,
     schema,
-    defaultValues,
-    undefined,
-    ConfigMode.Public
+    defaultValues
   );
   const [editingSkillId, setEditingSkillId] = useState<string | null>(null);
   const {fields: skills, append, remove} = useFieldArray({control, name: "skills", keyName: "fieldArrayId"});
