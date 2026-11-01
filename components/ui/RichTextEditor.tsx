@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import type { Range } from "@tiptap/core";
+import type { Editor, Range } from "@tiptap/core";
 import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Placeholder from "@tiptap/extension-placeholder";
@@ -37,6 +37,112 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+
+const BlogImage = Image.extend({
+  addAttributes() {
+    return {
+      ...this.parent?.(),
+      imageAlign: {
+        default: "left",
+        parseHTML: (element) => element.getAttribute("data-image-align") || "left",
+        renderHTML: (attributes) => ({
+          "data-image-align": attributes.imageAlign,
+        }),
+      },
+      imageWrap: {
+        default: "none",
+        parseHTML: (element) => element.getAttribute("data-image-wrap") || "none",
+        renderHTML: (attributes) => ({
+          "data-image-wrap": attributes.imageWrap,
+        }),
+      },
+      imageCrop: {
+        default: false,
+        parseHTML: (element) => element.getAttribute("data-image-crop") === "true",
+        renderHTML: (attributes) =>
+          attributes.imageCrop ? { "data-image-crop": "true" } : {},
+      },
+    };
+  },
+});
+
+function ImageToolbar({ editor }: { editor: Editor }) {
+  const [, refresh] = useState(0);
+
+  useEffect(() => {
+    const update = () => refresh((value) => value + 1);
+    editor.on("selectionUpdate", update);
+    editor.on("transaction", update);
+    return () => {
+      editor.off("selectionUpdate", update);
+      editor.off("transaction", update);
+    };
+  }, [editor]);
+
+  const imageActive = editor.isActive("image");
+  if (!imageActive) return null;
+
+  const imageAttributes = editor.getAttributes("image") as {
+    imageAlign?: "left" | "center" | "right";
+    imageWrap?: "none" | "left" | "right";
+    imageCrop?: boolean;
+  };
+
+  const updateImage = (attributes: Record<string, string | boolean>) => {
+    editor.chain().focus().updateAttributes("image", attributes).run();
+  };
+
+  return (
+    <div className="rich-text-image-toolbar" aria-label="Image options">
+      <span className="rich-text-image-toolbar-label">Image</span>
+      {(["left", "center", "right"] as const).map((align) => (
+        <button
+          key={align}
+          type="button"
+          className={cn(
+            "rich-text-image-toolbar-button",
+            imageAttributes.imageAlign === align && "is-active"
+          )}
+          onMouseDown={(event) => event.preventDefault()}
+          onClick={() => updateImage({ imageAlign: align })}
+          aria-pressed={imageAttributes.imageAlign === align}
+        >
+          {align[0].toUpperCase() + align.slice(1)}
+        </button>
+      ))}
+      <span className="rich-text-image-toolbar-divider" />
+      {(["none", "left", "right"] as const).map((wrap) => (
+        <button
+          key={wrap}
+          type="button"
+          className={cn(
+            "rich-text-image-toolbar-button",
+            imageAttributes.imageWrap === wrap && "is-active"
+          )}
+          onMouseDown={(event) => event.preventDefault()}
+          onClick={() => updateImage({ imageWrap: wrap })}
+          aria-pressed={imageAttributes.imageWrap === wrap}
+        >
+          {wrap === "none" ? "No wrap" : `Wrap ${wrap}`}
+        </button>
+      ))}
+      <span className="rich-text-image-toolbar-divider" />
+      <button
+        type="button"
+        className={cn(
+          "rich-text-image-toolbar-button",
+          imageAttributes.imageCrop && "is-active"
+        )}
+        onMouseDown={(event) => event.preventDefault()}
+        onClick={() => updateImage({ imageCrop: !imageAttributes.imageCrop })}
+        aria-pressed={imageAttributes.imageCrop}
+        title="Crop uses the image's saved dimensions; resize first for a custom crop frame."
+      >
+        {imageAttributes.imageCrop ? "Show full" : "Crop"}
+      </button>
+    </div>
+  );
+}
 
 function createSlashCommandItems(
   onImageRequest: (range: Range) => void
@@ -128,7 +234,7 @@ export function RichTextEditor({
       TableRow,
       TableCell,
       TableHeader,
-      Image.configure({
+      BlogImage.configure({
         resize: {
           enabled: true,
           directions: ["top-left", "top-right", "bottom-left", "bottom-right"],
@@ -178,6 +284,7 @@ export function RichTextEditor({
   return (
     <div id={id} className={cn("border rounded-md", className)}>
       <BlockEditor editor={editor} />
+      {editor && <ImageToolbar editor={editor} />}
       <Dialog
         open={imageDialogOpen}
         onOpenChange={(open) => {
@@ -195,45 +302,38 @@ export function RichTextEditor({
               Paste the URL of the image you want to add.
             </DialogDescription>
           </DialogHeader>
-          <form
-            onSubmit={(event) => {
-              event.preventDefault();
-              insertImage();
-            }}
-          >
-            <Input
-              autoFocus
-              type="url"
-              placeholder="https://example.com/image.jpg"
-              value={imageUrl}
-              onChange={(event) => setImageUrl(event.target.value)}
-              aria-label="Image URL"
-            />
-            <Input
-              className="mt-3"
-              type="text"
-              placeholder="Alternative text (recommended)"
-              value={imageAlt}
-              onChange={(event) => setImageAlt(event.target.value)}
-              aria-label="Image alternative text"
-            />
-            <Input
-              className="mt-3"
-              type="text"
-              placeholder="Caption or image title (optional)"
-              value={imageTitle}
-              onChange={(event) => setImageTitle(event.target.value)}
-              aria-label="Image title"
-            />
-            <DialogFooter className="mt-4">
-              <Button type="button" variant="outline" onClick={closeImageDialog} className="cursor-pointer hover:-translate-y-px">
-                Cancel
-              </Button>
-              <Button type="submit" disabled={!imageUrl.trim()} className="cursor-pointer hover:-translate-y-px">
-                Insert image
-              </Button>
-            </DialogFooter>
-          </form>
+          <Input
+            autoFocus
+            type="url"
+            placeholder="https://example.com/image.jpg"
+            value={imageUrl}
+            onChange={(event) => setImageUrl(event.target.value)}
+            aria-label="Image URL"
+          />
+          <Input
+            className="mt-3"
+            type="text"
+            placeholder="Alternative text (recommended)"
+            value={imageAlt}
+            onChange={(event) => setImageAlt(event.target.value)}
+            aria-label="Image alternative text"
+          />
+          <Input
+            className="mt-3"
+            type="text"
+            placeholder="Caption or image title (optional)"
+            value={imageTitle}
+            onChange={(event) => setImageTitle(event.target.value)}
+            aria-label="Image title"
+          />
+          <DialogFooter className="mt-4">
+            <Button type="button" variant="outline" onClick={closeImageDialog} className="cursor-pointer hover:-translate-y-px">
+              Cancel
+            </Button>
+            <Button type="button" disabled={!imageUrl.trim()} className="cursor-pointer hover:-translate-y-px" onClick={insertImage}>
+              Insert image
+            </Button>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
     </div>
