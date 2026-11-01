@@ -408,7 +408,7 @@ function Page() {
               <div className={"grid gap-4 border-t pt-4"}>
                 <MilestoneFields control={control} index={index} />
                 <div className={"flex justify-end"}>
-                  <Button type={"button"} variant={"ghost"} onClick={() => setEditingMilestoneId(null)}>Done</Button>
+                  <Button type={"button"} size={"sm"} variant={"outline"} onClick={() => setEditingMilestoneId(null)}>Done</Button>
                 </div>
               </div>
             )}
