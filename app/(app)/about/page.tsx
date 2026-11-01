@@ -26,8 +26,12 @@ function Page() {
     return <FullScreenMessage><Spinner className="size-10" /></FullScreenMessage>;
   }
 
-  if(!coreConfig || !aboutConfig){
-    return <FullScreenMessage>Error loading configuration...</FullScreenMessage>;
+  if(!coreConfig){
+    return <FullScreenMessage>Error loading core configuration.</FullScreenMessage>;
+  }
+
+  if(!aboutConfig){
+    return <FullScreenMessage>Error loading about configuration.</FullScreenMessage>;
   }
 
   return (
