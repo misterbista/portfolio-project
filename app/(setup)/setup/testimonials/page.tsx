@@ -5,6 +5,7 @@ import styles from "./page.module.css";
 import {Identifier} from "@/hooks/useConfig";
 import {defaultValues, Model, schema} from "@/configuration/testimonials";
 import {Input} from "@/components/ui/input";
+import {DatePicker} from "@/components/ui/DatePicker";
 import {Label} from "@/components/ui/label";
 import {Button} from "@/components/ui/button";
 import {Spinner} from "@/components/ui/spinner";
@@ -49,7 +50,7 @@ function TestimonialFields({control, index}: {control: Control<Model>; index: nu
           render={({field, fieldState: {error}}) =>
             <div className={"grid gap-2"}>
               <Label htmlFor={`testimonials.${index}.date`}>Date</Label>
-              <Input {...field} id={`testimonials.${index}.date`} type={"date"} value={field.value || ""} className={cn("w-full", error && "border-destructive")}/>
+              <DatePicker {...field} id={`testimonials.${index}.date`} className={cn("w-full", error && "border-destructive")}/>
               {error && <small className={"text-destructive"}>{error.message}</small>}
             </div>
           }

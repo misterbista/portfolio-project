@@ -5,6 +5,7 @@ import styles from "./page.module.css";
 import {ConfigMode, Identifier, useConfig} from "@/hooks/useConfig";
 import {defaultValues, Model, schema} from "@/configuration/blog";
 import {Input} from "@/components/ui/input";
+import {DatePicker} from "@/components/ui/DatePicker";
 import {ArrayInput} from "@/components/ui/ArrayInput";
 import {Label} from "@/components/ui/label";
 import {Button} from "@/components/ui/button";
@@ -51,7 +52,7 @@ function BlogMetadataFields({control, index}: {control: Control<Model>; index: n
           render={({field, fieldState: {error}}) =>
             <div className={"grid gap-2"}>
               <Label htmlFor={`posts.${index}.date`}>Date</Label>
-              <Input {...field} id={`posts.${index}.date`} type={"date"} value={field.value || ""} className={cn("w-full", error && "border-destructive")}/>
+              <DatePicker {...field} id={`posts.${index}.date`} className={cn("w-full", error && "border-destructive")}/>
               {error && <small className={"text-destructive"}>{error.message}</small>}
             </div>
           }

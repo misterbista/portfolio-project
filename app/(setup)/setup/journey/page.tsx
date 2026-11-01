@@ -5,6 +5,7 @@ import styles from "./page.module.css";
 import {Identifier} from "@/hooks/useConfig";
 import {defaultValues, Model, schema} from "@/configuration/journey";
 import {Input} from "@/components/ui/input";
+import {DatePicker} from "@/components/ui/DatePicker";
 import {Textarea} from "@/components/ui/textarea";
 import {ArrayInput} from "@/components/ui/ArrayInput";
 import {Label} from "@/components/ui/label";
@@ -145,7 +146,7 @@ function MilestoneFields({control, index}: {control: Control<Model>; index: numb
           render={({field, fieldState: {error}}) =>
             <div className={"grid gap-2"}>
               <Label htmlFor={`milestones.${index}.start`}>Start date</Label>
-              <Input {...field} id={`milestones.${index}.start`} type={"date"} value={field.value || ""} className={cn("w-full", error && "border-destructive")}/>
+              <DatePicker {...field} id={`milestones.${index}.start`} className={cn("w-full", error && "border-destructive")}/>
               {error && <small className={"text-destructive"}>{error.message}</small>}
             </div>
           }
@@ -157,7 +158,7 @@ function MilestoneFields({control, index}: {control: Control<Model>; index: numb
           render={({field, fieldState: {error}}) =>
             <div className={"grid gap-2"}>
               <Label htmlFor={`milestones.${index}.end`}>End date</Label>
-              <Input {...field} id={`milestones.${index}.end`} type={"date"} value={field.value || ""} className={cn("w-full", error && "border-destructive")}/>
+              <DatePicker {...field} id={`milestones.${index}.end`} className={cn("w-full", error && "border-destructive")}/>
               {error && <small className={"text-destructive"}>{error.message}</small>}
             </div>
           }
