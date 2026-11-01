@@ -257,7 +257,7 @@ function MilestonePreview(
 ){
   return (<>
     <p className={"text-sm text-muted-foreground"}>
-      {milestone.title} ({milestone.start || "Unknown start"} - {milestone.end || "Ongoing"})
+      {milestone.title || "Untitled"} ({milestone.start || "Unknown start"} - {milestone.end || "Ongoing"})
     </p>
     <p className={"text-sm text-muted-foreground"}>
       {milestone.type} | {milestone.organisation || "No organization"} | {milestone.department || "No department"}
