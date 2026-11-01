@@ -14,10 +14,6 @@ export const schema = z.array(
       title: "Date",
       description: "The publication date shown to readers. Use a clear date such as 2026-01-15.",
     }),
-    contentPath: z.string().min(1, "Content path is required.").meta({
-      title: "Content Path",
-      description: "The repository path for this post's rich-text JSON file. Keep files inside blogs/ and use one file per post.",
-    }),
     categories: z.array(z.string().min(1, "Category is required.").meta({
       title: "Category",
       description: "A category used to group the blog post.",
@@ -34,7 +30,7 @@ export const schema = z.array(
     }),
   }).meta({
     title: "Blog Post",
-    description: "Metadata that identifies a blog post and its rich-text JSON content.",
+    description: "Metadata that identifies a blog post whose rich-text HTML is stored in a file named after its ID.",
   }),
 ).meta({
   title: "Blog Posts",
