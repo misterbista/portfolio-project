@@ -288,7 +288,7 @@ function ProjectCardHeader(
 }
 
 function Page() {
-  const {config: journey} = useConfig(Identifier.Journey, undefined, ConfigMode.Public);
+  const {config: journey} = useConfig(Identifier.Journey, undefined, ConfigMode.Private);
   const {
     isLoadingConfig,
     saveConfig,
@@ -300,9 +300,7 @@ function Page() {
   } = useConfigurationForm(
     Identifier.Projects,
     schema,
-    defaultValues,
-    undefined,
-    ConfigMode.Public
+    defaultValues
   );
   const [editingProjectId, setEditingProjectId] = useState<string | null>(null);
   const {fields: projects, append, remove} = useFieldArray({control, name: "projects", keyName: "fieldArrayId"});
