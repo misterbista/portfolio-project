@@ -387,7 +387,7 @@ function Page() {
             size={"sm"}
             variant={"outline"}
             onClick={() => {
-              const milestone = withConfigurationId(emptyMilestone);
+              const milestone = withConfigurationId(emptyMilestone, "milestone");
               append(milestone);
               setEditingMilestoneId(milestone.id);
             }}
