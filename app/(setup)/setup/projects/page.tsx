@@ -18,6 +18,7 @@ import {useConfigurationForm} from "@/hooks/useConfigurationForm";
 import {withConfigurationId} from "@/lib/configurationIds";
 import {Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
 import {RichTextEditor} from "@/components/ui/RichTextEditor";
+import {generateMilestoneLabel} from "@/lib/configurationUtils";
 
 const emptyProject: Model["projects"][number] = {
   id: "",
@@ -30,23 +31,6 @@ const emptyProject: Model["projects"][number] = {
   seoKeywords: [],
   milestoneId: "",
 };
-
-function generateMilestoneLabel(milestone: Exclude<ReturnType<typeof useConfig<Identifier.Journey>>["config"], undefined>["milestones"][number]) {
-  const { title, start, end, department, organisation } = milestone;
-
-  const bigDot = "•";
-
-  const departmentPart = department ? `${department} ` : "";
-  const organisationPart = department ? `@ ${organisation}` : organisation || "";
-  const details = [departmentPart, organisationPart]
-    .filter(Boolean)
-    .map((part) => part.trim())
-    .join(" ")
-    .trim();
-  const datePart = start ? `(${start}${end ? ` to ${end}` : ""})` : "";
-
-  return `${title} ${details.length ? (bigDot + " " + details) : details} ${datePart}`.trim();
-}
 
 function ProjectLinksFields({control, projectIndex}: {control: Control<Model>; projectIndex: number}) {
   const {fields, append, remove} = useFieldArray({control, name: `projects.${projectIndex}.links` as const});
