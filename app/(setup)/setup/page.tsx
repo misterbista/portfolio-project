@@ -54,13 +54,13 @@ function Page() {
         <ConfigurationGroupCard
           icon={<Milestone/>}
           title="Journey"
-          description="Manage journey milestones."
+          description="Manage your journey and milestones."
           pagePath="/setup/journey"
         />
         <ConfigurationGroupCard
           icon={<FolderOpenDot/>}
           title="Projects"
-          description="Manage projects and milestones."
+          description="Manage your projects and related data."
           pagePath="/setup/projects"
         />
         <ConfigurationGroupCard
@@ -72,7 +72,7 @@ function Page() {
         <ConfigurationGroupCard
           icon={<BriefcaseBusiness/>}
           title="Services"
-          description="Manage offered services."
+          description="Manage services you offer."
           pagePath="/setup/services"
         />
         <ConfigurationGroupCard
@@ -90,13 +90,13 @@ function Page() {
         <ConfigurationGroupCard
           icon={<NotebookPen/>}
           title="Blog"
-          description="Write rich text blog posts."
+          description="Write blog posts."
           pagePath="/setup/blogs"
         />
         <ConfigurationGroupCard
           icon={<Link/>}
           title="Quick Links"
-          description="Manage downloads and links."
+          description="Manage links to show on the left panel."
           pagePath="/setup/quick-links"
         />
       </div>
