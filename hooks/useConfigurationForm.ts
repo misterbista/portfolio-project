@@ -9,7 +9,7 @@ import {
 } from "@/hooks/useConfig";
 
 export function useConfigurationForm<
-  TSchema extends z.ZodObject<any>,
+  TSchema extends z.ZodObject<any> | z.ZodArray<any>,
   TIdentifier extends Identifier
 >(
   identifier: TIdentifier,

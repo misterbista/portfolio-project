@@ -284,6 +284,7 @@ function MilestoneCardHeader(
       <div className={"min-w-0"}>
         <p className={"truncate font-medium text-muted-foreground"}>#{id}</p>
       </div>
+
       <div className={"flex shrink-0 gap-2"}>
         {!isCurrentlyEditing && <Button
           type={"button"}
