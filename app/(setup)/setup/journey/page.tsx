@@ -50,6 +50,7 @@ function AchievementFields({control, index}: {control: Control<Model>; index: nu
           <Plus /> Add achievement
         </Button>
       </div>
+
       {fields.map((field, achievementIndex) => (
         <div key={field.id} className={"grid gap-2 md:grid-cols-[1fr_1fr_auto]"}>
           <Controller
@@ -62,6 +63,7 @@ function AchievementFields({control, index}: {control: Control<Model>; index: nu
               </div>
             }
           />
+
           <Controller
             control={control}
             name={`milestones.${index}.achievements.${achievementIndex}.description`}
@@ -72,6 +74,7 @@ function AchievementFields({control, index}: {control: Control<Model>; index: nu
               </div>
             }
           />
+
           <Button type={"button"} size={"icon-sm"} variant={"ghost"} className={"text-destructive"} onClick={() => remove(achievementIndex)} aria-label={"Delete achievement"}>
             <Trash2 />
           </Button>
@@ -259,6 +262,7 @@ function MilestonePreview(
     <p className={"text-sm text-muted-foreground"}>
       {milestone.title || "Untitled"} ({milestone.start || "Unknown start"} - {milestone.end || "Ongoing"})
     </p>
+
     <p className={"text-sm text-muted-foreground"}>
       {milestone.type} | {milestone.organisation || "No organization"} | {milestone.department || "No department"}
     </p>
@@ -290,6 +294,7 @@ function MilestoneCardHeader(
         >
           <Pencil/>
         </Button>}
+
         <Button
           type={"button"}
           size={"icon-sm"}
@@ -395,6 +400,7 @@ function Page() {
             <Plus /> Add milestone
           </Button>
         </div>
+
         {milestonesWatch.map((milestone, index) => (
           <div key={milestone.id} className={"grid gap-4 rounded-xl border bg-card p-4 shadow-sm"}>
             <MilestoneCardHeader
@@ -408,6 +414,7 @@ function Page() {
                 remove(index);
               }}
             />
+
             {editingMilestoneId === milestone.id && (
               <div className={"grid gap-4 border-t pt-4"}>
                 <MilestoneFields control={control} index={index} />
@@ -416,11 +423,13 @@ function Page() {
                 </div>
               </div>
             )}
+
             {editingMilestoneId !== milestone.id && (
               <div className={"grid gap-1 border-t pt-4"}>
                 <MilestonePreview milestone={milestone}/>
               </div>
             )}
+
             {editingMilestoneId !== milestone.id && form.formState.errors.milestones?.[index] && (
               <div className={"text-sm text-destructive"}>
                 Please fix the errors in this milestone.

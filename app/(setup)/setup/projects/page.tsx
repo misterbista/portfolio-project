@@ -43,6 +43,7 @@ function ProjectLinksFields({control, projectIndex}: {control: Control<Model>; p
           <Plus /> Add link
         </Button>
       </div>
+
       {fields.map((field, linkIndex) => (
         <div key={field.id} className={"grid gap-2 md:grid-cols-[1fr_1fr_auto]"}>
           <Controller
@@ -55,6 +56,7 @@ function ProjectLinksFields({control, projectIndex}: {control: Control<Model>; p
               </div>
             }
           />
+
           <Controller
             control={control}
             name={`projects.${projectIndex}.links.${linkIndex}.url` as const}
@@ -65,6 +67,7 @@ function ProjectLinksFields({control, projectIndex}: {control: Control<Model>; p
               </div>
             }
           />
+
           <Button type={"button"} size={"icon-sm"} variant={"ghost"} className={"text-destructive"} onClick={() => remove(linkIndex)} aria-label={"Delete project link"}>
             <Trash2 />
           </Button>
@@ -85,6 +88,7 @@ function KeypointFields({control, index: projectIndex}: {control: Control<Model>
           <Plus /> Add key point
         </Button>
       </div>
+
       {fields.map((field, index) => (
         <div key={field.id} className={"grid gap-2 md:grid-cols-[1fr_1fr_auto]"}>
           <Controller
@@ -97,6 +101,7 @@ function KeypointFields({control, index: projectIndex}: {control: Control<Model>
               </div>
             }
           />
+
           <Controller
             control={control}
             name={`projects.${projectIndex}.keypoints.${index}.value` as const}
@@ -107,6 +112,7 @@ function KeypointFields({control, index: projectIndex}: {control: Control<Model>
               </div>
             }
           />
+
           <Button type={"button"} size={"icon-sm"} variant={"ghost"} className={"text-destructive"} onClick={() => remove(index)} aria-label={"Delete key point"}>
             <Trash2 />
           </Button>
@@ -225,6 +231,7 @@ function ProjectPreview({project}: {project: Model["projects"][number]}) {
     <p className={"truncate font-medium text-muted-foreground"}>
       {project.title || "Untitled project"}
     </p>
+
     <p className={"truncate text-sm text-muted-foreground"}>
       {project.description || "No description yet"}
     </p>
@@ -246,6 +253,7 @@ function ProjectCardHeader(
       <div className={"min-w-0"}>
         <p className={"truncate font-medium text-muted-foreground"}>#{id}</p>
       </div>
+
       <div className={"flex shrink-0 gap-2"}>
         {!isCurrentlyEditing && <Button
           type={"button"}
@@ -256,6 +264,7 @@ function ProjectCardHeader(
         >
           <Pencil/>
         </Button>}
+
         <Button
           type={"button"}
           size={"icon-sm"}
@@ -346,6 +355,7 @@ function Page() {
                 remove(index);
               }}
             />
+
             {editingProjectId === project.id && (
               <div className={"grid gap-4 border-t pt-4"}>
                 <ProjectFields control={control} index={index} journey={journey} />
@@ -354,11 +364,13 @@ function Page() {
                 </div>
               </div>
             )}
+
             {editingProjectId !== project.id && (
               <div className={"grid gap-1 border-t pt-4"}>
                 <ProjectPreview project={project}/>
               </div>
             )}
+
             {editingProjectId !== project.id && form.formState.errors.projects?.[index] && (
               <div className={"text-sm text-destructive"}>
                 Please fix the errors in this project.
