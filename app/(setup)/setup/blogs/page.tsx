@@ -122,6 +122,12 @@ function BlogForm(
   const [contentError, setContentError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (config !== undefined) {
+      setContent(config);
+    }
+  }, [config]);
+
+  useEffect(() => {
     if (contentError && !isNullOrWhitespace(content)) {
       setContentError(null);
     }
