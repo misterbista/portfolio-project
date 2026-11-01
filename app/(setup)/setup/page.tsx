@@ -34,16 +34,16 @@ function Page() {
           pagePath="/setup/core"
         />
         <ConfigurationGroupCard
-          icon={<AlignJustify/>}
-          title="Left Panel"
-          description="Customize the left panel."
-          pagePath="/setup/left-panel"
-        />
-        <ConfigurationGroupCard
           icon={<House/>}
           title="Home"
           description="Customize the Landing page."
           pagePath="/setup/home"
+        />
+        <ConfigurationGroupCard
+          icon={<AlignJustify/>}
+          title="Left Panel"
+          description="Customize the left panel."
+          pagePath="/setup/left-panel"
         />
         <ConfigurationGroupCard
           icon={<User/>}
