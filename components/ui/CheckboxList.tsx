@@ -27,6 +27,9 @@ function CheckboxList(
           <span className={"text-sm font-medium"}>{option.label}</span>
         </label>
       ))}
+      {(!options || options.length === 0) && (
+        <div className={"text-sm text-muted-foreground"}>No options available.</div>
+      )}
     </div>
   );
 }
