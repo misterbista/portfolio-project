@@ -20,6 +20,7 @@ type DatePickerProps = Omit<
 function DatePicker({className, value, onChange, ...props}: DatePickerProps) {
   const parsedDate = value ? parseISO(value) : undefined;
   const date = parsedDate && isValid(parsedDate) ? parsedDate : undefined;
+  const currentYear = new Date().getFullYear();
 
   return (
     <Popover>
@@ -42,6 +43,9 @@ function DatePicker({className, value, onChange, ...props}: DatePickerProps) {
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0">
         <Calendar
+          captionLayout="dropdown"
+          startMonth={new Date(currentYear - 100, 0)}
+          endMonth={new Date(currentYear + 100, 11)}
           mode="single"
           selected={date}
           onSelect={(selectedDate) =>
