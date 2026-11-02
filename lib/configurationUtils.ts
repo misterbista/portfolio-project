@@ -12,7 +12,7 @@ export function generateMilestoneLabel(milestone: Exclude<ReturnType<typeof useC
     .map((part) => part.trim())
     .join(" ")
     .trim();
-  const datePart = start ? `(${start}${end ? ` to ${end}` : ""})` : "";
+  const datePart = start ? `(${start}${end ? ` — ${end}` : ""})` : "";
 
   return `${title} ${details.length ? (bigDot + " " + details) : details} ${datePart}`.trim();
 }
