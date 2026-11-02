@@ -10,13 +10,12 @@ import {Button} from "@/components/ui/button";
 import {Spinner} from "@/components/ui/spinner";
 import FullScreenMessage from "@/components/ui/FullScreenMessage";
 import ConfigurationFormWrapper from "@/components/ui/ConfigurationFormWrapper";
-import {HelpCircle, Pencil, Plus, Trash2} from "lucide-react";
+import {Pencil, Plus, Trash2} from "lucide-react";
 import {cn} from "@/lib/utils";
 import {Control, Controller, useFieldArray, useWatch} from "react-hook-form";
 import {useConfigurationForm} from "@/hooks/useConfigurationForm";
 import DynamicLucideReactIcon, {LucideReactIconName} from "@/components/ui/DynamicLucideReactIcon";
-import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
-import SmartLink from "@/components/ui/SmartLink";
+import {LucideReactIconPicker} from "@/components/ui/LucideReactIconPicker";
 
 const emptyLink: Model["links"][number] = {
   title: "",
@@ -44,18 +43,8 @@ function LinkFields({control, index}: {control: Control<Model>; index: number}) 
         name={`links.${index}.icon`}
         render={({field, fieldState: {error}}) =>
           <div className={"grid gap-2"}>
-            <Label htmlFor={`links.${index}.icon`}>
-              Icon name
-              <Tooltip>
-                <TooltipTrigger type="button">
-                  <HelpCircle className={"ml-1 inline h-4 w-4 text-muted-foreground"} />
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p>Use <b>Component Name</b> From <SmartLink href={"https://lucide.dev/icons"} className={"underline"}>Lucide</SmartLink>.</p>
-                </TooltipContent>
-              </Tooltip>
-            </Label>
-            <Input {...field} id={`links.${index}.icon`} placeholder={"Icon name"} className={cn("w-full", error && "border-destructive")}/>
+            <Label htmlFor={`links.${index}.icon`}>Icon name</Label>
+            <LucideReactIconPicker {...field} id={`links.${index}.icon`} className={cn("w-full", error && "border-destructive")} aria-invalid={!!error}/>
             {error && <small className={"text-destructive"}>{error.message}</small>}
           </div>
         }

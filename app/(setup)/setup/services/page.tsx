@@ -10,14 +10,13 @@ import {Button} from "@/components/ui/button";
 import {Spinner} from "@/components/ui/spinner";
 import FullScreenMessage from "@/components/ui/FullScreenMessage";
 import ConfigurationFormWrapper from "@/components/ui/ConfigurationFormWrapper";
-import {HelpCircle, Pencil, Plus, Trash2} from "lucide-react";
+import {Pencil, Plus, Trash2} from "lucide-react";
 import {cn} from "@/lib/utils";
 import {Control, Controller, useFieldArray, useWatch} from "react-hook-form";
 import {RichTextEditor} from "@/components/ui/RichTextEditor";
 import {withConfigurationId} from "@/lib/configurationIds";
 import {useConfigurationForm} from "@/hooks/useConfigurationForm";
-import SmartLink from "@/components/ui/SmartLink";
-import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
+import {LucideReactIconPicker} from "@/components/ui/LucideReactIconPicker";
 
 const emptyService: Model["services"][number] = {
   id: "",
@@ -48,18 +47,8 @@ function ServiceFields({control, index}: {control: Control<Model>; index: number
           name={`services.${index}.icon`}
           render={({field, fieldState: {error}}) =>
             <div className={"grid gap-2"}>
-              <Label htmlFor={`services.${index}.icon`}>
-                Icon name
-                <Tooltip>
-                  <TooltipTrigger type="button">
-                    <HelpCircle className={"ml-1 inline h-4 w-4 text-muted-foreground"} />
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Use <b>Component Name</b> From <SmartLink href={"https://lucide.dev/icons"} className={"underline"}>Lucide</SmartLink>.</p>
-                  </TooltipContent>
-                </Tooltip>
-              </Label>
-              <Input {...field} id={`services.${index}.icon`} placeholder={"Optional icon name"} className={cn("w-full", error && "border-destructive")}/>
+              <Label htmlFor={`services.${index}.icon`}>Icon name</Label>
+              <LucideReactIconPicker {...field} id={`services.${index}.icon`} className={cn("w-full", error && "border-destructive")} aria-invalid={!!error}/>
               {error && <small className={"text-destructive"}>{error.message}</small>}
             </div>
           }
