@@ -52,7 +52,19 @@ function AchievementFields({control, index}: {control: Control<Model>; index: nu
         </Button>
       </div>
 
-      {fields.map((field, achievementIndex) => (
+      {fields.map((field, achievementIndex) => (<>
+        <Controller
+          control={control}
+          name={`milestones.${index}.achievements.${achievementIndex}.on`}
+          render={({field, fieldState: {error}}) =>
+            <div className={"grid gap-2"}>
+              <Label htmlFor={`milestones.${index}.achievements.${achievementIndex}.on`}>End date</Label>
+              <DatePicker {...field} id={`milestones.${index}.achievements.${achievementIndex}.on`} className={cn("w-full", error && "border-destructive")}/>
+              {error && <small className={"text-destructive"}>{error.message}</small>}
+            </div>
+          }
+        />
+
         <div key={field.id} className={"grid gap-2 md:grid-cols-[1fr_1fr_auto]"}>
           <Controller
             control={control}
@@ -80,7 +92,7 @@ function AchievementFields({control, index}: {control: Control<Model>; index: nu
             <Trash2 />
           </Button>
         </div>
-      ))}
+      </>))}
     </div>
   );
 }
