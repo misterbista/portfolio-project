@@ -17,6 +17,8 @@ import {RichTextEditor} from "@/components/ui/RichTextEditor";
 import {withConfigurationId} from "@/lib/configurationIds";
 import {useConfigurationForm} from "@/hooks/useConfigurationForm";
 import {LucideReactIconPicker} from "@/components/ui/LucideReactIconPicker";
+import DynamicLucideReactIcon, {LucideReactIconName} from "@/components/ui/DynamicLucideReactIcon";
+import {stripHtmlTags} from "@/lib/html";
 
 const emptyService: Model["services"][number] = {
   id: "",
@@ -85,11 +87,11 @@ function ServiceFields({control, index}: {control: Control<Model>; index: number
 function ServicePreview({service}: {service: Model["services"][number]}) {
   return (<>
     <p className={"truncate font-medium text-muted-foreground"}>
-      {service.title || "Untitled service"}
+      <DynamicLucideReactIcon name={service.icon as LucideReactIconName} className={"mr-2 inline"} size={16}/>{service.title || "Untitled service"}
     </p>
 
     <p className={"truncate text-sm text-muted-foreground"}>
-      {service.description || "No description yet"}
+      {stripHtmlTags(service.description) || "No description yet"}
     </p>
   </>);
 }
