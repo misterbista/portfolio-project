@@ -124,6 +124,7 @@ const EXTENSION_TO_TYPE_MAP: Record<string, FileType> = {
   webp: "Image",
   svg: "Image",
   ico: "Image",
+  heic: "Image",
 
   // Videos
   mp4: "Video",
@@ -131,6 +132,7 @@ const EXTENSION_TO_TYPE_MAP: Record<string, FileType> = {
   avi: "Video",
   mkv: "Video",
   webm: "Video",
+  hevc: "Video",
 
   // Audio
   mp3: "Audio",
