@@ -19,63 +19,6 @@ export type FileType =
   | "Font"
   | "Other";
 
-const MIME_TYPE_MAP: Record<string, FileType> = {
-  // Text
-  "text/plain": "Text",
-  "text/html": "HTML",
-  "text/htm": "HTML",
-  "text/css": "CSS",
-  "text/csv": "CSV",
-  "text/xml": "XML",
-  "text/markdown": "Markdown",
-  "text/javascript": "JavaScript",
-
-  // Structured data
-  "application/json": "JSON",
-  "application/ld+json": "JSON",
-  "application/geo+json": "JSON",
-  "application/xml": "XML",
-
-  // Documents
-  "application/pdf": "PDF",
-  "application/rtf": "RTF",
-  "application/msword": "Word",
-  "application/vnd.openxmlformats-officedocument.wordprocessingml.document": "Word",
-
-  "application/vnd.ms-excel": "Excel",
-  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": "Excel",
-
-  "application/vnd.ms-powerpoint": "PowerPoint",
-  "application/vnd.openxmlformats-officedocument.presentationml.presentation": "PowerPoint",
-
-  // Archives
-  "application/zip": "Archive",
-  "application/x-zip-compressed": "Archive",
-  "application/x-rar-compressed": "Archive",
-  "application/vnd.rar": "Archive",
-  "application/gzip": "Archive",
-  "application/x-gzip": "Archive",
-  "application/x-7z-compressed": "Archive",
-  "application/x-tar": "Archive",
-
-  // JavaScript
-  "application/javascript": "JavaScript",
-  "application/x-javascript": "JavaScript",
-
-  // Fonts
-  "font/woff": "Font",
-  "font/woff2": "Font",
-  "font/ttf": "Font",
-  "font/otf": "Font",
-  "application/vnd.ms-opentype": "Font",
-};
-
-const MIME_PREFIX_MAP: Record<string, FileType> = {
-  "image/": "Image",
-  "video/": "Video",
-  "audio/": "Audio",
-};
-
 const EXTENSION_TO_TYPE_MAP: Record<string, FileType> = {
   // Text
   txt: "Text",
