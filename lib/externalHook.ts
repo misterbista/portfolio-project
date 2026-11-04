@@ -24,10 +24,6 @@ type ExternalHook<T> = {
   get: () => T,
 }
 
-// export const {
-//   useState: useTestState,
-//   update: updateTestState
-// } = createExternalHook(1);
 /**
  * Creates a small external state store with a React hook for subscribing and an externally callable updater.
  *
