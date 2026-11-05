@@ -2,11 +2,7 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import {
-  ConfigMode,
-  Identifier,
-  useConfig,
-} from "@/hooks/useConfig";
+import {Identifier, useConfig} from "@/hooks/useConfig";
 
 export function useConfigurationForm<
   TSchema extends z.ZodObject<any> | z.ZodArray<any>,
@@ -15,20 +11,18 @@ export function useConfigurationForm<
   identifier: TIdentifier,
   schema: TSchema,
   defaultValues: z.input<TSchema>,
-  query?: Record<string, string | number | null>,
-  mode?: ConfigMode
+  query?: Record<string, string | number | null>
 ) {
+
   type Input = z.input<TSchema>;
   type Output = z.output<TSchema>;
-
-  mode ??= ConfigMode.Private;
 
   const {
     config,
     isLoadingConfig,
     saveConfig,
     isSavingConfig,
-  } = useConfig(identifier, query, mode);
+  } = useConfig(identifier, query);
 
   const form = useForm<Input, any, Output>({
     resolver: zodResolver(schema) as any,
