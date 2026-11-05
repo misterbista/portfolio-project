@@ -1,17 +1,24 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio
 
-## Getting Started
+A configurable portfolio site built with `Next.js`.
 
-First, run the development server:
+## Publish your own portfolio
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+1. Fork this repository.
+2. In the fork, open **Settings → Pages** and set **Source** to **GitHub Actions**.
+3. Edit the JSON files in public/config/, or use the site's **Setup** pages.
+
+## Run locally
+
+### Install dependencies and start the development server:
+
+```sh
+  pnpm install
+  pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Create the static export with:
+
+```sh
+  pnpm build
+```
