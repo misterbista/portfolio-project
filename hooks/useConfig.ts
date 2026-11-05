@@ -11,6 +11,7 @@ import {Model as SkillsConfigurationModel} from "@/configuration/skills";
 import {Model as TestimonialsConfigurationModel} from "@/configuration/testimonials";
 import {Model as GalleryConfigurationModel} from "@/configuration/gallery";
 import {Model as DownloadsConfigurationModel} from "@/configuration/quickLinks";
+import {Model as BlogsConfigurationModel} from "@/configuration/blogs";
 import {Model as BlogConfigurationModel} from "@/configuration/blog";
 import {Model as ServicesConfigurationModel} from "@/configuration/services";
 import {toast} from "sonner";
@@ -44,8 +45,8 @@ type ConfigurationModelMap = {
   [Identifier.Testimonials]: TestimonialsConfigurationModel;
   [Identifier.Gallery]: GalleryConfigurationModel;
   [Identifier.QuickLinks]: DownloadsConfigurationModel;
-  [Identifier.Blogs]: BlogConfigurationModel;
-  [Identifier.Blog]: string;
+  [Identifier.Blogs]: BlogsConfigurationModel;
+  [Identifier.Blog]: BlogConfigurationModel;
   [Identifier.Services]: ServicesConfigurationModel;
 };
 
@@ -59,53 +60,36 @@ type ConfigHookResult<T extends Identifier> = {
 };
 
 const configurationPaths: Record<Identifier, (query?: ConfigQuery) => string> = {
-  [Identifier.Core]: _ => `/config/core.json`,
-  [Identifier.LeftPanel]: _ => `/config/left-panel.json`,
-  [Identifier.Home]: _ => `/config/home.json`,
-  [Identifier.About]: _ => `/config/about.json`,
-  [Identifier.Journey]: _ => `/config/journey.json`,
-  [Identifier.Projects]: _ => `/config/projects.json`,
-  [Identifier.Skills]: _ => `/config/skills.json`,
-  [Identifier.Testimonials]: _ => `/config/testimonials.json`,
-  [Identifier.Gallery]: _ => `/config/gallery.json`,
-  [Identifier.QuickLinks]: _ => `/config/quick-links.json`,
-  [Identifier.Blogs]: _ => `/config/blogs.json`,
-  [Identifier.Blog]: (query) => `/config/blogs/${query ? query['id'] : "NA"}`,
-  [Identifier.Services]: _ => `/config/services.json`,
+  [Identifier.Core]: _ => `public/config/core.json`,
+  [Identifier.LeftPanel]: _ => `public/config/left-panel.json`,
+  [Identifier.Home]: _ => `public/config/home.json`,
+  [Identifier.About]: _ => `public/config/about.json`,
+  [Identifier.Journey]: _ => `public/config/journey.json`,
+  [Identifier.Projects]: _ => `public/config/projects.json`,
+  [Identifier.Skills]: _ => `public/config/skills.json`,
+  [Identifier.Testimonials]: _ => `public/config/testimonials.json`,
+  [Identifier.Gallery]: _ => `public/config/gallery.json`,
+  [Identifier.QuickLinks]: _ => `public/config/quick-links.json`,
+  [Identifier.Blogs]: _ => `public/config/blogs.json`,
+  [Identifier.Blog]: (query) => `public/config/blogs/${query ? query["id"] : "empty"}.json`,
+  [Identifier.Services]: _ => `public/config/services.json`,
 };
 
-export enum ConfigMode {
-  Public = "public",
-  Private = "private"
-}
-
-export function useConfig<T extends Identifier>(configIdentifier: T, query?: ConfigQuery, mode?: ConfigMode): ConfigHookResult<T>{
+export function useConfig<T extends Identifier>(configIdentifier: T, query?: ConfigQuery): ConfigHookResult<T>{
   const queryClient = useQueryClient();
-  mode ??= ConfigMode.Public;
 
   const {
-    data: publicConfigData,
-    isLoading: isLoadingPublicConfig
+    data,
+    isLoading
   } = useQuery({
-    queryKey: [configIdentifier, query, "Public"],
-    queryFn: async () => await getConfig(configIdentifier, query),
-    refetchOnWindowFocus: false,
-    enabled: mode === ConfigMode.Public
-  });
-
-  const {
-    data: privateConfigData,
-    isLoading: isLoadingPrivateConfig
-  } = useQuery({
-    queryKey: [configIdentifier, query, "Private"],
-    queryFn: async () => await getConfigUsingPat(
+    queryKey: [configIdentifier, query],
+    queryFn: async () => await getConfig(
       configIdentifier,
       query,
       gitHubPat,
       gitHubSession?.repository?.full_name || ""
     ),
-    refetchOnWindowFocus: false,
-    enabled: mode === ConfigMode.Private
+    refetchOnWindowFocus: false
   });
 
   const {
@@ -136,27 +120,11 @@ export function useConfig<T extends Identifier>(configIdentifier: T, query?: Con
   });
 
   return {
-    config: mode === ConfigMode.Public ? publicConfigData : privateConfigData,
-    isLoadingConfig: mode === ConfigMode.Public ? isLoadingPublicConfig : isLoadingPrivateConfig,
+    config: data,
+    isLoadingConfig: isLoading,
     saveConfig: mutateAsync,
     isSavingConfig: isPending
   };
-}
-
-async function getConfig<T extends Identifier>(configIdentifier: T, query?: ConfigQuery): Promise<ConfigurationModel<T>> {
-  const configPathFunction = configurationPaths[configIdentifier];
-  const configPath = configPathFunction(query);
-  const response = await fetch(configPath);
-  if (!response.ok) {
-    throw new Error(`Failed to fetch config: ${configIdentifier}`);
-  }
-
-  const text = await response.text();
-  try {
-    return JSON.parse(text) as ConfigurationModel<T>;
-  } catch {
-    return text as ConfigurationModel<T>;
-  }
 }
 
 async function saveConfig<T extends Identifier>(
@@ -167,11 +135,8 @@ async function saveConfig<T extends Identifier>(
   repo: string
 ): Promise<void> {
   const configPathFunction = configurationPaths[configIdentifier];
-  const configPath = configPathFunction(query);
-  const filePath = configPath.replace(/^\/+/, "");
-  const content = typeof newConfig === "string"
-    ? newConfig as string
-    : JSON.stringify(newConfig, null, 2);
+  const filePath = configPathFunction(query);
+  const content = JSON.stringify(newConfig, null, 2);
   await uploadGitHubFiles(
     gitHubPat ?? "",
     repo,
@@ -185,24 +150,19 @@ async function saveConfig<T extends Identifier>(
   )
 }
 
-async function getConfigUsingPat<T extends Identifier>(
+async function getConfig<T extends Identifier>(
   configIdentifier: T,
   query: ConfigQuery | undefined,
   gitHubPat: string | null,
   repo: string
 ): Promise<ConfigurationModel<T>> {
   const configPathFunction = configurationPaths[configIdentifier];
-  const configPath = configPathFunction(query);
-  const filePath = configPath.replace(/^\/+/, "");
+  const filePath = configPathFunction(query);
   const response = await getGitHubFileContent(
     gitHubPat ?? "",
     repo,
     filePath
   );
 
-  try {
-    return JSON.parse(response) as ConfigurationModel<T>;
-  } catch {
-    return response as ConfigurationModel<T>;
-  }
+  return JSON.parse(response) as ConfigurationModel<T>;
 }
