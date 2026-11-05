@@ -2,7 +2,7 @@
 
 import React, {useMemo, useState} from "react";
 import styles from "./page.module.css";
-import {ConfigMode, Identifier, useConfig} from "@/hooks/useConfig";
+import {Identifier, useConfig} from "@/hooks/useConfig";
 import {defaultValues, Model, schema} from "@/configuration/skills";
 import {Input} from "@/components/ui/input";
 import {Label} from "@/components/ui/label";
@@ -160,8 +160,8 @@ function SkillCardHeader(
 }
 
 function Page() {
-  const {config: journey} = useConfig(Identifier.Journey, undefined, ConfigMode.Private);
-  const {config: projectsConfig} = useConfig(Identifier.Projects, undefined, ConfigMode.Private);
+  const {config: journey} = useConfig(Identifier.Journey);
+  const {config: projectsConfig} = useConfig(Identifier.Projects);
   const {
     isLoadingConfig,
     saveConfig,

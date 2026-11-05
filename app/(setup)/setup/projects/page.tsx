@@ -2,7 +2,7 @@
 
 import React, {useMemo, useState} from "react";
 import styles from "./page.module.css";
-import {ConfigMode, Identifier, useConfig} from "@/hooks/useConfig";
+import {Identifier, useConfig} from "@/hooks/useConfig";
 import {defaultValues, Model, schema} from "@/configuration/projects";
 import {Input} from "@/components/ui/input";
 import {ArrayInput} from "@/components/ui/ArrayInput";
@@ -282,7 +282,7 @@ function ProjectCardHeader(
 }
 
 function Page() {
-  const {config: journey} = useConfig(Identifier.Journey, undefined, ConfigMode.Private);
+  const {config: journey} = useConfig(Identifier.Journey);
   const {
     isLoadingConfig,
     saveConfig,
