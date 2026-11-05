@@ -422,8 +422,8 @@ function FileIconWithCheckbox(
   const showCheckbox = hovered || isAnySelected;
 
   const isImage = getFileTypeFromExtension(file.name) === "Image";
-  const thumbnailUrl = isImage && file.path.startsWith("uploads/") && !file.path.startsWith("uploads_thumbs/")
-    ? file.download_url.replace("/uploads/", "/uploads_thumbs/")
+  const thumbnailUrl = isImage && file.path.startsWith("public/uploads/") && !file.path.startsWith("public/uploads_thumbs/")
+    ? file.download_url.replace("/public/uploads/", "/public/uploads_thumbs/")
     : file.download_url;
   const [imageUrl, setImageUrl] = useState(thumbnailUrl);
 
