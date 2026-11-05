@@ -2,8 +2,8 @@
 
 import React, {useEffect, useState} from "react";
 import styles from "./page.module.css";
-import {ConfigMode, Identifier, useConfig} from "@/hooks/useConfig";
-import {defaultValues, Model, schema} from "@/configuration/blog";
+import {Identifier, useConfig} from "@/hooks/useConfig";
+import {defaultValues, Model, schema} from "@/configuration/blogs";
 import {Input} from "@/components/ui/input";
 import {DatePicker} from "@/components/ui/DatePicker";
 import {ArrayInput} from "@/components/ui/ArrayInput";
@@ -114,16 +114,15 @@ function BlogForm(
     saveConfig: saveChildContent
   } = useConfig(
     Identifier.Blog,
-    {id: selectedPostId},
-    ConfigMode.Private
+    {id: selectedPostId}
   );
 
-  const [content, setContent] = useState<string>(config || "");
+  const [content, setContent] = useState<string>(config?.content || "");
   const [contentError, setContentError] = useState<string | null>(null);
 
   useEffect(() => {
     if (config !== undefined) {
-      setContent(config);
+      setContent(config.content || "");
     }
   }, [config]);
 
@@ -148,7 +147,7 @@ function BlogForm(
       return;
     }
 
-    await saveChildContent(content);
+    await saveChildContent({ content });
     await onSave();
     onClose();
   }
