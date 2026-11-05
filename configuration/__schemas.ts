@@ -8,6 +8,7 @@ import {schema as gallerySchema} from "./gallery";
 import {schema as skillsSchema} from "./skills";
 import {schema as servicesSchema} from "./services";
 import {schema as testimonialsSchema} from "./testimonials";
+import {schema as blogsSchema} from "./blogs";
 import {schema as blogSchema} from "./blog";
 import {schema as quickLinksSchema} from "./quickLinks";
 
@@ -52,6 +53,10 @@ export default [
   {
     title: "Testimonials",
     schema: testimonialsSchema
+  },
+  {
+    title: "Blogs",
+    schema: blogsSchema
   },
   {
     title: "Blog",
