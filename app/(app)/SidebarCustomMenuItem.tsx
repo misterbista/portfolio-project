@@ -26,13 +26,20 @@ function SidebarCustomMenuItem(
     return null;
   }
 
+  // is active if current path is equal to the link
+  // or if the current path starts with the link and the link is not just "/"
+  // or if the current path ends with the link and the link is not just "/"
+  const isActive = currentPath === link
+    || (link !== '/' && currentPath?.startsWith(link))
+    || (link !== '/' && currentPath?.endsWith(link));
+
   return (
     <Button
       type="button"
       variant="ghost"
       className={cn(
         "w-full justify-start h-12",
-        currentPath === link && "bg-gray-200",
+        isActive && "bg-gray-200",
         "cursor-pointer hover:-translate-y-px"
       )}
     >

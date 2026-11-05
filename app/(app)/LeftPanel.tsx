@@ -10,7 +10,6 @@ import {
   SidebarTrigger,
   useSidebar
 } from "@/components/ui/sidebar";
-import {Identifier, useConfig} from "@/hooks/useConfig";
 import {AlignJustify, Heart, XIcon} from "lucide-react";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import {usePathname} from "next/navigation";
@@ -18,6 +17,9 @@ import SocialLinks from "@/components/ui/SocialLinks";
 import {cn} from "@/lib/utils";
 import SidebarCustomMenuItem from "@/app/(app)/SidebarCustomMenuItem";
 import SmartLink from "@/components/ui/SmartLink";
+import type {Model as CoreModel} from "@/configuration/core";
+import type {Model as LeftPanelModel} from "@/configuration/leftPanel";
+import type {Model as QuickLinksModel} from "@/configuration/quickLinks";
 
 class LeftPanelItem {
   label: string;
@@ -87,37 +89,21 @@ const getMenuItems = (
   }
 ] as LeftPanelItem[]
 
-function LeftPanel() {
+function LeftPanel({
+  coreConfig,
+  leftPanelConfig,
+  quickLinksConfig,
+}: {
+  coreConfig: CoreModel;
+  leftPanelConfig: LeftPanelModel;
+  quickLinksConfig: QuickLinksModel;
+}) {
   const pathname = usePathname();
   const {open} = useSidebar();
 
-  const {
-    config: coreConfig,
-    isLoadingConfig: isLoadingCoreConfig
-  } = useConfig(Identifier.Core);
-
-  const {
-    config: leftPanelConfig,
-    isLoadingConfig: isLoadingLeftPanelConfig
-  } = useConfig(Identifier.LeftPanel);
-
-  const {
-    config: quickLinksConfig,
-    isLoadingConfig: isLoadingQuickLinksConfig
-  } = useConfig(Identifier.QuickLinks);
-
-  if (
-    isLoadingLeftPanelConfig ||
-    isLoadingCoreConfig ||
-    !leftPanelConfig ||
-    !coreConfig
-  ) {
-    return <></>;
-  }
-
   const menuItems = useMemo(
     () => getMenuItems(leftPanelConfig.enabledMenus),
-    [leftPanelConfig, quickLinksConfig]
+    [leftPanelConfig.enabledMenus]
   );
 
   return (<>
@@ -129,7 +115,7 @@ function LeftPanel() {
       <SidebarHeader>
         {(leftPanelConfig.profilePicture || coreConfig.fullName) && <div className={styles.avatarBlock}>
           <Avatar className={styles.avatar}>
-            <AvatarImage src={leftPanelConfig.profilePicture} alt={coreConfig.fullName} style={{objectFit: 'cover'}}/>
+          <AvatarImage src={leftPanelConfig.profilePicture} alt={coreConfig.fullName} style={{objectFit: 'cover'}}/>
             <AvatarFallback>
               {coreConfig
                 .fullName
@@ -180,8 +166,6 @@ function LeftPanel() {
         {leftPanelConfig.enabledMenus.includes('quickLinks') &&
           quickLinksConfig?.links?.length &&
           quickLinksConfig?.links?.length > 0 &&
-          !isLoadingQuickLinksConfig &&
-          !!quickLinksConfig &&
           <SidebarGroup>
             <SidebarGroupLabel>Quick Links</SidebarGroupLabel>
             <SidebarGroupContent>
