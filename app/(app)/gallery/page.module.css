@@ -1,0 +1,165 @@
+.page {
+  min-height: 100dvh;
+  padding: 2rem;
+}
+
+.headingRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.pageHeader {
+  display: block;
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.pageText {
+  display: block;
+  margin: 1rem 0 1.5rem;
+  line-height: 1.6;
+}
+
+.folderGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+  gap: 1rem;
+}
+
+.folderCard {
+  overflow: hidden;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--card);
+  color: var(--card-foreground);
+  text-align: left;
+  cursor: pointer;
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.folderCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgb(0 0 0 / 10%);
+}
+
+.folderCover {
+  display: flex;
+  aspect-ratio: 16 / 10;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--muted);
+}
+
+.folderImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.folderPlaceholder {
+  width: 3rem;
+  height: 3rem;
+  color: var(--muted-foreground);
+}
+
+.folderDetails {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.9rem 1rem;
+}
+
+.folderName {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+}
+
+.folderName svg {
+  flex: 0 0 auto;
+}
+
+.folderCount {
+  flex: 0 0 auto;
+  color: var(--muted-foreground);
+  font-size: 0.8rem;
+}
+
+.photoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.photoCard {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--card);
+}
+
+.photoImage {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.photoText {
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.8rem 1rem 1rem;
+}
+
+.photoTitle {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.photoCaption {
+  margin: 0;
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+}
+
+.emptyState {
+  display: grid;
+  min-height: 12rem;
+  place-content: center;
+  gap: 0.75rem;
+  border: 1px dashed var(--border);
+  border-radius: 0.75rem;
+  color: var(--muted-foreground);
+  text-align: center;
+}
+
+.emptyIcon {
+  width: 2rem;
+  height: 2rem;
+  justify-self: center;
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding: 1.25rem 1rem 2rem;
+  }
+
+  .headingRow {
+    align-items: flex-start;
+    flex-direction: column-reverse;
+  }
+
+  .pageHeader {
+    font-size: 1.75rem;
+  }
+}
