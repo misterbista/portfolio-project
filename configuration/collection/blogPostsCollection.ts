@@ -24,7 +24,7 @@ export const blogPostsCollection = BlogsConfig.posts
     const slug = slugify(post.title, usedSlugs);
     usedSlugs.add(slug);
 
-    return {...post, content, slug}
+    return {...post, ...content, slug}
   })
   .filter(post => post !== null)
   .sort((left, right) => right.date.localeCompare(left.date));
