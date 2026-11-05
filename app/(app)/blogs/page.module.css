@@ -1,0 +1,143 @@
+.page {
+  min-height: 100dvh;
+  padding: 2rem;
+}
+
+.pageHeader {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.pageText {
+  margin: 1rem 0 1.5rem;
+  color: var(--muted-foreground);
+  line-height: 1.6;
+}
+
+.postGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+  gap: 1rem;
+}
+
+.postLink {
+  color: inherit;
+  text-decoration: none;
+}
+
+.postCard {
+  display: grid;
+  height: 100%;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 0.85rem;
+  background: var(--card);
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.postLink:hover .postCard {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgb(0 0 0 / 10%);
+}
+
+.postCard h2,
+.article h1 {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.postDate {
+  color: var(--muted-foreground);
+  font-size: 0.85rem;
+}
+
+.postExcerpt {
+  color: var(--muted-foreground);
+  line-height: 1.6;
+}
+
+.tagList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.tag {
+  max-width: 100%;
+  padding: 0.2rem 0.55rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--muted-foreground);
+  font-size: 0.75rem;
+}
+
+.emptyState {
+  display: grid;
+  min-height: 12rem;
+  place-content: center;
+  border: 1px dashed var(--border);
+  border-radius: 0.75rem;
+  color: var(--muted-foreground);
+  text-align: center;
+}
+
+.article {
+  width: min(100%, 52rem);
+  margin: 0 auto;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 1.5rem;
+  color: var(--muted-foreground);
+  text-decoration: none;
+}
+
+.backLink:hover {
+  color: var(--foreground);
+}
+
+.articleHeader {
+  display: grid;
+  gap: 1rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.articleHeader h1 {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  line-height: 1.1;
+}
+
+.articleContent {
+  padding-top: 1.5rem;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+.articleContent > :first-child {
+  margin-top: 0;
+}
+
+.articleContent > :last-child {
+  margin-bottom: 0;
+}
+
+.articleContent img {
+  max-width: 100%;
+  height: auto;
+}
+
+.articleContent pre {
+  overflow-x: auto;
+}
+
+@media (max-width: 640px) {
+  .page {
+    padding: 1.25rem 1rem 2rem;
+  }
+}
