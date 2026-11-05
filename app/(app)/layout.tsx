@@ -1,18 +1,16 @@
-"use client"
+import React from "react";
+import SiteShell from "@/app/(app)/SiteShell";
+import {CoreConfig, LeftPanelConfig, QuickLinksConfig} from "@/configuration";
 
-import React from 'react';
-import { SidebarProvider } from "@/components/ui/sidebar"
-import LeftPanel from "@/app/(app)/LeftPanel";
-import GoToTopButton from "@/components/ui/GoToTopButton";
-
-
-function Layout({ children }: LayoutProps<"/">) {
+function Layout({children}: LayoutProps<"/">) {
   return (
-    <SidebarProvider defaultOpen={false}>
-      <LeftPanel/>
+    <SiteShell
+      coreConfig={CoreConfig}
+      leftPanelConfig={LeftPanelConfig}
+      quickLinksConfig={QuickLinksConfig}
+    >
       {children}
-      <GoToTopButton/>
-    </SidebarProvider>
+    </SiteShell>
   );
 }
 
