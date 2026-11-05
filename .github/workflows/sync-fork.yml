@@ -1,0 +1,98 @@
+name: Sync Fork with Upstream
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 2 * * *"
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: sync-fork
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get repository information
+        id: repository
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          repository_data="$(curl --fail-with-body --silent --show-error \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/$REPOSITORY")"
+
+          echo "is_fork=$(jq -r '.fork | tostring' <<< "$repository_data")" >> "$GITHUB_OUTPUT"
+          echo "default_branch=$(jq -r '.default_branch' <<< "$repository_data")" >> "$GITHUB_OUTPUT"
+          echo "parent_full_name=$(jq -r '.parent.full_name // empty' <<< "$repository_data")" >> "$GITHUB_OUTPUT"
+          echo "parent_default_branch=$(jq -r '.parent.default_branch // empty' <<< "$repository_data")" >> "$GITHUB_OUTPUT"
+
+      - name: Add upstream remote
+        if: steps.repository.outputs.is_fork == 'true'
+        env:
+          PARENT_REPOSITORY: ${{ steps.repository.outputs.parent_full_name }}
+        run: |
+          git remote add upstream "https://github.com/$PARENT_REPOSITORY.git"
+          git fetch upstream
+
+      - name: Update local default branch
+        if: steps.repository.outputs.is_fork == 'true'
+        env:
+          DEFAULT_BRANCH: ${{ steps.repository.outputs.default_branch }}
+        run: |
+          git fetch origin "$DEFAULT_BRANCH"
+          git checkout -B "$DEFAULT_BRANCH" "origin/$DEFAULT_BRANCH"
+
+      - name: Check for upstream changes
+        id: changes
+        if: steps.repository.outputs.is_fork == 'true'
+        env:
+          DEFAULT_BRANCH: ${{ steps.repository.outputs.default_branch }}
+          UPSTREAM_BRANCH: ${{ steps.repository.outputs.parent_default_branch }}
+        run: |
+          if git merge-base --is-ancestor "upstream/$UPSTREAM_BRANCH" "origin/$DEFAULT_BRANCH"; then
+            echo "has_updates=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_updates=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Merge upstream changes
+        if: steps.repository.outputs.is_fork == 'true' && steps.changes.outputs.has_updates == 'true'
+        env:
+          UPSTREAM_BRANCH: ${{ steps.repository.outputs.parent_default_branch }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git merge --no-edit "upstream/$UPSTREAM_BRANCH"
+
+      - name: Push synchronized branch
+        if: steps.repository.outputs.is_fork == 'true' && steps.changes.outputs.has_updates == 'true'
+        env:
+          DEFAULT_BRANCH: ${{ steps.repository.outputs.default_branch }}
+        run: git push origin "$DEFAULT_BRANCH"
+
+      - name: Deploy the synchronized site
+        if: steps.repository.outputs.is_fork == 'true' && steps.changes.outputs.has_updates == 'true'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: "deploy-pages.yml",
+              ref: "${{ steps.repository.outputs.default_branch }}",
+            })
