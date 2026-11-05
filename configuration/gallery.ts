@@ -1,6 +1,24 @@
 import * as z from "zod";
 
 export const schema = z.object({
+  categories: z.array(
+    z.object({
+      name: z.string().min(1, "Category name is required.").meta({
+        title: "Name",
+        description: "The name of a gallery folder.",
+      }),
+      description: z.string().optional().meta({
+        title: "Description",
+        description: "Optional introduction shown when this folder is opened.",
+      }),
+    }).meta({
+      title: "Category",
+      description: "A named folder in the gallery and its optional introduction.",
+    }),
+  ).meta({
+    title: "Categories",
+    description: "The folders used to organize gallery photos. A photo can appear in multiple folders without being copied.",
+  }),
   photos: z.array(
     z.object({
       id: z.string().min(1, "ID is required.").meta({
@@ -10,6 +28,10 @@ export const schema = z.object({
       url: z.string().min(1, "Photo URL is required.").meta({
         title: "Photo URL",
         description: "The URL of the photo to display in the gallery.",
+      }),
+      title: z.string().optional().meta({
+        title: "Title",
+        description: "An optional title for the photo.",
       }),
       caption: z.string().min(1, "Caption is required.").meta({
         title: "Caption",
@@ -40,5 +62,6 @@ export const schema = z.object({
 export type Model = z.infer<typeof schema>;
 
 export const defaultValues: Model = {
+  categories: [],
   photos: [],
 };
