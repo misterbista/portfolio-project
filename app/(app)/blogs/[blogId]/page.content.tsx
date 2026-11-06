@@ -1,0 +1,43 @@
+import React from 'react';
+import type {BlogPost} from "./page.types";
+import styles from "./page.module.css";
+import Link from "next/link";
+import {ArrowLeft} from "lucide-react";
+import HtmlRenderer from "@/components/ui/HtmlRenderer";
+
+function PageContent(
+  {post}: {
+    post: BlogPost
+  }
+) {
+  return (
+    <main className={styles.page}>
+      <article className={styles.article}>
+        <Link href="/blogs/" className={styles.backLink}>
+          <ArrowLeft size={16} /> All posts
+        </Link>
+        <header className={styles.articleHeader}>
+          <h1>{post.title}</h1>
+          <time className={styles.postDate} dateTime={post.date}>{post.date}</time>
+          {!!post.categories.length && (
+            <div className={styles.tagList}>
+              {post.categories.map((category) => (
+                <span className={styles.tag} key={category}>{category}</span>
+              ))}
+            </div>
+          )}
+          {!!post.tags.length && (
+            <div className={styles.tagList}>
+              {post.tags.map((tag) => (
+                <span className={styles.tag} key={tag}>{tag}</span>
+              ))}
+            </div>
+          )}
+        </header>
+        <HtmlRenderer>{styles.articleContent}</HtmlRenderer>
+      </article>
+    </main>
+  );
+}
+
+export default PageContent;
