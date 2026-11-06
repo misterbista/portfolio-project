@@ -3,8 +3,8 @@ import StructuredData from "@/components/StructuredData";
 import {CoreConfig, GalleryConfig} from "@/configuration";
 import {createPageMetadata, getCanonicalUrl} from "@/lib/pageMetadata";
 import {stripHtmlTags} from "@/lib/html";
-import {getCollectionCover, getCollectionPhotos} from "../page.content";
 import PageContent from "./page.content";
+import {getCollectionCover, getCollectionPhotos} from "../page.content";
 import type {GalleryCollection} from "./page.types";
 
 export const dynamicParams = false;
@@ -22,6 +22,7 @@ function findCollection(collectionName: string) {
   if(!metadata){
     return null;
   }
+
   const cover = getCollectionCover(collectionName, GalleryConfig.photos);
   const photos = getCollectionPhotos(collectionName, GalleryConfig.photos);
   return {
@@ -68,7 +69,7 @@ export default async function Page(
         "@context": "https://schema.org",
         "@type": "CollectionPage",
         name: collection.name,
-        description: stripHtmlTags(collection.description || collection.photos.length + " photos in the " + collection.name + " collection."),
+        description: stripHtmlTags(collection.description || collection.photos.length + " photos in the " + collection.name + " collection.").slice(0, 300),
         ...(collection.cover ? {image: collection.cover} : {}),
         ...(canonical ? {url: canonical} : {}),
         author: {"@type": "Person", name: CoreConfig.fullName},
