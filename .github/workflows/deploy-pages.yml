@@ -3,6 +3,8 @@ name: Deploy portfolio to GitHub Pages
 on:
   push:
     branches: ["main"]
+    paths-ignore:
+      - "public/uploads*/**"
   workflow_dispatch:
 
 permissions:
