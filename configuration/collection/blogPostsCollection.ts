@@ -2,7 +2,7 @@ import {readFileSync} from "node:fs";
 import {basename, join} from "node:path";
 import {BlogsConfig} from "@/configuration";
 import type {Model as BlogPost} from "@/configuration/blog";
-import {slugify} from "@/lib/routeSlugs";
+import {slugify} from "@/lib/slugs";
 
 const blogContentDirectory = join(process.cwd(), "public", "config", "blogs");
 const usedSlugs = new Set<string>();

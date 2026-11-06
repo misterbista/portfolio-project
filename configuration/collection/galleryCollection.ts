@@ -1,5 +1,5 @@
 import {GalleryConfig} from "@/configuration";
-import {slugify} from "@/lib/routeSlugs";
+import {slugify} from "@/lib/slugs";
 
 const usedCollectionSlugs = new Set<string>();
 

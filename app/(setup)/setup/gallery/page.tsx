@@ -15,7 +15,7 @@ import {Pencil, Plus, Trash2} from "lucide-react";
 import {cn} from "@/lib/utils";
 import {Control, Controller, useFieldArray, useWatch} from "react-hook-form";
 import {useConfigurationForm} from "@/hooks/useConfigurationForm";
-import {withConfigurationId} from "@/lib/configurationIds";
+import {withConfigurationId} from "@/lib/configurationUtils";
 import ImageLightbox from "@/components/ui/ImageLightbox";
 import {
   Dialog,

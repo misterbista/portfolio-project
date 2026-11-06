@@ -18,7 +18,7 @@ import {cn} from "@/lib/utils";
 import {Control, Controller, useFieldArray, useWatch} from "react-hook-form";
 import {RichTextEditor} from "@/components/ui/RichTextEditor";
 import {useConfigurationForm} from "@/hooks/useConfigurationForm";
-import {withConfigurationId} from "@/lib/configurationIds";
+import {withConfigurationId} from "@/lib/configurationUtils";
 import {Select, SelectTrigger, SelectValue, SelectContent, SelectGroup, SelectItem} from "@/components/ui/select";
 
 const emptyMilestone: Model["milestones"][number] = {

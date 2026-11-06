@@ -14,7 +14,7 @@ import {Pencil, Plus, Trash2} from "lucide-react";
 import {cn} from "@/lib/utils";
 import {Control, Controller, useFieldArray, useWatch} from "react-hook-form";
 import {RichTextEditor} from "@/components/ui/RichTextEditor";
-import {withConfigurationId} from "@/lib/configurationIds";
+import {withConfigurationId} from "@/lib/configurationUtils";
 import {useConfigurationForm} from "@/hooks/useConfigurationForm";
 import {LucideReactIconPicker} from "@/components/ui/LucideReactIconPicker";
 import DynamicLucideReactIcon, {LucideReactIconName} from "@/components/ui/DynamicLucideReactIcon";

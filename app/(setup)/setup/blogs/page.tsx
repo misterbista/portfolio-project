@@ -16,7 +16,7 @@ import {Pencil, Plus, Trash2} from "lucide-react";
 import {cn} from "@/lib/utils";
 import {Control, Controller, useFieldArray, useFormContext, useWatch} from "react-hook-form";
 import {RichTextEditor} from "@/components/ui/RichTextEditor";
-import {withConfigurationId} from "@/lib/configurationIds";
+import {withConfigurationId} from "@/lib/configurationUtils";
 import {useConfigurationForm} from "@/hooks/useConfigurationForm";
 import {confirm} from "@/components/ui/Confirm";
 import {isNullOrWhitespace} from "@/lib/string";

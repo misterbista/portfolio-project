@@ -15,7 +15,7 @@ import {cn} from "@/lib/utils";
 import {Control, Controller, useFieldArray, useWatch} from "react-hook-form";
 import {RichTextEditor} from "@/components/ui/RichTextEditor";
 import {useConfigurationForm} from "@/hooks/useConfigurationForm";
-import {withConfigurationId} from "@/lib/configurationIds";
+import {withConfigurationId} from "@/lib/configurationUtils";
 import {generateMilestoneLabel} from "@/lib/configurationUtils";
 import CheckboxList from "@/components/ui/CheckboxList";
 
