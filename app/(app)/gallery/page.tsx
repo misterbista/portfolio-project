@@ -1,167 +1,101 @@
-"use client"
-
-import React, {useState} from "react";
 import styles from "./page.module.css";
-import {ArrowLeft, Folder, Images} from "lucide-react";
-import {Identifier, useConfig} from "@/hooks/useConfig";
+import StructuredData from "@/components/StructuredData";
 import {cn} from "@/lib/utils";
-import FullScreenMessage from "@/components/ui/FullScreenMessage";
-import {Spinner} from "@/components/ui/spinner";
-import HtmlRenderer from "@/components/ui/HtmlRenderer";
-import ImageLightbox from "@/components/ui/ImageLightbox";
-import {Button} from "@/components/ui/button";
+import {CoreConfig, GalleryConfig} from "@/configuration";
+import {createPageMetadata, getCanonicalUrl} from "@/lib/pageMetadata";
+import {Folder, Images} from "lucide-react";
+import Link from "next/link";
 
-type GalleryCategory = {
-  key: string;
-  name: string;
-  description?: string;
-  photoCount: number;
-  coverUrl?: string;
-};
+const description = CoreConfig.seoDescription || "Browse the photo collections.";
+const uncategorizedGalleryCategory = {name: "Uncategorized", description: "Photos that are not part of a specific collection."};
 
-function categoryKey(name: string) {
-  return name.trim().toLocaleLowerCase();
+export function getCollectionImages(collectionName: string) {
+  if(collectionName === uncategorizedGalleryCategory.name) {
+    return GalleryConfig.photos.filter((photo) => !photo.categories || photo.categories.length === 0);
+  }
+  return GalleryConfig.photos.filter((photo) => photo.categories?.includes(collectionName));
 }
 
-function Page() {
-  const [selectedCategoryKey, setSelectedCategoryKey] = useState<string | null>(null);
-  const {config, isLoadingConfig} = useConfig(Identifier.Gallery);
-
-  if (isLoadingConfig) {
-    return <FullScreenMessage><Spinner className="size-10" /></FullScreenMessage>;
+export function getCollectionCover(collectionName: string){
+  const images = getCollectionImages(collectionName);
+  if(images.length) {
+    return images[0].url;
   }
+  return null;
+}
 
-  if (!config) {
-    return <FullScreenMessage>Error loading gallery configuration.</FullScreenMessage>;
+export function getCollection(collectionName: string){
+  const collection = GalleryConfig.categories.find((collection) => collection.name === collectionName);
+  if(collection) {
+    return collection;
   }
+  return null;
+}
 
-  const photos = (config.photos || []).filter((photo) => !!photo.url);
-  const categoriesByKey = new Map<string, GalleryCategory>();
+export const metadata = createPageMetadata({
+  title: "Gallery",
+  description,
+  path: "/gallery/",
+  image: CoreConfig.favicon,
+  keywords: CoreConfig.seoKeywords,
+});
 
-  for (const category of config.categories || []) {
-    const key = categoryKey(category.name);
-    if (!key) continue;
-    categoriesByKey.set(key, {
-      key,
-      name: category.name,
-      description: category.description,
-      photoCount: 0,
-    });
-  }
-
-  for (const photo of photos) {
-    for (const categoryName of photo.categories || []) {
-      const key = categoryKey(categoryName);
-      if (!key || categoriesByKey.has(key)) continue;
-      categoriesByKey.set(key, {key, name: categoryName.trim(), photoCount: 0});
-    }
-  }
-
-  const categories = Array.from(categoriesByKey.values());
-  for (const category of categories) {
-    const matchingPhotos = photos.filter((photo) =>
-      (photo.categories || []).some((name) => categoryKey(name) === category.key)
+function GalleryFolders() {
+  if (!GalleryConfig.photos.length) {
+    return (
+      <div className={styles.emptyState}>
+        <Images className={styles.emptyIcon} aria-hidden="true" />
+        No photos yet.
+      </div>
     );
-    category.photoCount = matchingPhotos.length;
-    category.coverUrl = matchingPhotos[0]?.url;
   }
-
-  const uncategorizedPhotos = photos.filter((photo) => !(photo.categories || []).some((name) => !!name.trim()));
-  if (uncategorizedPhotos.length > 0) {
-    categories.push({
-      key: "__uncategorized__",
-      name: "Uncategorized",
-      photoCount: uncategorizedPhotos.length,
-      coverUrl: uncategorizedPhotos[0]?.url,
-    });
-  }
-
-  const activeCategory = categories.find((category) => category.key === selectedCategoryKey);
-  const visiblePhotos = activeCategory?.key === "__uncategorized__"
-    ? uncategorizedPhotos
-    : activeCategory
-      ? photos.filter((photo) => (photo.categories || []).some((name) => categoryKey(name) === activeCategory.key))
-      : [];
 
   return (
-    <main className={cn(styles.page, "bg-secondary")}>
-      <div className={styles.headingRow}>
-        {activeCategory && (
-          <Button
-            type="button"
-            variant="outline"
-            size="sm"
-            className="cursor-pointer"
-            onClick={() => setSelectedCategoryKey(null)}
+    <>
+      <p className={styles.pageText}>Browse the photo collections.</p>
+      <div className={styles.folderGrid}>
+        {[...GalleryConfig.categories, uncategorizedGalleryCategory]
+          .sort((a, b) => a.name.localeCompare(b.name))
+          .map((collection, index) => (
+          <Link
+            href={"/gallery/" + collection.name + "/"}
+            key={index}
+            className={styles.folderCard}
           >
-            <ArrowLeft /> Folders
-          </Button>
-        )}
-        <h1 className={styles.pageHeader}>{activeCategory ? activeCategory.name : "Gallery"}</h1>
+            <span className={styles.folderCover}>
+              { getCollectionCover(collection.name)
+                ? <img src={getCollectionCover(collection.name) || ""} alt="" className={styles.folderImage} />
+                : <Folder className={styles.folderPlaceholder} aria-hidden="true" />}
+            </span>
+            <span className={styles.folderDetails}>
+              <span className={styles.folderName}><Folder size={18} />{collection.name}</span>
+              <span className={styles.folderCount}>
+                {getCollectionImages(collection.name).length} {getCollectionImages(collection.name).length === 1 ? "photo" : "photos"}
+              </span>
+            </span>
+          </Link>
+        ))}
       </div>
-
-      {activeCategory ? (
-        <>
-          {activeCategory.description?.trim() && (
-            <HtmlRenderer className={styles.pageText}>{activeCategory.description}</HtmlRenderer>
-          )}
-          {visiblePhotos.length > 0 ? (
-            <div className={styles.photoGrid}>
-              {visiblePhotos.map((photo, index) => {
-                const imageName = photo.title || photo.caption || `Gallery photo ${index + 1}`;
-                return (
-                  <article className={styles.photoCard} key={photo.id || `${photo.url}-${index}`}>
-                    <ImageLightbox
-                      src={photo.url}
-                      name={imageName}
-                      trigger={<img className={styles.photoImage} src={photo.url} alt={imageName} />}
-                    />
-                    {(photo.title || photo.caption) && (
-                      <div className={styles.photoText}>
-                        {photo.title && <h2 className={styles.photoTitle}>{photo.title}</h2>}
-                        {photo.caption && <p className={styles.photoCaption}>{photo.caption}</p>}
-                      </div>
-                    )}
-                  </article>
-                );
-              })}
-            </div>
-          ) : (
-            <div className={styles.emptyState}>This folder does not have any photos yet.</div>
-          )}
-        </>
-      ) : categories.length > 0 ? (
-        <>
-          <p className={styles.pageText}>Browse the photo collections.</p>
-          <div className={styles.folderGrid}>
-            {categories.map((category) => (
-              <button
-                type="button"
-                key={category.key}
-                className={styles.folderCard}
-                onClick={() => setSelectedCategoryKey(category.key)}
-              >
-                <span className={styles.folderCover}>
-                  {category.coverUrl
-                    ? <img src={category.coverUrl} alt="" className={styles.folderImage} />
-                    : <Folder className={styles.folderPlaceholder} aria-hidden="true" />}
-                </span>
-                <span className={styles.folderDetails}>
-                  <span className={styles.folderName}><Folder size={18} />{category.name}</span>
-                  <span className={styles.folderCount}>{category.photoCount} {category.photoCount === 1 ? "photo" : "photos"}</span>
-                </span>
-              </button>
-            ))}
-          </div>
-        </>
-      ) : (
-        <div className={styles.emptyState}>
-          <Images className={styles.emptyIcon} aria-hidden="true" />
-          No photo collections yet.
-        </div>
-      )}
-    </main>
+    </>
   );
 }
 
-export default Page;
+export default function Page() {
+  return (
+    <>
+      <main className={cn(styles.page, "bg-secondary")}>
+        <div className={styles.headingRow}>
+          <h1 className={styles.pageHeader}>Gallery</h1>
+        </div>
+        <GalleryFolders />
+      </main>
+      <StructuredData data={{
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        name: "Gallery",
+        description,
+        ...(getCanonicalUrl("/gallery/") ? {url: getCanonicalUrl("/gallery/")} : {}),
+      }} />
+    </>
+  );
+}

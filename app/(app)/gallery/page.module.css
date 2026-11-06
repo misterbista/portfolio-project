@@ -29,6 +29,7 @@
 }
 
 .folderCard {
+  display: block;
   overflow: hidden;
   padding: 0;
   border: 1px solid var(--border);
@@ -37,12 +38,18 @@
   color: var(--card-foreground);
   text-align: left;
   cursor: pointer;
+  text-decoration: none;
   transition: transform 150ms ease, box-shadow 150ms ease;
 }
 
 .folderCard:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 25px rgb(0 0 0 / 10%);
+}
+
+.folderCard:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
 }
 
 .folderCover {
