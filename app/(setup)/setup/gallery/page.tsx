@@ -39,6 +39,7 @@ const emptyPhoto: Model["photos"][number] = {
 
 const emptyCategory: Model["categories"][number] = {
   name: "",
+  coverImage: "",
   description: "",
 };
 
@@ -259,7 +260,7 @@ function Page() {
     const existingCategories = form.getValues("categories") || [];
     const normalizedName = name.trim().toLocaleLowerCase();
     if (!normalizedName || existingCategories.some((category) => category.name.trim().toLocaleLowerCase() === normalizedName)) return;
-    appendCategory({name: name.trim(), description: ""}, {shouldFocus: false});
+    appendCategory({name: name.trim(), coverImage: "", description: ""}, {shouldFocus: false});
   }
 
   function updatePhotoCategoryName(previousName: string, nextName: string) {
@@ -353,7 +354,7 @@ function Page() {
         const name = categoryName.trim();
         const normalizedName = name.toLocaleLowerCase();
         if (name && !knownNames.has(normalizedName)) {
-          appendCategory({name, description: ""}, {shouldFocus: false});
+          appendCategory({name, coverImage: "", description: ""}, {shouldFocus: false});
           knownNames.add(normalizedName);
         }
       }
@@ -391,7 +392,7 @@ function Page() {
         const name = categoryName.trim();
         const normalizedName = name.toLocaleLowerCase();
         if (name && !categoryNames.has(normalizedName)) {
-          values.categories.push({name, description: ""});
+          values.categories.push({name, coverImage: "", description: ""});
           categoryNames.add(normalizedName);
         }
       }
@@ -411,7 +412,7 @@ function Page() {
           <div className={"flex flex-col justify-between gap-3 sm:flex-row sm:items-center"}>
             <div>
               <Label>Gallery folders</Label>
-              <p className={"mt-1 text-sm text-muted-foreground"}>Add categories to photos or create folders manually. Each folder can have its own introduction.</p>
+              <p className={"mt-1 text-sm text-muted-foreground"}>Add categories to photos or create folders manually. Each folder can have its own cover image and introduction.</p>
             </div>
 
             <Button
@@ -462,6 +463,24 @@ function Page() {
                                 field.onChange(nextName);
                               }}
                             />
+                            {error && <small className={"text-destructive"}>{error.message}</small>}
+                          </div>
+                        }
+                      />
+                      <Controller
+                        control={control}
+                        name={`categories.${index}.coverImage`}
+                        render={({field, fieldState: {error}}) =>
+                          <div className={"grid gap-2"}>
+                            <Label htmlFor={`categories.${index}.coverImage`}>Folder cover image URL (optional)</Label>
+                            <Input
+                              {...field}
+                              id={`categories.${index}.coverImage`}
+                              value={field.value || ""}
+                              placeholder={"https://example.com/cover.jpg"}
+                              className={cn("w-full", error && "border-destructive")}
+                            />
+                            <p className={"text-xs text-muted-foreground"}>When empty, the first photo in this folder is used as its cover.</p>
                             {error && <small className={"text-destructive"}>{error.message}</small>}
                           </div>
                         }
