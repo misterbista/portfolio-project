@@ -3,7 +3,7 @@ import {CoreConfig} from "@/configuration";
 
 type PageMetadataOptions = {
   title: string;
-  description: string;
+  description?: string;
   path: string;
   image?: string;
   keywords?: string[];
@@ -34,7 +34,7 @@ export function createPageMetadata({
 
   return {
     title: title === CoreConfig.websiteName ? {absolute: title} : title,
-    description,
+    description: description || CoreConfig.seoDescription,
     keywords,
     authors: [{name: CoreConfig.fullName}],
     alternates: canonical ? {canonical} : undefined,
