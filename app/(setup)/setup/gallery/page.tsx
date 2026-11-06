@@ -175,7 +175,7 @@ function GalleryPhotoCard(
 function CategoryPreview({category}: {category: Model["categories"][number]}) {
   return (<>
     <p className={"truncate text-sm text-muted-foreground"}>
-      {stripHtmlTags(category.description || "") || "No introduction yet"}
+      {stripHtmlTags(category.description) || "No introduction yet"}
     </p>
   </>);
 }

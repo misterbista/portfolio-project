@@ -55,11 +55,3 @@ export function createPageMetadata({
     robots: {index: true, follow: true},
   };
 }
-
-export function plainText(value: string) {
-  return value
-    .replaceAll(/<[^>]*>/g, " ")
-    .replaceAll(/&nbsp;/gi, " ")
-    .replaceAll(/\s+/g, " ")
-    .trim();
-}

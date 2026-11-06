@@ -1,6 +1,11 @@
-export function stripHtmlTags(str?: string | null): string | null {
+export function stripHtmlTags(str?: string | null): string {
   if(!str) {
-    return null;
+    return "";
   }
-  return str.replace(/<[^>]*>/g, "");
+
+  return str
+    .replaceAll(/<[^>]*>/g, " ")
+    .replaceAll(/&nbsp;/gi, " ")
+    .replaceAll(/\s+/g, " ")
+    .trim();
 }
