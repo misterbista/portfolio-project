@@ -8,9 +8,10 @@ import {cn} from "@/lib/utils";
 import HtmlRenderer from "@/components/ui/HtmlRenderer";
 import StructuredData from "@/components/StructuredData";
 import {AboutConfig, CoreConfig} from "@/configuration";
-import {createPageMetadata, getCanonicalUrl, plainText} from "@/lib/pageMetadata";
+import {createPageMetadata, getCanonicalUrl} from "@/lib/pageMetadata";
+import {stripHtmlTags} from "@/lib/html";
 
-const description = CoreConfig.seoDescription || plainText(AboutConfig.aboutMe).slice(0, 300);
+const description = CoreConfig.seoDescription || stripHtmlTags(AboutConfig.aboutMe).slice(0, 300);
 
 export const metadata: Metadata = createPageMetadata({
   title: "About",
