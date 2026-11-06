@@ -34,7 +34,7 @@ function PageContent(
             </div>
           )}
         </header>
-        <HtmlRenderer>{styles.articleContent}</HtmlRenderer>
+        <HtmlRenderer className={styles.articleContent}>{post.content}</HtmlRenderer>
       </article>
     </main>
   );
