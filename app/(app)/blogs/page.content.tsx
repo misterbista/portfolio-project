@@ -3,7 +3,7 @@
 import React from 'react';
 import styles from "./page.module.css";
 import {Model as BlogsModel} from "@/configuration/blogs"
-import Link from "next/link";
+import SmartLink from "@/components/ui/SmartLink";
 
 function PageContent(
   {blogsConfig}: {
@@ -16,7 +16,7 @@ function PageContent(
       {blogsConfig.posts ? (
         <div className={styles.postGrid}>
           {blogsConfig.posts.map((post) => (
-            <Link href={"/blogs/" + post.id + "/"} className={styles.postLink} key={post.id}>
+            <SmartLink href={"/blogs/" + post.id + "/"} className={styles.postLink} key={post.id}>
               <article className={styles.postCard}>
                 <time className={styles.postDate} dateTime={post.date}>{post.date}</time>
                 <h2>{post.title}</h2>
@@ -29,7 +29,7 @@ function PageContent(
                   </div>
                 )}
               </article>
-            </Link>
+            </SmartLink>
           ))}
         </div>
       ) : (

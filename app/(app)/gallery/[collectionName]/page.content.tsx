@@ -4,7 +4,7 @@ import React from 'react';
 import type {GalleryCollection} from "./page.types";
 import styles from "./page.module.css";
 import { cn } from '@/lib/utils';
-import Link from "next/link";
+import SmartLink from "@/components/ui/SmartLink";
 import {buttonVariants} from "@/components/ui/button";
 import {ArrowLeft} from "lucide-react";
 import HtmlRenderer from "@/components/ui/HtmlRenderer";
@@ -18,9 +18,9 @@ function PageContent(
   return (
     <main className={cn(styles.page, "bg-secondary")}>
       <div className={styles.headingRow}>
-        <Link href="/gallery/" className={cn(buttonVariants({variant: "outline", size: "sm"}))}>
+        <SmartLink href="/gallery/" className={cn(buttonVariants({variant: "outline", size: "sm"}))}>
           <ArrowLeft /> Folders
-        </Link>
+        </SmartLink>
         <h1 className={styles.pageHeader}>{collection.name}</h1>
       </div>
 

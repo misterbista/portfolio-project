@@ -1,7 +1,6 @@
 "use client"
 
 import React from "react";
-import Link from "next/link";
 import {ArrowLeft, ArrowUpRight, ExternalLink, Image as ImageIcon} from "lucide-react";
 import styles from "./page.module.css";
 import {Badge} from "@/components/ui/badge";
@@ -28,9 +27,9 @@ function PageContent(
   return (
     <main className={cn(styles.page, "bg-secondary")}>
       <div className={styles.pageInner}>
-        <Link href="/projects/" className={cn(buttonVariants({variant: "outline", size: "sm"}), styles.backLink)}>
+        <SmartLink href="/projects/" className={cn(buttonVariants({variant: "outline", size: "sm"}), styles.backLink)}>
           <ArrowLeft /> All projects
-        </Link>
+        </SmartLink>
 
         <article>
           <header className={styles.projectHeader}>

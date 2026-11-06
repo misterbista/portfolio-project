@@ -5,7 +5,7 @@ import styles from "./page.module.css";
 import {Model as GalleryModel} from "@/configuration/gallery";
 import {cn} from "@/lib/utils";
 import {Folder, Images} from "lucide-react";
-import Link from "next/link";
+import SmartLink from "@/components/ui/SmartLink";
 
 const uncategorizedGalleryCategory = {name: "Uncategorized", description: "Photos that are not part of a specific collection."};
 
@@ -54,7 +54,7 @@ function PageContent(
           {[...galleryConfig.categories, uncategorizedGalleryCategory]
             .sort((a, b) => a.name.localeCompare(b.name))
             .map((collection, index) => (
-              <Link
+              <SmartLink
                 href={"/gallery/" + collection.name + "/"}
                 key={index}
                 className={styles.folderCard}
@@ -70,7 +70,7 @@ function PageContent(
                   {getCollectionPhotos(collection.name, galleryConfig.photos).length} {getCollectionPhotos(collection.name, galleryConfig.photos).length === 1 ? "photo" : "photos"}
                 </span>
               </span>
-              </Link>
+              </SmartLink>
             ))}
         </div>
       </main>

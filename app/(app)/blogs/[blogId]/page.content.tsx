@@ -1,7 +1,7 @@
 import React from 'react';
 import type {BlogPost} from "./page.types";
 import styles from "./page.module.css";
-import Link from "next/link";
+import SmartLink from "@/components/ui/SmartLink";
 import {ArrowLeft} from "lucide-react";
 import HtmlRenderer from "@/components/ui/HtmlRenderer";
 
@@ -13,9 +13,9 @@ function PageContent(
   return (
     <main className={styles.page}>
       <article className={styles.article}>
-        <Link href="/blogs/" className={styles.backLink}>
+        <SmartLink href="/blogs/" className={styles.backLink}>
           <ArrowLeft size={16} /> All posts
-        </Link>
+        </SmartLink>
         <header className={styles.articleHeader}>
           <h1>{post.title}</h1>
           <time className={styles.postDate} dateTime={post.date}>{post.date}</time>

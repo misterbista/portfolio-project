@@ -1,7 +1,7 @@
 "use client"
 
 import React, {useMemo, useState} from "react";
-import Link from "next/link";
+import SmartLink from "@/components/ui/SmartLink";
 import {ArrowRight, Grid2X2, Image as ImageIcon, List, Search} from "lucide-react";
 import styles from "./page.module.css";
 import {Badge} from "@/components/ui/badge";
@@ -90,7 +90,7 @@ function PageContent(
         {visibleProjects.length > 0 ? (
           <div className={cn(styles.projectGrid, viewMode === "list" && styles.listView)}>
             {visibleProjects.map((project) => (
-              <Link
+              <SmartLink
                 href={"/projects/" + project.id + "/"}
                 className={styles.projectLink}
                 key={project.id}
@@ -126,7 +126,7 @@ function PageContent(
                     )}
                   </CardContent>
                 </Card>
-              </Link>
+              </SmartLink>
             ))}
           </div>
         ) : (
