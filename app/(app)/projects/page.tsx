@@ -13,7 +13,7 @@ export const metadata = createPageMetadata({
   image: CoreConfig.favicon
 });
 
-export default function Page() {
+function Page() {
   const canonical = getCanonicalUrl("/projects/");
   return (
     <>
@@ -31,3 +31,5 @@ export default function Page() {
     </>
   );
 }
+
+export default Page;
