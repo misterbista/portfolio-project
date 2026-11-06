@@ -17,11 +17,8 @@ import {Input} from "@/components/ui/input";
 import HtmlRenderer from "@/components/ui/HtmlRenderer";
 import {cn} from "@/lib/utils";
 import type {Model as ProjectsModel} from "@/configuration/projects";
-import {ProjectsConfig} from "@/configuration";
 
-type Project = ProjectsModel["projects"][number];
-
-function getSearchableProjectText(project: Project) {
+function getSearchableProjectText(project: ProjectsModel["projects"][number]) {
   return [
     project.title,
     project.description,
@@ -31,11 +28,15 @@ function getSearchableProjectText(project: Project) {
   ].join(" ").replaceAll(/<[^>]*>/g, " ").toLocaleLowerCase();
 }
 
-function PageContent() {
+function PageContent(
+  {projectsConfig}: {
+    projectsConfig: ProjectsModel
+  }
+) {
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [searchTerm, setSearchTerm] = useState("");
-  const projects = ProjectsConfig.projects || [];
-  const summary = ProjectsConfig.summary || "";
+  const projects = projectsConfig.projects || [];
+  const summary = projectsConfig.summary || "";
 
   const visibleProjects = useMemo(() => {
     const query = searchTerm.trim().toLocaleLowerCase();

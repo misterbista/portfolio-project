@@ -4,27 +4,29 @@ import {createPageMetadata, getCanonicalUrl} from "@/lib/pageMetadata";
 import {stripHtmlTags} from "@/lib/html";
 import PageContent from "./page.content";
 
-const summary = ProjectsConfig.summary || "";
-const description = stripHtmlTags(summary || CoreConfig.seoDescription || "Explore projects.");
+const description = stripHtmlTags(ProjectsConfig.summary).slice(0, 300);
 
 export const metadata = createPageMetadata({
   title: "Projects",
   description,
   path: "/projects/",
-  image: CoreConfig.favicon,
-  keywords: CoreConfig.seoKeywords,
+  image: CoreConfig.favicon
 });
 
 export default function Page() {
+  const canonical = getCanonicalUrl("/projects/");
   return (
     <>
-      <PageContent />
+      <PageContent
+        projectsConfig={ProjectsConfig}
+      />
+
       <StructuredData data={{
         "@context": "https://schema.org",
         "@type": "CollectionPage",
         name: "Projects",
         description,
-        ...(getCanonicalUrl("/projects/") ? {url: getCanonicalUrl("/projects/")} : {}),
+        ...(canonical ? {url: canonical} : {}),
       }} />
     </>
   );
