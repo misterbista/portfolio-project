@@ -15,6 +15,7 @@ concurrency:
 
 jobs:
   sync:
+    if: github.event.repository.fork == true
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -35,13 +36,11 @@ jobs:
             -H "X-GitHub-Api-Version: 2022-11-28" \
             "https://api.github.com/repos/$REPOSITORY")"
 
-          echo "is_fork=$(jq -r '.fork | tostring' <<< "$repository_data")" >> "$GITHUB_OUTPUT"
           echo "default_branch=$(jq -r '.default_branch' <<< "$repository_data")" >> "$GITHUB_OUTPUT"
           echo "parent_full_name=$(jq -r '.parent.full_name // empty' <<< "$repository_data")" >> "$GITHUB_OUTPUT"
           echo "parent_default_branch=$(jq -r '.parent.default_branch // empty' <<< "$repository_data")" >> "$GITHUB_OUTPUT"
 
       - name: Add upstream remote
-        if: steps.repository.outputs.is_fork == 'true'
         env:
           PARENT_REPOSITORY: ${{ steps.repository.outputs.parent_full_name }}
         run: |
@@ -49,7 +48,6 @@ jobs:
           git fetch upstream
 
       - name: Update local default branch
-        if: steps.repository.outputs.is_fork == 'true'
         env:
           DEFAULT_BRANCH: ${{ steps.repository.outputs.default_branch }}
         run: |
@@ -58,7 +56,6 @@ jobs:
 
       - name: Check for upstream changes
         id: changes
-        if: steps.repository.outputs.is_fork == 'true'
         env:
           DEFAULT_BRANCH: ${{ steps.repository.outputs.default_branch }}
           UPSTREAM_BRANCH: ${{ steps.repository.outputs.parent_default_branch }}
@@ -70,7 +67,7 @@ jobs:
           fi
 
       - name: Merge upstream changes
-        if: steps.repository.outputs.is_fork == 'true' && steps.changes.outputs.has_updates == 'true'
+        if: steps.changes.outputs.has_updates == 'true'
         env:
           UPSTREAM_BRANCH: ${{ steps.repository.outputs.parent_default_branch }}
         run: |
@@ -79,13 +76,13 @@ jobs:
           git merge --no-edit "upstream/$UPSTREAM_BRANCH"
 
       - name: Push synchronized branch
-        if: steps.repository.outputs.is_fork == 'true' && steps.changes.outputs.has_updates == 'true'
+        if: steps.changes.outputs.has_updates == 'true'
         env:
           DEFAULT_BRANCH: ${{ steps.repository.outputs.default_branch }}
         run: git push origin "$DEFAULT_BRANCH"
 
       - name: Deploy the synchronized site
-        if: steps.repository.outputs.is_fork == 'true' && steps.changes.outputs.has_updates == 'true'
+        if: steps.changes.outputs.has_updates == 'true'
         uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}

@@ -1,8 +1,8 @@
 name: Deploy portfolio to GitHub Pages
 
 on:
-#  push:
-#    branches: ["main"]
+  push:
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
@@ -14,6 +14,7 @@ concurrency:
 
 jobs:
   build:
+    if: github.event.repository.fork == true
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source
@@ -49,6 +50,7 @@ jobs:
           path: build
 
   deploy:
+    if: github.event.repository.fork == true
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
