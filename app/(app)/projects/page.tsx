@@ -1,73 +1,31 @@
-"use client"
+import StructuredData from "@/components/StructuredData";
+import {CoreConfig, ProjectsConfig} from "@/configuration";
+import {createPageMetadata, getCanonicalUrl} from "@/lib/pageMetadata";
+import {stripHtmlTags} from "@/lib/html";
+import PageContent from "./page.content";
 
-import React, {useState} from 'react';
-import styles from "./page.module.css";
-import {cn} from "@/lib/utils";
-import {Identifier, useConfig} from "@/hooks/useConfig";
-import {Button} from "@/components/ui/button";
-import {Input} from "@/components/ui/input";
-import {GridIcon, ListIcon} from "lucide-react";
-import FullScreenMessage from "@/components/ui/FullScreenMessage";
-import {Spinner} from "@/components/ui/spinner";
-import HtmlRenderer from "@/components/ui/HtmlRenderer";
+const summary = ProjectsConfig.summary || "";
+const description = stripHtmlTags(summary || CoreConfig.seoDescription || "Explore projects.");
 
-function Page() {
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-  const [sortMode, setSortMode] = useState<'name_asc' | 'name_desc' | 'created_asc' | 'created_desc'>('name_asc');
-  const {
-    config: coreConfig,
-    isLoadingConfig: isLoadingCoreConfig
-  } = useConfig(Identifier.Core);
+export const metadata = createPageMetadata({
+  title: "Projects",
+  description,
+  path: "/projects/",
+  image: CoreConfig.favicon,
+  keywords: CoreConfig.seoKeywords,
+});
 
-  const {
-    config: projectsConfig,
-    isLoadingConfig: isLoadingProjectsConfig
-  } = useConfig(Identifier.Projects);
-
-  if (isLoadingCoreConfig || isLoadingProjectsConfig) {
-    return <FullScreenMessage><Spinner className="size-10" /></FullScreenMessage>;
-  }
-
-  if(!coreConfig){
-    return <FullScreenMessage>Error loading core configuration.</FullScreenMessage>;
-  }
-
-  if(!projectsConfig){
-    return <FullScreenMessage>Error loading projects configuration.</FullScreenMessage>;
-  }
-
+export default function Page() {
   return (
-    <div className={cn(styles.page, "bg-secondary")}>
-      <span className={styles.pageHeader}>Projects</span>
-      <HtmlRenderer className={styles.pageText}>{projectsConfig.summary}</HtmlRenderer>
-      <div className={styles.pageContent}>
-        <div className={styles.searchAndActionsStrip}>
-          <Input className={styles.searchBox} placeholder={"Search..."} />
-          <div className={styles.quickActionButtons}>
-            {viewMode === 'list' ? <Button
-                size={"icon-sm"}
-                type="button"
-                onClick={() => setViewMode('grid')}
-                aria-label={"Switch to grid mode"}
-                className="cursor-pointer hover:-translate-y-px"
-            ><GridIcon/></Button> : <Button
-                size={"icon-sm"}
-                type="button"
-                onClick={() => setViewMode('list')}
-                aria-label={"Switch to list mode"}
-                className="cursor-pointer hover:-translate-y-px"
-            ><ListIcon/></Button>}
-          {/*  make a dropdown menu for sort modes  */}
-          </div>
-        </div>
-        <div className={styles.projectsContainer}>
-          {projectsConfig.projects.map((project, index) => <div key={index}>
-            {project.title}
-          </div>)}
-        </div>
-      </div>
-    </div>
+    <>
+      <PageContent />
+      <StructuredData data={{
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        name: "Projects",
+        description,
+        ...(getCanonicalUrl("/projects/") ? {url: getCanonicalUrl("/projects/")} : {}),
+      }} />
+    </>
   );
 }
-
-export default Page;
