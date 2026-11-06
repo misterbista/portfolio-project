@@ -14,6 +14,7 @@ export const metadata = createPageMetadata({
 });
 
 function Page() {
+  const canonical = getCanonicalUrl("/about/");
   return (
     <>
       <PageContent
@@ -26,7 +27,7 @@ function Page() {
         "@type": "AboutPage",
         name: "About " + CoreConfig.fullName,
         description,
-        ...(getCanonicalUrl("/about/") ? {url: getCanonicalUrl("/about/")} : {}),
+        ...(canonical ? {url: canonical} : {}),
         mainEntity: {
           "@type": "Person",
           name: CoreConfig.fullName,
