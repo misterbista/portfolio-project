@@ -4,35 +4,34 @@ import {notFound} from "next/navigation";
 import {ArrowLeft} from "lucide-react";
 import styles from "../page.module.css";
 import StructuredData from "@/components/StructuredData";
-import {blogPostsCollection} from "@/configuration/collection/blogPostsCollection";
-import {createPageMetadata, getCanonicalUrl, plainText} from "@/lib/pageMetadata";
-import {CoreConfig} from "@/configuration";
+import {createPageMetadata, getCanonicalUrl} from "@/lib/pageMetadata";
+import {CoreConfig, BlogsConfig} from "@/configuration";
+import {getPostContent, getPostMetadata} from "@/app/(app)/blogs/page";
+import {stripHtmlTags} from "@/lib/html";
+import HtmlRenderer from "@/components/ui/HtmlRenderer";
 
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return blogPostsCollection.map((post) => ({blogSlug: post.slug}));
-}
-
-function findPost(blogSlug: string) {
-  return blogPostsCollection.find((post) => post.slug === blogSlug);
+  return BlogsConfig.posts.map((post) => ({blogId: post.id}));
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{blogSlug: string}>;
+  params: Promise<{blogId: string}>;
 }): Promise<Metadata> {
-  const {blogSlug} = await params;
-  const post = findPost(blogSlug);
+  const {blogId} = await params;
+  const post = getPostContent(blogId);
+  const postMetadata = getPostMetadata(blogId);
   if (!post) return {};
 
   return createPageMetadata({
-    title: post.title,
-    description: plainText(post.content).slice(0, 300),
-    path: "/blogs/" + blogSlug + "/",
+    title: postMetadata.title,
+    description: stripHtmlTags(post).slice(0, 300),
+    path: "/blogs/" + blogId + "/",
     image: CoreConfig.favicon,
-    keywords: post.tags,
+    keywords: postMetadata.tags,
     type: "article",
   });
 }
@@ -40,13 +39,14 @@ export async function generateMetadata({
 export default async function Page({
   params,
 }: {
-  params: Promise<{blogSlug: string}>;
+  params: Promise<{blogId: string}>;
 }) {
-  const {blogSlug} = await params;
-  const post = findPost(blogSlug);
+  const {blogId} = await params;
+  const post = getPostContent(blogId);
+  const postMetadata = getPostMetadata(blogId);
   if (!post) notFound();
-  const canonical = getCanonicalUrl("/blogs/" + blogSlug + "/");
-  const description = plainText(post.content).slice(0, 300);
+  const canonical = getCanonicalUrl("/blogs/" + blogId + "/");
+  const description = stripHtmlTags(post).slice(0, 300);
 
   return (
     <>
@@ -56,37 +56,34 @@ export default async function Page({
             <ArrowLeft size={16} /> All posts
           </Link>
           <header className={styles.articleHeader}>
-            <h1>{post.title}</h1>
-            <time className={styles.postDate} dateTime={post.date}>{post.date}</time>
-            {!!post.categories.length && (
+            <h1>{postMetadata.title}</h1>
+            <time className={styles.postDate} dateTime={postMetadata.date}>{postMetadata.date}</time>
+            {!!postMetadata.categories.length && (
               <div className={styles.tagList}>
-                {post.categories.map((category) => (
+                {postMetadata.categories.map((category) => (
                   <span className={styles.tag} key={category}>{category}</span>
                 ))}
               </div>
             )}
-            {!!post.tags.length && (
+            {!!postMetadata.tags.length && (
               <div className={styles.tagList}>
-                {post.tags.map((tag) => (
+                {postMetadata.tags.map((tag) => (
                   <span className={styles.tag} key={tag}>{tag}</span>
                 ))}
               </div>
             )}
           </header>
-          <div
-            className={styles.articleContent}
-            dangerouslySetInnerHTML={{__html: post.content}}
-          />
+          <HtmlRenderer>{styles.articleContent}</HtmlRenderer>
         </article>
       </main>
       <StructuredData data={{
         "@context": "https://schema.org",
         "@type": "BlogPosting",
-        headline: post.title,
+        headline: postMetadata.title,
         description,
-        datePublished: post.date,
-        articleSection: post.categories,
-        keywords: post.tags,
+        datePublished: postMetadata.date,
+        articleSection: postMetadata.categories,
+        keywords: postMetadata.tags,
         ...(canonical ? {url: canonical} : {}),
         author: {"@type": "Person", name: CoreConfig.fullName},
       }} />
