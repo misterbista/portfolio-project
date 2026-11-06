@@ -2,17 +2,18 @@
 
 import React from 'react';
 
-function HtmlRenderer(
-  {
-    children,
-    ...props
-  }: React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement> & {
-    children: string;
+type HtmlRendererProps =
+  | ({as?: "div"; children: string} & Omit<React.ComponentPropsWithoutRef<"div">, "children" | "dangerouslySetInnerHTML">)
+  | ({as: "span"; children: string} & Omit<React.ComponentPropsWithoutRef<"span">, "children" | "dangerouslySetInnerHTML">);
+
+function HtmlRenderer(props: HtmlRendererProps) {
+  if (props.as === "span") {
+    const {as, children, ...spanProps} = props;
+    return <span {...spanProps} dangerouslySetInnerHTML={{__html: children}} />;
   }
-) {
-  return (
-    <div {...props} dangerouslySetInnerHTML={{ __html: children }} children={undefined}></div>
-  );
+
+  const {as, children, ...divProps} = props;
+  return <div {...divProps} dangerouslySetInnerHTML={{__html: children}} />;
 }
 
 export default HtmlRenderer;

@@ -1,17 +1,17 @@
 "use client"
 
 import React from 'react';
+import HtmlRenderer from "@/components/ui/HtmlRenderer";
+import {stripHtmlTags} from "@/lib/html";
 
-const SmartText = (
-  props : React.DetailedHTMLProps<React.HTMLAttributes<HTMLSpanElement>, HTMLSpanElement> & {
-    children: string;
-  }
-) => {
-  const { children } = props;
+type SmartTextProps = Omit<React.ComponentPropsWithoutRef<"span">, "children" | "dangerouslySetInnerHTML"> & {
+  children: string;
+};
 
-  // remove all html tags from text
-  const htmlTagRegex = /<\/?[^>]+(>|$)/g;
-  let replacedText = children.replace(htmlTagRegex, '');
+const SmartText = (props: SmartTextProps) => {
+  const {children, ...spanProps} = props;
+
+  let replacedText = stripHtmlTags(children);
 
   const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g;
   replacedText = replacedText.replace(emailRegex, (match) => {
@@ -36,9 +36,7 @@ const SmartText = (
     </a>`;
   });
 
-  return (
-    <span {...props} dangerouslySetInnerHTML={{ __html: replacedText }} children={undefined}></span>
-  );
+  return <HtmlRenderer as="span" {...spanProps}>{replacedText}</HtmlRenderer>;
 };
 
 export default SmartText;
