@@ -7,13 +7,17 @@ export const schema = z.object({
         title: "Name",
         description: "The name of a gallery folder.",
       }),
+      coverImage: z.string().optional().meta({
+        title: "Cover image URL",
+        description: "An optional image to use as this folder's cover.",
+      }),
       description: z.string().optional().meta({
         title: "Description",
         description: "Optional introduction shown when this folder is opened.",
       }),
     }).meta({
       title: "Category",
-      description: "A named folder in the gallery and its optional introduction.",
+      description: "A named folder in the gallery.",
     }),
   ).meta({
     title: "Categories",
