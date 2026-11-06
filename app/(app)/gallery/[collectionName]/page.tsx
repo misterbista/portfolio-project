@@ -23,7 +23,7 @@ function findCollection(collectionName: string) {
     return null;
   }
 
-  const cover = getCollectionCover(collectionName, GalleryConfig.photos);
+  const cover = getCollectionCover(collectionName, GalleryConfig.photos, metadata.coverImage);
   const photos = getCollectionPhotos(collectionName, GalleryConfig.photos);
   return {
     ...metadata,
