@@ -23,7 +23,7 @@ export function createPageMetadata({
   description,
   path,
   image,
-  keywords,
+  keywords = CoreConfig.seoKeywords,
   type = "website",
 }: PageMetadataOptions): Metadata {
   const canonical = getCanonicalUrl(path);

@@ -1,4 +1,3 @@
-import type {Metadata} from "next";
 import StructuredData from "@/components/StructuredData";
 import {AboutConfig, CoreConfig} from "@/configuration";
 import {createPageMetadata, getCanonicalUrl} from "@/lib/pageMetadata";
@@ -7,12 +6,11 @@ import PageContent from "./page.content";
 
 const description = stripHtmlTags(AboutConfig.aboutMe).slice(0, 300);
 
-export const metadata: Metadata = createPageMetadata({
+export const metadata = createPageMetadata({
   title: "About",
   description,
   path: "/about/",
-  image: AboutConfig.heroPicture,
-  keywords: CoreConfig.seoKeywords,
+  image: AboutConfig.heroPicture
 });
 
 function Page() {
