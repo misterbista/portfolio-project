@@ -11,9 +11,21 @@ export const schema = z.object({
         title: "Name",
         description: "The name of a gallery folder.",
       }),
-      slug: z.string().default("").meta({
+      slugs: z.array(z.object({
+        isActive: z.boolean().default(true).meta({
+          title: "Is Active",
+          description: "Whether this slug is active and should be used to access the category.",
+        }),
+        slug: z.string().min(1, "Slug is required.").meta({
+          title: "Slug",
+          description: "A unique URL slug generated from the category name.",
+        }),
+      }).meta({
         title: "Slug",
-        description: "A hidden unique URL slug generated from the folder name.",
+        description: "A unique URL slug generated from the category name.",
+      })).default([]).meta({
+        title: "Slugs",
+        description: "The list of slugs including historical ones that can be used to access the category.",
       }),
       coverImage: z.string().optional().meta({
         title: "Cover image URL",
