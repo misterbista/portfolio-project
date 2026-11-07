@@ -1,3 +1,5 @@
+import {migrateAboutToV1} from "@/migrations/about/v1";
+
 export type ConfigurationMigration = (configuration: unknown) => unknown;
 
 type ConfigurationMigrationMap = Record<number, ConfigurationMigration>;
@@ -10,7 +12,7 @@ type VersionedConfiguration = {
 const initialConfigurationVersion = 0;
 
 const currentConfigurationVersions: Record<string, number> = {
-  about: initialConfigurationVersion,
+  about: 1,
   blog: initialConfigurationVersion,
   blogs: initialConfigurationVersion,
   core: initialConfigurationVersion,
@@ -26,7 +28,9 @@ const currentConfigurationVersions: Record<string, number> = {
 };
 
 const configurationMigrationManager: Record<string, ConfigurationMigrationMap> = {
-  about: {},
+  about: {
+    1: migrateAboutToV1
+  },
   blog: {},
   blogs: {},
   core: {},
@@ -53,8 +57,8 @@ function getConfigurationVersion(value: VersionedConfiguration | unknown): numbe
     return initialConfigurationVersion;
   }
 
-  if (!Number.isInteger(value.version) || value.version < 1) {
-    throw new Error("Configuration version must be a positive integer.");
+  if (!Number.isInteger(value.version) || value.version < 0) {
+    throw new Error(`Configuration version must be a positive integer. Found: ${value.version}.`);
   }
 
   return value.version;
