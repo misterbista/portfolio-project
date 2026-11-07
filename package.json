@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && rm -rf build/config build/uploads build/uploads_thumbs",
+    "migrate-config": "tsx scripts/migrate-config.ts",
+    "build": "pnpm migrate-config && next build && rm -rf build/config build/uploads build/uploads_thumbs",
     "start": "next start",
     "lint": "eslint"
   },

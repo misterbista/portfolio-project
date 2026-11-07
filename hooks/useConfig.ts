@@ -17,6 +17,7 @@ import {TOutput as ServicesConfigurationOutput, schema as ServicesConfigurationS
 import {toast} from "sonner";
 import {useGitHubPatAuth} from "@/hooks/useGitHubPatAuth";
 import {getGitHubFileContent, uploadGitHubFiles} from "@/lib/gitHub";
+import {migrateConfiguration, serializeConfiguration} from "@/lib/configurationMigrations";
 
 export enum Identifier {
   Core = "core",
@@ -152,7 +153,7 @@ async function saveConfig<T extends Identifier>(
 ): Promise<void> {
   const configPathFunction = configurationPaths[configIdentifier];
   const filePath = configPathFunction(query);
-  const content = JSON.stringify(newConfig, null, 2);
+  const content = serializeConfiguration(configIdentifier, newConfig);
   await uploadGitHubFiles(
     gitHubPat ?? "",
     repo,
@@ -180,5 +181,6 @@ async function getConfig<T extends Identifier>(
     filePath
   );
 
-  return configurationSchemas[configIdentifier].parse(JSON.parse(response)) as ConfigurationModel<T>;
+  const migratedConfig = migrateConfiguration(configIdentifier, JSON.parse(response));
+  return configurationSchemas[configIdentifier].parse(migratedConfig.configuration) as ConfigurationModel<T>;
 }
