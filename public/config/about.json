@@ -1,6 +1,9 @@
 {
-  "aboutMe": "",
-  "heroPicture": "",
-  "keypoints": [],
-  "additionalInformation": ""
+  "version": 1,
+  "configuration": {
+    "heroPicture": "",
+    "keypoints": [],
+    "additionalInformation": "",
+    "summary": ""
+  }
 }

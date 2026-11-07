@@ -1,4 +1,7 @@
 {
-  "coverPicture": "",
-  "bio": ""
+  "version": 0,
+  "configuration": {
+    "coverPicture": "",
+    "bio": ""
+  }
 }

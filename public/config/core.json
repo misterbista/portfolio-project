@@ -1,7 +1,10 @@
 {
-  "favicon": "",
-  "websiteName": "",
-  "fullName": "",
-  "seoDescription": "",
-  "seoKeywords": []
+  "version": 0,
+  "configuration": {
+    "favicon": "",
+    "websiteName": "",
+    "fullName": "",
+    "seoDescription": "",
+    "seoKeywords": []
+  }
 }

@@ -1,4 +1,7 @@
 {
-  "pageDescription": "",
-  "projects": []
+  "version": 0,
+  "configuration": {
+    "pageDescription": "",
+    "projects": []
+  }
 }

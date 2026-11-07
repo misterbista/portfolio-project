@@ -1,3 +1,6 @@
 {
-  "links": []
+  "version": 0,
+  "configuration": {
+    "links": []
+  }
 }

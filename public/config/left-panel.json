@@ -1,5 +1,8 @@
 {
-  "profilePicture": "",
-  "socials": [],
-  "enabledMenus": []
+  "version": 0,
+  "configuration": {
+    "profilePicture": "",
+    "socials": [],
+    "enabledMenus": []
+  }
 }
