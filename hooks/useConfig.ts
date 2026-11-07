@@ -1,19 +1,19 @@
 "use client"
 
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
-import {Model as CoreConfigurationModel, schema as CoreConfigurationSchema} from "@/configuration/core";
-import {Model as LeftPanelConfigurationModel, schema as LeftPanelConfigurationSchema} from "@/configuration/leftPanel";
-import {Model as HomeConfigurationModel, schema as HomeConfigurationSchema} from "@/configuration/home";
-import {Model as AboutConfigurationModel, schema as AboutConfigurationSchema} from "@/configuration/about";
-import {Model as JourneyConfigurationModel, schema as JourneyConfigurationSchema} from "@/configuration/journey";
-import {Model as ProjectsConfigurationModel, schema as ProjectsConfigurationSchema} from "@/configuration/projects";
-import {Model as SkillsConfigurationModel, schema as SkillsConfigurationSchema} from "@/configuration/skills";
-import {Model as TestimonialsConfigurationModel, schema as TestimonialsConfigurationSchema} from "@/configuration/testimonials";
-import {Model as GalleryConfigurationModel, schema as GalleryConfigurationSchema} from "@/configuration/gallery";
-import {Model as DownloadsConfigurationModel, schema as DownloadsConfigurationSchema} from "@/configuration/quickLinks";
-import {Model as BlogsConfigurationModel, schema as BlogsConfigurationSchema} from "@/configuration/blogs";
-import {Model as BlogConfigurationModel, schema as BlogConfigurationSchema} from "@/configuration/blog";
-import {Model as ServicesConfigurationModel, schema as ServicesConfigurationSchema} from "@/configuration/services";
+import {TOutput as CoreConfigurationOutput, schema as CoreConfigurationSchema} from "@/configuration/core";
+import {TOutput as LeftPanelConfigurationOutput, schema as LeftPanelConfigurationSchema} from "@/configuration/leftPanel";
+import {TOutput as HomeConfigurationOutput, schema as HomeConfigurationSchema} from "@/configuration/home";
+import {TOutput as AboutConfigurationOutput, schema as AboutConfigurationSchema} from "@/configuration/about";
+import {TOutput as JourneyConfigurationOutput, schema as JourneyConfigurationSchema} from "@/configuration/journey";
+import {TOutput as ProjectsConfigurationOutput, schema as ProjectsConfigurationSchema} from "@/configuration/projects";
+import {TOutput as SkillsConfigurationOutput, schema as SkillsConfigurationSchema} from "@/configuration/skills";
+import {TOutput as TestimonialsConfigurationOutput, schema as TestimonialsConfigurationSchema} from "@/configuration/testimonials";
+import {TOutput as GalleryConfigurationOutput, schema as GalleryConfigurationSchema} from "@/configuration/gallery";
+import {TOutput as QuickLinksConfigurationOutput, schema as QuickLinksConfigurationSchema} from "@/configuration/quickLinks";
+import {TOutput as BlogsConfigurationOutput, schema as BlogsConfigurationSchema} from "@/configuration/blogs";
+import {TOutput as BlogConfigurationOutput, schema as BlogConfigurationSchema} from "@/configuration/blog";
+import {TOutput as ServicesConfigurationOutput, schema as ServicesConfigurationSchema} from "@/configuration/services";
 import {toast} from "sonner";
 import {useGitHubPatAuth} from "@/hooks/useGitHubPatAuth";
 import {getGitHubFileContent, uploadGitHubFiles} from "@/lib/gitHub";
@@ -35,19 +35,19 @@ export enum Identifier {
 }
 
 type ConfigurationModelMap = {
-  [Identifier.Core]: CoreConfigurationModel;
-  [Identifier.LeftPanel]: LeftPanelConfigurationModel;
-  [Identifier.Home]: HomeConfigurationModel;
-  [Identifier.About]: AboutConfigurationModel;
-  [Identifier.Journey]: JourneyConfigurationModel;
-  [Identifier.Projects]: ProjectsConfigurationModel;
-  [Identifier.Skills]: SkillsConfigurationModel;
-  [Identifier.Testimonials]: TestimonialsConfigurationModel;
-  [Identifier.Gallery]: GalleryConfigurationModel;
-  [Identifier.QuickLinks]: DownloadsConfigurationModel;
-  [Identifier.Blogs]: BlogsConfigurationModel;
-  [Identifier.Blog]: BlogConfigurationModel;
-  [Identifier.Services]: ServicesConfigurationModel;
+  [Identifier.Core]: CoreConfigurationOutput;
+  [Identifier.LeftPanel]: LeftPanelConfigurationOutput;
+  [Identifier.Home]: HomeConfigurationOutput;
+  [Identifier.About]: AboutConfigurationOutput;
+  [Identifier.Journey]: JourneyConfigurationOutput;
+  [Identifier.Projects]: ProjectsConfigurationOutput;
+  [Identifier.Skills]: SkillsConfigurationOutput;
+  [Identifier.Testimonials]: TestimonialsConfigurationOutput;
+  [Identifier.Gallery]: GalleryConfigurationOutput;
+  [Identifier.QuickLinks]: QuickLinksConfigurationOutput;
+  [Identifier.Blogs]: BlogsConfigurationOutput;
+  [Identifier.Blog]: BlogConfigurationOutput;
+  [Identifier.Services]: ServicesConfigurationOutput;
 };
 
 type ConfigQuery = Record<string, string|number|null>;
@@ -85,7 +85,7 @@ const configurationSchemas = {
   [Identifier.Skills]: SkillsConfigurationSchema,
   [Identifier.Testimonials]: TestimonialsConfigurationSchema,
   [Identifier.Gallery]: GalleryConfigurationSchema,
-  [Identifier.QuickLinks]: DownloadsConfigurationSchema,
+  [Identifier.QuickLinks]: QuickLinksConfigurationSchema,
   [Identifier.Blogs]: BlogsConfigurationSchema,
   [Identifier.Blog]: BlogConfigurationSchema,
   [Identifier.Services]: ServicesConfigurationSchema,

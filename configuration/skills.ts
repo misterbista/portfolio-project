@@ -50,9 +50,11 @@ export const schema = z.object({
   description: "Configuration for the skills page and its skill entries.",
 });
 
-export type Model = z.infer<typeof schema>;
+export type TInput = z.input<typeof schema>;
+export type TOutput = z.output<typeof schema>;
+export type TModel = TOutput;
 
-export const defaultValues: Model = {
+export const defaultValues: TInput = {
   summary: "",
   skills: [],
 };
