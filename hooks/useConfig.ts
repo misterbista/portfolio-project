@@ -17,7 +17,7 @@ import {TOutput as ServicesConfigurationOutput, schema as ServicesConfigurationS
 import {toast} from "sonner";
 import {useGitHubPatAuth} from "@/hooks/useGitHubPatAuth";
 import {getGitHubFileContent, uploadGitHubFiles} from "@/lib/gitHub";
-import {migrateConfiguration, serializeConfiguration} from "@/lib/configurationMigrations";
+import {migrateConfiguration, serializeConfiguration} from "@/migrations/configurationMigrationManager";
 
 export enum Identifier {
   Core = "core",

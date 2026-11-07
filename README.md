@@ -9,7 +9,7 @@ Configuration files are versioned independently in `public/config/`. The build r
 before Next.js validates or imports them.
 
 When changing a configuration shape, increment its version in
-`lib/configurationMigrations.ts` and add a migration for each version transition.
+`migrations/configurationMigrationManager.ts` and add a migration for each version transition.
 Migrations are applied sequentially, so a file that skips several versions receives
 every migration between its stored version and the current version.
 

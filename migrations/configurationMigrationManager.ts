@@ -25,7 +25,7 @@ const currentConfigurationVersions: Record<string, number> = {
   testimonials: initialConfigurationVersion,
 };
 
-const configurationMigrations: Record<string, ConfigurationMigrationMap> = {
+const configurationMigrationManager: Record<string, ConfigurationMigrationMap> = {
   about: {},
   blog: {},
   blogs: {},
@@ -81,7 +81,7 @@ export function migrateConfiguration(
     : value;
 
   for (let nextVersion = version + 1; nextVersion <= currentVersion; nextVersion += 1) {
-    const migration = configurationMigrations[identifier][nextVersion];
+    const migration = configurationMigrationManager[identifier][nextVersion];
     if (!migration) {
       throw new Error(
         `Missing migration for configuration "${identifier}" from version ${nextVersion - 1} to ${nextVersion}.`,

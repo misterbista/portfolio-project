@@ -1,6 +1,6 @@
 import {readdirSync, readFileSync, writeFileSync} from "node:fs";
 import {join} from "node:path";
-import {migrateConfiguration, serializeMigratedConfiguration} from "@/lib/configurationMigrations";
+import {migrateConfiguration, serializeMigratedConfiguration} from "@/migrations/configurationMigrationManager";
 
 type ConfigurationFile = {
   identifier: string;

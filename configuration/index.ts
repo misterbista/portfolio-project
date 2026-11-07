@@ -1,4 +1,4 @@
-import {migrateConfiguration} from "@/lib/configurationMigrations";
+import {migrateConfiguration} from "@/migrations/configurationMigrationManager";
 
 import aboutJson from "@/public/config/about.json";
 import type {TOutput as AboutOutput} from "@/configuration/about";
