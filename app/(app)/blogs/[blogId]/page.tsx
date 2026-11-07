@@ -8,6 +8,7 @@ import {stripHtmlTags} from "@/lib/html";
 import PageContent from "./page.content";
 import type {BlogPost} from "./page.types";
 import {TModel as BlogModel} from "@/configuration/blog";
+import {getConfigurationDirectory} from "@/configuration/configurationFiles";
 
 export const dynamicParams = false;
 
@@ -27,7 +28,7 @@ function findBlogPost(postId: string){
     return null;
   }
 
-  const blogContentDirectory = join(process.cwd(), "public", "config", "blogs");
+  const blogContentDirectory = join(getConfigurationDirectory(), "blogs");
   let content: BlogModel;
   try {
     const fileContent = readFileSync(join(blogContentDirectory, postId + ".json"), "utf8");

@@ -1,5 +1,6 @@
 import {readdirSync, readFileSync, writeFileSync} from "node:fs";
 import {join} from "node:path";
+import {getConfigurationDirectory} from "@/configuration/configurationFiles";
 import {migrateConfiguration, serializeMigratedConfiguration} from "@/migrations/configurationMigrationManager";
 
 type ConfigurationFile = {
@@ -7,7 +8,7 @@ type ConfigurationFile = {
   path: string;
 };
 
-const configurationDirectory = join(process.cwd(), "public", "config");
+const configurationDirectory = getConfigurationDirectory();
 
 const configurationFiles: ConfigurationFile[] = [
   {identifier: "about", path: "about.json"},
