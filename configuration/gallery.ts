@@ -19,7 +19,7 @@ export const schema = z.object({
       title: "Category",
       description: "A named folder in the gallery.",
     }),
-  ).meta({
+  ).default([]).meta({
     title: "Categories",
     description: "The folders used to organize gallery photos. A photo can appear in multiple folders without being copied.",
   }),
@@ -46,7 +46,7 @@ export const schema = z.object({
           title: "Category",
           description: "A gallery category that groups this photo.",
         }),
-      ).meta({
+      ).default([]).meta({
         title: "Categories",
         description: "The categories used to group this photo in the gallery.",
       }),
@@ -54,7 +54,7 @@ export const schema = z.object({
       title: "Photo",
       description: "A photo and its display information in the gallery.",
     }),
-  ).meta({
+  ).default([]).meta({
     title: "Photos",
     description: "The photos to display in the gallery.",
   }),

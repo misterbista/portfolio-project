@@ -47,7 +47,7 @@ export const schema = z.object({
       title: "Testimonial",
       description: "A testimonial and optional details about its author.",
     }),
-  ).meta({
+  ).default([]).meta({
     title: "Testimonials",
     description: "The testimonials to display on the portfolio.",
   }),

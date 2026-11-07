@@ -27,7 +27,7 @@ export const schema = z.object({
       title: "Service",
       description: "A service offered and its related information.",
     }),
-  ).meta({
+  ).default([]).meta({
     title: "Services",
     description: "The list of services offered on the Services page.",
   })

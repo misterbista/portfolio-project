@@ -19,7 +19,7 @@ export const schema = z.object({
       title: "Download Link",
       description: "A file or resource that visitors can download.",
     }),
-  ).meta({
+  ).default([]).meta({
     title: "Download Links",
     description: "A list of downloadable files and resources.",
   }),

@@ -1,19 +1,19 @@
 "use client"
 
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
-import {Model as CoreConfigurationModel} from "@/configuration/core";
-import {Model as LeftPanelConfigurationModel} from "@/configuration/leftPanel";
-import {Model as HomeConfigurationModel} from "@/configuration/home";
-import {Model as AboutConfigurationModel} from "@/configuration/about";
-import {Model as JourneyConfigurationModel} from "@/configuration/journey";
-import {Model as ProjectsConfigurationModel} from "@/configuration/projects";
-import {Model as SkillsConfigurationModel} from "@/configuration/skills";
-import {Model as TestimonialsConfigurationModel} from "@/configuration/testimonials";
-import {Model as GalleryConfigurationModel} from "@/configuration/gallery";
-import {Model as DownloadsConfigurationModel} from "@/configuration/quickLinks";
-import {Model as BlogsConfigurationModel} from "@/configuration/blogs";
-import {Model as BlogConfigurationModel} from "@/configuration/blog";
-import {Model as ServicesConfigurationModel} from "@/configuration/services";
+import {Model as CoreConfigurationModel, schema as CoreConfigurationSchema} from "@/configuration/core";
+import {Model as LeftPanelConfigurationModel, schema as LeftPanelConfigurationSchema} from "@/configuration/leftPanel";
+import {Model as HomeConfigurationModel, schema as HomeConfigurationSchema} from "@/configuration/home";
+import {Model as AboutConfigurationModel, schema as AboutConfigurationSchema} from "@/configuration/about";
+import {Model as JourneyConfigurationModel, schema as JourneyConfigurationSchema} from "@/configuration/journey";
+import {Model as ProjectsConfigurationModel, schema as ProjectsConfigurationSchema} from "@/configuration/projects";
+import {Model as SkillsConfigurationModel, schema as SkillsConfigurationSchema} from "@/configuration/skills";
+import {Model as TestimonialsConfigurationModel, schema as TestimonialsConfigurationSchema} from "@/configuration/testimonials";
+import {Model as GalleryConfigurationModel, schema as GalleryConfigurationSchema} from "@/configuration/gallery";
+import {Model as DownloadsConfigurationModel, schema as DownloadsConfigurationSchema} from "@/configuration/quickLinks";
+import {Model as BlogsConfigurationModel, schema as BlogsConfigurationSchema} from "@/configuration/blogs";
+import {Model as BlogConfigurationModel, schema as BlogConfigurationSchema} from "@/configuration/blog";
+import {Model as ServicesConfigurationModel, schema as ServicesConfigurationSchema} from "@/configuration/services";
 import {toast} from "sonner";
 import {useGitHubPatAuth} from "@/hooks/useGitHubPatAuth";
 import {getGitHubFileContent, uploadGitHubFiles} from "@/lib/gitHub";
@@ -73,6 +73,22 @@ const configurationPaths: Record<Identifier, (query?: ConfigQuery) => string> = 
   [Identifier.Blogs]: _ => `public/config/blogs.json`,
   [Identifier.Blog]: (query) => `public/config/blogs/${query ? query["id"] : "empty"}.json`,
   [Identifier.Services]: _ => `public/config/services.json`,
+};
+
+const configurationSchemas = {
+  [Identifier.Core]: CoreConfigurationSchema,
+  [Identifier.LeftPanel]: LeftPanelConfigurationSchema,
+  [Identifier.Home]: HomeConfigurationSchema,
+  [Identifier.About]: AboutConfigurationSchema,
+  [Identifier.Journey]: JourneyConfigurationSchema,
+  [Identifier.Projects]: ProjectsConfigurationSchema,
+  [Identifier.Skills]: SkillsConfigurationSchema,
+  [Identifier.Testimonials]: TestimonialsConfigurationSchema,
+  [Identifier.Gallery]: GalleryConfigurationSchema,
+  [Identifier.QuickLinks]: DownloadsConfigurationSchema,
+  [Identifier.Blogs]: BlogsConfigurationSchema,
+  [Identifier.Blog]: BlogConfigurationSchema,
+  [Identifier.Services]: ServicesConfigurationSchema,
 };
 
 export function useConfig<T extends Identifier>(configIdentifier: T, query?: ConfigQuery): ConfigHookResult<T>{
@@ -164,5 +180,5 @@ async function getConfig<T extends Identifier>(
     filePath
   );
 
-  return JSON.parse(response) as ConfigurationModel<T>;
+  return configurationSchemas[configIdentifier].parse(JSON.parse(response)) as ConfigurationModel<T>;
 }

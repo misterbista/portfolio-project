@@ -26,14 +26,14 @@ export const schema = z.object({
       associatedMilestoneIds: z.array(z.string().min(1, "Milestone ID is required.").meta({
         title: "Milestone ID",
         description: "The ID of a journey milestone associated with this skill.",
-      })).meta({
+      })).default([]).meta({
         title: "Associated Milestones",
         description: "Select existing journey milestones that demonstrate or relate to this skill.",
       }),
       associatedProjectIds: z.array(z.string().min(1, "Project ID is required.").meta({
         title: "Project ID",
         description: "The ID of a project associated with this skill.",
-      })).meta({
+      })).default([]).meta({
         title: "Associated Projects",
         description: "Select existing projects that demonstrate or use this skill.",
       }),
@@ -41,7 +41,7 @@ export const schema = z.object({
       title: "Skill",
       description: "A skill entry and its related projects and milestones.",
     }),
-  ).meta({
+  ).default([]).meta({
     title: "Skills",
     description: "The skills displayed on the skills page.",
   }),

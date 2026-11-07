@@ -49,7 +49,6 @@ export const schema = z.object({
       description: "A search term associated with the website.",
     }))
     .default([])
-    .optional()
     .meta({
       title: "SEO Keywords",
       description:

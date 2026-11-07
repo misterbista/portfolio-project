@@ -35,7 +35,7 @@ export const schema = z.object({
     }).meta({
       title: "Key point",
       description: "A key point to display on the about page.",
-    })).meta({
+    })).default([]).meta({
       title: "Key points",
       description: "A list of key points to display on the about page.",
     }),

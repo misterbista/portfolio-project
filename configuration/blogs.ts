@@ -18,14 +18,14 @@ export const schema = z.object({
       categories: z.array(z.string().min(1, "Category is required.").meta({
         title: "Category",
         description: "A category used to group the blog post.",
-      })).meta({
+      })).default([]).meta({
         title: "Categories",
         description: "Broad groups used to filter or organize posts, such as Engineering or Design.",
       }),
       tags: z.array(z.string().min(1, "Tag is required.").meta({
         title: "Tag",
         description: "A tag associated with the blog post.",
-      })).meta({
+      })).default([]).meta({
         title: "Tags",
         description: "Specific searchable topics for the post, such as React, TypeScript, or Accessibility.",
       }),
@@ -33,7 +33,7 @@ export const schema = z.object({
       title: "Blog Post Metadata",
       description: "Metadata that identifies a blog post whose rich-text HTML is stored in a file named after its ID.",
     }),
-  ).meta({
+  ).default([]).meta({
     title: "Blog Posts",
     description: "The list of blog posts available on the Blog page.",
   })
