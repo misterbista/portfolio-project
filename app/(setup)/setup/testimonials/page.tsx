@@ -237,7 +237,7 @@ function Page() {
           name={"summary"}
           render={({field, fieldState: {error}}) =>
             <div className={"grid gap-2"}>
-              <Label htmlFor={"testimonialsSummary"}>Page description</Label>
+              <Label htmlFor={"testimonialsSummary"}>Summary</Label>
               <RichTextEditor id={"testimonialsSummary"} placeholder={"Introduce your testimonials"} value={field.value} onChange={field.onChange} className={cn("w-full", error && "border-destructive")}/>
               {error && <small className={"text-destructive"}>{error.message}</small>}
             </div>

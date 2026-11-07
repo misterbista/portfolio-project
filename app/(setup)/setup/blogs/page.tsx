@@ -16,6 +16,7 @@ import {Pencil, Plus, Trash2} from "lucide-react";
 import {cn} from "@/lib/utils";
 import {Control, Controller, useFieldArray, useFormContext, useWatch} from "react-hook-form";
 import {RichTextEditor} from "@/components/ui/RichTextEditor";
+import {Textarea} from "@/components/ui/textarea";
 import {withConfigurationId} from "@/lib/configurationUtils";
 import {useConfigurationForm} from "@/hooks/useConfigurationForm";
 import {confirm} from "@/components/ui/Confirm";
@@ -24,6 +25,7 @@ import {isNullOrWhitespace} from "@/lib/string";
 const emptyPost: Model["posts"][number] = {
   id: "",
   title: "",
+  summary: "",
   date: "",
   categories: [],
   tags: [],
@@ -58,6 +60,19 @@ function BlogMetadataFields({control, index}: {control: Control<Model>; index: n
           }
         />
       </div>
+
+      <Controller
+        control={control}
+        name={`posts.${index}.summary`}
+        render={({field, fieldState: {error}}) =>
+          <div className={"grid gap-2"}>
+            <Label htmlFor={`posts.${index}.summary`}>Summary (optional)</Label>
+            <Textarea {...field} id={`posts.${index}.summary`} placeholder={"A concise description of this post"} className={cn("w-full", error && "border-destructive")}/>
+            <p className={"text-xs text-muted-foreground"}>Shown on the blog page and used in search and social previews.</p>
+            {error && <small className={"text-destructive"}>{error.message}</small>}
+          </div>
+        }
+      />
 
       <div className={"grid gap-3 md:grid-cols-2"}>
         <Controller
@@ -320,6 +335,18 @@ function Page() {
   return (
     <ConfigurationFormWrapper className={styles.page} title={"Blog Configuration"} config={formValues} form={form}>
       <form onSubmit={handleSubmit(save)} className={cn(styles.form, "grid max-w-3xl gap-6")}>
+        <Controller
+          control={control}
+          name={"summary"}
+          render={({field, fieldState: {error}}) =>
+            <div className={"grid gap-2"}>
+              <Label htmlFor={"blogsSummary"}>Summary</Label>
+              <RichTextEditor id={"blogsSummary"} placeholder={"Introduce the articles on your blog"} value={field.value} onChange={field.onChange} className={cn("w-full", error && "border-destructive")}/>
+              {error && <small className={"text-destructive"}>{error.message}</small>}
+            </div>
+          }
+        />
+
         <div className={"flex flex-col justify-between gap-3 sm:flex-row sm:items-center"}>
           <div>
             <Label>Blogs</Label>

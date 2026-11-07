@@ -1,6 +1,10 @@
 import * as z from "zod";
 
 export const schema = z.object({
+  summary: z.string().min(1, "Summary is required.").default("").meta({
+    title: "Summary",
+    description: "A short introduction to the photo collections on the Gallery page.",
+  }),
   categories: z.array(
     z.object({
       name: z.string().min(1, "Category name is required.").meta({
@@ -66,6 +70,7 @@ export const schema = z.object({
 export type Model = z.infer<typeof schema>;
 
 export const defaultValues: Model = {
+  summary: "",
   categories: [],
   photos: [],
 };

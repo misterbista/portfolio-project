@@ -2,8 +2,8 @@ import * as z from "zod";
 
 export const schema = z.object({
   summary: z.string().min(1, "Summary is required.").meta({
-    title: "Page Description",
-    description: "Introductory text displayed at the top of the testimonials page.",
+    title: "Summary",
+    description: "Introductory text displayed at the top of the testimonials page and used as its search result description.",
   }),
   testimonials: z.array(
     z.object({

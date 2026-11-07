@@ -1,6 +1,10 @@
 import * as z from "zod";
 
 export const schema = z.object({
+  summary: z.string().min(1, "Summary is required.").default("").meta({
+    title: "Summary",
+    description: "A short introduction to the articles on the Blog page.",
+  }),
   posts: z.array(
     z.object({
       id: z.string().min(1, "ID is required.").meta({
@@ -10,6 +14,10 @@ export const schema = z.object({
       title: z.string().min(1, "Title is required.").meta({
         title: "Title",
         description: "The headline shown on the blog card and at the top of the post.",
+      }),
+      summary: z.string().min(1, "Summary is required.").default("").meta({
+        title: "Summary",
+        description: "A concise description shown on the blog card and used for the post's search result description.",
       }),
       date: z.string().min(1, "Date is required.").meta({
         title: "Date",
@@ -42,5 +50,6 @@ export const schema = z.object({
 export type Model = z.infer<typeof schema>;
 
 export const defaultValues: Model = {
+  summary: "",
   posts: []
 };

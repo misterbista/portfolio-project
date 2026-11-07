@@ -6,7 +6,7 @@ export const schema = z.object({
     .min(1, "Summary is required.")
     .meta({
       title: "Summary",
-      description: "A concise introduction shown above the timeline. One or two sentences works best."
+      description: "A concise introduction shown above the timeline and used as its search result description."
     }),
   milestones: z.array(
     z.object({

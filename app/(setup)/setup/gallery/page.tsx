@@ -408,6 +408,18 @@ function Page() {
   return (
     <ConfigurationFormWrapper className={styles.page} title={"Gallery Configuration"} config={formValues} form={form}>
       <form onSubmit={handleSubmit(save)} className={cn(styles.form, "grid max-w-3xl gap-6")}>
+        <Controller
+          control={control}
+          name={"summary"}
+          render={({field, fieldState: {error}}) =>
+            <div className={"grid gap-2"}>
+              <Label htmlFor={"gallerySummary"}>Summary</Label>
+              <RichTextEditor id={"gallerySummary"} placeholder={"Introduce the photos and collections in your gallery"} value={field.value} onChange={field.onChange} className={cn("w-full", error && "border-destructive")}/>
+              {error && <small className={"text-destructive"}>{error.message}</small>}
+            </div>
+          }
+        />
+
         <div className={"grid gap-3"}>
           <div className={"flex flex-col justify-between gap-3 sm:flex-row sm:items-center"}>
             <div>

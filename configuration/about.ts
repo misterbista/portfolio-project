@@ -1,12 +1,12 @@
 import * as z from "zod";
 
 export const schema = z.object({
-  aboutMe: z
+  summary: z
     .string()
-    .min(1, "About me is required.")
+    .min(1, "Summary is required.")
     .meta({
-      title: "About me",
-      description: "A detailed description about yourself.",
+      title: "Summary",
+      description: "The introduction shown on the About page and used as its search result description.",
     }
   ),
   heroPicture: z
@@ -54,7 +54,7 @@ export const schema = z.object({
 export type Model = z.infer<typeof schema>;
 
 export const defaultValues: Model = {
-  aboutMe: "",
+  summary: "",
   heroPicture: "",
   keypoints: [],
   additionalInformation: "",

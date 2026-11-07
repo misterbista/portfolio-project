@@ -2,8 +2,8 @@ import * as z from "zod";
 
 export const schema = z.object({
   summary: z.string().min(1, "Summary is required.").meta({
-    title: "Page Description",
-    description: "A short introduction shown above the project cards. Keep it to one or two sentences.",
+    title: "Summary",
+    description: "A concise introduction shown above the project cards and used as the page's search result description.",
   }),
   projects: z.array(
     z.object({

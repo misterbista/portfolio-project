@@ -53,7 +53,7 @@ export async function generateMetadata(
 
   return createPageMetadata({
     title: post.title,
-    description: stripHtmlTags(post.content).slice(0, 300),
+    description: stripHtmlTags(post.summary || post.content).slice(0, 300),
     path: "/blogs/" + blogId + "/",
     image: CoreConfig.favicon,
     keywords: post.tags,
@@ -81,7 +81,7 @@ export default async function Page(
         "@context": "https://schema.org",
         "@type": "BlogPosting",
         headline: post.title,
-        description: stripHtmlTags(post.content).slice(0, 300),
+        description: stripHtmlTags(post.summary || post.content).slice(0, 300),
         datePublished: post.date,
         articleSection: post.categories,
         keywords: post.tags,
