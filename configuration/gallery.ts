@@ -11,6 +11,10 @@ export const schema = z.object({
         title: "Name",
         description: "The name of a gallery folder.",
       }),
+      slug: z.string().default("").meta({
+        title: "Slug",
+        description: "A hidden unique URL slug generated from the folder name.",
+      }),
       coverImage: z.string().optional().meta({
         title: "Cover image URL",
         description: "An optional image to use as this folder's cover.",
