@@ -7,8 +7,8 @@ import SmartText from "@/components/ui/SmartText";
 import {AspectRatio} from "@/components/ui/aspect-ratio";
 import {cn} from "@/lib/utils";
 import HtmlRenderer from "@/components/ui/HtmlRenderer";
-import {Model as CoreModel} from "@/configuration/core";
-import {Model as AboutModel} from "@/configuration/about";
+import {TModel as CoreModel} from "@/configuration/core";
+import {TModel as AboutModel} from "@/configuration/about";
 
 function PageContent(
   {coreConfig, aboutConfig}: {

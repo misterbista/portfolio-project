@@ -2,7 +2,7 @@
 
 import React from 'react';
 import styles from "./page.module.css";
-import {Model as GalleryModel} from "@/configuration/gallery";
+import {TModel as GalleryModel} from "@/configuration/gallery";
 import {cn} from "@/lib/utils";
 import {Folder, Images} from "lucide-react";
 import SmartLink from "@/components/ui/SmartLink";

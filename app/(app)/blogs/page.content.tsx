@@ -2,7 +2,7 @@
 
 import React from 'react';
 import styles from "./page.module.css";
-import {Model as BlogsModel} from "@/configuration/blogs"
+import {TModel as BlogsModel} from "@/configuration/blogs"
 import SmartLink from "@/components/ui/SmartLink";
 import HtmlRenderer from "@/components/ui/HtmlRenderer";
 

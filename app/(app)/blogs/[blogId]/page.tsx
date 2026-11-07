@@ -7,7 +7,7 @@ import {createPageMetadata, getCanonicalUrl} from "@/lib/pageMetadata";
 import {stripHtmlTags} from "@/lib/html";
 import PageContent from "./page.content";
 import type {BlogPost} from "./page.types";
-import {Model as BlogModel} from "@/configuration/blog";
+import {TModel as BlogModel} from "@/configuration/blog";
 
 export const dynamicParams = false;
 
