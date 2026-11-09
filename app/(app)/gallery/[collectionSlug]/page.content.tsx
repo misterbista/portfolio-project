@@ -51,7 +51,11 @@ function PageContent(
           })}
         </div>
       ) : (
-        <div className={styles.emptyState}>This folder does not have any photos yet.</div>
+        <section className={styles.emptyState} aria-label="Collection photos">
+          <Images size={26} aria-hidden="true"/>
+          <h2>No photos in this collection.</h2>
+          <p>Images added to this collection will show up here.</p>
+        </section>
       )}
     </main>
   );
