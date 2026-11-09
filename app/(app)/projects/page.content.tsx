@@ -1,6 +1,6 @@
 "use client"
 
-import React, {useMemo, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import SmartLink from "@/components/ui/SmartLink";
 import {ArrowRight, Grid2X2, Image as ImageIcon, List, Search} from "lucide-react";
 import styles from "./page.module.css";
@@ -19,6 +19,8 @@ import {cn} from "@/lib/utils";
 import type {TModel as JourneyModel} from "@/configuration/journey";
 import type {TModel as ProjectsModel} from "@/configuration/projects";
 import {getActiveSlug} from "@/lib/slugs";
+import {useDebouncedState} from "@/hooks/useDebouncedState";
+import {useRouter, useSearchParams} from "next/navigation";
 
 type MilestoneType = JourneyModel["milestones"][number]["type"];
 
@@ -27,6 +29,7 @@ function getSearchableProjectText(project: ProjectsModel["projects"][number]) {
     project.title,
     project.description,
     project.id,
+    ...project.slugs.map(({slug}) => slug),
     ...(project.keypoints || []).flatMap(({title, value}) => [title, value]),
     ...(project.seoKeywords || []),
   ].join(" ").replaceAll(/<[^>]*>/g, " ").toLocaleLowerCase();
@@ -38,8 +41,27 @@ function PageContent(
     journeyConfig: JourneyModel;
   }
 ) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const keyword = searchParams.get("keyword") || "";
+  const {
+    state: searchTerm,
+    debouncedState: debouncedSearchTerm,
+    setState: setSearchTerm
+  } = useDebouncedState(keyword, 300);
+
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams.toString());
+    if(!debouncedSearchTerm.trim()) {
+      params.delete("keyword");
+    } else {
+      params.set("keyword", debouncedSearchTerm);
+    }
+    router.push(`?${params.toString()}`);
+  }, [debouncedSearchTerm]);
+
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
-  const [searchTerm, setSearchTerm] = useState("");
+
   const projects = projectsConfig.projects || [];
   const milestonesById = useMemo(() => {
     return new Map((journeyConfig.milestones || []).map((milestone) => [milestone.id, milestone]));
@@ -51,10 +73,10 @@ function PageContent(
   };
 
   const visibleProjects = useMemo(() => {
-    const query = searchTerm.trim().toLocaleLowerCase();
+    const query = debouncedSearchTerm.trim().toLocaleLowerCase();
     if (!query) return projects;
     return projects.filter((project) => getSearchableProjectText(project).includes(query));
-  }, [projects, searchTerm]);
+  }, [projects, debouncedSearchTerm]);
 
   return (
     <main className={cn(styles.page)}>
