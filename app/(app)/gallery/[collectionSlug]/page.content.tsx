@@ -29,7 +29,7 @@ function PageContent(
       )}
 
       {collection.photos.length ? (
-        <div className={styles.photoGrid}>
+        <section className={styles.photoGrid} aria-label={collection.name + " photos"}>
           {collection.photos.map((photo, index) => {
             const imageName = photo.title || "Untitled Photo";
             const imageUrl = photo.url;
@@ -49,7 +49,7 @@ function PageContent(
               </article>
             );
           })}
-        </div>
+        </section>
       ) : (
         <section className={styles.emptyState} aria-label="Collection photos">
           <Images size={26} aria-hidden="true"/>
