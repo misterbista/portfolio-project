@@ -10,6 +10,7 @@ import {Input} from "@/components/ui/input";
 import {useDebouncedState} from "@/hooks/useDebouncedState";
 import {GitHubContent} from "@/lib/gitHub";
 import {getFileTypeFromExtension} from "@/lib/files";
+import {UPLOADS_PATH, UPLOADS_THUMBS_PATH} from "@/lib/pathConfig";
 import Image from "next/image";
 import ImageLightbox from "@/components/ui/ImageLightbox";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
@@ -21,7 +22,7 @@ type GithubFilePickerProps = {
 };
 
 function GithubFilePicker({
-  path = "public/uploads",
+  path = UPLOADS_PATH,
   onSelect,
   className
 }: GithubFilePickerProps) {
@@ -142,8 +143,8 @@ function PickerImageCard({
 }) {
   const [hovered, setHovered] = useState(false);
 
-  const thumbnailUrl = file.path.startsWith("public/uploads/") && !file.path.startsWith("public/uploads_thumbs/")
-    ? file.download_url.replace("/public/uploads/", "/public/uploads_thumbs/")
+  const thumbnailUrl = file.path.startsWith(`${UPLOADS_PATH}/`) && !file.path.startsWith(`${UPLOADS_THUMBS_PATH}/`)
+    ? file.download_url.replace(`/${UPLOADS_PATH}/`, `/${UPLOADS_THUMBS_PATH}/`)
     : file.download_url;
   const [imageUrl, setImageUrl] = useState(thumbnailUrl);
 
