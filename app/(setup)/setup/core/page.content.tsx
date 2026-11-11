@@ -12,12 +12,13 @@ import {Button} from "@/components/ui/button";
 import {cn} from "@/lib/utils";
 import {ArrayInput} from "@/components/ui/ArrayInput";
 import {Textarea} from "@/components/ui/textarea";
+import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
 import ConfigurationFormWrapper from "@/components/ui/ConfigurationFormWrapper";
 import FullScreenMessage from "@/components/ui/FullScreenMessage";
 import {Spinner} from "@/components/ui/spinner";
 import {useConfigurationForm} from "@/hooks/useConfigurationForm";
 
-export default function PageContent() {
+export default function PageContent({templates}: {templates: string[]}) {
   const {
     isLoadingConfig,
     saveConfig,
@@ -101,6 +102,33 @@ export default function PageContent() {
               {error && <small className={"text-destructive"}>{error.message}</small>}
             </div>
           }
+        />
+
+        <Controller
+          control={control}
+          name={"template"}
+          render={({field, fieldState: {error}}) => (
+            <div className={"grid gap-2"}>
+              <Label htmlFor={"template"}>Template</Label>
+              <Select
+                value={field.value || "default"}
+                onValueChange={field.onChange}
+                defaultValue={"default"}
+              >
+                <SelectTrigger id={"template"} className={cn("w-full", error && "border-destructive")}>
+                  <SelectValue placeholder={"Select a template"} />
+                </SelectTrigger>
+                <SelectContent>
+                  {templates.map((template) => (
+                    <SelectItem key={template} value={template}>
+                      {template}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              {error && <small className={"text-destructive"}>{error.message}</small>}
+            </div>
+          )}
         />
 
         <div className={"flex justify-end"}>
