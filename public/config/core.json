@@ -1,10 +1,11 @@
 {
-  "version": 0,
+  "version": 1,
   "configuration": {
     "favicon": "",
     "websiteName": "",
     "fullName": "",
     "seoDescription": "",
-    "seoKeywords": []
+    "seoKeywords": [],
+    "template": "default"
   }
 }
