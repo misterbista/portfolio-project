@@ -1,0 +1,94 @@
+body:has([data-template="minimol"]) {
+  --background: #faf9f6;
+  --foreground: #252520;
+  --template-body: #53534b;
+  --muted: #eeede7;
+  --muted-foreground: #74746a;
+  --border: #deded5;
+  --ring: #656b50;
+  --card: #f3f2ec;
+  --card-foreground: var(--foreground);
+  --popover: var(--background);
+  --popover-foreground: var(--foreground);
+  --primary: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary: var(--muted);
+  --secondary-foreground: var(--foreground);
+  --accent: var(--muted);
+  --accent-foreground: var(--foreground);
+  --input: var(--border);
+  --sidebar: #f3f2ec;
+  --sidebar-foreground: #252520;
+  --sidebar-accent: #e5e6da;
+  --sidebar-accent-foreground: #252520;
+  --sidebar-border: #deded5;
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-ring: var(--ring);
+  color: var(--foreground);
+  color-scheme: light;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+body:has([data-template="minimol"]) [data-slot="sidebar-wrapper"] {
+  background: var(--background);
+}
+
+body:has([data-template="minimol"]) [data-slot="sidebar-container"] {
+  border-color: var(--border);
+}
+
+body:has([data-template="minimol"]) [data-slot="sidebar-profile"] {
+  justify-content: flex-start;
+  padding: 1rem 0;
+}
+
+body:has([data-template="minimol"]) [data-slot="avatar"] {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+}
+
+body:has([data-template="minimol"]) [data-slot="sidebar-menu-button"] {
+  min-height: 2.75rem;
+  border-radius: 0;
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+body:has([data-template="minimol"]) [data-slot="sidebar-menu-button"][aria-current="page"] {
+  background: var(--sidebar-accent);
+}
+
+body:has([data-template="minimol"]) [data-slot="sidebar-footer"] {
+  margin-top: auto;
+  padding: 1.5rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted-foreground);
+  font-size: 0.65rem;
+  text-align: left;
+}
+
+body:has([data-template="minimol"]) [data-slot="sidebar-trigger"],
+body:has([data-template="minimol"]) [aria-label="Back to top"] {
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--background);
+  color: var(--foreground);
+  box-shadow: none;
+}
+
+body:has([data-template="minimol"]) [role="group"][aria-label="Floating controls"] {
+  right: max(1.25rem, env(safe-area-inset-right));
+  bottom: max(1.25rem, env(safe-area-inset-bottom));
+}
+
+body:has([data-template="minimol"]) #main-content {
+  max-width: 74rem;
+  margin-inline: auto;
+  padding: 0 clamp(1.5rem, 6vw, 5rem) 5rem;
+}

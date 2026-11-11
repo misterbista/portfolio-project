@@ -1,0 +1,232 @@
+.page {
+  padding-top: clamp(3rem, 8vw, 7rem);
+  container-type: inline-size;
+}
+
+.intro {
+  max-width: 42rem;
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+.eyebrow,
+.type {
+  color: var(--muted-foreground);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.intro h1 {
+  margin-top: 0.75rem;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 450;
+  letter-spacing: -0.06em;
+  line-height: 1.2;
+}
+
+.summary {
+  margin-top: 1.5rem;
+  color: var(--muted-foreground);
+  line-height: 2;
+}
+
+.timeline {
+  position: relative;
+  display: grid;
+}
+
+.timeline::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0.25rem;
+  width: 1px;
+  content: "";
+  background: var(--border);
+}
+
+.entry {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.7fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  padding: 0 0 clamp(3rem, 6vw, 5rem) 2.5rem;
+  scroll-margin-top: 2rem;
+}
+
+.entry:last-child {
+  padding-bottom: 0;
+}
+
+.marker {
+  position: absolute;
+  top: 0.1rem;
+  left: -0.1rem;
+  display: grid;
+  width: 0.8rem;
+  height: 0.8rem;
+  place-items: center;
+  border: 1px solid var(--muted-foreground);
+  border-radius: 50%;
+  color: var(--muted-foreground);
+  background: var(--background);
+}
+
+.context {
+  min-width: 0;
+  color: var(--muted-foreground);
+  font-size: 0.78rem;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.type {
+  margin-bottom: 0.35rem;
+  font-size: 0.6rem;
+}
+
+.date {
+  font-variant-numeric: tabular-nums;
+}
+
+.context h2 {
+  margin-block: 0.75rem 0.5rem;
+  color: var(--foreground);
+  font-size: 1.1rem;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.organisation,
+.department {
+  color: var(--muted-foreground);
+}
+
+.department {
+  margin-top: 0.2rem;
+}
+
+.organisation a,
+.department a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  text-decoration: underline;
+  text-decoration-color: var(--border);
+  text-underline-offset: 4px;
+}
+
+.organisation a:hover,
+.department a:hover {
+  color: var(--foreground);
+  text-decoration-color: currentColor;
+}
+
+.organisation a:focus-visible,
+.department a:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 4px;
+}
+
+.dateRange {
+  display: grid;
+  gap: 0.2rem;
+  margin-top: 0.8rem;
+  color: var(--muted-foreground);
+  font-size: 0.7rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.story {
+  min-width: 0;
+  color: var(--template-body);
+  line-height: 2;
+  overflow-wrap: anywhere;
+}
+
+.description :first-child {
+  margin-top: 0;
+}
+
+.description :last-child {
+  margin-bottom: 0;
+}
+
+.points {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  padding-left: 1.2rem;
+  list-style: disc;
+}
+
+.achievements,
+.partingNote {
+  margin-top: 1.5rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--border);
+}
+
+.achievements h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--foreground);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.achievements ul {
+  display: grid;
+  gap: 1rem;
+  margin-top: 0.8rem;
+}
+
+.achievements li {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.achievements strong {
+  color: var(--foreground);
+  font-weight: 500;
+}
+
+.achievements span,
+.achievements time {
+  color: var(--muted-foreground);
+  font-size: 0.8rem;
+}
+
+.partingNote span {
+  color: var(--muted-foreground);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.partingNote p {
+  margin-top: 0.35rem;
+  color: var(--muted-foreground);
+}
+
+.empty {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1.5rem 0 0 2.5rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted-foreground);
+  font-size: 0.85rem;
+}
+
+@container (max-width: 40rem) {
+  .entry {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1rem;
+  }
+}

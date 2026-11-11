@@ -18,7 +18,7 @@ type SiteShellProps = {
 
 export default function SiteShell({children, coreConfig, leftPanelConfig, quickLinksConfig}: SiteShellProps) {
   return (
-    <SidebarProvider defaultOpen={false}>
+    <SidebarProvider defaultOpen={false} data-template={coreConfig.template}>
       <a href="#main-content" className={styles.skipLink}>
         Skip to main content
       </a>

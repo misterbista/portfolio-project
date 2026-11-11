@@ -1,8 +1,10 @@
-import React from "react";
-import styles from "./page.module.css";
-import {cn} from "@/lib/utils";
+import dynamic from "next/dynamic";
+import {existsSync} from "node:fs";
+import {join} from "node:path";
 import {CoreConfig, HomeConfig} from "@/configuration";
 import {createPageMetadata, getSiteName} from "@/lib/pageMetadata";
+import {cn} from "@/lib/utils";
+import styles from "./page.module.css";
 
 export const metadata = createPageMetadata({
   title: getSiteName(),
@@ -12,8 +14,14 @@ export const metadata = createPageMetadata({
   keywords: CoreConfig.seoKeywords,
 });
 
+const customHomePath = join(process.cwd(), "templates", CoreConfig.template, "home", "page.content.tsx");
+const PageContent = existsSync(customHomePath) ? dynamic(
+  () => import(`@/templates/${CoreConfig.template}/home/page.content`),
+  {ssr: true}
+) : null;
+
 function Page() {
-  return (
+  if (!PageContent) return (
     <main className={styles.page} aria-label="Home">
       <div
         className={styles.heroImage}
@@ -28,6 +36,8 @@ function Page() {
       </div>
     </main>
   );
+
+  return <PageContent />;
 }
 
 export default Page;
