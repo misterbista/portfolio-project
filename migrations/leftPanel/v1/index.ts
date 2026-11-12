@@ -5,8 +5,13 @@ export function migrateLeftPanelToV1(configuration: unknown): unknown {
 
   const config = configuration as Record<string, unknown>;
   const navigations = (config.enabledMenus || config.enabledNavigations || []) as unknown[];
-  return {
+  const leftPanelConfig =  {
     ...config,
     enabledNavigations: navigations.filter((item: unknown) => typeof item === 'string' && item !== 'quickLinks'),
   };
+
+  if ('enabledMenus' in leftPanelConfig) {
+    delete leftPanelConfig.enabledMenus;
+  }
+  return leftPanelConfig;
 }
