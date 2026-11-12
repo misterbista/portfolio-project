@@ -1,3 +1,4 @@
+import {existsSync} from "node:fs";
 import dynamic from "next/dynamic";
 import {join} from "node:path";
 import {notFound} from "next/navigation";
@@ -10,6 +11,7 @@ import {readConfigurationFile} from "@/configuration/configurationFiles";
 import {buildSchema as blogSchema, type TOutput as BlogOutput} from "@/configuration/blog";
 import {migrateConfiguration} from "@/migrations/configurationMigrationManager";
 
+const contentExists = existsSync(join(process.cwd(), "templates", CoreConfig.template, "blogs", "[blogSlug]", "page.content.tsx"));
 const PageContent = dynamic<PageContentProps>(
   () => import(`@/templates/${CoreConfig.template}/blogs/[blogSlug]/page.content`),
   {ssr: true}
@@ -77,6 +79,9 @@ export default async function Page(
   {params}: { params: Promise<{blogSlug: string}>; }
 ) {
   const {blogSlug} = await params;
+  if (!contentExists) {
+    notFound();
+  }
   const post = findBlogPost(blogSlug);
   if (!post) {
     notFound();

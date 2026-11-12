@@ -1,4 +1,7 @@
+import {join} from "node:path";
+import {existsSync} from "node:fs";
 import dynamic from "next/dynamic";
+import {notFound} from "next/navigation";
 import StructuredData from "@/components/StructuredData";
 import {AboutConfig, CoreConfig} from "@/configuration";
 import {createPageMetadata, getCanonicalUrl} from "@/lib/pageMetadata";
@@ -14,12 +17,16 @@ export const metadata = createPageMetadata({
   image: AboutConfig.heroPicture
 });
 
+const contentExists = existsSync(join(process.cwd(), "templates", CoreConfig.template, "about", "page.content.tsx"));
 const PageContent = dynamic<PageContentProps>(
   () => import(`@/templates/${CoreConfig.template}/about/page.content`),
   {ssr: true}
 );
 
 function Page() {
+  if (!contentExists) {
+    notFound();
+  }
   const canonical = getCanonicalUrl("/about/");
   return (
     <>
