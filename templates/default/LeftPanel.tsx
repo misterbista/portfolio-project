@@ -15,12 +15,12 @@ import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import {usePathname} from "next/navigation";
 import SocialLinks from "@/components/ui/SocialLinks";
 import {cn} from "@/lib/utils";
-import SidebarCustomMenuItem from "@/app/(app)/SidebarCustomMenuItem";
 import SmartLink from "@/components/ui/SmartLink";
 import ImageLightbox from "@/components/ui/ImageLightbox";
 import type {TModel as CoreModel} from "@/configuration/core";
 import type {TModel as LeftPanelModel} from "@/configuration/leftPanel";
 import type {TModel as QuickLinksModel} from "@/configuration/quickLinks";
+import SidebarCustomMenuItem from "@/templates/default/SidebarCustomMenuItem";
 
 class LeftPanelItem {
   label: string;

@@ -3,20 +3,11 @@
 import React from "react";
 import {SidebarProvider} from "@/components/ui/sidebar";
 import GoToTopButton from "@/components/ui/GoToTopButton";
-import LeftPanel from "@/app/(app)/LeftPanel";
-import type {TModel as CoreModel} from "@/configuration/core";
-import type {TModel as LeftPanelModel} from "@/configuration/leftPanel";
-import type {TModel as QuickLinksModel} from "@/configuration/quickLinks";
-import styles from "./SiteShell.module.css";
+import type {LayoutContentProps} from "@/app/(app)/layout.types";
+import styles from "./layout.module.css";
+import LeftPanel from "@/templates/default/LeftPanel";
 
-type SiteShellProps = {
-  children: React.ReactNode;
-  coreConfig: CoreModel;
-  leftPanelConfig: LeftPanelModel;
-  quickLinksConfig: QuickLinksModel;
-};
-
-export default function SiteShell({children, coreConfig, leftPanelConfig, quickLinksConfig}: SiteShellProps) {
+export default function ShellTemplate({children, coreConfig, leftPanelConfig, quickLinksConfig}: LayoutContentProps) {
   return (
     <SidebarProvider defaultOpen={false}>
       <a href="#main-content" className={styles.skipLink}>
