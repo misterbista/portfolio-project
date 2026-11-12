@@ -1,5 +1,4 @@
 .page {
-  padding-top: clamp(3rem, 8vw, 7rem);
   container-type: inline-size;
 }
 
@@ -8,28 +7,17 @@
   margin-bottom: clamp(3rem, 6vw, 5rem);
 }
 
-.eyebrow,
 .type {
   color: var(--muted-foreground);
-  font-size: 0.65rem;
-  font-weight: 500;
-  letter-spacing: 0.12em;
+  font-size: var(--minimol-meta-size);
+  font-weight: 400;
   line-height: 1.5;
-  text-transform: uppercase;
-}
-
-.intro h1 {
-  margin-top: 0.75rem;
-  font-size: clamp(2.5rem, 6vw, 4rem);
-  font-weight: 450;
-  letter-spacing: -0.06em;
-  line-height: 1.2;
 }
 
 .summary {
   margin-top: 1.5rem;
   color: var(--muted-foreground);
-  line-height: 2;
+  line-height: 1.75;
 }
 
 .timeline {
@@ -52,7 +40,7 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1.7fr);
   gap: clamp(2rem, 5vw, 5rem);
-  padding: 0 0 clamp(3rem, 6vw, 5rem) 2.5rem;
+  padding: 0 0 clamp(3rem, 6vw, 5rem) 1.75rem;
   scroll-margin-top: 2rem;
 }
 
@@ -62,11 +50,11 @@
 
 .marker {
   position: absolute;
-  top: 0.1rem;
-  left: -0.1rem;
+  top: 0.35rem;
+  left: 0.08rem;
   display: grid;
-  width: 0.8rem;
-  height: 0.8rem;
+  width: 0.375rem;
+  height: 0.375rem;
   place-items: center;
   border: 1px solid var(--muted-foreground);
   border-radius: 50%;
@@ -84,7 +72,6 @@
 
 .type {
   margin-bottom: 0.35rem;
-  font-size: 0.6rem;
 }
 
 .date {
@@ -142,7 +129,7 @@
 .story {
   min-width: 0;
   color: var(--template-body);
-  line-height: 2;
+  line-height: 1.75;
   overflow-wrap: anywhere;
 }
 

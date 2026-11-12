@@ -1,22 +1,20 @@
 "use client"
 
-import React, { useMemo } from 'react';
+import React, {useMemo} from 'react';
 import styles from './LeftPanel.module.css';
 import {
   Sidebar,
   SidebarContent, SidebarFooter,
   SidebarGroup, SidebarGroupContent, SidebarGroupLabel,
-  SidebarHeader,
-  SidebarMenu, SidebarMenuItem,
+  SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem,
   SidebarTrigger,
   useSidebar
 } from "@/components/ui/sidebar";
-import { AlignJustify, Heart, XIcon } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { usePathname } from "next/navigation";
+import {AlignJustify, Heart, XIcon} from "lucide-react";
+import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
+import {usePathname} from "next/navigation";
 import SocialLinks from "@/components/ui/SocialLinks";
-import { cn } from "@/lib/utils";
-import SidebarCustomMenuItem from "@/templates/default/SidebarCustomMenuItem";
+import {cn} from "@/lib/utils";
 import SmartLink from "@/components/ui/SmartLink";
 import ImageLightbox from "@/components/ui/ImageLightbox";
 import type {TModel as CoreModel} from "@/configuration/core";
@@ -102,7 +100,7 @@ function LeftPanel({
   quickLinksConfig: QuickLinksModel;
 }) {
   const pathname = usePathname();
-  const { open, openMobile, isMobile } = useSidebar();
+  const {open} = useSidebar();
 
   const menuItems = useMemo(
     () => getMenuItems(navigationConfig.enabledNavigations),

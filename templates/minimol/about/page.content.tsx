@@ -13,7 +13,6 @@ export default function PageContent({coreConfig, aboutConfig}: PageContentProps)
   return (
     <article className={styles.page} aria-label="About">
       <header className={styles.header}>
-        <p className={styles.eyebrow}>A little context</p>
         <h1>About me.</h1>
       </header>
       <div className={styles.body}><HtmlRenderer>{aboutConfig.summary}</HtmlRenderer></div>

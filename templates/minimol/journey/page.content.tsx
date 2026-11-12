@@ -128,9 +128,8 @@ export default function PageContent({journeyConfig}: PageContentProps) {
   const events = useMemo(() => getTimelineEvents(journeyConfig.milestones || []), [journeyConfig.milestones]);
 
   return (
-    <main className={styles.page} aria-label="My journey">
+    <article className={styles.page} aria-label="My journey">
       <header className={styles.intro}>
-        <p className={styles.eyebrow}>A few turns along the way</p>
         <h1>My journey.</h1>
         {journeyConfig.summary && <HtmlRenderer className={styles.summary}>{journeyConfig.summary}</HtmlRenderer>}
       </header>
@@ -139,6 +138,6 @@ export default function PageContent({journeyConfig}: PageContentProps) {
       </section> : <section className={styles.empty} aria-label="Journey milestones">
         <p>No milestones added yet.</p>
       </section>}
-    </main>
+    </article>
   );
 }
