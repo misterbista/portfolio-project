@@ -6,7 +6,7 @@ import SmartLink from "@/components/ui/SmartLink";
 import HtmlRenderer from "@/components/ui/HtmlRenderer";
 import ImageLightbox from "@/components/ui/ImageLightbox";
 import styles from "./page.module.css";
-import type {PageContentProps} from "./page.types";
+import type {PageContentProps} from "@/app/(app)/gallery/[collectionSlug]/page.types";
 
 function PageContent({collection}: PageContentProps) {
   return (

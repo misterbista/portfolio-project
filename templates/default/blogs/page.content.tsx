@@ -10,7 +10,7 @@ import {formatDate} from "@/lib/utils";
 import {useDebouncedState} from "@/hooks/useDebouncedState";
 import {useRouter, useSearchParams} from "next/navigation";
 import styles from "./page.module.css";
-import type {PageContentProps} from "./page.types";
+import type {PageContentProps} from "@/app/(app)/blogs/page.types";
 import type {TModel as BlogsModel} from "@/configuration/blogs";
 
 const RECENT_COUNT = 3;

@@ -11,7 +11,7 @@ import ImageLightbox from "@/components/ui/ImageLightbox";
 import SmartLink from "@/components/ui/SmartLink";
 import {cn} from "@/lib/utils";
 import SmartText from "@/components/ui/SmartText";
-import type {PageContentProps} from "./page.types";
+import type {PageContentProps} from "@/app/(app)/projects/[projectSlug]/page.types";
 
 function PageContent({project, milestone, skills}: PageContentProps) {
   const links = (project.links || []);

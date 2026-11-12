@@ -8,7 +8,7 @@ import HtmlRenderer from "@/components/ui/HtmlRenderer";
 import SmartLink from "@/components/ui/SmartLink";
 import styles from "./page.module.css";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip";
-import type {PageContentProps} from "./page.types";
+import type {PageContentProps} from "@/app/(app)/skills/page.types";
 import type {TModel as SkillsModel} from "@/configuration/skills";
 import type {TModel as JourneyModel} from "@/configuration/journey";
 import type {TModel as ProjectsModel} from "@/configuration/projects";

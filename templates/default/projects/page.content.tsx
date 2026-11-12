@@ -18,7 +18,7 @@ import {cn} from "@/lib/utils";
 import {getActiveSlug} from "@/lib/slugs";
 import {useDebouncedState} from "@/hooks/useDebouncedState";
 import {useRouter, useSearchParams} from "next/navigation";
-import type {PageContentProps} from "./page.types";
+import type {PageContentProps} from "@/app/(app)/projects/page.types";
 import type {TModel as JourneyModel} from "@/configuration/journey";
 import type {TModel as ProjectsModel} from "@/configuration/projects";
 

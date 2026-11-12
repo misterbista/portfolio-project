@@ -3,7 +3,7 @@
 import React from 'react';
 import styles from "./page.module.css";
 import {cn} from "@/lib/utils";
-import type {PageContentProps} from "./page.types";
+import type {PageContentProps} from "@/app/(app)/page.types";
 
 
 function PageContent({coreConfig, homeConfig}: PageContentProps) {

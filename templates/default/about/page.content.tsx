@@ -8,7 +8,7 @@ import {AspectRatio} from "@/components/ui/aspect-ratio";
 import {cn} from "@/lib/utils";
 import HtmlRenderer from "@/components/ui/HtmlRenderer";
 import ImageLightbox from "@/components/ui/ImageLightbox";
-import type {PageContentProps} from "./page.types";
+import type {PageContentProps} from "@/app/(app)/about/page.types";
 
 function PageContent({coreConfig, aboutConfig}: PageContentProps) {
   return (

@@ -7,7 +7,7 @@ import SmartLink from "@/components/ui/SmartLink";
 import DynamicLucideReactIcon, {LucideReactIconName} from "@/components/ui/DynamicLucideReactIcon";
 import HtmlRenderer from "@/components/ui/HtmlRenderer";
 import styles from "./page.module.css";
-import type {PageContentProps} from "./page.types";
+import type {PageContentProps} from "@/app/(app)/services/page.types";
 
 function PageContent({servicesConfig}: PageContentProps) {
   return (

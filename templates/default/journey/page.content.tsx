@@ -6,7 +6,7 @@ import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import SmartLink from "@/components/ui/SmartLink";
 import HtmlRenderer from "@/components/ui/HtmlRenderer";
 import styles from "./page.module.css";
-import type {PageContentProps} from "./page.types";
+import type {PageContentProps} from "@/app/(app)/journey/page.types";
 import type {TModel as JourneyModel} from "@/configuration/journey";
 
 type Milestone = JourneyModel["milestones"][number];

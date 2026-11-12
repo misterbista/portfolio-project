@@ -7,7 +7,7 @@ import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import HtmlRenderer from "@/components/ui/HtmlRenderer";
 import styles from "./page.module.css";
 import SmartLink from "@/components/ui/SmartLink";
-import type {PageContentProps} from "./page.types";
+import type {PageContentProps} from "@/app/(app)/testimonials/page.types";
 
 function initials(name: string) {
   return name.split(/\s+/).filter(Boolean).map((part) => part[0]).slice(0, 2).join("").toUpperCase();

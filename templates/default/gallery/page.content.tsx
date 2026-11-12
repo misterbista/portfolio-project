@@ -7,7 +7,7 @@ import HtmlRenderer from "@/components/ui/HtmlRenderer";
 import {getActiveSlug} from "@/lib/slugs";
 import styles from "./page.module.css";
 import {getCollectionCover, getCollectionPhotos, uncategorizedGalleryCategory} from "./[collectionSlug]/page.utils";
-import type {PageContentProps} from "./page.types";
+import type {PageContentProps} from "@/app/(app)/gallery/page.types";
 
 function PageContent({galleryConfig}: PageContentProps) {
   const collections = [...galleryConfig.categories, uncategorizedGalleryCategory]

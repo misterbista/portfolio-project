@@ -4,7 +4,7 @@ import SmartLink from "@/components/ui/SmartLink";
 import {ArrowLeft} from "lucide-react";
 import HtmlRenderer from "@/components/ui/HtmlRenderer";
 import {formatDate} from "@/lib/utils";
-import type {PageContentProps} from "./page.types";
+import type {PageContentProps} from "@/app/(app)/blogs/[blogSlug]/page.types";
 
 function PageContent({post, authorName}: PageContentProps) {
   return (
