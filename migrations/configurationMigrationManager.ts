@@ -17,6 +17,7 @@ import {initialQuickLinksMigration} from "@/migrations/quickLinks/initial";
 import {initialServicesMigration} from "@/migrations/services/initial";
 import {initialSkillsMigration} from "@/migrations/skills/initial";
 import {initialTestimonialsMigration} from "@/migrations/testimonials/initial";
+import {currentConfigurationVersions, serializeConfiguration} from "@/migrations/configurationVersions";
 
 type ConfigurationMigration = (configuration: unknown) => unknown;
 type InitialMigration = () => unknown;
@@ -29,22 +30,6 @@ type VersionedConfiguration = {
 };
 
 const initialConfigurationVersion = 0;
-
-const currentConfigurationVersions: Record<string, number> = {
-  about: 1,
-  blog: initialConfigurationVersion,
-  blogs: 2,
-  core: 1,
-  gallery: 1,
-  home: initialConfigurationVersion,
-  journey: initialConfigurationVersion,
-  navigation: 1,
-  projects: 1,
-  quickLinks: initialConfigurationVersion,
-  services: initialConfigurationVersion,
-  skills: initialConfigurationVersion,
-  testimonials: initialConfigurationVersion,
-};
 
 const initialMigrationMap: Record<string, InitialMigration> = {
   about: initialAboutMigration,
@@ -153,14 +138,4 @@ export function migrateConfiguration(
   };
 }
 
-export function serializeConfiguration(identifier: string, configuration: unknown): string {
-  const currentVersion = currentConfigurationVersions[identifier];
-  if (currentVersion === undefined) {
-    throw new Error(`Unknown configuration identifier "${identifier}".`);
-  }
-
-  return `${JSON.stringify({
-    version: currentVersion,
-    configuration,
-  }, null, 2)}\n`;
-}
+export {serializeConfiguration} from "@/migrations/configurationVersions";
