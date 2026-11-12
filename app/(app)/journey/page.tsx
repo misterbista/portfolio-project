@@ -3,11 +3,9 @@ import {CoreConfig, JourneyConfig} from "@/configuration";
 import {createPageMetadata, getCanonicalUrl} from "@/lib/pageMetadata";
 import {stripHtmlTags} from "@/lib/html";
 import StructuredData from "@/components/StructuredData";
-import type {TModel as JourneyModel} from "@/configuration/journey";
+import type {PageContentProps} from "./page.types";
 
-const PageContent = dynamic<{
-  journeyConfig: JourneyModel;
-}>(
+const PageContent = dynamic<PageContentProps>(
   () => import(`@/templates/${CoreConfig.template}/journey/page.content`),
   {ssr: true}
 );

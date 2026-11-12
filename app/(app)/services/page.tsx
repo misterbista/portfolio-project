@@ -3,11 +3,9 @@ import {CoreConfig, ServicesConfig} from "@/configuration";
 import {createPageMetadata, getCanonicalUrl} from "@/lib/pageMetadata";
 import {stripHtmlTags} from "@/lib/html";
 import StructuredData from "@/components/StructuredData";
-import type {TModel as ServicesModel} from "@/configuration/services";
+import type {PageContentProps} from "./page.types";
 
-const PageContent = dynamic<{
-  servicesConfig: ServicesModel;
-}>(
+const PageContent = dynamic<PageContentProps>(
   () => import(`@/templates/${CoreConfig.template}/services/page.content`),
   {ssr: true}
 );

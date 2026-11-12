@@ -3,8 +3,7 @@ import StructuredData from "@/components/StructuredData";
 import {AboutConfig, CoreConfig} from "@/configuration";
 import {createPageMetadata, getCanonicalUrl} from "@/lib/pageMetadata";
 import {stripHtmlTags} from "@/lib/html";
-import type {TModel as CoreModel} from "@/configuration/core";
-import type {TModel as AboutModel} from "@/configuration/about";
+import type {PageContentProps} from "./page.types";
 
 const description = stripHtmlTags(AboutConfig.summary).slice(0, 300);
 
@@ -15,10 +14,7 @@ export const metadata = createPageMetadata({
   image: AboutConfig.heroPicture
 });
 
-const PageContent = dynamic<{
-  coreConfig: CoreModel;
-  aboutConfig: AboutModel;
-}>(
+const PageContent = dynamic<PageContentProps>(
   () => import(`@/templates/${CoreConfig.template}/about/page.content`),
   {ssr: true}
 );

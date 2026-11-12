@@ -4,11 +4,9 @@ import {CoreConfig, BlogsConfig} from "@/configuration";
 import {createPageMetadata, getCanonicalUrl} from "@/lib/pageMetadata";
 import {stripHtmlTags} from "@/lib/html";
 import {Suspense} from "react";
-import type {TModel as BlogsModel} from "@/configuration/blogs";
+import type {PageContentProps} from "./page.types";
 
-const PageContent = dynamic<{
-  blogsConfig: BlogsModel;
-}>(
+const PageContent = dynamic<PageContentProps>(
   () => import(`@/templates/${CoreConfig.template}/blogs/page.content`),
   {ssr: true}
 );

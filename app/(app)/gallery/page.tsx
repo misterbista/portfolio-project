@@ -3,11 +3,9 @@ import StructuredData from "@/components/StructuredData";
 import {CoreConfig, GalleryConfig} from "@/configuration";
 import {createPageMetadata, getCanonicalUrl} from "@/lib/pageMetadata";
 import {stripHtmlTags} from "@/lib/html";
-import type {TModel as GalleryModel} from "@/configuration/gallery";
+import type {PageContentProps} from "./page.types";
 
-const PageContent = dynamic<{
-  galleryConfig: GalleryModel;
-}>(
+const PageContent = dynamic<PageContentProps>(
   () => import(`@/templates/${CoreConfig.template}/gallery/page.content`),
   {ssr: true}
 );

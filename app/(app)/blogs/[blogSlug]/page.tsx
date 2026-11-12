@@ -5,15 +5,12 @@ import StructuredData from "@/components/StructuredData";
 import {CoreConfig, BlogsConfig} from "@/configuration";
 import {createPageMetadata, getCanonicalUrl} from "@/lib/pageMetadata";
 import {stripHtmlTags} from "@/lib/html";
-import type {BlogPost} from "./page.types";
+import type {BlogPost, PageContentProps} from "./page.types";
 import {readConfigurationFile} from "@/configuration/configurationFiles";
 import {buildSchema as blogSchema, type TOutput as BlogOutput} from "@/configuration/blog";
 import {migrateConfiguration} from "@/migrations/configurationMigrationManager";
 
-const PageContent = dynamic<{
-  post: BlogPost;
-  authorName: string;
-}>(
+const PageContent = dynamic<PageContentProps>(
   () => import(`@/templates/${CoreConfig.template}/blogs/[blogSlug]/page.content`),
   {ssr: true}
 );
