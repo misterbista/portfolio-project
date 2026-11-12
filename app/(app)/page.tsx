@@ -1,10 +1,10 @@
-import dynamic from "next/dynamic";
-import {existsSync} from "node:fs";
 import {join} from "node:path";
+import {existsSync} from "node:fs";
+import dynamic from "next/dynamic";
+import {notFound} from "next/navigation";
 import {CoreConfig, HomeConfig} from "@/configuration";
 import {createPageMetadata, getSiteName} from "@/lib/pageMetadata";
-import {cn} from "@/lib/utils";
-import styles from "./page.module.css";
+import type {PageContentProps} from "./page.types";
 
 export const metadata = createPageMetadata({
   title: getSiteName(),
@@ -14,30 +14,22 @@ export const metadata = createPageMetadata({
   keywords: CoreConfig.seoKeywords,
 });
 
-const customHomePath = join(process.cwd(), "templates", CoreConfig.template, "home", "page.content.tsx");
-const PageContent = existsSync(customHomePath) ? dynamic(
+const contentExists = existsSync(join(process.cwd(), "templates", CoreConfig.template, "home", "page.content.tsx"));
+const PageContent = dynamic<PageContentProps>(
   () => import(`@/templates/${CoreConfig.template}/home/page.content`),
   {ssr: true}
-) : null;
+);
 
 function Page() {
-  if (!PageContent) return (
-    <main className={styles.page} aria-label="Home">
-      <div
-        className={styles.heroImage}
-        style={{backgroundImage: `url("${HomeConfig.coverPicture}")`}}
-        role="img"
-        aria-label={`Hero image of ${CoreConfig.fullName}`}
-      />
-      <div className={styles.heroText}>
-        <h1 className={cn(styles.heroTextPrimary, "text-white")}>{CoreConfig.fullName}</h1>
-        <br/><br/>
-        <p className={cn(styles.heroTextSecondary, "text-white")}>{HomeConfig.bio}</p>
-      </div>
-    </main>
+  if (!contentExists) {
+    notFound();
+  }
+  return (
+    <PageContent
+      coreConfig={CoreConfig}
+      homeConfig={HomeConfig}
+    />
   );
-
-  return <PageContent />;
 }
 
 export default Page;

@@ -4,11 +4,10 @@ import Image from "next/image";
 import HtmlRenderer from "@/components/ui/HtmlRenderer";
 import ImageLightbox from "@/components/ui/ImageLightbox";
 import SmartText from "@/components/ui/SmartText";
-import type {TModel as CoreModel} from "@/configuration/core";
-import type {TModel as AboutModel} from "@/configuration/about";
+import type {PageContentProps} from "@/app/(app)/about/page.types";
 import styles from "./page.module.css";
 
-export default function PageContent({coreConfig, aboutConfig}: {coreConfig: CoreModel; aboutConfig: AboutModel}) {
+export default function PageContent({coreConfig, aboutConfig}: PageContentProps) {
   const heroPicture = aboutConfig.heroPicture?.trim();
 
   return (

@@ -5,6 +5,7 @@ import {ArrowUpRight} from "lucide-react";
 import SmartLink from "@/components/ui/SmartLink";
 import HtmlRenderer from "@/components/ui/HtmlRenderer";
 import type {TModel as JourneyModel} from "@/configuration/journey";
+import type {PageContentProps} from "@/app/(app)/journey/page.types";
 import styles from "./page.module.css";
 
 type Milestone = JourneyModel["milestones"][number];
@@ -123,7 +124,7 @@ function TimelineEntry({event}: {event: TimelineEvent}) {
   );
 }
 
-export default function PageContent({journeyConfig}: {journeyConfig: JourneyModel}) {
+export default function PageContent({journeyConfig}: PageContentProps) {
   const events = useMemo(() => getTimelineEvents(journeyConfig.milestones || []), [journeyConfig.milestones]);
 
   return (
