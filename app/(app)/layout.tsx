@@ -1,16 +1,21 @@
-import React from "react";
-import SiteShell from "@/app/(app)/SiteShell";
+import dynamic from "next/dynamic";
 import {CoreConfig, LeftPanelConfig, QuickLinksConfig} from "@/configuration";
+import type {LayoutContentProps} from "@/app/(app)/layout.types";
+
+const LayoutContent = dynamic<LayoutContentProps>(
+  () => import(`@/templates/${CoreConfig.template}/layout.content`),
+  {ssr: true}
+);
 
 function Layout({children}: LayoutProps<"/">) {
   return (
-    <SiteShell
+    <LayoutContent
       coreConfig={CoreConfig}
       leftPanelConfig={LeftPanelConfig}
       quickLinksConfig={QuickLinksConfig}
     >
       {children}
-    </SiteShell>
+    </LayoutContent>
   );
 }
 
