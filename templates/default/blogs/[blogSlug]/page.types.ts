@@ -3,3 +3,8 @@ import {TModel as BlogModel} from "@/configuration/blog";
 
 
 export type BlogPost = BlogsModel["posts"][number] & BlogModel
+
+export interface PageContentProps {
+  post: BlogPost;
+  authorName: string;
+}
