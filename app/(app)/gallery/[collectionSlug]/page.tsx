@@ -4,16 +4,14 @@ import StructuredData from "@/components/StructuredData";
 import {CoreConfig, GalleryConfig} from "@/configuration";
 import {createPageMetadata, getCanonicalUrl} from "@/lib/pageMetadata";
 import {stripHtmlTags} from "@/lib/html";
-import type {GalleryCollection} from "./page.types";
+import type {GalleryCollection, PageContentProps} from "./page.types";
 import {
   getCollectionCover,
   getCollectionPhotos,
   uncategorizedGalleryCategory
 } from "@/app/(app)/gallery/[collectionSlug]/page.utils";
 
-const PageContent = dynamic<{
-  collection: GalleryCollection;
-}>(
+const PageContent = dynamic<PageContentProps>(
   () => import(`@/templates/${CoreConfig.template}/gallery/[collectionSlug]/page.content`),
   {ssr: true}
 );

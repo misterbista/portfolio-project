@@ -4,13 +4,9 @@ import {CoreConfig, JourneyConfig, ProjectsConfig} from "@/configuration";
 import {createPageMetadata, getCanonicalUrl} from "@/lib/pageMetadata";
 import {stripHtmlTags} from "@/lib/html";
 import {Suspense} from "react";
-import type {TModel as ProjectsModel} from "@/configuration/projects";
-import type {TModel as JourneyModel} from "@/configuration/journey";
+import type {PageContentProps} from "./page.types";
 
-const PageContent = dynamic<{
-  projectsConfig: ProjectsModel;
-  journeyConfig: JourneyModel;
-}>(
+const PageContent = dynamic<PageContentProps>(
   () => import(`@/templates/${CoreConfig.template}/projects/page.content`),
   {ssr: true}
 );

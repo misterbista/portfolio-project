@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
 import {CoreConfig, HomeConfig} from "@/configuration";
 import {createPageMetadata, getSiteName} from "@/lib/pageMetadata";
+import type {PageContentProps} from "./page.types";
 
 export const metadata = createPageMetadata({
   title: getSiteName(),
@@ -10,10 +11,7 @@ export const metadata = createPageMetadata({
   keywords: CoreConfig.seoKeywords,
 });
 
-const PageContent = dynamic<{
-  coreConfig: typeof CoreConfig;
-  homeConfig: typeof HomeConfig;
-}>(
+const PageContent = dynamic<PageContentProps>(
   () => import(`@/templates/${CoreConfig.template}/home/page.content`),
   {ssr: true}
 );

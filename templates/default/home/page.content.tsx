@@ -3,16 +3,10 @@
 import React from 'react';
 import styles from "./page.module.css";
 import {cn} from "@/lib/utils";
-import type {TModel as CoreModel} from "@/configuration/core";
-import type {TModel as HomeModel} from "@/configuration/home";
+import type {PageContentProps} from "@/app/(app)/page.types";
 
 
-function PageContent(
-  {coreConfig, homeConfig}: {
-    coreConfig: CoreModel;
-    homeConfig: HomeModel;
-  }
-) {
+function PageContent({coreConfig, homeConfig}: PageContentProps) {
   return (
     <main className={styles.page} aria-label="Home">
       <div

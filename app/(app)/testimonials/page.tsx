@@ -3,11 +3,9 @@ import {CoreConfig, TestimonialsConfig} from "@/configuration";
 import {createPageMetadata, getCanonicalUrl} from "@/lib/pageMetadata";
 import {stripHtmlTags} from "@/lib/html";
 import StructuredData from "@/components/StructuredData";
-import type {TModel as TestimonialsModel} from "@/configuration/testimonials";
+import type {PageContentProps} from "./page.types";
 
-const PageContent = dynamic<{
-  testimonialsConfig: TestimonialsModel;
-}>(
+const PageContent = dynamic<PageContentProps>(
   () => import(`@/templates/${CoreConfig.template}/testimonials/page.content`),
   {ssr: true}
 );
