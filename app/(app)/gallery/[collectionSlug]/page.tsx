@@ -1,4 +1,6 @@
+import {existsSync} from "node:fs";
 import dynamic from "next/dynamic";
+import {join} from "node:path";
 import {notFound} from "next/navigation";
 import StructuredData from "@/components/StructuredData";
 import {CoreConfig, GalleryConfig} from "@/configuration";
@@ -11,6 +13,7 @@ import {
   uncategorizedGalleryCategory
 } from "@/app/(app)/gallery/[collectionSlug]/page.utils";
 
+const contentExists = existsSync(join(process.cwd(), "templates", CoreConfig.template, "gallery", "[collectionSlug]", "page.content.tsx"));
 const PageContent = dynamic<PageContentProps>(
   () => import(`@/templates/${CoreConfig.template}/gallery/[collectionSlug]/page.content`),
   {ssr: true}
@@ -70,6 +73,9 @@ export default async function Page(
   {params}: { params: Promise<{collectionSlug: string}>; }
 ) {
   const {collectionSlug} = await params;
+  if (!contentExists) {
+    notFound();
+  }
   const collection = findCollection(collectionSlug);
   if (!collection) {
     notFound();
