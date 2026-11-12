@@ -2,7 +2,7 @@
 
 import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query";
 import {TOutput as CoreConfigurationOutput, schema as CoreConfigurationSchema} from "@/configuration/core";
-import {TOutput as LeftPanelConfigurationOutput, schema as LeftPanelConfigurationSchema} from "@/configuration/leftPanel";
+import {TOutput as NavigationConfigurationOutput, schema as NavigationConfigurationSchema} from "@/configuration/navigation";
 import {TOutput as HomeConfigurationOutput, schema as HomeConfigurationSchema} from "@/configuration/home";
 import {TOutput as AboutConfigurationOutput, schema as AboutConfigurationSchema} from "@/configuration/about";
 import {TOutput as JourneyConfigurationOutput, schema as JourneyConfigurationSchema} from "@/configuration/journey";
@@ -21,7 +21,7 @@ import {serializeConfiguration} from "@/migrations/configurationMigrationManager
 
 export enum Identifier {
   Core = "core",
-  LeftPanel = "leftPanel",
+  Navigation = "navigation",
   Home = "home",
   About = "about",
   Journey = "journey",
@@ -37,7 +37,7 @@ export enum Identifier {
 
 type ConfigurationModelMap = {
   [Identifier.Core]: CoreConfigurationOutput;
-  [Identifier.LeftPanel]: LeftPanelConfigurationOutput;
+  [Identifier.Navigation]: NavigationConfigurationOutput;
   [Identifier.Home]: HomeConfigurationOutput;
   [Identifier.About]: AboutConfigurationOutput;
   [Identifier.Journey]: JourneyConfigurationOutput;
@@ -62,7 +62,7 @@ type ConfigHookResult<T extends Identifier> = {
 
 const configurationPaths: Record<Identifier, (query?: ConfigQuery) => string> = {
   [Identifier.Core]: _ => `public/config/core.json`,
-  [Identifier.LeftPanel]: _ => `public/config/left-panel.json`,
+  [Identifier.Navigation]: _ => `public/config/navigation.json`,
   [Identifier.Home]: _ => `public/config/home.json`,
   [Identifier.About]: _ => `public/config/about.json`,
   [Identifier.Journey]: _ => `public/config/journey.json`,
@@ -78,7 +78,7 @@ const configurationPaths: Record<Identifier, (query?: ConfigQuery) => string> = 
 
 const configurationSchemas = {
   [Identifier.Core]: CoreConfigurationSchema,
-  [Identifier.LeftPanel]: LeftPanelConfigurationSchema,
+  [Identifier.Navigation]: NavigationConfigurationSchema,
   [Identifier.Home]: HomeConfigurationSchema,
   [Identifier.About]: AboutConfigurationSchema,
   [Identifier.Journey]: JourneyConfigurationSchema,

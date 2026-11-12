@@ -24,9 +24,9 @@ import type {TOutput as JourneyOutput} from "@/configuration/journey";
 import {buildSchema as journeySchema} from "@/configuration/journey";
 export const JourneyConfig: JourneyOutput = journeySchema.parse(readConfigurationFromFile("journey.json")) as JourneyOutput;
 
-import type {TOutput as LeftPanelOutput} from "@/configuration/leftPanel";
-import {buildSchema as leftPanelSchema} from "@/configuration/leftPanel";
-export const LeftPanelConfig: LeftPanelOutput = leftPanelSchema.parse(readConfigurationFromFile("left-panel.json")) as LeftPanelOutput;
+import type {TOutput as NavigationOutput} from "@/configuration/navigation";
+import {buildSchema as navigationSchema} from "@/configuration/navigation";
+export const NavigationConfig: NavigationOutput = navigationSchema.parse(readConfigurationFromFile("navigation.json")) as NavigationOutput;
 
 import type {TOutput as ProjectsOutput} from "@/configuration/projects";
 import {buildSchema as projectsSchema} from "@/configuration/projects";
