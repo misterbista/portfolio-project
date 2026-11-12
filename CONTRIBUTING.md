@@ -39,7 +39,7 @@ The portfolio uses a template system to separate visual presentation from config
 2. Each content page in `app/(app)/` uses `next/dynamic` with string interpolation to import its template-specific component:
    ```ts
    const PageContent = dynamic(
-     () => import(`@/templates/${CoreConfig.template}/about/page.content`),
+     () => import(`@/templates/${CoreConfig.template}/<component-name>/page.content`),
      {ssr: true}
    );
    ```
@@ -49,6 +49,7 @@ The portfolio uses a template system to separate visual presentation from config
 
 The following routes have template content pages:
 
+- `home/page.content.tsx`
 - `about/page.content.tsx`
 - `blogs/page.content.tsx`
 - `blogs/[blogSlug]/page.content.tsx`
